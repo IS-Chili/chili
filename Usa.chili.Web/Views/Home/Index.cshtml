@@ -13,7 +13,7 @@ ViewData["Title"] = "Home";
                 <h5 class="card-title text-center mb-0">Regional Observations</h5>
             </div>
             <div class="card-body">
-                <img id="regionalImage" class="img-fluid"
+                <img id="regionalImage" class="img-fluid" alt="Large logo"
                     src="http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png"
                     alt="Gulf Coast Observations" />
 
@@ -43,13 +43,13 @@ ViewData["Title"] = "Home";
                 <hr />
                 <div class="d-flex justify-content-center">
                     <a class="mr-3" href="http://www.facebook.com/pages/South-Alabama-Mesonet/140015933698">
-                        <img class="small-logo" src="/images/Facebook.png" />
+                        <img class="small-logo" alt="Facebook" title="Facebook" src="/images/Facebook.png" />
                     </a>
                     <a class="mr-3" asp-controller="Home" asp-action="Donate">
-                        <img class="small-logo" src="/images/Donate.png" />
+                        <img class="small-logo" alt="Donate" title="Donate" src="/images/Donate.png" />
                     </a>
                     <a class="mr-3 mt-2" href="https://www.southalabama.edu">
-                        <img class="small-logo" src="/images/USALogo2.png" />
+                        <img class="small-logo" alt="USA" title="USA" src="/images/USALogo2.png" />
                     </a>
                 </div>
             </div>
@@ -120,6 +120,6 @@ ViewData["Title"] = "Home";
     <script src="~/js/home/index.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/home/index.min.js"></script>
+    <script src="~/js/home/index.min.js" asp-append-version="true"></script>
 </environment>
 }

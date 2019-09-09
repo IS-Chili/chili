@@ -12,9 +12,57 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/index.min.js",
+    "outputFileName": "wwwroot/js/home/index.min.js",
     "inputFiles": [
-      "wwwroot/js/index.js"
+      "wwwroot/js/home/index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/graph.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/graph.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/metadata.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/metadata.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/meteorological.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/meteorological.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/qc_graphs.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/qc_graphs.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/realtime.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/realtime.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/station.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/station.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/summaries.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/summaries.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/data/voc.min.js",
+    "inputFiles": [
+      "wwwroot/js/data/voc.js"
     ]
   }
 ]
