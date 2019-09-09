@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>CHILI | @ViewBag.Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Description" content="@ViewBag.Description">
+    <title>CHILI | @ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="~/lib/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/css/tempusdominus-bootstrap-4.min.css" />
     <link rel="stylesheet" href="~/lib/css/select2.min.css" />
@@ -53,6 +53,11 @@
             </ul>
         </div>
     </nav>
+
+    <noscript>
+      <strong>We're sorry but this website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+
     <div id="app" class="container mt-100 mb-5">
         @RenderBody()
     </div>
