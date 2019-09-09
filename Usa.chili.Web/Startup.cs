@@ -1,4 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿// ********************************************************************************************************************************************
+// Copyright (c) 2019
+// Author: USA
+// Product: CHILI
+// Version: 1.0.0
+// ********************************************************************************************************************************************
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

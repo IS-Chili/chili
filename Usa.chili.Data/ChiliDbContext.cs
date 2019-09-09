@@ -23,10 +23,7 @@ namespace Usa.chili.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // The model cannot be created from the stored procedure calls
-            //throw new UnintentionalCodeFirstException();
+            
         }
-
-       
     }
 }
