@@ -1,11 +1,16 @@
 ﻿@{
-ViewData["Title"] = "Home";
+    ViewBag.Title = "Home";
+    ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated weather stations, " +
+                "located in the north-central Gulf Coast area and was founded in 2004 by " +
+                "University of South Alabama Meteorology professor Dr. Sytske Kimball. " +
+                "The weather stations collect 16 meteorological- and soil- quantities including " +
+                "temperature, rainfall, wind speed and direction, soil temperature and humidity.";
 }
 
 <div class="row">
     <div class="col-sm-12 col-lg-8 mb-3">
         <div class="card-body mb-3 bg-core-light-blue">
-            <img class="img-fluid" src="/images/MesonetLogo.png" />
+            <img class="img-fluid" alt="Large logo" src="/images/MesonetLogo.png" />
         </div>
 
         <div class="card">
@@ -13,7 +18,7 @@ ViewData["Title"] = "Home";
                 <h5 class="card-title text-center mb-0">Regional Observations</h5>
             </div>
             <div class="card-body">
-                <img id="regionalImage" class="img-fluid" alt="Large logo"
+                <img id="regionalImage" class="img-fluid"
                     src="http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png"
                     alt="Gulf Coast Observations" />
 

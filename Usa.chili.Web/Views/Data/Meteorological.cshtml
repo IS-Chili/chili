@@ -1,6 +1,6 @@
-
 @{
-    ViewData["Title"] = "Meteorological Data";
+    ViewBag.Title = "Meteorological Data";
+    ViewBag.Description = "Meteorological Data";
 }
 
 <div class="alert alert-info" role="alert">
@@ -13,7 +13,7 @@
     <div class="form-group col-lg-2 mr-2">
         <label for="beginDate">Begin Date</label>
         <div class="input-group date" id="beginDate" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#beginDate"/>
+            <input type="text" class="form-control datetimepicker-input" data-target="#beginDate" />
             <div class="input-group-append" data-target="#beginDate" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>
@@ -22,7 +22,7 @@
     <div class="form-group col-lg-2 mr-2">
         <label for="endDate">End Date</label>
         <div class="input-group date" id="endDate" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#endDate"/>
+            <input type="text" class="form-control datetimepicker-input" data-target="#endDate" />
             <div class="input-group-append" data-target="#endDate" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>
@@ -45,10 +45,10 @@
 </div>
 
 @section scripts {
-<environment include="Development">
-    <script src="~/js/data/meteorological.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/data/meteorological.min.js" asp-append-version="true"></script>
-</environment>
+    <environment include="Development">
+        <script src="~/js/data/meteorological.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/data/meteorological.min.js" asp-append-version="true"></script>
+    </environment>
 }

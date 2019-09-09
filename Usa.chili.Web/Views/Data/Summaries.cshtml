@@ -1,6 +1,6 @@
-
 @{
-    ViewData["Title"] = "Monthly Summaries";
+    ViewBag.Title = "Monthly Summaries";
+    ViewBag.Description = "USA Mesonet Monthly Summary Displays";
 }
 
 <h2 class="text-center">USA Mesonet Monthly Summary Displays</h2>
@@ -25,10 +25,10 @@
 </div>
 
 @section scripts {
-<environment include="Development">
-    <script src="~/js/data/summaries.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/data/summaries.min.js" asp-append-version="true"></script>
-</environment>
+    <environment include="Development">
+        <script src="~/js/data/summaries.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/data/summaries.min.js" asp-append-version="true"></script>
+    </environment>
 }

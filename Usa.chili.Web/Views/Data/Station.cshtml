@@ -1,6 +1,6 @@
-
 @{
-    ViewData["Title"] = "Metadata";
+    ViewBag.Title = "Meteorological Station Data";
+    ViewBag.Description = "Meteorological Station Data";
 }
 
 <h1 class="text-center">Meteorological Data for Agricola Station</h1>
@@ -17,7 +17,7 @@
     <div class="form-group col-lg-2 mr-2">
         <label for="datePicker">Date</label>
         <div class="input-group date" id="datePicker" data-target-input="nearest">
-            <input type="text" :value="currentDate" class="form-control datetimepicker-input" data-target="#datePicker"/>
+            <input type="text" :value="currentDate" class="form-control datetimepicker-input" data-target="#datePicker" />
             <div class="input-group-append" data-target="#datePicker" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
             </div>
@@ -26,7 +26,7 @@
     <div class="form-group col-lg-2 mr-2">
         <label for="timePicker">Time</label>
         <div class="input-group date" id="timePicker" data-target-input="nearest">
-            <input type="text" :value="currentTime" class="form-control datetimepicker-input" data-target="#timePicker"/>
+            <input type="text" :value="currentTime" class="form-control datetimepicker-input" data-target="#timePicker" />
             <div class="input-group-append" data-target="#timePicker" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fas fa-clock"></i></div>
             </div>
@@ -52,10 +52,10 @@
 </div>
 
 @section scripts {
-<environment include="Development">
-    <script src="~/js/data/station.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/data/station.min.js" asp-append-version="true"></script>
-</environment>
+    <environment include="Development">
+        <script src="~/js/data/station.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/data/station.min.js" asp-append-version="true"></script>
+    </environment>
 }
