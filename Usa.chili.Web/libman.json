@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "defaultDestination": "wwwroot/lib",
+  "libraries": [
+    {
+      "library": "jquery@3.4.1",
+      "files": [
+        "jquery.min.js"
+      ],
+      "destination": "wwwroot/lib/js"
+    },
+    {
+      "library": "popper.js@1.15.0",
+      "files": [
+        "umd/popper.min.js"
+      ],
+      "destination": "wwwroot/lib/js"
+    },
+    {
+      "library": "twitter-bootstrap@4.3.1",
+      "files": [
+        "css/bootstrap.min.css",
+        "js/bootstrap.min.js"
+      ]
+    },
+    {
+      "library": "font-awesome@5.10.2",
+      "files": [
+        "css/all.min.css",
+        "webfonts/fa-solid-900.eot",
+        "webfonts/fa-solid-900.svg",
+        "webfonts/fa-solid-900.ttf",
+        "webfonts/fa-solid-900.woff",
+        "webfonts/fa-solid-900.woff2"
+      ]
+    },
+    {
+      "library": "moment.js@2.24.0",
+      "files": [
+        "moment.min.js"
+      ],
+      "destination": "wwwroot/lib/js"
+    },
+    {
+      "library": "tempusdominus-bootstrap-4@5.1.2",
+      "files": [
+        "css/tempusdominus-bootstrap-4.min.css",
+        "js/tempusdominus-bootstrap-4.min.js"
+      ]
+    },
+    {
+      "library": "select2@4.0.10",
+      "files": [
+        "css/select2.min.css",
+        "js/select2.min.js"
+      ]
+    },
+    {
+      "library": "axios@0.19.0",
+      "files": [
+        "axios.min.js"
+      ],
+      "destination": "wwwroot/lib/js"
+    },
+    {
+      "library": "vue@2.6.10",
+      "files": [
+        "vue.min.js", "vue.js"
+      ],
+      "destination": "wwwroot/lib/js"
+    }
+  ]
+}

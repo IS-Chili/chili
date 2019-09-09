@@ -1,0 +1,140 @@
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255, 255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-dark .navbar-toggler {
+  border-color: transparent;
+}
+
+.navbar {
+  background-color: #008cba;
+  padding: 0;
+}
+
+.navbar-brand {
+  margin-left: 1rem;
+}
+
+.navbar-brand > img.logo {
+  width: 40px;
+}
+
+.nav-link > div {
+  padding: 0.4rem 0.2rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #ffffff;
+  background-color: #006687;
+}
+
+@media (min-width: 992px) {
+  button.btn-inline {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .nav-link > div {
+    padding: 0.4rem 1rem;
+  }
+
+  ul.navbar-nav > li:first-child {
+    padding-top: 0.3rem;
+    border-top: 1px solid #006687;
+  }
+}
+
+.dropdown-divider {
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.nav-item > .dropdown-menu {
+  background-color: #60acda;
+  margin: 0;
+}
+
+.nav-item > .dropdown-menu > .dropdown-item {
+  color: #ffffff;
+  font-weight: bold;
+  padding: .4rem 1.5rem;
+}
+
+.nav-item > .dropdown-menu > .dropdown-item:focus,
+.dropdown-item:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #006687;
+}
+
+a {
+  color: #008cba;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #00526e;
+  text-decoration: underline;
+}
+
+.bg-core-blue {
+  background-color: #008cba;
+  color: #ffffff;
+}
+
+.bg-core-blue a {
+  color: #ffffff;
+}
+
+.bg-core-blue a:hover {
+  color: #ffffff;
+}
+
+.bg-core-blue a:focus {
+  color: #ffffff;
+}
+
+.bg-core-lavender {
+  background-color: lavender;
+  color: #000000;
+}
+
+.bg-core-light-blue {
+  background-color: #bbddff;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+}
+
+.mt-100 {
+  margin-top: 100px;
+}
+
+.small-logo {
+  width: 60px;
+}
+
+.w-300 {
+  width: 300px;
+}
+
+.w-400 {
+  width: 400px;
+}
+
+.h-750 {
+  max-height: 750px;
+}
+
+.h-400 {
+  max-height: 400px;
+}

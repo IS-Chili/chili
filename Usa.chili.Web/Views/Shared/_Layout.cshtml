@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>CHILI | @ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/css/tempusdominus-bootstrap-4.min.css" />
+    <link rel="stylesheet" href="~/lib/css/select2.min.css" />
+    <link rel="stylesheet" href="~/css/select2-bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/lib/css/all.min.css" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/core.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/core.min.css" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img class="logo" src="/images/NavBarLogo.png" alt="Logo" title="Home"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index"><div>Home</div></a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="StationMap"><div>Station Map</div></a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Data" asp-action="Realtime"><div>Realtime Data</div></a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="archivedDataMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div>
+                            Archived Data
+                            <i class="fas fa-caret-down"></i>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="archivedDataMenuLink">
+                        <a class="dropdown-item" asp-controller="Data" asp-action="Metadata">Metadata</a>
+                        <a class="dropdown-item" asp-controller="Data" asp-action="Meteorological">Meteorological Data</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Data" asp-action="QC_Graphs">Monthly QC Graphs</a>
+                        <a class="dropdown-item" asp-controller="Data" asp-action="Summaries">Monthly Summaries</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Data" asp-action="VOC">VOC Data</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Data" asp-action="CustomProducts"><div>Custom Data</div></a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact"><div>Contact Us</div></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="app" class="container mt-100 mb-5">
+        @RenderBody()
+    </div>
+
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise&flags=gated"></script>
+
+    <script src="~/lib/js/jquery.min.js"></script>
+    <script src="~/lib/js/umd/popper.min.js"></script>
+    <script src="~/lib/js/bootstrap.min.js"></script>
+    <script src="~/lib/js/moment.min.js"></script>
+    <script src="~/lib/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="~/lib/js/select2.min.js"></script>
+    <script src="~/lib/js/axios.min.js"></script>
+
+    <environment include="Development">
+        <script src="~/lib/js/vue.js"></script>
+        <script src="~/js/core.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/js/vue.min.js"></script>
+        <script src="~/js/core.min.js"></script>
+    </environment>
+
+    <script type="text/x-template" id="select2-template">
+        <select>
+            <slot></slot>
+        </select>
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

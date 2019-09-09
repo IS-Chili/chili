@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usa.chili.Common", "Usa.chili.Common\Usa.chili.Common.csproj", "{5130CFD7-B4C6-41E9-9230-FAD1C67B1FFF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usa.chili.Data", "Usa.chili.Data\Usa.chili.Data.csproj", "{2D07E5B2-F725-4718-9822-788357305F0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usa.chili.Domain", "Usa.chili.Domain\Usa.chili.Domain.csproj", "{793DAE80-D904-4BA2-8687-A6FFCCD83B73}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usa.chili.Dto", "Usa.chili.Dto\Usa.chili.Dto.csproj", "{2CC83F6E-E995-4C47-A750-68A7BFE463ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Usa.chili.Web", "Usa.chili.Web\Usa.chili.Web.csproj", "{E48F6A0B-9CA0-424C-920D-49391EC6040F}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Usa.chili.Services", "Usa.chili.Services\Usa.chili.Services.csproj", "{F5CDA6AF-C561-4FC6-8E79-B24DC7D744C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5130CFD7-B4C6-41E9-9230-FAD1C67B1FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5130CFD7-B4C6-41E9-9230-FAD1C67B1FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5130CFD7-B4C6-41E9-9230-FAD1C67B1FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5130CFD7-B4C6-41E9-9230-FAD1C67B1FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D07E5B2-F725-4718-9822-788357305F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D07E5B2-F725-4718-9822-788357305F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D07E5B2-F725-4718-9822-788357305F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D07E5B2-F725-4718-9822-788357305F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{793DAE80-D904-4BA2-8687-A6FFCCD83B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793DAE80-D904-4BA2-8687-A6FFCCD83B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793DAE80-D904-4BA2-8687-A6FFCCD83B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793DAE80-D904-4BA2-8687-A6FFCCD83B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC83F6E-E995-4C47-A750-68A7BFE463ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC83F6E-E995-4C47-A750-68A7BFE463ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC83F6E-E995-4C47-A750-68A7BFE463ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC83F6E-E995-4C47-A750-68A7BFE463ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E48F6A0B-9CA0-424C-920D-49391EC6040F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E48F6A0B-9CA0-424C-920D-49391EC6040F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E48F6A0B-9CA0-424C-920D-49391EC6040F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E48F6A0B-9CA0-424C-920D-49391EC6040F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A170B56D-CF77-41C8-91F5-C8D1E2C2532E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A170B56D-CF77-41C8-91F5-C8D1E2C2532E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A170B56D-CF77-41C8-91F5-C8D1E2C2532E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A170B56D-CF77-41C8-91F5-C8D1E2C2532E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A170B56D-CF77-41C8-91F5-C8D1E2C2532E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A170B56D-CF77-41C8-91F5-C8D1E2C2532E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F5CDA6AF-C561-4FC6-8E79-B24DC7D744C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CDA6AF-C561-4FC6-8E79-B24DC7D744C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CDA6AF-C561-4FC6-8E79-B24DC7D744C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CDA6AF-C561-4FC6-8E79-B24DC7D744C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A753780A-0A1D-4CF3-832F-53258D532B3F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.askcts.com/appsupport
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Usa.chili.Common\\Usa.chili.Common.csproj
+		SccProjectName1 = Usa.chili.Common
+		SccLocalPath1 = Usa.chili.Common
+		SccProjectUniqueName2 = Usa.chili.Data\\Usa.chili.Data.csproj
+		SccProjectName2 = Usa.chili.Data
+		SccLocalPath2 = Usa.chili.Data
+		SccProjectUniqueName4 = Usa.chili.Domain\\Usa.chili.Domain.csproj
+		SccProjectName4 = Usa.chili.Domain
+		SccLocalPath4 = Usa.chili.Domain
+		SccProjectUniqueName5 = Usa.chili.Dto\\Usa.chili.Dto.csproj
+		SccProjectName5 = Usa.chili.Dto
+		SccLocalPath5 = Usa.chili.Dto
+		SccProjectUniqueName6 = Usa.chili.Services\\Usa.chili.Services.csproj
+		SccProjectName6 = Usa.chili.Services
+		SccLocalPath6 = Usa.chili.Services
+		SccProjectUniqueName7 = Usa.chili.Web\\Usa.chili.Web.csproj
+		SccProjectName7 = Usa.chili.Web
+		SccLocalPath7 = Usa.chili.Web
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,125 @@
+﻿@{
+ViewData["Title"] = "Home";
+}
+
+<div class="row">
+    <div class="col-sm-12 col-lg-8 mb-3">
+        <div class="card-body mb-3 bg-core-light-blue">
+            <img class="img-fluid" src="/images/MesonetLogo.png" />
+        </div>
+
+        <div class="card">
+            <div class="card-heading bg-core-blue py-1">
+                <h5 class="card-title text-center mb-0">Regional Observations</h5>
+            </div>
+            <div class="card-body">
+                <img id="regionalImage" class="img-fluid"
+                    src="http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png"
+                    alt="Gulf Coast Observations" />
+
+                <div class="row">
+                    <div class="col-sm-8 col-md-4">
+                        <label for="dataSetSelection">Dataset</label>
+                        <select id="dataSetSelection">
+                            <option value="1">Temperature</option>
+                            <option value="2">Dewpoint</option>
+                            <option value="3">Pressure</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-4">
+        <div class="card mb-3">
+            <div class="card-body bg-core-lavender">
+                <h5 class="text-center">Like our site? Like our data?</h5>
+                <h5 class="text-center">
+                    Please consider making a
+                    <strong>
+                        <a asp-controller="Home" asp-action="Donate">contribution</a>
+                    </strong>!
+                </h5>
+                <hr />
+                <div class="d-flex justify-content-center">
+                    <a class="mr-3" href="http://www.facebook.com/pages/South-Alabama-Mesonet/140015933698">
+                        <img class="small-logo" src="/images/Facebook.png" />
+                    </a>
+                    <a class="mr-3" asp-controller="Home" asp-action="Donate">
+                        <img class="small-logo" src="/images/Donate.png" />
+                    </a>
+                    <a class="mr-3 mt-2" href="https://www.southalabama.edu">
+                        <img class="small-logo" src="/images/USALogo2.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-heading bg-core-blue py-1">
+                <h5 class="card-title text-center mb-0">Live Mesonet Observations</h5>
+                <div class="text-center"><small>Choose a Station Below</small></div>
+            </div>
+            <div id="stationObservationsCanvasDiv" class="card-body">
+                <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
+                <label for="stationSelection">Station</label>
+                <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="col-sm-12 col-lg-8">
+        <div class="card mb-3">
+            <div class="card-heading bg-core-blue py-1">
+                <h5 class="card-title text-center mb-0">
+                    <a asp-controller="Home" asp-action="MesonetInformation">USA Mesonet History</a>
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>
+                    The South Alabama Mesonet is a network of
+                    <a asp-controller="Home" asp-action="StationMap">26 automated weather stations</a>, located
+                    in the north-central Gulf Coast area and was founded in 2004 by
+                    University of South Alabama Meteorology professor Dr. Sytske Kimball.
+                    The weather stations collect 16 meteorological- and soil- quantities
+                    including temperature, rainfall, wind speed and direction, soil
+                    temperature and humidity. Measurements are made automatically every
+                    minute of the day, every day of the year. The Mesonet is entirely
+                    funded through grants and donations to support routine maintenance
+                    (removing vegetation and animal nests), sensor replacement/repair,
+                    calibration of instruments, and to pay our student workers.
+                </p>
+                <p>
+                    Mesonet weather station data have inspired a wide variety of research
+                    projects at the University of South Alabama addressing local weather
+                    events and phenomena including cold fronts, landfall of tropical
+                    storms, sea breezes, nocturnal cooling, and local wind and rainfall
+                    climatologies. The weather stations and their data are used in the
+                    Meteorology curriculum at the University of South Alabama. Meteorology
+                    majors can take a class in Meteorological Instrumentation, get
+                    involved in weather station maintenance, social media outreach, and
+                    participate in research projects using Mesonet data. The Mobile
+                    National Weather Service forecast office uses the data on a frequent
+                    basis to issue severe weather and flash flood warnings and to perform
+                    post weather event analyses. Thirteen stations are located on local
+                    public school campuses and are used for K-12 outreach activities. The
+                    Mesonet serves the wider Gulf Coast community in a wide range of
+                    applications including agriculture, ecosystem monitoring, fire
+                    weather, recreation, renewable energy, air quality and health,
+                    emergency management, litigation, and climate change.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<environment include="Development">
+    <script src="~/js/home/index.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/home/index.min.js"></script>
+</environment>
+}
