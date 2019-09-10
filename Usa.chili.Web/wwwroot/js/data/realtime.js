@@ -1,6 +1,7 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip({
-    boundary: 'span'
+    boundary: 'span',
+    placement: 'left'
   });
 });
 
