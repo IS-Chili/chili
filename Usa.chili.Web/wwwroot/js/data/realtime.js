@@ -1,5 +1,7 @@
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip({
+    boundary: 'span'
+  });
 });
 
 const App = new Vue({

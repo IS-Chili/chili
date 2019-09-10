@@ -38,6 +38,12 @@
   .btn-inline {
     margin-top: 30px;
   }
+
+  #realtimeData {
+    position: absolute; 
+    left: 0; 
+    width: 100%; 
+  }
 }
 
 @media (max-width: 991.98px) {
