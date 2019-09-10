@@ -35,7 +35,7 @@
 }
 
 @media (min-width: 992px) {
-  button.btn-inline {
+  .btn-inline {
     margin-top: 30px;
   }
 }
@@ -123,6 +123,10 @@ canvas {
   width: 60px;
 }
 
+.w-100p {
+  width: 100%;
+}
+
 .w-300 {
   width: 300px;
 }
@@ -131,10 +135,22 @@ canvas {
   width: 400px;
 }
 
+.w-1000 {
+  width: 1000px;
+}
+
 .h-750 {
   max-height: 750px;
 }
 
 .h-400 {
   max-height: 400px;
+}
+
+.text-color-high {
+  color: #CC0000;
+}
+
+.text-color-low {
+  color: blue;
 }

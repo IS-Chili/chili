@@ -1,6 +1,6 @@
 @{
-    ViewBag.Title = "Metadata";
-    ViewBag.Description = "Instrument Metadata";
+ViewBag.Title = "Metadata";
+ViewBag.Description = "Instrument Metadata";
 }
 
 <h1 class="text-center">Displaying Instrument Metadata for Atmore Station</h1>
@@ -9,7 +9,8 @@
 <hr>
 
 <div class="d-flex justify-content-center my-4">
-    <a class="btn btn-light" asp-controller="Data" asp-action="Station" asp-route-id="1">Display Current Data for Agricola Station</a>
+    <a class="btn btn-light" asp-controller="Data" asp-action="Station" asp-route-id="1">Display Current Data for
+        Agricola Station</a>
 </div>
 
 <div class="form-row d-flex justify-content-center">
@@ -32,11 +33,34 @@
     </div>
 </div>
 
+<table class="table table-responsive table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">Parameter</th>
+            <th class="text-center">Manufacturer / Model (SerialNo)</th>
+            <th class="text-center">Installation Date</th>
+            <th class="text-center">Mounting Height</th>
+            <th class="text-center">Measuring Range</th>
+            <th class="text-center">Accuracy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Precipitation</td>
+            <td>Hydrological Services<br />TB3 (N/A)</td>
+            <td>2005-08-27</td>
+            <td>1m</td>
+            <td>0 to 700 mm/h</td>
+            <td>&plusmn; 2% @@ 225 to 500 mm/h<br />Resolution: 0.254 mm</td>
+        </tr>
+    </tbody>
+</table>
+
 @section scripts {
-    <environment include="Development">
-        <script src="~/js/data/metadata.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/data/metadata.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/data/metadata.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/data/metadata.min.js" asp-append-version="true"></script>
+</environment>
 }

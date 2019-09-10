@@ -1,6 +1,7 @@
 $(function () {
   $('#datePicker').datetimepicker(Core.dateTimePickerDateOptions);
   $('#timePicker').datetimepicker(Core.dateTimePickerTimeOptions);
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 const App = new Vue({

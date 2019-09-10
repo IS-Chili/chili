@@ -1,6 +1,6 @@
 @{
-    ViewBag.Title = "Realtime Data";
-    ViewBag.Description = "USA Mesonet Realtime Display";
+ViewBag.Title = "Realtime Data";
+ViewBag.Description = "USA Mesonet Realtime Display";
 }
 
 <h1 class="text-center">USA Mesonet Realtime Display</h1>
@@ -24,11 +24,167 @@
     </div>
 </div>
 
+<div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th colspan="4" class="text-center">&#64;&nbsp;6.56 ft</th>
+                <th colspan="2" class="text-center">&#64;&nbsp;32.81 ft</th>
+                <th>SeaLv</th>
+                <th colspan="5" class="text-center">Today's Extremes (<span class="text-color-high">Hi</span>/<span
+                        class="text-color-low">Lo</span>)</th>
+                <th colspan="5" class="text-center">Yesterday's Extremes (<span class="text-color-high">Hi</span>/<span
+                        class="text-color-low">Lo</span>)</th>
+            </tr>
+            <tr>
+                <th>Location/Obs time</th>
+                <th class="text-center">Temp</th>
+                <th class="text-center">HtIdx</th>
+                <th class="text-center">DewPt</th>
+                <th class="text-center">Hum</th>
+                <th class="text-center">WdDir</th>
+                <th class="text-center">WdSpd</th>
+                <th class="text-center">Press</th>
+                <th class="text-center">Rain</th>
+                <th class="text-center">WdSpd</th>
+                <th class="text-center">Temp</th>
+                <th class="text-center">DewPt</th>
+                <th class="text-center">Hum</th>
+                <th class="text-center">Rain</th>
+                <th class="text-center">WdSpd</th>
+                <th class="text-center">Temp</th>
+                <th class="text-center">DewPt</th>
+                <th class="text-center">Hum</th>
+            </tr>
+            <tr class="text-center">
+                <td></td>
+                <td>&deg;F</td>
+                <td>&deg;F</td>
+                <td>&deg;F</td>
+                <td>&#37;</td>
+                <td>&deg;</td>
+                <td>mph</td>
+                <td>inHg</td>
+                <td>in</td>
+                <td>mph</td>
+                <td>&deg;F</td>
+                <td>&deg;F</td>
+                <td>&#37;</td>
+                <td>in</td>
+                <td>mph</td>
+                <td>&deg;F</td>
+                <td>&deg;F</td>
+                <td>&#37;</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <span class="font-weight-bold">Agricola</span>
+                    </div>
+                    <div>
+                        <small>2019-09-09 16:33:38</small>
+                    </div>
+                </td>
+                <td class="temp font-weight-bold">87.85</td>
+                <td class="ht">101.38</td>
+                <td class="hum">78.02</td>
+                <td class="hum">72.80</td>
+                <td class="wind">240.52</td>
+                <td class="wind">0.58</td>
+                <td class="pres">30.06</td>
+                <td class="rain">0.00</td>
+                <td class="wind" data-toggle="tooltip" data-placement="bottom" title="WndSpd_Max &#64; 2019-09-09 13:07:00">
+                    8.48
+                </td>
+                <td>
+                    <div>
+                        <span data-toggle="tooltip" data-placement="bottom" title="AirT_Max &#64; 2019-09-09 13:29:00">
+                            95.47
+                        </span>
+                    </div>
+                    <div>
+                        <span data-toggle="tooltip" data-placement="bottom" title="AirT_Min &#64; 2019-09-09 04:21:00">
+                            95.47
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <span class="text-color-high" data-toggle="tooltip" title="DewPt_Max &#64; 2019-09-09 13:29:00">
+                            95.47
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-color-low" data-toggle="tooltip" title="DewPt_Min &#64; 2019-09-09 04:21:00">
+                            95.47
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <span class="text-color-high" data-toggle="tooltip" data-placement="bottom" title="RH_Max &#64; 2019-09-09 13:29:00">
+                            95.47
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-color-low" data-toggle="tooltip" data-placement="bottom" title="RH_Min &#64; 2019-09-09 04:21:00">
+                            95.47
+                        </span>
+                    </div>
+                </td>
+                <td class="rain">0.00</td>
+                <td class="wind" data-toggle="tooltip" data-placement="bottom"
+                    title="WndSpd_Max &#64; 2019-09-08 10:22:00">
+                    7.89</td>
+                <td>
+                    <div>
+                        <span class="text-color-high" data-toggle="tooltip" title="AirT_Max &#64; 2019-09-09 13:29:00">
+                            95.47
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-color-low" data-toggle="tooltip" title="AirT_Min &#64; 2019-09-09 04:21:00">
+                            95.47
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <span class="text-color-high" data-toggle="tooltip" title="DewPt_Max &#64; 2019-09-09 13:29:00">
+                            95.47
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-color-low" data-toggle="tooltip" title="DewPt_Min &#64; 2019-09-09 04:21:00">
+                            95.47
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <span class="text-color-high" data-toggle="tooltip" title="RH_Max &#64; 2019-09-09 13:29:00">
+                            95.47
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-color-low" data-toggle="tooltip" title="RH_Min &#64; 2019-09-09 04:21:00">
+                            95.47
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 @section scripts {
-    <environment include="Development">
-        <script src="~/js/data/realtime.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/data/realtime.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/data/realtime.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/data/realtime.min.js" asp-append-version="true"></script>
+</environment>
 }
