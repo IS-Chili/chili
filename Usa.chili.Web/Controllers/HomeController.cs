@@ -18,8 +18,8 @@ namespace Usa.chili.Web.Controllers
             return View();
         }
 
-        [HttpGet("Contact")]
-        public IActionResult Contact()
+        [HttpGet("About")]
+        public IActionResult About()
         {
             return View();
         }
