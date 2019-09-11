@@ -66,9 +66,18 @@
     {
       "library": "vue@2.6.10",
       "files": [
-        "vue.min.js", "vue.js"
+        "vue.min.js", 
+        "vue.js"
       ],
       "destination": "wwwroot/lib/js"
+    },
+    {
+      "library": "leaflet@1.5.1",
+      "files": [
+        "leaflet.css", 
+        "leaflet.js"
+      ],
+      "destination": "wwwroot/lib/leaflet"
     }
   ]
 }

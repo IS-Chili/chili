@@ -164,3 +164,7 @@ canvas {
 .text-color-low {
   color: blue;
 }
+
+.map { 
+  height: 500px; 
+}

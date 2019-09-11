@@ -18,6 +18,12 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/js/home/map.min.js",
+    "inputFiles": [
+      "wwwroot/js/home/map.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/js/data/graph.min.js",
     "inputFiles": [
       "wwwroot/js/data/graph.js"
