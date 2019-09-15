@@ -1,0 +1,42 @@
+Listen 8080
+
+<VirtualHost *:*>
+    RequestHeader set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+</VirtualHost>
+
+<VirtualHost *:8080>
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:5000/
+    ProxyPassReverse / http://127.0.0.1:5000/
+    ServerName localhost
+    ErrorLog "/usr/local/var/log/httpd/chili-error.log"
+	CustomLog "/usr/local/var/log/httpd/chili-access.log" combined
+</VirtualHost>
+
+<IfDefine IgnoreBlockComment>
+	Listen 80
+	Listen 443
+
+	<VirtualHost *:*>
+		RequestHeader set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+	</VirtualHost>
+
+	<VirtualHost *:80>
+		RewriteEngine On
+		RewriteCond %{HTTPS} !=on
+		RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+	</VirtualHost>
+
+	<VirtualHost *:443>
+		ProxyPreserveHost On
+		ProxyPass / http://127.0.0.1:5000/
+		ProxyPassReverse / http://127.0.0.1:5000/
+		ErrorLog /var/log/httpd/chili-error.log
+		CustomLog /var/log/httpd/chili-access.log common
+		SSLEngine on
+		SSLProtocol all -SSLv2
+		SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:!RC4+RSA:+HIGH:+MEDIUM:!LOW:!RC4
+		SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+		SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+	</VirtualHost>
+</IfDefine>

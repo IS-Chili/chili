@@ -1,0 +1,16 @@
+[Unit]
+Description=Chili Web App
+
+[Service]
+WorkingDirectory=/var/www
+ExecStart=/usr/local/bin/dotnet /var/www/Usa.chili.Web.dll
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=chili
+User=apache
+Environment=ASPNETCORE_ENVIRONMENT=Production 
+
+[Install]
+WantedBy=multi-user.target

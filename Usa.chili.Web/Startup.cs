@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.Extensions.Logging;
 using Usa.chili.Web;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Usa.chili
 {
@@ -71,6 +72,11 @@ namespace Usa.chili
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+            
             var policyCollection = new HeaderPolicyCollection()
                 .AddFrameOptionsDeny()
                 .AddXssProtectionBlock()
