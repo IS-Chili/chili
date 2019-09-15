@@ -1,4 +1,4 @@
-const USACampusWestStationId = 19;
+const USACampusWestStationId = 22;
 
 $(function () {
   //populateStationDropdown_Jquery();
@@ -322,12 +322,12 @@ const App = new Vue({
     return {
       stations: [],
       model: {
-        stationId: 19
+        stationId: 22
       }
     }
   },
   created: function() {
-    Core.populateStationDropdown(this);
+    Core.populateStationDropdown(this, true);
   },
   watch: {
     "model.stationId": function(val) {

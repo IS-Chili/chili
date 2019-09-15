@@ -33,7 +33,7 @@ namespace Usa.chili
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ChiliDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
 
             // Configure Antiforgery
             services.AddAntiforgery(opts => opts.Cookie.Name = "X-CSRF-TOKEN-COOKIE");

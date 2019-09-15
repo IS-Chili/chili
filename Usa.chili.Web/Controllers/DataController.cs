@@ -79,9 +79,14 @@ namespace Usa.chili.Web.Controllers
             return View();
         }
 
+        [HttpGet("ActiveStationList")]
+        public async Task<IActionResult> ActiveStationList() {
+            return new JsonResult(await _stationService.ListActiveStations());
+        } 
+
         [HttpGet("StationList")]
         public async Task<IActionResult> StationList() {
-            return new JsonResult(await _stationService.ListStations());
+            return new JsonResult(await _stationService.ListAllStations());
         } 
 
         [HttpGet("StationObservation")]

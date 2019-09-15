@@ -7,14 +7,15 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Usa.chili.Data;
+using Usa.chili.Domain;
 using Usa.chili.Dto;
 
 namespace Usa.chili.Services
 {
     public interface IStationService
     {
-        Task<List<Station>> ListStations();
+        Task<List<Station>> ListAllStations();
+        Task<List<Station>> ListActiveStations();
         Task<StationObservationDto> GetStationObservationById(int id);
     }
 }

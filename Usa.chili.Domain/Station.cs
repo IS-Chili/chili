@@ -1,15 +1,13 @@
-// ********************************************************************************************************************************************
-// Copyright (c) 2019
-// Author: USA
-// Product: CHILI
-// Version: 1.0.0
-// ********************************************************************************************************************************************
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Usa.chili.Data
+namespace Usa.chili.Domain
 {
     public partial class Station
     {
-        public int ID { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string StationKey { get; set; }
         public string DisplayName { get; set; }
         public bool IsActive { get; set; }
     }

@@ -20,8 +20,8 @@ Core.dateTimePickerTimeOptions = {
 };
 
 // Get Stations
-Core.populateStationDropdown = function (self) {
-  axios.get('/data/StationList')
+Core.populateStationDropdown = function (self, activeOnly) {
+  axios.get(activeOnly === true ? '/data/ActiveStationList' : '/data/StationList')
     .then(function (response) {
       self.stations = response.data;
     })

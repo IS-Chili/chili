@@ -15,7 +15,7 @@ const App = new Vue({
     }
   },
   created: function() {
-    Core.populateStationDropdown(this);
+    Core.populateStationDropdown(this, false);
   },
   computed: {
     currentDate: function() {
