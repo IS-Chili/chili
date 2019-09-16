@@ -33,18 +33,26 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
-        public async Task<List<Station>> ListActiveStations() {
+        public async Task<List<DropdownDto>> ListActiveStations() {
             return await _dbContext.Station
                 .AsNoTracking()
                 .Where(x => x.IsActive == true)
                 .OrderBy(x => x.DisplayName)
+                .Select(x => new DropdownDto {
+                    Id = x.Id,
+                    Text = x.DisplayName
+                })
                 .ToListAsync();
         }
 
-         public async Task<List<Station>> ListAllStations() {
+         public async Task<List<DropdownDto>> ListAllStations() {
             return await _dbContext.Station
                 .AsNoTracking()
                 .OrderBy(x => x.DisplayName)
+                .Select(x => new DropdownDto {
+                    Id = x.Id,
+                    Text = x.DisplayName
+                })
                 .ToListAsync();
         }
 

@@ -14,8 +14,8 @@ namespace Usa.chili.Services
 {
     public interface IStationService
     {
-        Task<List<Station>> ListAllStations();
-        Task<List<Station>> ListActiveStations();
+        Task<List<DropdownDto>> ListAllStations();
+        Task<List<DropdownDto>> ListActiveStations();
         Task<StationObservationDto> GetStationObservationById(int id);
     }
 }

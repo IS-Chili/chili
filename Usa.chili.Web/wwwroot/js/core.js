@@ -40,7 +40,7 @@ Vue.component('select2', {
     $(this.$el)
       // init select2
       .select2({
-        data: this.optionsData,
+        data: this.options,
         theme: Core.select2Options.theme,
         width: Core.select2Options.width
       })
@@ -50,14 +50,6 @@ Vue.component('select2', {
       .on('change', function () {
         vm.$emit('input', this.value)
       });
-  },
-  computed: {
-    optionsData: function() {
-      return $.map(this.options, function (obj) {
-        obj.text = obj.text || obj.displayName;
-        return obj;
-      });
-    }
   },
   watch: {
     value: function (value) {
@@ -69,7 +61,7 @@ Vue.component('select2', {
     options: function (options) {
       // update options
       $(this.$el).empty().select2({
-        data: this.optionsData,
+        data: options,
         theme: Core.select2Options.theme,
         width: Core.select2Options.width
       })
