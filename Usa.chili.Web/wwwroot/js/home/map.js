@@ -48,7 +48,7 @@ const StationMap = function() {
       radius: 1000
     }).addTo(stationMap);
 
-    circle.bindPopup(dataText).openPopup();
+    circle.bindPopup(dataText);
   }
 
   function onMapClick(e) {
