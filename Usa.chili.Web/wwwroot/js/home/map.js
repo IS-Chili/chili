@@ -28,20 +28,33 @@ const StationMap = function() {
     stationList.forEach(function(station) {
       const stationLink = "<a class='font-weight-bold' href='/Data/Station?id=" + station.id + "'>" + station.displayName + "</a>";
       const stationData = "<br>High: 100 &deg;F<br>Low: 70 &deg;F";
-      addPoint([station.latitude, station.longitude], station.isActive, stationLink + stationData);
+      station.dataText = stationLink + stationData;
+      addPoint(station);
     });
+
+    stationMap.on('popupopen', onPopupOpen);
   }
 
-  function addPoint(latLng, isActive, dataText) {
-    const color = isActive ? '#1e76e3' : '#d60909';
-    const circle = L.circle(latLng, {
+  function addPoint(station) {
+    const color = station.isActive ? '#1e76e3' : '#d60909';
+    const circle = L.circle([station.latitude, station.longitude], {
       color: color,
       fillColor: color,
       fillOpacity: 1,
       radius: 1000
     }).addTo(stationMap);
 
-    circle.bindPopup(dataText);
+    const popup = L.popup()
+      .setContent(station.dataText);
+
+    popup.stationId = station.id;
+
+    circle.bindPopup(popup);
+  }
+
+  function onPopupOpen(e) {
+    // TODO: Use this stationId to update the "Live Mesonet Observations" station
+    console.log(e.popup.stationId);
   }
 
   init();
