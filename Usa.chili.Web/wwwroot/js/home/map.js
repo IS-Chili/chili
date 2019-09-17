@@ -34,7 +34,6 @@ const StationMap = function() {
     });
 
     //marker.bindPopup("<b>Some station</b>").openPopup();
-    circle.bindPopup("<b>Some station</b><br>High: 100 &deg;F<br>Low: 70 &deg;F").openPopup();
 
     stationMap.on('click', onMapClick);
   }
