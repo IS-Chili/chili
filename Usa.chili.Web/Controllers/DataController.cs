@@ -49,6 +49,11 @@ namespace Usa.chili.Web.Controllers
             return View();
         }
 
+        [HttpGet("StationMap")]
+        public async Task<IActionResult> StationMap() {
+           return new JsonResult(await _stationService.GetStationMapData());
+        } 
+
         [HttpGet("Graph")]
         public IActionResult Graph()
         {

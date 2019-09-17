@@ -45,6 +45,19 @@ namespace Usa.chili.Services
                 .ToListAsync();
         }
 
+        public async Task<List<StationMapDto>> GetStationMapData() {
+            return await _dbContext.Station
+                .AsNoTracking()
+                .Select(x => new StationMapDto {
+                    Id = x.Id,
+                    DisplayName = x.DisplayName,
+                    Latitude = x.Latitude,
+                    Longitude = x.Longitude,
+                    IsActive = x.IsActive
+                })
+                .ToListAsync();
+        }
+
          public async Task<List<DropdownDto>> ListAllStations() {
             return await _dbContext.Station
                 .AsNoTracking()

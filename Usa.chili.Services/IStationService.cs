@@ -16,6 +16,7 @@ namespace Usa.chili.Services
     {
         Task<List<DropdownDto>> ListAllStations();
         Task<List<DropdownDto>> ListActiveStations();
+        Task<List<StationMapDto>> GetStationMapData();
         Task<StationObservationDto> GetStationObservationById(int id);
     }
 }
