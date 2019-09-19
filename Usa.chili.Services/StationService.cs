@@ -68,25 +68,5 @@ namespace Usa.chili.Services
                 })
                 .ToListAsync();
         }
-
-        // TODO: Replace with a database call
-        public async Task<StationObservationDto> GetStationObservationById(int id) {
-            Station station = await _dbContext.Station
-                .AsNoTracking()
-                .Where(x => x.Id == id)
-                .FirstAsync();
-
-            return await Task.FromResult(new StationObservationDto {
-                StationName = station.DisplayName,
-                StationTimestamp = DateTime.Now,
-                AirTemperature = 81.98,
-                DewPoint = 75.71,
-                RealHumidity = 81.35,
-                WindDirection = 264.91,
-                WindSpeed = 0.73,
-                Pressure = 29.96,
-                Precipitation = 1.0
-            });
-        }
     }
 }

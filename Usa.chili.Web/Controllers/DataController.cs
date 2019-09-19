@@ -18,11 +18,16 @@ namespace Usa.chili.Web.Controllers
     {
         private readonly ILogger _logger;
         private readonly IStationService _stationService;
-        
-        public DataController(ILogger<DataController> logger, IStationService stationService)
+        private readonly IPublicService _publicService;
+
+        public DataController(
+            ILogger<DataController> logger,
+            IStationService stationService,
+            IPublicService publicService)
         {
             _logger = logger;
             _stationService = stationService;
+            _publicService = publicService;
         }
 
         [HttpGet("Realtime")]
@@ -50,9 +55,10 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("StationMap")]
-        public async Task<IActionResult> StationMap() {
-           return new JsonResult(await _stationService.GetStationMapData());
-        } 
+        public async Task<IActionResult> StationMap()
+        {
+            return new JsonResult(await _stationService.GetStationMapData());
+        }
 
         [HttpGet("Graph")]
         public IActionResult Graph()
@@ -85,18 +91,21 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("ActiveStationList")]
-        public async Task<IActionResult> ActiveStationList() {
+        public async Task<IActionResult> ActiveStationList()
+        {
             return new JsonResult(await _stationService.ListActiveStations());
-        } 
+        }
 
         [HttpGet("StationList")]
-        public async Task<IActionResult> StationList() {
+        public async Task<IActionResult> StationList()
+        {
             return new JsonResult(await _stationService.ListAllStations());
-        } 
+        }
 
         [HttpGet("StationObservation")]
-        public async Task<IActionResult> StationObservationData(int id) {
-           return new JsonResult(await _stationService.GetStationObservationById(id));
-        } 
+        public async Task<IActionResult> StationObservationData(int id)
+        {
+            return new JsonResult(await _publicService.GetStationObservationById(id));
+        }
     }
 }

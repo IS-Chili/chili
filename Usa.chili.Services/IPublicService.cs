@@ -1,4 +1,4 @@
-﻿// ********************************************************************************************************************************************
+// ********************************************************************************************************************************************
 // Copyright (c) 2019
 // Author: USA
 // Product: CHILI
@@ -12,10 +12,8 @@ using Usa.chili.Dto;
 
 namespace Usa.chili.Services
 {
-    public interface IStationService
+    public interface IPublicService
     {
-        Task<List<DropdownDto>> ListAllStations();
-        Task<List<DropdownDto>> ListActiveStations();
-        Task<List<StationMapDto>> GetStationMapData();
+        Task<StationObservationDto> GetStationObservationById(int id);
     }
 }
