@@ -1,13 +1,17 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Usa.chili.Domain
 {
     public partial class Public
     {
+        [NotMapped()]
         public double? Rh { get; set; }
+        [NotMapped()]
         public double? DewPoint { get; set; }
+        [NotMapped()]
         public double? HtIdx { get; set; }
+        [NotMapped()]
         public double? Felt { get; set; }
 
         public double? NormalizeRelativeHumidity()

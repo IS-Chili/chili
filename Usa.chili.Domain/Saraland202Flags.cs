@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Usa.chili.Domain
 {
     public partial class Saraland202Flags
     {
-        [Key]
         public DateTime Ts { get; set; }
         public byte? RecIdFlag { get; set; }
         public byte? TableCodeFlag { get; set; }

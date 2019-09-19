@@ -44,7 +44,9 @@ function populateStationDropdown_Jquery() {
 function getStationDataAndDraw(stationId) {
   axios.get('/data/StationObservation?id=' + stationId)
     .then(function (response) {
-      drawStation(response.data);
+      if(response.data != null) {
+        drawStation(response.data);
+      }
     })
     .catch(function (error) {
       console.log('getStationDataAndDraw failed', error);

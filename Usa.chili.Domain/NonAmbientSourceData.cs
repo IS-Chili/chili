@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Usa.chili.Domain
 {
     public partial class NonAmbientSourceData
     {
-        [Key]
         public string StationKey { get; set; }
         public double Distance { get; set; }
         public double? Height { get; set; }

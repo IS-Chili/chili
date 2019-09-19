@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Usa.chili.Domain
 {
@@ -7,7 +7,6 @@ namespace Usa.chili.Domain
     {
         public short Year { get; set; }
         public byte Stormnum { get; set; }
-        [Key]
         public DateTime Ts { get; set; }
         public string Advisory { get; set; }
         public string Stage { get; set; }

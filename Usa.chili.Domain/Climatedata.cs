@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Usa.chili.Domain
 {
@@ -7,7 +7,6 @@ namespace Usa.chili.Domain
     {
         public string Year { get; set; }
         public string Month { get; set; }
-        [Key]
         public string StationKey { get; set; }
         public double? AirT2m { get; set; }
         public double? AirT1pt5m { get; set; }

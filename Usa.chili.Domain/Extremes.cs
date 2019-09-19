@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Usa.chili.Domain
 {
     public partial class Extremes
     {
-        [Key]
         public string StationKey { get; set; }
         public double? AirT1pt5mMax { get; set; }
         public DateTime? AirT1pt5mTmx { get; set; }

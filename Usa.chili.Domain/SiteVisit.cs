@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Usa.chili.Domain
 {
     public partial class SiteVisit
     {
-        [Key]
         public string StationKey { get; set; }
         public DateTime Arrive { get; set; }
         public DateTime Depart { get; set; }
