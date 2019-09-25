@@ -3,7 +3,7 @@ USE chili;
 DROP TABLE IF EXISTS chili.station;
 
 CREATE TABLE chili.station (
-  ID INT(10) NOT NULL AUTO_INCREMENT,
+  Id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   StationKey VARCHAR(15) NOT NULL,
   DisplayName VARCHAR(30) NOT NULL,
   Latitude DECIMAL(8, 6) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE chili.station (
   BeginDate DATETIME NOT NULL,
   EndDate DATETIME NULL,
   IsActive TINYINT(1) NOT NULL,
-  PRIMARY KEY (ID)
+  PRIMARY KEY (Id)
 );
 
 INSERT INTO chili.station (StationKey, DisplayName, Latitude, Longitude, Elevation, BeginDate, EndDate, IsActive) 
