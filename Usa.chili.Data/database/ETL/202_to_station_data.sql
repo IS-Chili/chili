@@ -17,7 +17,7 @@ START TRANSACTION;
 -- Insert station data from ashford_202
 INSERT INTO chili.station_data
 (
-    `StationID`,
+    `StationId`,
     `TS`,
     `RecId`,
     `TableCode`,
