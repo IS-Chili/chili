@@ -16,9 +16,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.Extensions.Logging;
 using Usa.chili.Web;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.HttpOverrides;
-
+using Microsoft.Extensions.Hosting;
+ 
 namespace Usa.chili
 {
     public class Startup
@@ -61,7 +61,8 @@ namespace Usa.chili
             });
             */
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddOptions();
 
@@ -71,7 +72,7 @@ namespace Usa.chili
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -91,7 +92,6 @@ namespace Usa.chili
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -112,7 +112,13 @@ namespace Usa.chili
 
             app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
-            app.UseMvcWithDefaultRoute();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                // endpoints.MapControllers();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
