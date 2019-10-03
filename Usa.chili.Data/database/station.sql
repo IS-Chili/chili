@@ -52,7 +52,7 @@ INSERT INTO chili.station (StationKey, DisplayName, Latitude, Longitude, Elevati
 VALUES ('florala', 'Florala', 31.0011, -86.336, 86.87, '2009-01-18', NULL, 1);
 
 INSERT INTO chili.station (StationKey, DisplayName, Latitude, Longitude, Elevation, BeginDate, EndDate, IsActive) 
-VALUES ('foley', 'Foley', 0.3699, -87.6456, 17.0, '2009-08-03', NULL, 1);
+VALUES ('foley', 'Foley', 30.3699, -87.6456, 17.0, '2009-08-03', NULL, 1);
 
 INSERT INTO chili.station (StationKey, DisplayName, Latitude, Longitude, Elevation, BeginDate, EndDate, IsActive) 
 VALUES ('gasque', 'Gasque', 30.2387, -87.854, 1.22, '2010-05-12', NULL, 1);
