@@ -9,8 +9,8 @@ Listen 8080
     ProxyPass / http://127.0.0.1:5000/
     ProxyPassReverse / http://127.0.0.1:5000/
     ServerName localhost
-    ErrorLog "/usr/local/var/log/httpd/chili-error.log"
-	CustomLog "/usr/local/var/log/httpd/chili-access.log" combined
+    ErrorLog "/var/log/httpd/chili-error.log"
+	CustomLog "/var/log/httpd/chili-access.log" combined
 </VirtualHost>
 
 <IfDefine IgnoreBlockComment>

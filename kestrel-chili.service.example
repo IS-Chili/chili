@@ -2,8 +2,8 @@
 Description=Chili Web App
 
 [Service]
-WorkingDirectory=/var/www
-ExecStart=/usr/local/bin/dotnet /var/www/Usa.chili.Web.dll
+WorkingDirectory=/var/www/chili_net_core
+ExecStart=/bin/dotnet /var/www/chili_net_core/Usa.chili.Web.dll
 Restart=always
 # Restart service after 10 seconds if the dotnet service crashes:
 RestartSec=10

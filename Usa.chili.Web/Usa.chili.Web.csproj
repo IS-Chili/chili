@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\lib\js\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Usa.chili.Common\Usa.chili.Common.csproj" />
     <ProjectReference Include="..\Usa.chili.Data\Usa.chili.Data.csproj" />
     <ProjectReference Include="..\Usa.chili.Domain\Usa.chili.Domain.csproj" />
