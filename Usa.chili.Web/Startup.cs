@@ -108,8 +108,6 @@ namespace Usa.chili
 
             app.UseCookiePolicy();
 
-            loggerFactory.AddLog4Net();
-
             app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             app.UseRouting();
