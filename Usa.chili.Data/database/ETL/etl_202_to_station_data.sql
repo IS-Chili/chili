@@ -24,6 +24,8 @@ SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 START TRANSACTION;
 
+SELECT CONCAT('Started at ', NOW());
+
 OPEN station_cursor;
 
 station_loop: LOOP
@@ -404,6 +406,8 @@ ELSE
     SELECT 'Successful and committing the data change.';
     COMMIT;
 END IF;
+
+SELECT CONCAT('Ended at ', NOW());
 
 END$$
 
