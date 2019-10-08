@@ -10,7 +10,8 @@ RestartSec=10
 KillSignal=SIGINT
 SyslogIdentifier=chili
 User=apache
-Environment=ASPNETCORE_ENVIRONMENT=Production 
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ConnectionStrings__DefaultConnection=server=localhost;port=3306;user=;password=;database=chili
 
 [Install]
 WantedBy=multi-user.target
