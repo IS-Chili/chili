@@ -61,7 +61,10 @@ namespace Usa.chili
             });
             */
 
-            services.AddControllersWithViews();
+            services
+                .AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
+                
             services.AddRazorPages();
 
             services.AddOptions();

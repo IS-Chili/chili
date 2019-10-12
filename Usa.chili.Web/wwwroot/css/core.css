@@ -1,3 +1,8 @@
+.header-img {
+  max-height: 150px;
+  padding: 20px;
+}
+
 .navbar-dark .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255, 255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
@@ -116,17 +121,25 @@ a:focus {
   background-color: #bbddff;
 }
 
+.bg-core-dark-blue {
+  background-color: #1d2a56;
+}
+
+.bg-core-darker-blue {
+  background-color: #101046;
+}
+
 canvas {
   width: 100%;
   height: auto;
 }
 
-.mt-100 {
-  margin-top: 100px;
+.mt-60 {
+  margin-top: 60px;
 }
 
 .small-logo {
-  width: 60px;
+  height: 50px;
 }
 
 .w-100p {
@@ -165,6 +178,34 @@ canvas {
   color: blue;
 }
 
-.map { 
+#station-map { 
   height: 500px; 
+}
+
+.main-container {
+  min-height: 100%;
+  height: auto;
+  margin-top: 60px;
+  margin-bottom: -200px;
+  padding-bottom: 200px;
+}
+
+.footer {
+  width: 100%;
+}
+
+.station-label {
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-weight: bold;
+  color: black;
+}
+
+.leaflet-tooltip-top:before {
+  border-top-color: transparent;
+}
+
+.text-wrap {
+  overflow: ;
 }

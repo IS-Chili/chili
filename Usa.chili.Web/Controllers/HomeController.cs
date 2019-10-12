@@ -35,12 +35,5 @@ namespace Usa.chili.Web.Controllers
         {
             return View();
         }
-
-        // TODO: Move to home page
-        [HttpGet("StationMap")]
-        public IActionResult StationMap()
-        {
-            return View();
-        }
     }
 }

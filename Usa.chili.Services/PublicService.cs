@@ -42,7 +42,7 @@ namespace Usa.chili.Services
             return _dbContext.Public
                 .AsNoTracking()
                 .Where(x => x.StationKey == station.StationKey)
-                .Where(x => x.Ts.HasValue && x.Ts.Value >= DateTime.Now.AddHours(-1))
+                //.Where(x => x.Ts.HasValue && x.Ts.Value >= DateTime.Now.AddHours(-1))
                 .AsEnumerable()
                 .Select(p => p.ConvertUnits())
                 .Select(p => new StationObservationDto {

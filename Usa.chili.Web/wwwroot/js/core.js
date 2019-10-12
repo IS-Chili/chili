@@ -76,3 +76,17 @@ Vue.component('select2', {
 
 // Prevent changes to Core object
 Object.freeze(Core);
+
+// Handle navbar stickiness
+$(function () {
+  const header = document.getElementById("navbar");
+  const sticky = header.offsetTop;
+
+  window.onscroll = function() {
+    if (window.pageYOffset > sticky) {
+      header.classList.add("fixed-top");
+    } else {
+      header.classList.remove("fixed-top");
+    }
+  };
+});

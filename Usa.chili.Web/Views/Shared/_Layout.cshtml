@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -21,49 +22,93 @@
         <link rel="stylesheet" href="~/css/core.min.css" asp-append-version="true" />
     </environment>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-        <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img class="logo" src="/images/NavBarLogo.png" alt="Logo" title="Home"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index"><div>Home</div></a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="StationMap"><div>Station Map</div></a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Data" asp-action="Realtime"><div>Realtime Data</div></a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="archivedDataMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div>
-                            Archived Data
-                            <i class="fas fa-caret-down"></i>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="archivedDataMenuLink">
-                        <a class="dropdown-item" asp-controller="Data" asp-action="Metadata">Metadata</a>
-                        <a class="dropdown-item" asp-controller="Data" asp-action="Meteorological">Meteorological Data</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-controller="Data" asp-action="QC_Graphs">Monthly QC Graphs</a>
-                        <a class="dropdown-item" asp-controller="Data" asp-action="Summaries">Monthly Summaries</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-controller="Data" asp-action="VOC">VOC Data</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Data" asp-action="CustomProducts"><div>Custom Data</div></a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About"><div>About Us</div></a></li>
-            </ul>
+    <header>
+        <div class="d-flex justify-content-center bg-core-light-blue">
+            <a href="/"><img class="header-img img-fluid" alt="Large logo" src="/images/MesonetLogo.png" /></a>
         </div>
-    </nav>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">
+                            <div>Home</div>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Data" asp-action="Realtime">
+                            <div>Realtime Data</div>
+                        </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="archivedDataMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <div>
+                                Archived Data
+                                <i class="fas fa-caret-down"></i>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="archivedDataMenuLink">
+                            <a class="dropdown-item" asp-controller="Data" asp-action="Metadata">Metadata</a>
+                            <a class="dropdown-item" asp-controller="Data" asp-action="Meteorological">Meteorological
+                                Data</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Data" asp-action="QC_Graphs">Monthly QC Graphs</a>
+                            <a class="dropdown-item" asp-controller="Data" asp-action="Summaries">Monthly Summaries</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Data" asp-action="VOC">VOC Data</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Data" asp-action="CustomProducts">
+                            <div>Custom Data</div>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">
+                            <div>About Us</div>
+                        </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <noscript>
-        <div class="mt-100 mx-5 text-center">
-            <strong>We're sorry but this website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        <div class="mt-60 mx-5 text-center">
+            <strong>We're sorry but this website doesn't work properly without JavaScript enabled. Please enable it to
+                continue.</strong>
         </div>
     </noscript>
 
-    <div id="app" class="container mt-100 mb-5">
+    <main role="main" id="app" class="main-container container mt-60 mb-5">
         @RenderBody()
-    </div>
+    </main>
+
+    <footer class="footer">
+        <ul class="list-unstyled list-inline text-center bg-core-dark-blue m-0 p-2">
+            <li class="list-inline-item">
+                <a class="mr-3" href="http://www.facebook.com/pages/South-Alabama-Mesonet/140015933698">
+                    <img class="small-logo" alt="Facebook" title="Facebook" src="/images/Facebook.png" />
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="mr-3 mt-2" href="https://www.southalabama.edu">
+                    <img class="small-logo" alt="USA" title="USA" src="/images/USALogo.png" />
+                </a>
+            </li>
+        </ul>
+
+        <div class="bg-core-darker-blue text-white py-2">
+            <div class="row d-flex justify-content-center text-center m-0">
+                <div class="col-sm-12 col-md-auto">
+                    <a asp-controller="Home" asp-action="Donate">
+                        <span class="text-white">Donate to USA Mesonet</span>
+                    </a>
+                </div>
+                <div class="col-sm-12 col-md-auto">
+                    <small>© 2019 South Alabama Mesonet</small>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise&flags=gated"></script>
 
@@ -93,4 +138,5 @@
 
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
