@@ -70,6 +70,7 @@ namespace Usa.chili
             services.AddOptions();
 
             services.AddScoped<IStationService, StationService>();
+            services.AddScoped<IStationDataService, StationDataService>();
             services.AddScoped<IPublicService, PublicService>();
             services.Configure<ChiliConfig>(Configuration.GetSection("ChiliConfig"));
         }

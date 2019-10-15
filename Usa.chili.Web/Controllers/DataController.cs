@@ -18,15 +18,18 @@ namespace Usa.chili.Web.Controllers
     {
         private readonly ILogger _logger;
         private readonly IStationService _stationService;
+        private readonly IStationDataService _stationDataService;
         private readonly IPublicService _publicService;
 
         public DataController(
             ILogger<DataController> logger,
             IStationService stationService,
+            IStationDataService stationDataService,
             IPublicService publicService)
         {
             _logger = logger;
             _stationService = stationService;
+            _stationDataService = stationDataService;
             _publicService = publicService;
         }
 
@@ -34,6 +37,12 @@ namespace Usa.chili.Web.Controllers
         public IActionResult Realtime()
         {
             return View();
+        }
+
+        [HttpGet("RealtimeData")]
+        public async Task<IActionResult> RealtimeData()
+        {
+            return new JsonResult(await _stationDataService.ListRealtimeData());
         }
 
         [HttpGet("CustomProducts")]
