@@ -13,8 +13,8 @@ namespace Usa.chili.Common
     public class Constant
     {
         /// <summary>
-        /// Standard date format for the application
+        /// Standard datetime format for the application
         /// </summary>
-        public const string DATE_FORMAT = "MM/dd/yyyy";
+        public const string DATETIME_FORMAT = "MM/dd/yyyy HH:mm:ss";
     }
 }

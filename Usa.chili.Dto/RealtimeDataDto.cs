@@ -6,8 +6,6 @@
 // ********************************************************************************************************************************************
 
 using System;
-using Newtonsoft.Json;
-using Usa.chili.Common.Converters;
 
 namespace Usa.chili.Dto
 {
@@ -15,7 +13,6 @@ namespace Usa.chili.Dto
     {
         public int StationId { get; set; }
         public string StationName { get; set; }
-        [JsonConverter(typeof(JsonDateTimeConverter))]
         public DateTime StationTimestamp { get; set; }
         public double AirTemperature { get; set; }
         public double? HeatIndex { get; set; }

@@ -43,12 +43,6 @@
   .btn-inline {
     margin-top: 30px;
   }
-
-  .table-expand {
-    position: absolute; 
-    left: 0; 
-    width: 100%; 
-  }
 }
 
 @media (max-width: 991.98px) {

@@ -7,51 +7,53 @@
                 "temperature, rainfall, wind speed and direction, soil temperature and humidity.";
 }
 
-<div class="row">
-    <div class="col-sm-12 col-lg-8 mb-3">
-        <div class="card">
-            <div class="card-heading bg-core-blue py-1">
-                <h5 class="card-title text-center mb-0">Station Map</h5>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-8 mb-3">
+            <div class="card">
+                <div class="card-heading bg-core-blue py-1">
+                    <h5 class="card-title text-center mb-0">Station Map</h5>
+                </div>
+                <div class="card-body">
+                    <div id="station-map"></div>
+                </div>
             </div>
-            <div class="card-body">
-                <div id="station-map"></div>
+        </div>
+        <div class="col-sm-12 col-lg-4">
+            <div class="card">
+                <div class="card-heading bg-core-blue py-1">
+                    <h5 class="card-title text-center mb-0">Live Mesonet Observations</h5>
+                    <div class="text-center"><small>Choose a Station Below</small></div>
+                </div>
+                <div id="stationObservationsCanvasDiv" class="card-body">
+                    <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
+                    <label for="stationSelection">Station</label>
+                    <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-4">
-        <div class="card">
-            <div class="card-heading bg-core-blue py-1">
-                <h5 class="card-title text-center mb-0">Live Mesonet Observations</h5>
-                <div class="text-center"><small>Choose a Station Below</small></div>
-            </div>
-            <div id="stationObservationsCanvasDiv" class="card-body">
-                <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
-                <label for="stationSelection">Station</label>
-                <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-sm-12 col-lg-8 mb-3">
-        <div class="card">
-            <div class="card-heading bg-core-blue py-1">
-                <h5 class="card-title text-center mb-0">Regional Observations</h5>
-            </div>
-            <div class="card-body">
-                <img id="regionalImage" class="img-fluid"
-                    src="http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png"
-                    alt="Gulf Coast Observations" />
+    <div class="row">
+        <div class="col-sm-12 col-lg-8 mb-3">
+            <div class="card">
+                <div class="card-heading bg-core-blue py-1">
+                    <h5 class="card-title text-center mb-0">Regional Observations</h5>
+                </div>
+                <div class="card-body">
+                    <img id="regionalImage" class="img-fluid"
+                        src="http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png"
+                        alt="Gulf Coast Observations" />
 
-                <div class="row">
-                    <div class="col-sm-8 col-md-4">
-                        <label for="dataSetSelection">Dataset</label>
-                        <select id="dataSetSelection">
-                            <option value="1">Temperature</option>
-                            <option value="2">Dewpoint</option>
-                            <option value="3">Pressure</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-sm-8 col-md-4">
+                            <label for="dataSetSelection">Dataset</label>
+                            <select id="dataSetSelection">
+                                <option value="1">Temperature</option>
+                                <option value="2">Dewpoint</option>
+                                <option value="3">Pressure</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

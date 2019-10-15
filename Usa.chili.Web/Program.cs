@@ -8,7 +8,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Usa.chili
+namespace Usa.chili.Web
 {
     public class Program
     {
