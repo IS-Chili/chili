@@ -1,27 +1,42 @@
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip({
-    boundary: 'span',
-    placement: 'left'
-  });
-});
-
 const App = new Vue({
   el: '#app',
   data: function () {
     return {
-      realtimeData: []
+      realtimeData: [],
+      now: new Date()
     }
   },
   created: function() {
-    this.getData();
+    const self = this;
+
+    // Get data on load
+    self.getData();
+
+    // Get data again every 5 minutes
+    setInterval(function() {
+      self.getData();
+    }, 300000);
+  },
+  computed: {
+    nowFormated: function() {
+      return moment(this.now).format('MM/DD/YYYY HH:mm:ss');
+    }
   },
   methods: {
     getData: function() {
-      const self = this
+      const self = this;
 
       axios.get('/data/RealtimeData')
       .then(function (response) {
         self.realtimeData = response.data;
+        Vue.nextTick(function () {
+          self.now = new Date();
+
+          $('[data-toggle="tooltip"]').tooltip({
+            boundary: 'span',
+            placement: 'left'
+          });
+        });
       })
       .catch(function (error) {
         console.log('getRealtimeData failed', error);
