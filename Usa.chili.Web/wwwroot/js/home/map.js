@@ -50,12 +50,13 @@ const StationMap = function() {
     // Active stations are blue and inactive stations are red
     const color = station.isActive ? '#1e76e3' : '#d60909';
 
-    // Create the circle object at the station coordinates on the map
-    const circle = L.circle([station.latitude, station.longitude], {
+    // Create the circleMarker object at the station coordinates on the map
+    const circleMarker = L.circleMarker([station.latitude, station.longitude], {
       color: color,
       fillColor: color,
+      clickable: true,
       fillOpacity: 1,
-      radius: 2000
+      radius: 6
     })
     .bindTooltip(station.displayName,
       {
@@ -75,7 +76,7 @@ const StationMap = function() {
     popup.stationId = station.id;
 
     // Bind the popup object to the circle object
-    circle.bindPopup(popup);
+    circleMarker.bindPopup(popup);
   }
 
   // Set the App stationId from the popup object
