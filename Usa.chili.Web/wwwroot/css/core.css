@@ -1,11 +1,12 @@
 div.left_header{
   background-color: #bbddff;
   width:100%;
+  padding: 10px;
 }
 div.right_header{
   position: absolute;
   font: bold 11px Georgia, serif;
-  top: 20px;
+  top: 30px;
   right: 150px;
   margin-left: 60%;
   margin-right: auto;
