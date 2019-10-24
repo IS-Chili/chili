@@ -52,10 +52,7 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("Metadata")]
-        public IActionResult Metadata(int? id)
-        {
-            return View();
-        }
+        public IActionResult Metadata(int? id) => View();
 
         [HttpGet("Station")]
         public IActionResult Station(int? id)
