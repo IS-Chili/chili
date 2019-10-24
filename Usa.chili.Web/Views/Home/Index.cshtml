@@ -19,28 +19,28 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-12 col-lg-4">
-        <div class="card">
-            <div class="card-heading bg-core-blue py-1">
-                <h5 class="card-title text-center mb-0">Live Mesonet Observations</h5>
-                <div class="text-center"><small>Choose a Station Below</small></div>
-            </div>
-            <div id="stationObservationsCanvasDiv" class="card-body">
-                <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
-                <div>
-                    <div class="text-left">
-                        <label for="stationSelection">Station</label>
-                        <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+    
+        <div class="col-sm-12 col-lg-4">
+            <div class="card">
+                <div class="card-heading bg-core-blue py-1">
+                    <h5 class="card-title text-center mb-0">Live Mesonet Observations</h5>
+                    <div class="text-center"><small>Choose a Station Below</small></div>
+                </div>
+                <div id="stationObservationsCanvasDiv" class="card-body">
+                    <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
+                    <div>
+                        <div class="text-left">
+                            <label for="stationSelection">Station</label>
+                            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+                        </div>
+                        <div class="text-right">
+                            <a id="widgetFullDataLink" class="btn btn-default" asp-controller="Data" asp-action="Station" asp-route-id="1" >Full Data</a>                                
+                        </div>                
                     </div>
-                    <div class="text-right">
-                        <a id="widgetFullDataLink" class="btn btn-default" asp-controller="Data" asp-action="Station" asp-route-id="1" >Full Data</a>                                
-                    </div>                
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-sm-12 col-lg-8 mb-3">
             <div class="card">
