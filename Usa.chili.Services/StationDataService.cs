@@ -34,13 +34,15 @@ namespace Usa.chili.Services
         }
 
         public async Task<List<RealtimeDataDto>> ListRealtimeData() {
+            DateTime now = DateTime.Now;
+
             return await _dbContext.Station
                 .AsNoTracking()
                 .OrderBy(x => x.DisplayName)
                 .Select(x => new RealtimeDataDto {
                     StationId = x.Id,
                     StationName = x.DisplayName,
-                    StationTimestamp = DateTime.Now,
+                    StationTimestamp = now,
                     AirTemperature = 90.1,
                     DewPoint = 1.1,
                     HeatIndex = 1.1,
@@ -50,13 +52,13 @@ namespace Usa.chili.Services
                     WindSpeed = 1.4,
                     Pressure = 1.5,
                     YesterdayExtreme = new ExtremeDto {
-                        AirTemperatureHighTimestamp = DateTime.Now.AddDays(-1),
-                        AirTemperatureLowTimestamp = DateTime.Now.AddDays(-1),
-                        DewPointHighTimestamp = DateTime.Now.AddDays(-1),
-                        DewPointLowTimestamp = DateTime.Now.AddDays(-1),
-                        RealHumidityHighTimestamp = DateTime.Now.AddDays(-1),
-                        RealHumidityLowTimestamp = DateTime.Now.AddDays(-1),
-                        WindSpeedMaxTimestamp = DateTime.Now.AddDays(-1),
+                        AirTemperatureHighTimestamp = now.AddDays(-1),
+                        AirTemperatureLowTimestamp = now.AddDays(-1),
+                        DewPointHighTimestamp = now.AddDays(-1),
+                        DewPointLowTimestamp = now.AddDays(-1),
+                        RealHumidityHighTimestamp = now.AddDays(-1),
+                        RealHumidityLowTimestamp = now.AddDays(-1),
+                        WindSpeedMaxTimestamp = now.AddDays(-1),
                         AirTemperatureHigh = 65.3,
                         AirTemperatureLow = 80.6,
                         DewPointHigh = 1.5,
@@ -67,13 +69,13 @@ namespace Usa.chili.Services
                         Precipitation = 1.5,
                     },
                     TodayExtreme = new ExtremeDto {
-                        AirTemperatureHighTimestamp = DateTime.Now,
-                        AirTemperatureLowTimestamp = DateTime.Now,
-                        DewPointHighTimestamp = DateTime.Now,
-                        DewPointLowTimestamp = DateTime.Now,
-                        RealHumidityHighTimestamp = DateTime.Now,
-                        RealHumidityLowTimestamp = DateTime.Now,
-                        WindSpeedMaxTimestamp = DateTime.Now,
+                        AirTemperatureHighTimestamp = now,
+                        AirTemperatureLowTimestamp = now,
+                        DewPointHighTimestamp = now,
+                        DewPointLowTimestamp = now,
+                        RealHumidityHighTimestamp = now,
+                        RealHumidityLowTimestamp = now,
+                        WindSpeedMaxTimestamp = now,
                         AirTemperatureHigh = 65.3,
                         AirTemperatureLow = 80.6,
                         DewPointHigh = 1.5,

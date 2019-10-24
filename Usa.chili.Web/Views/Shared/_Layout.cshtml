@@ -25,9 +25,12 @@
 
 <body>
     <header>
-        <div class="d-flex justify-content-center bg-core-light-blue">
-            <a href="/"><img class="header-img img-fluid" alt="Large logo" src="/images/MesonetLogo.png" /></a>
+        <div class="left_header" id="banner"><a href="/">
+            <img src="/images/MesonetLogo.png" alt="USA Mesonet Logo" height="60px" /></a>
         </div>
+        <div class="right_header"> 
+             The Center for Hurricane Intensity and Landfall Investigation
+       </div>
         <nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +81,7 @@
         </div>
     </noscript>
 
-    <main role="main" id="app" class="main-container container mt-60 mb-5">
+    <main role="main" id="app" class="main-container mt-60 mb-5">
         @RenderBody()
     </main>
 

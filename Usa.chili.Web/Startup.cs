@@ -15,11 +15,11 @@ using Usa.chili.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.Extensions.Logging;
-using Usa.chili.Web;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Hosting;
- 
-namespace Usa.chili
+using Usa.chili.Web.Converters;
+
+namespace Usa.chili.Web
 {
     public class Startup
     {
@@ -63,7 +63,11 @@ namespace Usa.chili
 
             services
                 .AddControllersWithViews()
-                .AddRazorRuntimeCompilation();
+                .AddRazorRuntimeCompilation()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                });
                 
             services.AddRazorPages();
 

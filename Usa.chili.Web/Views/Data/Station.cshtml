@@ -3,84 +3,86 @@ ViewBag.Title = "Meteorological Station Data";
 ViewBag.Description = "Meteorological Station Data";
 }
 
-<h1 class="text-center">Meteorological Data for Agricola Station</h1>
-<h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
-<h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
+<div class="container">
+    <h1 class="text-center">Meteorological Data for Agricola Station</h1>
+    <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
+    <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
 
-<hr>
+    <hr>
 
-<div class="d-flex justify-content-center my-4">
-    <a class="btn btn-light" asp-controller="Data" asp-action="Metadata" asp-route-id="1">Display Metadata for Agricola
-        Station</a>
-</div>
+    <div class="d-flex justify-content-center my-4">
+        <a class="btn btn-light" asp-controller="Data" asp-action="Metadata" asp-route-id="1">Display Metadata for Agricola
+            Station</a>
+    </div>
 
-<div class="form-row d-flex justify-content-center">
-    <div class="form-group col-lg-2 mr-2">
-        <label for="datePicker">Date</label>
-        <div class="input-group date" id="datePicker" data-target-input="nearest">
-            <input type="text" :value="currentDate" class="form-control datetimepicker-input"
-                data-target="#datePicker" />
-            <div class="input-group-append" data-target="#datePicker" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+    <div class="form-row d-flex justify-content-center">
+        <div class="form-group col-lg-2 mr-2">
+            <label for="datePicker">Date</label>
+            <div class="input-group date" id="datePicker" data-target-input="nearest">
+                <input type="text" :value="currentDate" class="form-control datetimepicker-input"
+                    data-target="#datePicker" />
+                <div class="input-group-append" data-target="#datePicker" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="form-group col-lg-2 mr-2">
-        <label for="timePicker">Time</label>
-        <div class="input-group date" id="timePicker" data-target-input="nearest">
-            <input type="text" :value="currentTime" class="form-control datetimepicker-input"
-                data-target="#timePicker" />
-            <div class="input-group-append" data-target="#timePicker" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fas fa-clock"></i></div>
+        <div class="form-group col-lg-2 mr-2">
+            <label for="timePicker">Time</label>
+            <div class="input-group date" id="timePicker" data-target-input="nearest">
+                <input type="text" :value="currentTime" class="form-control datetimepicker-input"
+                    data-target="#timePicker" />
+                <div class="input-group-append" data-target="#timePicker" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="form-group col-lg-1 ml-3 mr-5">
-        <div class="btn-group btn-inline" role="group" aria-label="Date change">
-            <button type="button" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
-            <button type="button" class="btn btn-light"><i class="fas fa-clock"></i></button>
-            <button type="button" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
+        <div class="form-group col-lg-1 ml-3 mr-5">
+            <div class="btn-group btn-inline" role="group" aria-label="Date change">
+                <button type="button" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
+                <button type="button" class="btn btn-light"><i class="fas fa-clock"></i></button>
+                <button type="button" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="form-group col-lg-3 mr-2">
+            <label for="stationSelection">Station</label>
+            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+        </div>
+        <div class="col-lg-1">
+            <button type="button" class="btn btn-secondary btn-inline mb-3">Go</button>
         </div>
     </div>
-    <div class="form-group col-lg-3 mr-2">
-        <label for="stationSelection">Station</label>
-        <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
-    </div>
-    <div class="col-lg-1">
-        <button type="button" class="btn btn-secondary btn-inline mb-3">Go</button>
-    </div>
-</div>
 
-<table class="table table-responsive">
-    <tbody>
-        <tr>
-            <td>
-                <a asp-controller="Data" asp-action="Graph" asp-route-id="1" data-toggle="tooltip"
-                    data-placement="bottom" title="View Graph">
-                    <i class="fas fa-chart-area fa-lg"></i>
-                </a>
-            </td>
-            <td>Precipitation over the last minute (TB3):</td>
-            <td>0</td>
-            <td>mm</td>
-            <td>0</td>
-            <td>in</td>
-        </tr>
-        <tr>
-            <td>
-                <a asp-controller="Data" asp-action="Graph" asp-route-id="1" data-toggle="tooltip"
-                    data-placement="bottom" title="View Graph">
-                    <i class="fas fa-chart-area fa-lg"></i>
-                </a>
-            </td>
-            <td>Precipitation over the last minute (TX):</td>
-            <td>0</td>
-            <td>mm</td>
-            <td>0</td>
-            <td>in</td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table table-responsive">
+        <tbody>
+            <tr>
+                <td>
+                    <a asp-controller="Data" asp-action="Graph" asp-route-id="1" data-toggle="tooltip"
+                        data-placement="bottom" title="View Graph">
+                        <i class="fas fa-chart-area fa-lg"></i>
+                    </a>
+                </td>
+                <td>Precipitation over the last minute (TB3):</td>
+                <td>0</td>
+                <td>mm</td>
+                <td>0</td>
+                <td>in</td>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Data" asp-action="Graph" asp-route-id="1" data-toggle="tooltip"
+                        data-placement="bottom" title="View Graph">
+                        <i class="fas fa-chart-area fa-lg"></i>
+                    </a>
+                </td>
+                <td>Precipitation over the last minute (TX):</td>
+                <td>0</td>
+                <td>mm</td>
+                <td>0</td>
+                <td>in</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 @section scripts {
 <environment include="Development">

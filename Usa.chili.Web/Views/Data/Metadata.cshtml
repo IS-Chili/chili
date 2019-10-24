@@ -3,58 +3,60 @@ ViewBag.Title = "Metadata";
 ViewBag.Description = "Instrument Metadata";
 }
 
-<h1 class="text-center">Displaying Instrument Metadata for Atmore Station</h1>
-<h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12 </h6>
+<div class="container">
+    <h1 class="text-center">Displaying Instrument Metadata for Atmore Station</h1>
+    <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12 </h6>
 
-<hr>
+    <hr>
 
-<div class="d-flex justify-content-center my-4">
-    <a class="btn btn-light" asp-controller="Data" asp-action="Station" asp-route-id="1">Display Current Data for
-        Agricola Station</a>
+    <div class="d-flex justify-content-center my-4">
+        <a class="btn btn-light" asp-controller="Data" asp-action="Station" asp-route-id="1">Display Current Data for
+            Agricola Station</a>
+    </div>
+
+    <div class="form-row d-flex justify-content-center">
+        <div class="form-group col-lg-3 mr-2">
+            <label for="stationSelection">Station</label>
+            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+        </div>
+        <div class="form-group col-lg-4 mr-2">
+            <label for="metadataSelection">Metadata</label>
+            <select id="metadataSelection">
+                <option value="instrument">Instrument Metadata</option>
+                <option value="eventlog">Station Event Log</option>
+                <option value="images">Ground-level Station Images</option>
+                <option value="satellite">Satellite Station Images</option>
+                <option value="dataproc">Data Processing</option>
+            </select>
+        </div>
+        <div class="col-lg-1">
+            <button type="button" class="btn btn-secondary btn-inline">Go</button>
+        </div>
+    </div>
+
+    <table class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">Parameter</th>
+                <th class="text-center">Manufacturer / Model (SerialNo)</th>
+                <th class="text-center">Installation Date</th>
+                <th class="text-center">Mounting Height</th>
+                <th class="text-center">Measuring Range</th>
+                <th class="text-center">Accuracy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Precipitation</td>
+                <td>Hydrological Services<br />TB3 (N/A)</td>
+                <td>2005-08-27</td>
+                <td>1m</td>
+                <td>0 to 700 mm/h</td>
+                <td>&plusmn; 2% @@ 225 to 500 mm/h<br />Resolution: 0.254 mm</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-<div class="form-row d-flex justify-content-center">
-    <div class="form-group col-lg-3 mr-2">
-        <label for="stationSelection">Station</label>
-        <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
-    </div>
-    <div class="form-group col-lg-4 mr-2">
-        <label for="metadataSelection">Metadata</label>
-        <select id="metadataSelection">
-            <option value="instrument">Instrument Metadata</option>
-            <option value="eventlog">Station Event Log</option>
-            <option value="images">Ground-level Station Images</option>
-            <option value="satellite">Satellite Station Images</option>
-            <option value="dataproc">Data Processing</option>
-        </select>
-    </div>
-    <div class="col-lg-1">
-        <button type="button" class="btn btn-secondary btn-inline">Go</button>
-    </div>
-</div>
-
-<table class="table table-responsive table-bordered">
-    <thead>
-        <tr>
-            <th class="text-center">Parameter</th>
-            <th class="text-center">Manufacturer / Model (SerialNo)</th>
-            <th class="text-center">Installation Date</th>
-            <th class="text-center">Mounting Height</th>
-            <th class="text-center">Measuring Range</th>
-            <th class="text-center">Accuracy</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Precipitation</td>
-            <td>Hydrological Services<br />TB3 (N/A)</td>
-            <td>2005-08-27</td>
-            <td>1m</td>
-            <td>0 to 700 mm/h</td>
-            <td>&plusmn; 2% @@ 225 to 500 mm/h<br />Resolution: 0.254 mm</td>
-        </tr>
-    </tbody>
-</table>
 
 @section scripts {
 <environment include="Development">

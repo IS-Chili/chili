@@ -28,7 +28,7 @@ namespace Usa.chili.Web
         {
             if (datetime.HasValue)
             {
-                return new HtmlString(datetime.Value.ToString(Constant.DATE_FORMAT));
+                return new HtmlString(datetime.Value.ToString(Constant.DATETIME_FORMAT));
             }
             else
             {
@@ -50,7 +50,7 @@ namespace Usa.chili.Web
             }
             else
             {
-                return new HtmlString(datetime.ToString(Constant.DATE_FORMAT));
+                return new HtmlString(datetime.ToString(Constant.DATETIME_FORMAT));
             }
         }
 
