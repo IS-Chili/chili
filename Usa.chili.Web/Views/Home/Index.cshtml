@@ -29,13 +29,9 @@
                 <div id="stationObservationsCanvasDiv" class="card-body">
                     <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
                     <div>
-                        <div class="text-left">
-                            <label for="stationSelection">Station</label>
-                            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
-                        </div>
-                        <div class="text-right">
-                            <a id="widgetFullDataLink" class="btn btn-default" asp-controller="Data" asp-action="Station" asp-route-id="1" >Full Data</a>                                
-                        </div>                
+                        <label for="stationSelection">Station</label>
+                        <select2 id="stationSelection" :options="stations" style="display: inline-block; width: 40%" v-model="model.stationId" ></select2>
+                        <a id="widgetFullDataLink" class="btn btn-defaault" style="display: inline-block; width: 40%" href="/Data/Station" onclick="goToFullData('id', currentStation)" >Full Data</a>                                
                     </div>
                 </div>
             </div>

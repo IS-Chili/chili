@@ -1,4 +1,5 @@
 const USACampusWestStationId = 23;
+var currentStation = '23';
 
 $(function () {
   //populateStationDropdown_Jquery();
@@ -41,7 +42,22 @@ function populateStationDropdown_Jquery() {
     });
 }
 
+function goToFullData(paramName, paramValue){
+  url = document.getElementById("widgetFullDataLink").href;
+  if (paramValue === null) {
+      paramValue = '';
+  }
+  var pattern = new RegExp('\\b('+paramName+'=).*?(&|#|$)');
+  if (url.search(pattern)>=0) {
+      return url.replace(pattern,'$1' + paramValue + '$2');
+  }
+  url = url.replace(/[?#]$/,'');
+  url = url + (url.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue;
+  document.getElementById("widgetFullDataLink").href = url;
+};
+
 function getStationDataAndDraw(stationId) {
+  currentStation = stationId;
   axios.get('/data/StationObservation?id=' + stationId)
     .then(function (response) {
       if(response.data != null) {
