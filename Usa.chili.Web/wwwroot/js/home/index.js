@@ -1,4 +1,6 @@
 const USACampusWestStationId = 23;
+//currentStation keeps track of the station id for the station
+//that is currently displayed on the widget.
 var currentStation = '23';
 
 $(function () {
@@ -42,6 +44,9 @@ function populateStationDropdown_Jquery() {
     });
 }
 
+//This function appends a new parameter and parameter value 
+//on the end of the Full Data button's href attribute. It is used
+//here to pass the current station's id as a url paramater value.
 function goToFullData(paramName, paramValue){
   url = document.getElementById("widgetFullDataLink").href;
   if (paramValue === null) {
