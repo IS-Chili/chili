@@ -8,7 +8,7 @@
 }
 
 <div class="container">
-    <div class="row">
+    <div class="row">        
         <div class="col-sm-12 col-lg-8 mb-3">
             <div class="card">
                 <div class="card-heading bg-core-blue py-1">
@@ -29,14 +29,20 @@
                 <div id="stationObservationsCanvasDiv" class="card-body">
                     <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
                     <div>
-                        <label for="stationSelection">Station</label>
-                        <select2 id="stationSelection" :options="stations" style="display: inline-block; width: 40%" v-model="model.stationId" ></select2>
-                        <a id="widgetFullDataLink" class="btn btn-defaault" style="display: inline-block; width: 40%" href="/Data/Station" onclick="goToFullData('id', currentStation)" >Full Data</a>                                
+                    <label for="stationSelection">Station</label>
+                    </div>
+                    <div class="align-middle" style="display: inline-block; width: 70%">
+                        <select2 id="stationSelection" :options="stations"  v-model="model.stationId" ></select2>
+                    </div>    
+                    <div class="align-middle" style="display: inline-block">
+                        <a id="widgetFullDataLink" class="btn btn-outline-primary" href="/Data/Station" onclick="goToFullData('id', currentStation)" >Full Data</a>                               
                     </div>
                 </div>
             </div>
         </div>
+    
     </div>
+    
     <div class="row">
         <div class="col-sm-12 col-lg-8 mb-3">
             <div class="card">
