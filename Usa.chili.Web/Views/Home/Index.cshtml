@@ -1,14 +1,14 @@
 ﻿@{
-    ViewBag.Title = "Home";
-    ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated weather stations, " +
-                "located in the north-central Gulf Coast area and was founded in 2004 by " +
-                "University of South Alabama Meteorology professor Dr. Sytske Kimball. " +
-                "The weather stations collect 16 meteorological- and soil- quantities including " +
-                "temperature, rainfall, wind speed and direction, soil temperature and humidity.";
+ViewBag.Title = "Home";
+ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated weather stations, " +
+"located in the north-central Gulf Coast area and was founded in 2004 by " +
+"University of South Alabama Meteorology professor Dr. Sytske Kimball. " +
+"The weather stations collect 16 meteorological- and soil- quantities including " +
+"temperature, rainfall, wind speed and direction, soil temperature and humidity.";
 }
 
 <div class="container">
-    <div class="row">        
+    <div class="row">
         <div class="col-sm-12 col-lg-8 mb-3">
             <div class="card">
                 <div class="card-heading bg-core-blue py-1">
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="col-sm-12 col-lg-4">
             <div class="card">
                 <div class="card-heading bg-core-blue py-1">
@@ -29,20 +29,21 @@
                 <div id="stationObservationsCanvasDiv" class="card-body">
                     <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
                     <div>
-                    <label for="stationSelection">Station</label>
+                        <label for="stationSelection">Station</label>
                     </div>
-                    <div class="align-middle" style="display: inline-block; width: 70%">
-                        <select2 id="stationSelection" :options="stations"  v-model="model.stationId" ></select2>
-                    </div>    
-                    <div class="align-middle" style="display: inline-block">
-                        <a id="widgetFullDataLink" class="btn btn-outline-primary" href="/Data/Station" onclick="goToFullData('id', currentStation)" >Full Data</a>                               
+                    <div class="row">
+                        <div class="col-8 pr-0">
+                            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+                        </div>
+                        <div class="col-4 pr-0">
+                            <a class="btn btn-outline-primary" v-bind:href="meteorologicalDataLink">Full Data</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    
     </div>
-    
+
     <div class="row">
         <div class="col-sm-12 col-lg-8 mb-3">
             <div class="card">
