@@ -331,6 +331,11 @@ const App = new Vue({
   created: function() {
     Core.populateStationDropdown(this, true);
   },
+  computed: {
+    meteorologicalDataLink: function() {
+      return '/Data/Station?id=' + this.model.stationId;
+    }
+  },
   watch: {
     "model.stationId": function(val) {
       getStationDataAndDraw(val);
