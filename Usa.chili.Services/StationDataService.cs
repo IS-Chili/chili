@@ -33,6 +33,43 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
+        public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits) {
+            StationGraphDto stationGraphDto =  new StationGraphDto {
+                Title = "24 hour graph of Air Temperature at 1.5m (4.92ft)",
+                YAxisTitle = "Degrees Fahrenheit",
+                Series = new List<StationGraphSeriesDto> {
+                    new StationGraphSeriesDto {
+                        Name = "Temperature",
+                        LineWidth = 0.5,
+                        Data = new List<List<double>>()
+                    }
+                }
+            };
+
+            DateTime dateStart = new DateTime(2019, 11, 1, 0, 0, 0);
+            DateTime dateToReach = new DateTime(2019, 11, 2, 0, 0, 0);
+
+            Random random = new Random();
+
+            double i = 0.1;
+
+            while(dateStart < dateToReach) {
+                stationGraphDto.Series[0].Data.Add(new List<double>() {
+                    (double) new DateTimeOffset(dateStart.ToUniversalTime()).ToUnixTimeMilliseconds(),
+                    75 + i
+                });
+                dateStart = dateStart.AddMinutes(1);
+
+                i += 0.1;
+
+                if(i > 25) {
+                    i = 15;
+                }
+            }
+
+            return stationGraphDto;
+        }
+
         public async Task<List<RealtimeDataDto>> ListRealtimeData() {
             DateTime now = DateTime.Now;
 
