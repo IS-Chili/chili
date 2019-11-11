@@ -1,0 +1,17 @@
+#!/bin/sh
+# 2011-08-01 dnb Initial version
+#
+# getdwm retrieves (what should be) the most recently available daily weather map images
+# from NOAA for distribution on the Mesonet web site. This script is designed to run
+# daily via cron after the NOAA DWM site has published new weather map images (~13:00)
+#
+cd /var/www/html/education/images/DWM
+ydate=`date -d "yesterday" +"%Y%m%d"`
+# Surface weather map
+wget http://www.hpc.ncep.noaa.gov/dailywxmap/htmlimages/sfcplot_sm_${ydate}.gif
+# Temperature max/min chart
+wget http://www.hpc.ncep.noaa.gov/dailywxmap/htmlimages/colormaxmin_${ydate}.gif
+# 500 millibar pressure contour map
+wget http://www.hpc.ncep.noaa.gov/dailywxmap/htmlimages/dwm500_wbgsm_${ydate}.gif
+# 24-hr precipitation map
+wget http://www.hpc.ncep.noaa.gov/dailywxmap/htmlimages/dwm_p24i_${ydate}.gif

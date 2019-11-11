@@ -1,0 +1,8 @@
+#!/bin/bash
+basedir=/data/AWIS
+baseurl=ftp://www.awis.com
+year=`date +%Y`
+user='usametdept'
+password='R70A9de5'
+/usr/bin/wget -P ${basedir}/${year}/ -N --user=$user --password=$password --quiet ${baseurl}/${year}*.txt
+exit

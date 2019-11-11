@@ -5,6 +5,7 @@
 // Version: 1.0.0
 // ********************************************************************************************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -70,6 +71,12 @@ namespace Usa.chili.Web.Controllers
         public IActionResult Graph()
         {
             return View();
+        }
+
+        [HttpGet("StationGraph")]
+        public async Task<IActionResult> StationGraph(int stationId, int variableId, DateTime? date, bool isMetricUnits)
+        {
+            return new JsonResult(await _stationDataService.StationGraphData(stationId, variableId, date, isMetricUnits));
         }
 
         [HttpGet("Meteorological")]
