@@ -3,107 +3,115 @@ ViewBag.Title = "Monthly Summaries";
 ViewBag.Description = "USA Mesonet Monthly Summary Displays";
 }
 
-<div class="mx-5">
+<div class="container bg-core-blue">
+    <br>
     <h2 class="text-center">USA Mesonet Monthly Summary Displays</h2>
-    <h2 class="text-center text-secondary">September, 2017</h2>
-    <h3 class="text-center">
-        <a href="#" class="mr-3"><i class="fas fa-arrow-left"></i> Previous Month</a>
-        <a href="#" class="mr-3">Most Recent</a>
-        <a href="#">Next Month <i class="fas fa-arrow-right"></i></a>
-    </h3>
+    <h2 class="text-center">September, 2017</h2>
+    <br>
+</div>
 
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2">
-            <label for="dayMonthSelection">Year and month</label>
-            <select id="dayMonthSelection">
-                <option value="2010-09">2010-09</option>
-                <option value="2010-10">2010-10</option>
-            </select>
-        </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline">Go</button>
-        </div>
-    </div>
+<div class="mx-5">
+    <div class="container bg-core-translucent">
+        <br>
+        <h3 class="text-center">
+            <a href="#" class="mr-3"><i class="fas fa-arrow-left"></i> Previous Month</a>
+            <a href="#" class="mr-3">Most Recent</a>
+            <a href="#">Next Month <i class="fas fa-arrow-right"></i></a>
+        </h3>
 
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2">
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="metricUnits">
-                <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-2">
+                <label for="dayMonthSelection">Year and month</label>
+                <select id="dayMonthSelection">
+                    <option value="2010-09">2010-09</option>
+                    <option value="2010-10">2010-10</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-secondary btn-inline">Go</button>
             </div>
         </div>
-    </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr class="text-center">
-                    <th></th>
-                    <th colspan="2" class="text-center">Total Rainfall</th>
-                    <th colspan="3" class="text-center">Temperature</th>
-                    <th colspan="3" class="text-center">Heat Index</th>
-                    <th colspan="3" class="text-center">Wind Chill</th>
-                    <th class="text-center">Wind Gust</th>
-                </tr>
-                <tr class="text-center">
-                    <th>Location</th>
-                    <th>TB3 gauge</th>
-                    <th>TX gauge</th>
-                    <th>Maximum</th>
-                    <th>Minimum</th>
-                    <th>Average</th>
-                    <th>Maximum</th>
-                    <th>Minimum</th>
-                    <th>Average</th>
-                    <th>Maximum</th>
-                    <th>Minimum</th>
-                    <th>Average</th>
-                    <th>Maximum</th>
-                </tr>
-                <tr class="text-center">
-                    <th></th>
-                    <th>inches</th>
-                    <th>inches</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>&deg;F</th>
-                    <th>mph</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="text-weight-bold">Agricola</td>
-                    <td class="text-right">4.25</td>
-                    <td class="text-right">4.24</td>
-                    <td class="text-right">
-                        <span data-toggle="tooltip" title="AirT_Max &#64; 2019-08-17 14:34:00">95.85</span>
-                    </td>
-                    <td class="text-right">
-                        <span data-toggle="tooltip" title="AirT_Min &#64; 2019-08-03 03:58:00">67.23</span>
-                    </td>
-                    <td class="text-right">78.53</td>
-                    <td class="text-right">
-                        <span data-toggle="tooltip" title="HtIdx_Max &#64; 2019-08-13 12:52:00">114.08</span>
-                    </td>
-                    <td class="text-right">
-                        <span data-toggle="tooltip" title="HtIdx_Min &#64; 2019-08-30 08:37:00">82.22</span>
-                    </td>
-                    <td class="text-right">94.84</td>
-                    <td class="text-right"></td>
-                    <td class="text-right"></td>
-                    <td class="text-right"></td>
-                    <td class="text-right">
-                        <span data-toggle="tooltip" title="WdSpd_Max &#64; 2019-08-14 15:35:00">27.47</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-2">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="metricUnits">
+                    <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered bg-white">
+                <thead>
+                    <tr class="text-center">
+                        <th></th>
+                        <th colspan="2" class="text-center">Total Rainfall</th>
+                        <th colspan="3" class="text-center">Temperature</th>
+                        <th colspan="3" class="text-center">Heat Index</th>
+                        <th colspan="3" class="text-center">Wind Chill</th>
+                        <th class="text-center">Wind Gust</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th>Location</th>
+                        <th>TB3 gauge</th>
+                        <th>TX gauge</th>
+                        <th>Maximum</th>
+                        <th>Minimum</th>
+                        <th>Average</th>
+                        <th>Maximum</th>
+                        <th>Minimum</th>
+                        <th>Average</th>
+                        <th>Maximum</th>
+                        <th>Minimum</th>
+                        <th>Average</th>
+                        <th>Maximum</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th></th>
+                        <th>inches</th>
+                        <th>inches</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>mph</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-weight-bold">Agricola</td>
+                        <td class="text-right">4.25</td>
+                        <td class="text-right">4.24</td>
+                        <td class="text-right">
+                            <span data-toggle="tooltip" title="AirT_Max &#64; 2019-08-17 14:34:00">95.85</span>
+                        </td>
+                        <td class="text-right">
+                            <span data-toggle="tooltip" title="AirT_Min &#64; 2019-08-03 03:58:00">67.23</span>
+                        </td>
+                        <td class="text-right">78.53</td>
+                        <td class="text-right">
+                            <span data-toggle="tooltip" title="HtIdx_Max &#64; 2019-08-13 12:52:00">114.08</span>
+                        </td>
+                        <td class="text-right">
+                            <span data-toggle="tooltip" title="HtIdx_Min &#64; 2019-08-30 08:37:00">82.22</span>
+                        </td>
+                        <td class="text-right">94.84</td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right"></td>
+                        <td class="text-right">
+                            <span data-toggle="tooltip" title="WdSpd_Max &#64; 2019-08-14 15:35:00">27.47</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

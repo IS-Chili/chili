@@ -1,3 +1,19 @@
+body {
+	background: url(../images/cloudback.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.select2-selection {
+  background-color: white;
+}
+
+.card {
+  border: none;
+}
+
 div.left_header {
   background-color: #bbddff;
   width: 100%;
@@ -142,6 +158,10 @@ a:focus {
 
 .bg-core-darker-blue {
   background-color: #101046;
+}
+
+.bg-core-translucent {
+  background-color:rgba(230, 230, 230, 0.85);
 }
 
 canvas {
