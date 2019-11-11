@@ -1,0 +1,39 @@
+#!/bin/bash
+basedir=/home/data/NWS_HPC_Surface_Analysis_Archive
+baseurl=http://www.hpc.ncep.noaa.gov/archives/sfc
+year=`date -d 'last month' +%Y`
+month=`date -d 'last month' +%m`
+mondir=`date -d ${year}-${month}-01 +"%B"`
+
+for pfx in satsfcnps lrgnamsfc ; do
+  case "$pfx" in
+    satsfcnps)
+      # retrieve North America Satellite/Composite
+      dstdir=${basedir}/North_America_Analysis_Satellite_Composite/${year}
+      ;;
+    lrgnamsfc)
+      # retrieve North America Zoom In
+      dstdir=${basedir}/North_America_Zoom_In/${year}
+      ;;
+    *)
+      # Bogus map set configured
+      /bin/logger -t get_nws_sfc_monthly "Invalid map set ($pfx) specified"
+      exit 3
+      ;;
+  esac
+
+  test -d ${dstdir}/${mondir} || mkdir -p ${dstdir}/${mondir}
+  for (( day = 1; day <= 31; day++ )); do
+    date -d "${year}-${month}-${day}" >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      break
+    fi
+    for hr in 0 3 6 9 12 15 18 21 ; do
+      fn=${pfx}`date -d "$year-$month-$day $hr" +"%Y%m%d%H"`.gif
+      /usr/bin/wget -P ${dstdir}/${mondir} -q -N ${baseurl}/${fn}
+      # sleep for a random number of seconds between 1 and 10
+      sleep $[ ( $RANDOM % 10 ) + 1 ]
+    done
+  done
+done
+exit
