@@ -3,24 +3,28 @@ ViewBag.Title = "Realtime Data";
 ViewBag.Description = "USA Mesonet Realtime Display";
 }
 
+
 <div class="mx-2">
-    <h1 class="text-center">USA Mesonet Realtime Display</h1>
-    <h2 class="text-center">{{ nowFormated }} CST</h2>
-
-    <hr>
-
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2">
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="windchill">
-                <label class="custom-control-label" for="windchill">Display Windchill</label>
-            </div>
+        <div class="bg-core-blue">
+            <hr>
+            <h1 class="text-center">USA Mesonet Realtime Display</h1>
+            <h2 class="text-center">{{ nowFormated }} CST</h2>
+            <hr>
         </div>
 
-        <div class="form-group col-lg-2">
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="metricUnits">
-                <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-2">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="windchill">
+                    <label class="custom-control-label" for="windchill">Display Windchill</label>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="metricUnits">
+                    <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
+                </div>
             </div>
         </div>
     </div>

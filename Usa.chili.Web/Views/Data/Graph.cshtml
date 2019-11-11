@@ -3,13 +3,16 @@
     ViewBag.Description = "24 Hour Meteorological Data Graph";
 }
 
-<div class="container">
-    <h1 class="text-center">24 Hour Meteorological Data Graph for Agricola Station</h1>
-    <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
-    <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
-
+<div class="container bg-core-blue">
+        <hr>
+        <h1 class="text-center">24 Hour Meteorological Data Graph for Agricola Station</h1>
+        <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
+        <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
+        <hr>
+</div>
+<div class="container" style="background-color:rgba(230, 230, 230, 0.85);">
+    
     <hr>
-
     <div class="d-flex justify-content-center my-4">
         <a class="btn btn-light mr-3" asp-controller="Data" asp-action="Station" asp-route-id="1">Display Current Data for Agricola Station</a>
         <a class="btn btn-light" asp-controller="Data" asp-action="Metadata" asp-route-id="1">Display Metadata for Agricola Station</a>

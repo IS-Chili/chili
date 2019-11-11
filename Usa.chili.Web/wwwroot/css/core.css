@@ -1,3 +1,11 @@
+body {
+	background: url(../images/cloudback.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
 div.left_header {
   background-color: #bbddff;
   width: 100%;
@@ -238,3 +246,4 @@ canvas {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
