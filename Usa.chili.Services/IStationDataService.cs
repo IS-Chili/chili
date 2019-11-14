@@ -17,5 +17,7 @@ namespace Usa.chili.Services
     {
         Task<List<RealtimeDataDto>> ListRealtimeData();
         Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits);
+
+        Task<MeteorologicalDataDto> GetMeteorologicalData(int? id);
     }
 }

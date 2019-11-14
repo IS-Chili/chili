@@ -84,9 +84,9 @@ $(function () {
 
   window.onscroll = function() {
     if (window.pageYOffset > sticky) {
-      header.classList.add("fixed-top");
+      header.classList.add("sticky");
     } else {
-      header.classList.remove("fixed-top");
+      header.classList.remove("sticky");
     }
   };
 });
