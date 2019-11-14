@@ -1,0 +1,44 @@
+#!/bin/sh
+# 2010-01-13 dnb Original version
+#    this script calls mk_madis_file to collect any unsent data into a .csv file,
+#    calls unix2dos to convert the file to cr-lf format, and then drives ftp to
+#    send the data to two MADIS ftp servers
+# 2010-06-14 dnb Added -q (quiet) unix2dos switch to prevent cron emails
+# 2016-03-15 dbm changed nonfunctional backup site to madisinftp-bldr.ncep.noaa.gov 
+#    per email from patrick.serengulian@noaa.gov.  Commented out Backup site.
+#    Anticipated activation date 2016-04-05.  Uncomment block when site goes live.
+# 2019-04-23 dbm Added scp transfer to Synoptic
+#           
+# open tmadisi.nws.noaa.gov
+# user ftp skimball@usouthal.edu
+# cd ldad
+# put usouthal.dat
+# close
+test -f /tmp/usouthal.dat && rm /tmp/usouthal.dat
+$HOME/bin/mk_madis_file.php
+cd /tmp
+if [ ! -f usouthal.dat ] ; then
+  exit 99
+fi
+/usr/bin/unix2dos -q usouthal.dat
+
+# Backup Site
+/usr/bin/ftp -ni <<-EOF
+open madisinftp-bldr.ncep.noaa.gov
+user ftp skimball@usouthal.edu
+cd ldad
+put usouthal.dat
+close
+EOF
+
+# Primary Site
+/usr/bin/ftp -ni <<-EOF
+open  madisinftp.ncep.noaa.gov
+user ftp skimball@usouthal.edu
+cd ldad
+put usouthal.dat
+close
+EOF
+
+scp  -i ~/.ssh/synoptic_ed25519  usouthal.dat  southal@ftp2.mesowest.net:~/data/
+exit $?

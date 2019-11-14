@@ -1,0 +1,23 @@
+#!/bin/sh
+# 2010-10-25 dnb Original version
+#    this script calls exportXML.py to generate SML for all available Mesonet
+#    metadata, save the results in a file, and then drive an ftp session to send
+#    the data to the AWS ftp server
+# 2012-03007 dnb Modified ftp host per NMP request
+#    open 8.15.14.99
+#           
+FN=`date +"ALNET-MHSMETADATAADD-%Y-%m-%d-00.xml"`
+test -f /tmp/${FN} && rm /tmp/${FN}
+/usr/bin/python2 -u /usr/local/bin/exportXML.py -H localhost -u chiliweb -p NONE -d chili > /tmp/${FN}
+cd /tmp
+if [ ! -f $FN ] ; then
+  exit 99
+fi
+/usr/bin/ftp -ni <<-EOF
+open ftp.dataservice.earthnetworks.com
+user ALNET_MHS morp3i
+put $FN
+close
+EOF
+# test -f /tmp/${FN} && rm /tmp/${FN}
+exit $?

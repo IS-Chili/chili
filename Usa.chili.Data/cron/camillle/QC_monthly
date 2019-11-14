@@ -1,0 +1,103 @@
+#!/bin/sh
+die() {
+  echo >&2 "$@"
+  echo >&2 "Usage: QC_monthly <year> <month>"
+  exit 1
+}
+
+# Validate parameter count
+if [ $# -ne 2 ]; then
+  die "Invalid parameter count specified"
+fi
+
+# Validate year parameter
+year=$1
+echo $year | grep -E -q '^[0-9]+$' || die "Year must be a numeric argument, $year specified"
+if [ $year -lt 2000 -o $year -gt 9999 ]; then
+  die "Year must be between 2000 and 9999, $year specified"
+fi
+
+# Validate month parameter
+month=`echo $2 | sed -e 's/^0\+//'`
+echo $month | grep -E -q '^[0-9]+$' || die "Month must be numeric, $month specified"
+if [ $month -gt 12 ]; then
+  die "Month must be between 1 and 12, $month specified"
+fi
+
+stations='agricola
+          andalusia
+          ashford
+          atmore
+          bayminette
+          castleberry
+          disl
+          dixie
+          elberta
+          fairhope
+          florala
+          foley
+          gasque
+          geneva
+          grandbay
+          jay
+          kinston
+          leakesville
+          loxley
+          mobiledr
+          mobileusa
+          mobileusaw
+          mtvernon
+          pascagoula
+          robertsdale
+          saraland
+          walnuthill'
+
+cd /home/data/QC_monthly
+export PATH=/usr/local/bin/grads:/opt/pgi/linux86-64/7.1/bin:${PATH}
+export GASCRP=/home/data/QC_monthly/scripts
+# Extract requested data from database and output in GrADS format
+for s in $stations; do
+  echo "Processing: $s $year $month"
+  ./monthly_extract_f $s $year $month
+done
+
+# Generate GrADS driver script from template
+days=`cal $month $year | egrep -v '[A-Za-z]' | wc -w`
+mon=`date -d "${year}-${month}-1" +%b | tr [:upper:] [:lower:]`
+yr=`date -d "${year}-${month}-1" +%y`
+sed -e "s/day2=DD/day2=$days/" -e "s/mmmYY/${mon}${yr}/" QC-driver.gs.tpl > QC-driver.gs
+grads -blx -c 'run QC-driver'
+
+# Generate gmeta to postscript conversion script from template
+for f in *.gm; do
+  echo "Processing: $f"
+  gxps -c -i $f -o `basename $f .gm`.ps
+done
+
+# Store all of the generated data and charts under /home/data/MesonetDataAll/YYYY/MonthName
+monthname=`date -d "${year}-${month}-01" +%B`
+test -d /home/data/MesonetDataAll/${year}/${monthname}/plots-png || mkdir -p /home/data/MesonetDataAll/${year}/${monthname}/plots-png
+mv -f *.ctl *.dat *.ps /home/data/MesonetDataAll/${year}/${monthname}
+mv -f *.png /home/data/MesonetDataAll/${year}/${monthname}/plots-png
+
+# Final housekeeping
+rm -f *.gm
+test -e a.out && rm -f a.out
+test -L fort.20 && rm -f fort.20
+test -L fort.40 && rm -f fort.40
+test -e params.f && rm -f params.f
+test -e QC-driver.gs && rm -f QC-driver.gs
+
+# Copy all of the generated png files to chiliweb
+mo=`printf '%02d' $month`
+cd /home/data/MesonetDataAll/${year}/${monthname}/plots-png
+ssh -i ~/.ssh/chiliweb_id_rsa terwey@chiliweb.southalabama.edu "mkdir -p /var/www/html/images/qc_graphs/${year}/${mo}"
+scp -q -F ~/.ssh/qcconfig *.png terwey@chiliweb.southalabama.edu:/var/www/html/images/qc_graphs/$year/$mo
+ssh -i ~/.ssh/chiliweb_id_rsa terwey@chiliweb.southalabama.edu "chmod -R g+w /var/www/html/images/qc_graphs/${year}"
+
+# Update monthly_qcgraphs table on chiliweb to reflect the new images
+urltpl='http://chiliweb.usouthal.edu/update_qcgraphs.php?yr=%s&mo=%s'
+url=`printf $urltpl $year $mo`
+curl $url
+
+exit 0

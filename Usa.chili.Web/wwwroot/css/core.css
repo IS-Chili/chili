@@ -1,24 +1,44 @@
-div.left_header{
+body {
+	background: url(../images/cloudback.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.select2-selection {
+  background-color: white;
+}
+
+.card {
+  border: none;
+}
+
+div.left_header {
   background-color: #bbddff;
-  width:100%;
+  width: 100%;
   padding: 10px;
 }
-div.right_header{
+
+div.right_header {
   position: absolute;
   font: bold 11px Georgia, serif;
   top: 30px;
   right: 150px;
   margin-left: 60%;
   margin-right: auto;
-  ;
 }
 @media screen and (max-width: 1150px) {
-   div.left_header{
-     text-align: center;
+  div.left_header {
+    text-align: center;
   }
   div.right_header {
     visibility: hidden;
-  } 
+  }
+
+  .realtime-data-table {
+    width: 50vw !important;
+  }
 }
 .navbar-dark .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255, 255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
@@ -74,7 +94,7 @@ div.right_header{
 }
 
 .dropdown-divider {
-    border-top: 1px solid rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .nav-item > .dropdown-menu {
@@ -85,7 +105,7 @@ div.right_header{
 .nav-item > .dropdown-menu > .dropdown-item {
   color: #ffffff;
   font-weight: bold;
-  padding: .4rem 1.5rem;
+  padding: 0.4rem 1.5rem;
 }
 
 .nav-item > .dropdown-menu > .dropdown-item:focus,
@@ -140,6 +160,10 @@ a:focus {
   background-color: #101046;
 }
 
+.bg-core-translucent {
+  background-color:rgba(230, 230, 230, 0.85);
+}
+
 canvas {
   width: 100%;
   height: auto;
@@ -182,15 +206,15 @@ canvas {
 }
 
 .text-color-high {
-  color: #CC0000;
+  color: #cc0000;
 }
 
 .text-color-low {
   color: blue;
 }
 
-#station-map { 
-  height: 500px; 
+#station-map {
+  height: 500px;
 }
 
 .main-container {
@@ -217,11 +241,20 @@ canvas {
   border-top-color: transparent;
 }
 
-body {
-	background: url(../images/cloudback.jpg) no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+.medium-row {
+  height: 50px;
 }
 
+.large-row {
+  height: 97px;
+}
+
+.realtime-locations-table {
+  min-width: 200px;
+}
+
+.realtime-data-table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
