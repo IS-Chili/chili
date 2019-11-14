@@ -184,6 +184,7 @@ namespace Usa.chili.Data
         public virtual DbSet<SiteData> SiteData { get; set; }
         public virtual DbSet<SiteVisit> SiteVisit { get; set; }
         public virtual DbSet<Station> Station { get; set; }
+        public virtual DbSet<Station_Data> Station_Data {get; set; }
         public virtual DbSet<Stormtrack> Stormtrack { get; set; }
         public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<Walnuthill202> Walnuthill202 { get; set; }

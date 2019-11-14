@@ -7,9 +7,13 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Usa.chili.Services;
+using Usa.chili.Domain;
+using Usa.chili.Data;
 
 namespace Usa.chili.Web.Controllers
 {
@@ -20,18 +24,21 @@ namespace Usa.chili.Web.Controllers
         private readonly IStationService _stationService;
         private readonly IStationDataService _stationDataService;
         private readonly IPublicService _publicService;
+        private readonly ChiliDbContext _context;
 
         public DataController(
             ILogger<DataController> logger,
             IStationService stationService,
             IStationDataService stationDataService,
-            IPublicService publicService)
+            IPublicService publicService,
+            ChiliDbContext context)
         {
             _logger = logger;
             _stationService = stationService;
             _stationDataService = stationDataService;
             _publicService = publicService;
-        }
+            _context = context;
+        } 
 
         [HttpGet("Realtime")]
         public IActionResult Realtime()
@@ -55,9 +62,25 @@ namespace Usa.chili.Web.Controllers
         public IActionResult Metadata(int? id) => View();
 
         [HttpGet("Station")]
-        public IActionResult Station(int? id)
+        public async Task<IActionResult> Station(int? id)
         {
+           /* if (id == null)
+            {
+                return NotFound();
+            }
+            var station_mData = await _context.Station_Data
+                .Include(s => s.Station)
+                .OrderByDescending(s => s.TS)
+                .FirstOrDefaultAsync(m => m.StationId == id);
+            if (station_mData == null)
+            {
+                return NotFound();
+            }
+
+            return View(station_mData);*/
+
             return View();
+
         }
 
         [HttpGet("StationMap")]
