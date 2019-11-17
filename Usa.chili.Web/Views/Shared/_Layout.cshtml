@@ -21,6 +21,8 @@
     <environment exclude="Development">
         <link rel="stylesheet" href="~/css/core.min.css" asp-append-version="true" />
     </environment>
+
+    @RenderSection("styles", required: false)
 </head>
 
 <body>
@@ -85,7 +87,7 @@
         @RenderBody()
     </main>
 
-    <footer class="footer">
+    <footer class="footer-bottom">
         <ul class="list-unstyled list-inline text-center bg-core-dark-blue m-0 p-2">
             <li class="list-inline-item">
                 <a class="mr-3" href="http://www.facebook.com/pages/South-Alabama-Mesonet/140015933698">
