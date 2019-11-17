@@ -2,8 +2,15 @@
 ViewBag.Title = "Realtime Data";
 ViewBag.Description = "USA Mesonet Realtime Display";
 }
- 
-<link rel="stylesheet" href="~/lib/css/realtime.css" />
+
+@section styles {
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/data/realtime.css" />
+</environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="~/css/data/realtime.min.css" asp-append-version="true" />
+</environment>
+}
 
 <div class="mx-2 bg-core-translucent">
     <div class="bg-core-blue">
@@ -30,178 +37,178 @@ ViewBag.Description = "USA Mesonet Realtime Display";
     </div>
 </div>
 
-<table id="real_time_table" >
-                <thead>
-                    <tr>
-                        <th colspan="1"></th>
-                        <th colspan="4" class="text-center">&#64;&nbsp;6.56 ft</th>
-                        <th colspan="2" class="text-center">&#64;&nbsp;32.81 ft</th>
-                        <th class="text-center">SeaLv</th>
-                        <th colspan="5" class="text-center">Today's Extremes (<span
-                                class="text-color-high">Hi</span>/<span class="text-color-low">Lo</span>)</th>
-                        <th colspan="5" class="text-center">Yesterday's Extremes (<span
-                                class="text-color-high">Hi</span>/<span class="text-color-low">Lo</span>)</th>
-                    </tr>
-                    <tr>
-                        <th>Location/Obs time</th>
-                        <th class="text-center">Temp</th>
-                        <th class="text-center">HtIdx</th>
-                        <th class="text-center">DewPt</th>
-                        <th class="text-center">Hum</th>
-                        <th class="text-center">WdDir</th>
-                        <th class="text-center">WdSpd</th>
-                        <th class="text-center">Press</th>
-                        <th class="text-center">Rain</th>
-                        <th class="text-center">WdSpd</th>
-                        <th class="text-center">Temp</th>
-                        <th class="text-center">DewPt</th>
-                        <th class="text-center">Hum</th>
-                        <th class="text-center">Rain</th>
-                        <th class="text-center">WdSpd</th>
-                        <th class="text-center">Temp</th>
-                        <th class="text-center">DewPt</th>
-                        <th class="text-center">Hum</th>
-                    </tr>
-                    <tr class="text-center">
-                        <th colspan="1"></th>
-                        <th>&deg;F</th>
-                        <th>&deg;F</th>
-                        <th>&deg;F</th>
-                        <th>&#37;</th>
-                        <th>&deg;</th>
-                        <th>mph</th>
-                        <th>inHg</th>
-                        <th>in</th>
-                        <th>mph</th>
-                        <th>&deg;F</th>
-                        <th>&deg;F</th>
-                        <th>&#37;</th>
-                        <th>in</th>
-                        <th>mph</th>
-                        <th>&deg;F</th>
-                        <th>&deg;F</th>
-                        <th>&#37;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for='item in realtimeData' :class='item.stationName.length > 25 ? "large-row" : ""'>
-                        <td>
-                        <div>
-                            <a v-bind:href="'/Data/Station?id=' + item.stationId">
-                                <span class="font-weight-bold" style=" font: bold 11px Georgia, serif; word-wrap:break-word;">{{ item.stationName }}</span>
-                            </a>
-                        </div>
-                        <div>
-                            <small>{{ item.stationTimestamp }}</small>
-                        </div>
-                       </td>
-                        <td class="temp font-weight-bold">{{ item.airTemperature }}</td>
-                        <td class="ht">{{ item.heatIndex }}</td>
-                        <td class="hum">{{ item.dewPoint }}</td>
-                        <td class="hum">{{ item.realHumidity }}</td>
-                        <td class="wind">{{ item.windDirection }}</td>
-                        <td class="wind">{{ item.windSpeed }}</td>
-                        <td class="pres">{{ item.pressure }}</td>
-                        <td class="rain">{{ item.todayExtreme.precipitation }}</td>
-                        <td class="wind">
-                            <span data-toggle="tooltip" v-bind:title="item.todayExtreme.windSpeedMaxTimestamp">
-                                {{ item.todayExtreme.windSpeedMax }}
-                            </span>
-                        </td>
-                        <td>
-                            <div>
-                                <span data-toggle="tooltip"
-                                    v-bind:title="item.todayExtreme.airTemperatureHighTimestamp">
-                                    {{ item.todayExtreme.airTemperatureHigh }}
-                                </span>
-                            </div>
-                            <div>
-                                <span data-toggle="tooltip" v-bind:title="item.todayExtreme.airTemperatureLowTimestamp">
-                                    {{ item.todayExtreme.airTemperatureLow }}
-                                </span>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <span class="text-color-high" data-toggle="tooltip"
-                                    v-bind:title="item.todayExtreme.dewPointHighTimestamp">
-                                    {{ item.todayExtreme.dewPointHigh }}
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-color-low" data-toggle="tooltip"
-                                    v-bind:title="item.todayExtreme.dewPointLowTimestamp">
-                                    {{ item.todayExtreme.dewPointLow }}
-                                </span>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <span class="text-color-high" data-toggle="tooltip"
-                                    v-bind:title="item.todayExtreme.realHumidityHighTimestamp">
-                                    {{ item.todayExtreme.realHumidityHigh }}
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-color-low" data-toggle="tooltip"
-                                    v-bind:title="item.todayExtreme.realHumidityLowTimestamp">
-                                    {{ item.todayExtreme.realHumidityLow }}
-                                </span>
-                            </div>
-                        </td>
-                        <td class="rain">{{ item.yesterdayExtreme.precipitation }}</td>
-                        <td class="wind">
-                            <span data-toggle="tooltip" v-bind:title="item.yesterdayExtreme.windSpeedMaxTimestamp">
-                                {{ item.yesterdayExtreme.windSpeedMax }}
-                            </span>
-                        </td>
-                        <td>
-                            <div>
-                                <span class="text-color-high" data-toggle="tooltip"
-                                    v-bind:title="item.yesterdayExtreme.airTemperatureHighTimestamp">
-                                    {{ item.yesterdayExtreme.airTemperatureHigh }}
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-color-low" data-toggle="tooltip"
-                                    v-bind:title="item.yesterdayExtreme.airTemperatureLowTimestamp">
-                                    {{ item.yesterdayExtreme.airTemperatureLow }}
-                                </span>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <span class="text-color-high" data-toggle="tooltip"
-                                    v-bind:title="item.yesterdayExtreme.dewPointHighTimestamp">
-                                    {{ item.yesterdayExtreme.dewPointHigh }}
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-color-low" data-toggle="tooltip"
-                                    v-bind:title="item.yesterdayExtreme.dewPointLowTimestamp">
-                                    {{ item.yesterdayExtreme.dewPointLow }}
-                                </span>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <span class="text-color-high" data-toggle="tooltip"
-                                    v-bind:title="item.yesterdayExtreme.realHumidityHighTimestamp">
-                                    {{ item.yesterdayExtreme.realHumidityHigh }}
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-color-low" data-toggle="tooltip"
-                                    v-bind:title="item.yesterdayExtreme.realHumidityLowTimestamp">
-                                    {{ item.yesterdayExtreme.realHumidityLow }}
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<table id="real_time_table">
+    <thead>
+        <tr>
+            <th colspan="1"></th>
+            <th colspan="4" class="text-center">&#64;&nbsp;6.56 ft</th>
+            <th colspan="2" class="text-center">&#64;&nbsp;32.81 ft</th>
+            <th class="text-center">SeaLv</th>
+            <th colspan="5" class="text-center">Today's Extremes (<span class="text-color-high">Hi</span>/<span
+                    class="text-color-low">Lo</span>)</th>
+            <th colspan="5" class="text-center">Yesterday's Extremes (<span class="text-color-high">Hi</span>/<span
+                    class="text-color-low">Lo</span>)</th>
+        </tr>
+        <tr>
+            <th>Location/Obs time</th>
+            <th class="text-center">Temp</th>
+            <th class="text-center">HtIdx</th>
+            <th class="text-center">DewPt</th>
+            <th class="text-center">Hum</th>
+            <th class="text-center">WdDir</th>
+            <th class="text-center">WdSpd</th>
+            <th class="text-center">Press</th>
+            <th class="text-center">Rain</th>
+            <th class="text-center">WdSpd</th>
+            <th class="text-center">Temp</th>
+            <th class="text-center">DewPt</th>
+            <th class="text-center">Hum</th>
+            <th class="text-center">Rain</th>
+            <th class="text-center">WdSpd</th>
+            <th class="text-center">Temp</th>
+            <th class="text-center">DewPt</th>
+            <th class="text-center">Hum</th>
+        </tr>
+        <tr class="text-center">
+            <th colspan="1"></th>
+            <th>&deg;F</th>
+            <th>&deg;F</th>
+            <th>&deg;F</th>
+            <th>&#37;</th>
+            <th>&deg;</th>
+            <th>mph</th>
+            <th>inHg</th>
+            <th>in</th>
+            <th>mph</th>
+            <th>&deg;F</th>
+            <th>&deg;F</th>
+            <th>&#37;</th>
+            <th>in</th>
+            <th>mph</th>
+            <th>&deg;F</th>
+            <th>&deg;F</th>
+            <th>&#37;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr v-for='item in realtimeData'>
+            <td>
+                <div>
+                    <a v-bind:href="'/Data/Station?id=' + item.stationId">
+                        <span class="font-weight-bold"
+                            style=" font: bold 11px Georgia, serif; word-wrap:break-word;">{{ item.stationName }}</span>
+                    </a>
+                </div>
+                <div>
+                    <small>{{ item.stationTimestamp }}</small>
+                </div>
+            </td>
+            <td class="temp font-weight-bold">{{ item.airTemperature }}</td>
+            <td class="ht">{{ item.heatIndex }}</td>
+            <td class="hum">{{ item.dewPoint }}</td>
+            <td class="hum">{{ item.realHumidity }}</td>
+            <td class="wind">{{ item.windDirection }}</td>
+            <td class="wind">{{ item.windSpeed }}</td>
+            <td class="pres">{{ item.pressure }}</td>
+            <td class="rain">{{ item.todayExtreme.precipitation }}</td>
+            <td class="wind">
+                <span data-toggle="tooltip" v-bind:title="item.todayExtreme.windSpeedMaxTimestamp">
+                    {{ item.todayExtreme.windSpeedMax }}
+                </span>
+            </td>
+            <td>
+                <div>
+                    <span data-toggle="tooltip" v-bind:title="item.todayExtreme.airTemperatureHighTimestamp">
+                        {{ item.todayExtreme.airTemperatureHigh }}
+                    </span>
+                </div>
+                <div>
+                    <span data-toggle="tooltip" v-bind:title="item.todayExtreme.airTemperatureLowTimestamp">
+                        {{ item.todayExtreme.airTemperatureLow }}
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <span class="text-color-high" data-toggle="tooltip"
+                        v-bind:title="item.todayExtreme.dewPointHighTimestamp">
+                        {{ item.todayExtreme.dewPointHigh }}
+                    </span>
+                </div>
+                <div>
+                    <span class="text-color-low" data-toggle="tooltip"
+                        v-bind:title="item.todayExtreme.dewPointLowTimestamp">
+                        {{ item.todayExtreme.dewPointLow }}
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <span class="text-color-high" data-toggle="tooltip"
+                        v-bind:title="item.todayExtreme.realHumidityHighTimestamp">
+                        {{ item.todayExtreme.realHumidityHigh }}
+                    </span>
+                </div>
+                <div>
+                    <span class="text-color-low" data-toggle="tooltip"
+                        v-bind:title="item.todayExtreme.realHumidityLowTimestamp">
+                        {{ item.todayExtreme.realHumidityLow }}
+                    </span>
+                </div>
+            </td>
+            <td class="rain">{{ item.yesterdayExtreme.precipitation }}</td>
+            <td class="wind">
+                <span data-toggle="tooltip" v-bind:title="item.yesterdayExtreme.windSpeedMaxTimestamp">
+                    {{ item.yesterdayExtreme.windSpeedMax }}
+                </span>
+            </td>
+            <td>
+                <div>
+                    <span class="text-color-high" data-toggle="tooltip"
+                        v-bind:title="item.yesterdayExtreme.airTemperatureHighTimestamp">
+                        {{ item.yesterdayExtreme.airTemperatureHigh }}
+                    </span>
+                </div>
+                <div>
+                    <span class="text-color-low" data-toggle="tooltip"
+                        v-bind:title="item.yesterdayExtreme.airTemperatureLowTimestamp">
+                        {{ item.yesterdayExtreme.airTemperatureLow }}
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <span class="text-color-high" data-toggle="tooltip"
+                        v-bind:title="item.yesterdayExtreme.dewPointHighTimestamp">
+                        {{ item.yesterdayExtreme.dewPointHigh }}
+                    </span>
+                </div>
+                <div>
+                    <span class="text-color-low" data-toggle="tooltip"
+                        v-bind:title="item.yesterdayExtreme.dewPointLowTimestamp">
+                        {{ item.yesterdayExtreme.dewPointLow }}
+                    </span>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <span class="text-color-high" data-toggle="tooltip"
+                        v-bind:title="item.yesterdayExtreme.realHumidityHighTimestamp">
+                        {{ item.yesterdayExtreme.realHumidityHigh }}
+                    </span>
+                </div>
+                <div>
+                    <span class="text-color-low" data-toggle="tooltip"
+                        v-bind:title="item.yesterdayExtreme.realHumidityLowTimestamp">
+                        {{ item.yesterdayExtreme.realHumidityLow }}
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
 
 
 @section scripts {

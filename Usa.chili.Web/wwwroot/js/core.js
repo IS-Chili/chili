@@ -77,27 +77,34 @@ Vue.component('select2', {
 // Prevent changes to Core object
 Object.freeze(Core);
 
-// Handle navbar stickiness
+// Handle navbar and footer stickiness
 $(function () {
-  const header = document.getElementById("navbar");
-  const sticky = header.offsetTop;
+  const header = document.getElementsByTagName("header")[0];
+  const footer = document.getElementsByTagName("footer")[0];
+  const navbar = document.getElementById("navbar");
+  const sticky = navbar.offsetTop;
+
+  if ($(document).height() <= $(window).height()) {
+    footer.classList.add("footer-bottom");
+  }
+  else {
+    footer.classList.remove("footer-bottom");
+  }
 
   window.onscroll = function() {
     if (window.pageYOffset > sticky) {
-      header.classList.add("fixed-top");
+      navbar.classList.add("fixed-top");
+      header.classList.add("header-fixed");
     } else {
-      header.classList.remove("fixed-top");
+      navbar.classList.remove("fixed-top");
+      header.classList.remove("header-fixed");
+    }
+
+    if ($(document).height() <= $(window).height()) {
+      footer.classList.add("footer-bottom");
+    }
+    else {
+      footer.classList.remove("footer-bottom");
     }
   };
-});
-$(document).ready(function() {
-  $('tbody').scroll(function(e) { //detect a scroll event on the tbody
-  	/*
-    Setting the thead left value to the negative valule of tbody.scrollLeft will make it track the movement
-    of the tbody element. Setting an elements left value to that of the tbody.scrollLeft left makes it maintain 			it's relative position at the left of the table.    
-    */
-    $('thead').css("left", -$("tbody").scrollLeft()); //fix the thead relative to the body scrolling
-    $('thead th:nth-child(1)').css("left", $("tbody").scrollLeft()); //fix the first cell of the header
-    $('tbody td:nth-child(1)').css("left", $("tbody").scrollLeft()); //fix the first column of tdbody
-  });
 });

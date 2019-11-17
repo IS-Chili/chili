@@ -28,6 +28,7 @@ div.right_header {
   margin-left: 60%;
   margin-right: auto;
 }
+
 @media screen and (max-width: 1150px) {
   div.left_header {
     text-align: center;
@@ -36,10 +37,11 @@ div.right_header {
     visibility: hidden;
   }
 
-  .realtime-data-table {
-    width: 50vw !important;
+  .header-fixed {
+    margin-bottom: 100px !important;
   }
 }
+
 .navbar-dark .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255, 255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
@@ -218,15 +220,20 @@ canvas {
 }
 
 .main-container {
-  min-height: 100%;
-  height: auto;
   margin-top: 60px;
-  margin-bottom: -200px;
-  padding-bottom: 200px;
 }
 
-.footer {
+.header-fixed {
+  margin-bottom: 115px;
+}
+
+footer {
+  position: absolute;
   width: 100%;
+}
+
+.footer-bottom {
+  bottom: 0;
 }
 
 .station-label {

@@ -6,6 +6,12 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/css/data/realtime.min.css",
+    "inputFiles": [
+      "wwwroot/css/data/realtime.css"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/js/core.min.js",
     "inputFiles": [
       "wwwroot/js/core.js"
