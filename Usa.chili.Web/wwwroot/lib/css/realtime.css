@@ -1,0 +1,58 @@
+table {
+  position: relative;
+  width: 1250px;
+  background-color:white;
+  overflow: hidden;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/*thead*/
+thead {
+  position: relative;
+  display: block; /*seperates the header from the body allowing it to be positioned*/
+  width: 1250px;
+  overflow: visible;
+  text-align:center;
+}
+
+thead th {
+  background-color: white;
+  min-width: 100px;
+  height: 32px;
+  border: 1px solid #222;
+}
+
+thead th:nth-child(1) {/*first cell in the header*/
+  position: relative;
+  display: block; /*seperates the first cell in the header from the header*/
+  background-color:whitesmoke;
+  width: 165px;
+}
+
+
+/*tbody*/
+tbody {
+  position: relative;
+  display: block; /*seperates the tbody from the header*/
+  width: 1250px;
+  height:400px;
+  overflow: scroll;
+  text-align: center;
+}
+
+tbody td {
+  background-color:white;
+  min-width: 100px;
+  border: 1px solid #222;
+}
+
+tbody tr td:nth-child(1) {  /*the first cell in each tr*/
+  position: relative;
+  display: block; /*seperates the first column from the tbody*/
+  height: 52px;
+  background-color:whitesmoke;
+  width:165px;
+}

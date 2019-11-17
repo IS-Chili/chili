@@ -2,7 +2,8 @@
 ViewBag.Title = "Realtime Data";
 ViewBag.Description = "USA Mesonet Realtime Display";
 }
-
+ 
+<link rel="stylesheet" href="~/lib/css/realtime.css" />
 
 <div class="mx-2 bg-core-translucent">
     <div class="bg-core-blue">
@@ -29,50 +30,20 @@ ViewBag.Description = "USA Mesonet Realtime Display";
     </div>
 </div>
 
-<div class="d-flex flex-row">
-    <div class="realtime-locations-table">
-        <table class="table table-hover table-bordered bg-white">
-            <thead>
-                <tr class="medium-row">
-                    <th></th>
-                </tr>
-                <tr>
-                    <th>Location/Obs time</th>
-                </tr>
-                <tr class="medium-row">
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for='item in realtimeData'>
-                    <td>
-                        <div>
-                            <a v-bind:href="'/Data/Station?id=' + item.stationId">
-                                <span class="font-weight-bold">{{ item.stationName }}</span>
-                            </a>
-                        </div>
-                        <div>
-                            <small>{{ item.stationTimestamp }}</small>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="flex-grow-1">
-        <div class="realtime-data-table">
-            <table class="table table-hover table-bordered bg-white">
+<table id="real_time_table" >
                 <thead>
                     <tr>
+                        <th colspan="1"></th>
                         <th colspan="4" class="text-center">&#64;&nbsp;6.56 ft</th>
                         <th colspan="2" class="text-center">&#64;&nbsp;32.81 ft</th>
-                        <th>SeaLv</th>
+                        <th class="text-center">SeaLv</th>
                         <th colspan="5" class="text-center">Today's Extremes (<span
                                 class="text-color-high">Hi</span>/<span class="text-color-low">Lo</span>)</th>
                         <th colspan="5" class="text-center">Yesterday's Extremes (<span
                                 class="text-color-high">Hi</span>/<span class="text-color-low">Lo</span>)</th>
                     </tr>
                     <tr>
+                        <th>Location/Obs time</th>
                         <th class="text-center">Temp</th>
                         <th class="text-center">HtIdx</th>
                         <th class="text-center">DewPt</th>
@@ -92,27 +63,38 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                         <th class="text-center">Hum</th>
                     </tr>
                     <tr class="text-center">
-                        <td>&deg;F</td>
-                        <td>&deg;F</td>
-                        <td>&deg;F</td>
-                        <td>&#37;</td>
-                        <td>&deg;</td>
-                        <td>mph</td>
-                        <td>inHg</td>
-                        <td>in</td>
-                        <td>mph</td>
-                        <td>&deg;F</td>
-                        <td>&deg;F</td>
-                        <td>&#37;</td>
-                        <td>in</td>
-                        <td>mph</td>
-                        <td>&deg;F</td>
-                        <td>&deg;F</td>
-                        <td>&#37;</td>
+                        <th colspan="1"></th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&#37;</th>
+                        <th>&deg;</th>
+                        <th>mph</th>
+                        <th>inHg</th>
+                        <th>in</th>
+                        <th>mph</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&#37;</th>
+                        <th>in</th>
+                        <th>mph</th>
+                        <th>&deg;F</th>
+                        <th>&deg;F</th>
+                        <th>&#37;</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for='item in realtimeData' :class='item.stationName.length > 25 ? "large-row" : ""'>
+                        <td>
+                        <div>
+                            <a v-bind:href="'/Data/Station?id=' + item.stationId">
+                                <span class="font-weight-bold" style=" font: bold 11px Georgia, serif; word-wrap:break-word;">{{ item.stationName }}</span>
+                            </a>
+                        </div>
+                        <div>
+                            <small>{{ item.stationTimestamp }}</small>
+                        </div>
+                       </td>
                         <td class="temp font-weight-bold">{{ item.airTemperature }}</td>
                         <td class="ht">{{ item.heatIndex }}</td>
                         <td class="hum">{{ item.dewPoint }}</td>
@@ -220,8 +202,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             </table>
         </div>
     </div>
-</div>
-</div>
+
 
 @section scripts {
 <environment include="Development">
