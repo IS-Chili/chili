@@ -34,12 +34,17 @@ namespace Usa.chili.Services
         }
 
         public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits) {
+            VariableDescription variableDescription = await _dbContext.VariableDescription
+                .Include(x => x.VariableType)
+                .Where(x => x.Id == variableId)
+                .SingleAsync();
+
             StationGraphDto stationGraphDto =  new StationGraphDto {
-                Title = "24 hour graph of Air Temperature at 1.5m (4.92ft)",
-                YAxisTitle = "Degrees Fahrenheit",
+                Title = "24 hour graph of " + variableDescription.VariableDescription1,
+                YAxisTitle = isMetricUnits ? variableDescription.VariableType.MetricUnit : variableDescription.VariableType.EnglishUnit,
                 Series = new List<StationGraphSeriesDto> {
                     new StationGraphSeriesDto {
-                        Name = "Temperature",
+                        Name = variableDescription.VariableType.VariableType1,
                         LineWidth = 0.5,
                         Data = new List<List<double>>()
                     }

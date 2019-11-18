@@ -30,6 +30,17 @@ Core.populateStationDropdown = function (self, activeOnly) {
     });
 };
 
+// Get Variables
+Core.populateVariableDropdown = function (self) {
+  axios.get('/data/VariableList')
+    .then(function (response) {
+      self.variables = response.data;
+    })
+    .catch(function (error) {
+      console.log('populateVariableDropdown failed', error);
+    });
+};
+
 // select2 Vue component
 Vue.component('select2', {
   props: ['options', 'value'],

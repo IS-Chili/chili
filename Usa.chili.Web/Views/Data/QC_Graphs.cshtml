@@ -28,10 +28,7 @@
         </div>
         <div class="form-group col-lg-4 mr-2">
             <label for="variableSelection">Variable</label>
-            <select id="variableSelection">
-                <option value="1">Air Temp</option>
-                <option value="2">Percp</option>
-            </select>
+            <select2 id="variableSelection" :options="variables" v-model="model.variableId"></select2>
         </div>
         <div class="form-group col-lg-2 mr-2">
             <label for="groupSelection">Group</label>

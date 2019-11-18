@@ -1,6 +1,5 @@
 $(function () {
   $('#datePicker').datetimepicker(Core.dateTimePickerDateOptions);
-  $('#variableSelection').select2(Core.select2Options);
   DataGraph();
 });
 
@@ -9,13 +8,16 @@ const App = new Vue({
   data: function () {
     return {
       stations: [],
+      variables: [],
       model: {
-        stationId: null
+        stationId: null,
+        variableId: null
       }
     }
   },
   created: function () {
     Core.populateStationDropdown(this, false);
+    Core.populateVariableDropdown(this);
   },
   computed: {
     currentDate: function () {
@@ -31,7 +33,7 @@ const DataGraph = function () {
     axios.get('/data/StationGraph', {
         params: {
           stationId: 1,
-          variableId: 1,
+          variableId: 12,
           date: '11/01/2019',
           isMetricUnits: false
         }
