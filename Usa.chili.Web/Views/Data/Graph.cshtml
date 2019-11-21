@@ -3,13 +3,15 @@
     ViewBag.Description = "24 Hour Meteorological Data Graph";
 }
 
-<div class="container">
-    <h1 class="text-center">24 Hour Meteorological Data Graph for Agricola Station</h1>
-    <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
-    <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
-
+<div class="container bg-core-blue">
+        <hr>
+        <h1 class="text-center">24 Hour Meteorological Data Graph for Agricola Station</h1>
+        <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
+        <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
+        <hr>
+</div>
+<div class="container bg-core-translucent">
     <hr>
-
     <div class="d-flex justify-content-center my-4">
         <a class="btn btn-light mr-3" asp-controller="Data" asp-action="Station" asp-route-id="1">Display Current Data for Agricola Station</a>
         <a class="btn btn-light" asp-controller="Data" asp-action="Metadata" asp-route-id="1">Display Metadata for Agricola Station</a>
@@ -31,10 +33,7 @@
         </div>
         <div class="form-group col-lg-4 mr-2">
             <label for="variableSelection">Variable</label>
-            <select id="variableSelection">
-                <option value="1">Air Temp</option>
-                <option value="2">Percp</option>
-            </select>
+            <select2 id="variableSelection" :options="variables" v-model="model.variableId"></select2>
         </div>
         <div class="col-lg-1">
             <button type="button" class="btn btn-secondary btn-inline mb-3">Go</button>
@@ -60,6 +59,10 @@
 
     <div class="d-flex justify-content-center">
         <img class="img-fluid w-740" src="/images/Air1.png" />
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div id="graph" class="w-740"></div>
     </div>
 </div>
 

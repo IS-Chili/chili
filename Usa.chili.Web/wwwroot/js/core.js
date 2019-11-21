@@ -30,6 +30,17 @@ Core.populateStationDropdown = function (self, activeOnly) {
     });
 };
 
+// Get Variables
+Core.populateVariableDropdown = function (self) {
+  axios.get('/data/VariableList')
+    .then(function (response) {
+      self.variables = response.data;
+    })
+    .catch(function (error) {
+      console.log('populateVariableDropdown failed', error);
+    });
+};
+
 // select2 Vue component
 Vue.component('select2', {
   props: ['options', 'value'],
@@ -77,16 +88,34 @@ Vue.component('select2', {
 // Prevent changes to Core object
 Object.freeze(Core);
 
-// Handle navbar stickiness
+// Handle navbar and footer stickiness
 $(function () {
-  const header = document.getElementById("navbar");
-  const sticky = header.offsetTop;
+  const header = document.getElementsByTagName("header")[0];
+  const footer = document.getElementsByTagName("footer")[0];
+  const navbar = document.getElementById("navbar");
+  const sticky = navbar.offsetTop;
+
+  if ($(document).height() <= $(window).height()) {
+    footer.classList.add("footer-bottom");
+  }
+  else {
+    footer.classList.remove("footer-bottom");
+  }
 
   window.onscroll = function() {
     if (window.pageYOffset > sticky) {
-      header.classList.add("fixed-top");
+      navbar.classList.add("fixed-top");
+      header.classList.add("header-fixed");
     } else {
-      header.classList.remove("fixed-top");
+      navbar.classList.remove("fixed-top");
+      header.classList.remove("header-fixed");
+    }
+
+    if ($(document).height() <= $(window).height()) {
+      footer.classList.add("footer-bottom");
+    }
+    else {
+      footer.classList.remove("footer-bottom");
     }
   };
 });

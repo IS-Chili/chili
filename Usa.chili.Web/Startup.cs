@@ -76,6 +76,7 @@ namespace Usa.chili.Web
             services.AddScoped<IStationService, StationService>();
             services.AddScoped<IStationDataService, StationDataService>();
             services.AddScoped<IPublicService, PublicService>();
+            services.AddScoped<IVariableService, VariableService>();
             services.Configure<ChiliConfig>(Configuration.GetSection("ChiliConfig"));
         }
 
@@ -93,7 +94,7 @@ namespace Usa.chili.Web
                 .AddContentTypeOptionsNoSniff()
                 .AddReferrerPolicyNoReferrer()
                 .RemoveServerHeader()
-                .AddCustomHeader("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; object-src 'self'; form-action 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: http://weather.southalabama.edu https://api.tiles.mapbox.com; sandbox allow-forms allow-scripts allow-same-origin allow-popups; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://polyfill.io; connect-src 'self'; manifest-src 'self'");
+                .AddCustomHeader("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; object-src 'self'; form-action 'self' https://export.highcharts.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: http://weather.southalabama.edu https://api.tiles.mapbox.com; sandbox allow-forms allow-scripts allow-same-origin allow-popups; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://polyfill.io; connect-src 'self'; manifest-src 'self'");
 
             app.UseSecurityHeaders(policyCollection);
 
@@ -122,8 +123,7 @@ namespace Usa.chili.Web
 
             app.UseEndpoints(endpoints =>
             {
-                // endpoints.MapControllers();
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

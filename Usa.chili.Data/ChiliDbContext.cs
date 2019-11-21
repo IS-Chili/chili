@@ -184,8 +184,11 @@ namespace Usa.chili.Data
         public virtual DbSet<SiteData> SiteData { get; set; }
         public virtual DbSet<SiteVisit> SiteVisit { get; set; }
         public virtual DbSet<Station> Station { get; set; }
+        public virtual DbSet<StationData> StationData { get; set; }
         public virtual DbSet<Stormtrack> Stormtrack { get; set; }
         public virtual DbSet<Test> Test { get; set; }
+        public virtual DbSet<VariableDescription> VariableDescription { get; set; }
+        public virtual DbSet<VariableType> VariableType { get; set; }
         public virtual DbSet<Walnuthill202> Walnuthill202 { get; set; }
         public virtual DbSet<Walnuthill202Flags> Walnuthill202Flags { get; set; }
         public virtual DbSet<Walnuthill224> Walnuthill224 { get; set; }
@@ -36771,9 +36774,7 @@ namespace Usa.chili.Data
             {
                 entity.ToTable("station", "chili");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .HasColumnType("int(10)");
+                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.DisplayName)
                     .IsRequired()
@@ -36795,6 +36796,245 @@ namespace Usa.chili.Data
 
                 entity.Property(x => x.IsActive)
                     .HasConversion(new BoolToZeroOneConverter<Int16>());
+            });
+
+            modelBuilder.Entity<StationData>(entity =>
+            {
+                entity.ToTable("station_data", "chili");
+
+                entity.HasIndex(e => e.StationId)
+                    .HasName("StationId");
+
+                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.AirT10m).HasColumnName("AirT_10m");
+
+                entity.Property(e => e.AirT1pt5m).HasColumnName("AirT_1pt5m");
+
+                entity.Property(e => e.AirT2m).HasColumnName("AirT_2m");
+
+                entity.Property(e => e.AirT9pt5m).HasColumnName("AirT_9pt5m");
+
+                entity.Property(e => e.DayOfMon).HasColumnType("tinyint(3) unsigned");
+
+                entity.Property(e => e.DayOfYear).HasColumnType("smallint(5) unsigned");
+
+                entity.Property(e => e.Door).HasColumnType("tinyint(3) unsigned");
+
+                entity.Property(e => e.EI).HasColumnName("eI");
+
+                entity.Property(e => e.EITc).HasColumnName("eI_tc");
+
+                entity.Property(e => e.ER).HasColumnName("eR");
+
+                entity.Property(e => e.ERTc).HasColumnName("eR_tc");
+
+                entity.Property(e => e.Hour).HasColumnType("tinyint(3) unsigned");
+
+                entity.Property(e => e.IrtsBody).HasColumnName("IRTS_Body");
+
+                entity.Property(e => e.IrtsTrgt).HasColumnName("IRTS_Trgt");
+
+                entity.Property(e => e.Minute).HasColumnType("tinyint(3) unsigned");
+
+                entity.Property(e => e.Month).HasColumnType("tinyint(3) unsigned");
+
+                entity.Property(e => e.NaCi).HasColumnName("NaCI");
+
+                entity.Property(e => e.ObsInSummTot)
+                    .HasColumnName("ObsInSumm_Tot")
+                    .HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.PrecipTb3Today).HasColumnName("Precip_TB3_Today");
+
+                entity.Property(e => e.PrecipTb3Tot).HasColumnName("Precip_TB3_Tot");
+
+                entity.Property(e => e.PrecipTxToday).HasColumnName("Precip_TX_Today");
+
+                entity.Property(e => e.PrecipTxTot).HasColumnName("Precip_TX_Tot");
+
+                entity.Property(e => e.Pressure1).HasColumnName("Pressure_1");
+
+                entity.Property(e => e.Pressure2).HasColumnName("Pressure_2");
+
+                entity.Property(e => e.Ptemp).HasColumnName("PTemp");
+
+                entity.Property(e => e.RecId).HasColumnType("mediumint(8) unsigned");
+
+                entity.Property(e => e.Rh10m).HasColumnName("RH_10m");
+
+                entity.Property(e => e.Rh2m).HasColumnName("RH_2m");
+
+                entity.Property(e => e.SoilCondTc).HasColumnName("SoilCond_tc");
+
+                entity.Property(e => e.SoilT100cm).HasColumnName("SoilT_100cm");
+
+                entity.Property(e => e.SoilT10cm).HasColumnName("SoilT_10cm");
+
+                entity.Property(e => e.SoilT20cm).HasColumnName("SoilT_20cm");
+
+                entity.Property(e => e.SoilT50cm).HasColumnName("SoilT_50cm");
+
+                entity.Property(e => e.SoilT5cm).HasColumnName("SoilT_5cm");
+
+                entity.Property(e => e.SoilWaCondTc).HasColumnName("SoilWaCond_tc");
+
+                entity.Property(e => e.StationId).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.TableCode).HasColumnType("smallint(5) unsigned");
+
+                entity.Property(e => e.TempC).HasColumnName("Temp_C");
+
+                entity.Property(e => e.Ts).HasColumnName("TS");
+
+                entity.Property(e => e.Vitel100cmA).HasColumnName("Vitel_100cm_a");
+
+                entity.Property(e => e.Vitel100cmB).HasColumnName("Vitel_100cm_b");
+
+                entity.Property(e => e.Vitel100cmC).HasColumnName("Vitel_100cm_c");
+
+                entity.Property(e => e.Vitel100cmD).HasColumnName("Vitel_100cm_d");
+
+                entity.Property(e => e.Vitel10cmA).HasColumnName("Vitel_10cm_a");
+
+                entity.Property(e => e.Vitel10cmB).HasColumnName("Vitel_10cm_b");
+
+                entity.Property(e => e.Vitel10cmC).HasColumnName("Vitel_10cm_c");
+
+                entity.Property(e => e.Vitel10cmD).HasColumnName("Vitel_10cm_d");
+
+                entity.Property(e => e.Vitel20cmA).HasColumnName("Vitel_20cm_a");
+
+                entity.Property(e => e.Vitel20cmB).HasColumnName("Vitel_20cm_b");
+
+                entity.Property(e => e.Vitel20cmC).HasColumnName("Vitel_20cm_c");
+
+                entity.Property(e => e.Vitel20cmD).HasColumnName("Vitel_20cm_d");
+
+                entity.Property(e => e.Vitel50cmA).HasColumnName("Vitel_50cm_a");
+
+                entity.Property(e => e.Vitel50cmB).HasColumnName("Vitel_50cm_b");
+
+                entity.Property(e => e.Vitel50cmC).HasColumnName("Vitel_50cm_c");
+
+                entity.Property(e => e.Vitel50cmD).HasColumnName("Vitel_50cm_d");
+
+                entity.Property(e => e.Vitel5cmA).HasColumnName("Vitel_5cm_a");
+
+                entity.Property(e => e.Vitel5cmB).HasColumnName("Vitel_5cm_b");
+
+                entity.Property(e => e.Vitel5cmC).HasColumnName("Vitel_5cm_c");
+
+                entity.Property(e => e.Vitel5cmD).HasColumnName("Vitel_5cm_d");
+
+                entity.Property(e => e.Wfv).HasColumnName("wfv");
+
+                entity.Property(e => e.WndDir10m).HasColumnName("WndDir_10m");
+
+                entity.Property(e => e.WndDir2m).HasColumnName("WndDir_2m");
+
+                entity.Property(e => e.WndSpd10m).HasColumnName("WndSpd_10m");
+
+                entity.Property(e => e.WndSpd10mMax).HasColumnName("WndSpd_10m_Max");
+
+                entity.Property(e => e.WndSpd10mStd).HasColumnName("WndSpd_10m_Std");
+
+                entity.Property(e => e.WndSpd10mWvc1).HasColumnName("WndSpd_10m_WVc_1");
+
+                entity.Property(e => e.WndSpd10mWvc2).HasColumnName("WndSpd_10m_WVc_2");
+
+                entity.Property(e => e.WndSpd10mWvc3).HasColumnName("WndSpd_10m_WVc_3");
+
+                entity.Property(e => e.WndSpd10mWvc4).HasColumnName("WndSpd_10m_WVc_4");
+
+                entity.Property(e => e.WndSpd2m).HasColumnName("WndSpd_2m");
+
+                entity.Property(e => e.WndSpd2mMax).HasColumnName("WndSpd_2m_Max");
+
+                entity.Property(e => e.WndSpd2mStd).HasColumnName("WndSpd_2m_Std");
+
+                entity.Property(e => e.WndSpd2mWvc1).HasColumnName("WndSpd_2m_WVc_1");
+
+                entity.Property(e => e.WndSpd2mWvc2).HasColumnName("WndSpd_2m_WVc_2");
+
+                entity.Property(e => e.WndSpd2mWvc3).HasColumnName("WndSpd_2m_WVc_3");
+
+                entity.Property(e => e.WndSpd2mWvc4).HasColumnName("WndSpd_2m_WVc_4");
+
+                entity.Property(e => e.WndSpdVert).HasColumnName("WndSpd_Vert");
+
+                entity.Property(e => e.WndSpdVertMax).HasColumnName("WndSpd_Vert_Max");
+
+                entity.Property(e => e.WndSpdVertMin).HasColumnName("WndSpd_Vert_Min");
+
+                entity.Property(e => e.WndSpdVertTot).HasColumnName("WndSpd_Vert_Tot");
+
+                entity.Property(e => e.Year).HasColumnType("smallint(5) unsigned");
+
+                entity.HasOne(d => d.Station)
+                    .WithMany(p => p.StationData)
+                    .HasForeignKey(d => d.StationId)
+                    .HasConstraintName("station_data_ibfk_1");
+            });
+
+             modelBuilder.Entity<VariableDescription>(entity =>
+            {
+                entity.ToTable("variable_description", "chili");
+
+                entity.HasIndex(e => e.VariableTypeId)
+                    .HasName("VariableTypeId");
+
+                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.VariableDescription1)
+                    .IsRequired()
+                    .HasColumnName("VariableDescription")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VariableName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VariableTypeId).HasColumnType("int(10) unsigned");
+
+                entity.HasOne(d => d.VariableType)
+                    .WithMany(p => p.VariableDescription)
+                    .HasForeignKey(d => d.VariableTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("variable_description_ibfk_1");
+            });
+
+            modelBuilder.Entity<VariableType>(entity =>
+            {
+                entity.ToTable("variable_type", "chili");
+
+                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.EnglishMax).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.EnglishMin).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.EnglishUnit)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MetricMax).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.MetricMin).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.MetricUnit)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VariableType1)
+                    .IsRequired()
+                    .HasColumnName("VariableType")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Stormtrack>(entity =>

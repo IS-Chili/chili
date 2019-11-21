@@ -78,6 +78,15 @@
         "leaflet.js"
       ],
       "destination": "wwwroot/lib/leaflet"
+    },
+    {
+      "library": "highcharts@7.2.0",
+      "files": [
+        "highcharts.js",
+        "modules/exporting.js",
+        "modules/offline-exporting.js"
+      ],
+      "destination": "wwwroot/lib/highcharts"
     }
   ]
 }
