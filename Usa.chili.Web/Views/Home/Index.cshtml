@@ -6,6 +6,7 @@ ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated we
 "The weather stations collect 16 meteorological- and soil- quantities including " +
 "temperature, rainfall, wind speed and direction, soil temperature and humidity.";
 }
+<!--STATION MAP -->
 
 <div class="container">
     <div class="row">
@@ -17,6 +18,69 @@ ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated we
                 <div class="card-body">
                     <div id="station-map"></div>
                 </div>
+                <div padding="8px">
+
+                </div>
+
+                <!-- TABLE CREATION -->  
+
+            
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th class="text-center">Temp</th>
+                                <th class="text-center">HtIdx</th>
+                                <th class="text-center">DewPt</th>
+                                <th class="text-center">Hum</th>
+                                <th class="text-center">WdDir</th>
+                                <th class="text-center">WdSpd</th>
+                                <th class="text-center">Press</th>
+                                <th class="text-center">Rain</th>
+                                <th class="text-center">TS</th>
+                            </tr>
+                            <tr class="text-center">
+                                <!--<td id="Location" style="color:blue;font-size:20px;"></td>-->
+                                <td><a href="/Data/Metadata" id="Location"></a></td>
+                                <td>&deg;F</td>
+                                <td>&deg;F</td>
+                                <td>&deg;F</td>
+                                <td>&#37;</td>
+                                <td>&deg;</td>
+                                <td>mph</td>
+                                <td>inHg</td>
+                                <td>in</td>
+                                <td>Time Stamp</td>
+                            </tr>
+                            <tr class="text-center">
+                                <!--<td><button type= "button" class= "button1" ><a href="/Data/Realtime">ALL STATIONS DATA</a></button></td> -->
+                                <td><a href="/Data/Realtime"><input type= button value= "All Stations Data"></a></td>
+                                <td id="stationTemp"></td>
+                                <td id="stationHtIdx"></td>
+                                <td id="stationDew"></td>
+                                <td id="stationRH"></td>
+                                <td id="stationWinD"></td>
+                                <td id="stationWinS"></td>
+                                <td id="stationPres"></td>
+                                <td id="stationPrec"></td>
+                                <td id="stationTS"></td>
+                                                               
+                            </tr>
+                        </thead>
+
+                                               
+                    </table>  
+                     
+                </div> 
+                
+                <!-- END OF THE TABLE --> 
+
+
+                      
+
+                
+
             </div>
         </div>
 
