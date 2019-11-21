@@ -14,77 +14,77 @@ CREATE TABLE chili.variable_description (
 );
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'Precip_TB3_Tot', 'Precipitation per minute (TB3)'
+SELECT variable_type.id, 'Precip_TB3_Tot', 'Precipitation per minute (TB3)', in, mm
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Minute Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'Precip_TX_Tot', 'Precipitation per minute (TX)'
+SELECT variable_type.id, 'Precip_TX_Tot', 'Precipitation per minute (TX)', in, mm
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Minute Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'Precip_TB3_Today', 'Precipitation since midnight (TB3)'
+SELECT variable_type.id, 'Precip_TB3_Today', 'Precipitation since midnight (TB3)', in, mm
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Total Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'Precip_TX_Today', 'Precipitation since midnight (TX)'
+SELECT variable_type.id, 'Precip_TX_Today', 'Precipitation since midnight (TX)', in, mm
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Total Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'SoilSfcT', 'Soil Surface Temperature'
+SELECT variable_type.id, 'SoilSfcT', 'Soil Surface Temperature', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'SoilT_5cm', 'Soil Temperature at 5cm (1.97in)'
+SELECT variable_type.id, 'SoilT_5cm', 'Soil Temperature at 5cm (1.97in)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'SoilT_10cm', 'Soil Temperature at 10cm (3.94in)'
+SELECT variable_type.id, 'SoilT_10cm', 'Soil Temperature at 10cm (3.94in)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'SoilT_20cm', 'Soil Temperature at 20cm (7.87in)'
+SELECT variable_type.id, 'SoilT_20cm', 'Soil Temperature at 20cm (7.87in)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'SoilT_50cm', 'Soil Temperature at 50cm (19.68in)'
+SELECT variable_type.id, 'SoilT_50cm', 'Soil Temperature at 50cm (19.68in)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'SoilT_100cm', 'Soil Temperature at 100cm (39.37in)'
+SELECT variable_type.id, 'SoilT_100cm', 'Soil Temperature at 100cm (39.37in)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'Temp_C', 'Hydraprobe Soil Temperature at 100cm (39.37in)'
+SELECT variable_type.id, 'Temp_C', 'Hydraprobe Soil Temperature at 100cm (39.37in)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'AirT_1pt5m', 'Air Temperature at 1.5m (4.92ft)'
+SELECT variable_type.id, 'AirT_1pt5m', 'Air Temperature at 1.5m (4.92ft)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'AirT_2m', 'Air Temperature at 2m (6.56ft)'
+SELECT variable_type.id, 'AirT_2m', 'Air Temperature at 2m (6.56ft)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'AirT_9pt5m', 'Air Temperature at 9.5m (31.17ft)'
+SELECT variable_type.id, 'AirT_9pt5m', 'Air Temperature at 9.5m (31.17ft)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'AirT_10m', 'Air Temperature at 10m (31.81ft)'
+SELECT variable_type.id, 'AirT_10m', 'Air Temperature at 10m (31.81ft)', &#176;F, &#176;C
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Temperature';
 
