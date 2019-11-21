@@ -11,6 +11,7 @@ $(function () {
   */
 
   $('#dataSetSelection').select2(Core.select2Options);
+ 
 
   $('#dataSetSelection').on('change', function() {
     changeRegional($(this).val());
@@ -46,11 +47,42 @@ function getStationDataAndDraw(stationId) {
     .then(function (response) {
       if(response.data != null) {
         drawStation(response.data);
+        drawMapTable(response.data);
       }
     })
     .catch(function (error) {
       console.log('getStationDataAndDraw failed', error);
     });
+}
+
+/*function drawMapTable(stationData){
+  const stationTemp = Math.round(Number(stationData.airTemperature));
+  const stationDew = Math.round(Number(stationData.dewPoint));
+  const stationRH = Math.round(Number(stationData.realHumidity));
+  const stationWinD = Math.round(Number(stationData.windDirection));
+  const stationWinS = Math.round(Number(stationData.windSpeed));
+  const stationPrec = Number(stationData.precipitation);
+  const stationPres = Number(stationData.pressure);
+  const stationTS = stationData.stationTimestamp;
+  
+
+}
+*/
+
+function drawMapTable(stationData){
+  const stationName = document.getElementById("Location").innerText = stationData.stationName;
+  const stationTemp = document.getElementById("stationTemp").innerText = Math.round(Number(stationData.airTemperature));
+  const stationDew = document.getElementById("stationDew").innerText = Math.round(Number(stationData.dewPoint));
+  const stationRH = document.getElementById("stationRH").innerText = Math.round(Number(stationData.realHumidity));
+  const stationWinD = document.getElementById("stationWinD").innerText = Math.round(Number(stationData.windDirection));
+  const stationWinS = document.getElementById("stationWinS").innerText = Math.round(Number(stationData.windSpeed));
+  const stationPrec = document.getElementById("stationPrec").innerText = Number(stationData.precipitation);
+  const stationPres = document.getElementById("stationPres").innerText = Number(stationData.pressure);
+  const stationTS = document.getElementById("stationTS").innerText = stationData.stationTimestamp;
+
+ 
+
+
 }
 
 function drawStation(stationData) {
