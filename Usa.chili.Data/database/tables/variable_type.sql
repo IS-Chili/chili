@@ -8,14 +8,16 @@ CREATE TABLE chili.variable_type (
   MetricMin DECIMAL(6, 2) NOT NULL,
   MetricMax DECIMAL(6, 2) NOT NULL,
   MetricUnit VARCHAR(30) NOT NULL,
+  MetricShort VARCHAR(30) NOT NULL,
   EnglishMin DECIMAL(6, 2) NOT NULL,
   EnglishMax DECIMAL(6, 2) NOT NULL,
   EnglishUnit VARCHAR(30) NOT NULL,
+  EnglishShort VARCHAR(30) NOT NULL,
   PRIMARY KEY (Id)
 );
 
-INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, EnglishMin, EnglishMax, EnglishUnit) 
-VALUES ('Minute Precipitation', 0, 10, 'Millimeters', 0, 0.5, 'Inches');
+INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
+VALUES ('Minute Precipitation', 0, 10, 'Millimeters', 'mm', 0, 0.5, 'Inches', 'in');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, EnglishMin, EnglishMax, EnglishUnit) 
 VALUES ('Total Precipitation', 0, 200, 'Millimeters', 0, 8, 'Inches');
