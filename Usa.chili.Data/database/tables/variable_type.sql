@@ -20,22 +20,22 @@ INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit,
 VALUES ('Minute Precipitation', 0, 10, 'Millimeters', 'mm', 0, 0.5, 'Inches', 'in');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
-VALUES ('Total Precipitation', 0, 200, 'Millimeters', 0, 8, 'Inches');
+VALUES ('Total Precipitation', 0, 200, 'Millimeters', 'mm', 0, 8, 'Inches', 'in');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
-VALUES ('Temperature', -30, 50, 'Degrees Celsius', -25, 125, 'Degrees Fahrenheit');
+VALUES ('Temperature', -30, 50, 'Degrees Celsius', '&#176;C', -25, 125, 'Degrees Fahrenheit', '&#176;F');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
-VALUES ('Humidity', 0, 100, 'Percent Humidity', 0, 100, 'Percent Humidity');
+VALUES ('Humidity', 0, 100, 'Percent Humidity', '&#37;', 0, 100, 'Percent Humidity', '&#37;');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
-VALUES ('Water Content', 0, 100, 'Soil Water Content Percentage', 0, 100, 'Soil Water Content Percentage');
+VALUES ('Water Content', 0, 100, 'Soil Water Content Percentage', '&#37;', 0, 100, 'Soil Water Content Percentage', '&#37;');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
-VALUES ('Conductivity', 0, 1, 'Siemens/Meter', 0, 1, 'Siemens/Meter');
+VALUES ('Conductivity', 0, 1, 'Siemens/Meter', 'siemens/m', 0, 1, 'Siemens/Meter', 'siemens/m');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
-VALUES ('Pressure', 990, 1030, 'Hectopascals', 29, 30.5, 'Inches of Mercury');
+VALUES ('Pressure', 990, 1030, 'Hectopascals', 'hPa', 29, 30.5, 'Inches of Mercury', 'inHg');
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricShort, EnglishMin, EnglishMax, EnglishUnit, EnglishShort) 
 VALUES ('Total Radiation', -100, 2000, 'Watts/sq Meter', -0.15, 2.9, 'Langleys/Minute');
