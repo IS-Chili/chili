@@ -114,57 +114,57 @@ FROM chili.variable_type
 WHERE variable_type.VariableType = 'Humidity';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'Pressure_1', 'Air Pressure #1'
+SELECT variable_type.id, 'Pressure_1', 'Air Pressure #1', 'inHg', 'hPa'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Pressure';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'Pressure_2', 'Air Pressure #2'
+SELECT variable_type.id, 'Pressure_2', 'Air Pressure #2', 'inHg', 'hPa'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Pressure';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'TotalRadn', 'Total Radiation'
+SELECT variable_type.id, 'TotalRadn', 'Total Radiation', 'ly/min', 'W/m&#178;'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Total Radiation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'QuantRadn', 'Quantum Radiation'
+SELECT variable_type.id, 'QuantRadn', 'Quantum Radiation', 'ly/min', 'W/m&#178;'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Quantum Radiation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'WndDir_2m', 'Wind Direction at 2m (6.56ft)'
+SELECT variable_type.id, 'WndDir_2m', 'Wind Direction at 2m (6.56ft)', 'Mph', 'm/s'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Direction';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'WndDir_10m', 'Wind Direction at 10m (31.81ft)'
+SELECT variable_type.id, 'WndDir_10m', 'Wind Direction at 10m (31.81ft)', 'Mph', 'm/s'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Direction';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'WndSpd_2m', 'Wind Speed at 2m (6.56ft)'
+SELECT variable_type.id, 'WndSpd_2m', 'Wind Speed at 2m (6.56ft)', 'Mph', 'm/s'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Speed';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'WndSpd_10m', 'Wind Speed at 10m (31.81ft)'
+SELECT variable_type.id, 'WndSpd_10m', 'Wind Speed at 10m (31.81ft)', 'Mph', 'm/s'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Speed';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'WndSpd_Vert', 'Vertical Wind Speed'
+SELECT variable_type.id, 'WndSpd_Vert', 'Vertical Wind Speed', 'Mph', 'm/s'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Vertical Speed';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'WndSpd_2m_Max', 'Maximum Wind Speed at 2m (6.56ft)'
+SELECT variable_type.id, 'WndSpd_2m_Max', 'Maximum Wind Speed at 2m (6.56ft)', 'Mph', 'm/s'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Speed';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription, EnglishSymbol, MetricSymbol) 
-SELECT variable_type.id, 'WndSpd_10m_Max', 'Maximum Wind Speed at 10m (31.81ft)'
+SELECT variable_type.id, 'WndSpd_10m_Max', 'Maximum Wind Speed at 10m (31.81ft)', 'Mph', 'm/s'
 FROM chili.variable_type
 WHERE variable_type.VariableType = 'Speed';
 
