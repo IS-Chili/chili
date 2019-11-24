@@ -8,7 +8,7 @@ const App = new Vue({
   el: '#app',
   data: function () {
     return {
-      meteorologicalData: [],
+      metData: {},
       now: new Date()
     }
   },
@@ -32,9 +32,9 @@ const App = new Vue({
     getData: function() {
       const self = this;
 
-      axios.get('/data/Station')
+      axios.get('/data/StationData')
       .then(function (response) {
-        self.realtimeData = response.data;
+        self.metData = response.data;
         Vue.nextTick(function () {
           self.now = new Date();
 
