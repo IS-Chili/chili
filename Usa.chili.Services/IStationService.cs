@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Usa.chili.Domain;
 using Usa.chili.Dto;
+using System;
 
 namespace Usa.chili.Services
 {
@@ -17,5 +18,6 @@ namespace Usa.chili.Services
         Task<List<DropdownDto>> ListAllStations();
         Task<List<DropdownDto>> ListActiveStations();
         Task<List<StationMapDto>> GetStationMapData();
+        Task<StationInfoDto> GetStationInfo(int stationid, DateTime? dateTime);
     }
 }

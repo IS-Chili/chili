@@ -58,7 +58,7 @@ namespace Usa.chili.Services
                 .ToListAsync();
         }
 
-         public async Task<List<DropdownDto>> ListAllStations() {
+        public async Task<List<DropdownDto>> ListAllStations() {
             return await _dbContext.Station
                 .AsNoTracking()
                 .OrderBy(x => x.DisplayName)
@@ -67,6 +67,29 @@ namespace Usa.chili.Services
                     Text = x.DisplayName
                 })
                 .ToListAsync();
+        }
+
+        public async Task<StationInfoDto> GetStationInfo(int stationid, DateTime? dateTime) {
+
+            var stationInfoDto = new StationInfoDto();
+
+            var stationInfo = await _dbContext.Station
+                .AsNoTracking()
+                .Where(s => s.Id == stationid)
+                .FirstOrDefaultAsync();
+
+            stationInfoDto.StationID = stationInfo.Id;
+            stationInfoDto.StationTimeStamp = dateTime.GetValueOrDefault();
+            stationInfoDto.StationKey = stationInfo.StationKey;
+            stationInfoDto.DisplayName = stationInfo.DisplayName;
+            stationInfoDto.Latitude = stationInfo.Latitude;
+            stationInfoDto.Longitude = stationInfo.Longitude;
+            stationInfoDto.Elevation = stationInfo.Elevation;
+            stationInfoDto.BeginDate = stationInfo.BeginDate;
+            stationInfoDto.EndDate = stationInfo.EndDate.GetValueOrDefault();
+            stationInfoDto.IsActive = Convert.ToInt32(stationInfo.IsActive);
+            
+            return stationInfoDto;
         }
     }
 }

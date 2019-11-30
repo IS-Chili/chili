@@ -4,7 +4,7 @@ $(function () {
   $('#endDate').datetimepicker(Core.dateTimePickerDateOptions);
 });
 
-const App = new Vue({
+/*const App = new Vue({
   el: '#app',
   data: function () {
     return {
@@ -49,9 +49,9 @@ const App = new Vue({
       });
     }
   }
-});
+});*/
 
-/*const App = new Vue({
+const App = new Vue({
   el: '#app',
   data: function () {
     return {
@@ -64,4 +64,4 @@ const App = new Vue({
   created: function() {
     Core.populateStationDropdown(this, false);
   }
-});*/
+});

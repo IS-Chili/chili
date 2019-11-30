@@ -30,6 +30,11 @@ Core.populateStationDropdown = function (self, activeOnly) {
     });
 };
 
+// Get any URL query parameters being passed
+Core.getURLParameters = function (self) {
+  self.queryParams = new URLSearchParams(location.search);
+}
+
 // select2 Vue component
 Vue.component('select2', {
   props: ['options', 'value'],

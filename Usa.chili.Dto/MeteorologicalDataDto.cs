@@ -12,7 +12,6 @@ namespace Usa.chili.Dto
     public class MeteorologicalDataDto
     {
         public int StationID {get; set;}
-        public string StationName { get; set; }
         public DateTime StationTimestamp { get; set; }
         public string Door {get; set;}
         public string Battery {get; set;}

@@ -146,7 +146,6 @@ namespace Usa.chili.Services
             // Start building MeteorologicalDataDto from Station_Data object 
             // retrieved in above database query
             mdDto.StationID = md.StationId.GetValueOrDefault();
-            mdDto.StationName = md.Station.DisplayName;
             mdDto.StationTimestamp = md.TS;
 
             if (md.Door == null) {

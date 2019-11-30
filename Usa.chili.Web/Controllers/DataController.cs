@@ -69,9 +69,15 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("StationData")]
-        public async Task<IActionResult> StationData(int id, DateTime? dateTime) 
+        public async Task<IActionResult> StationData(int stationid, DateTime? dateTime) 
         {   
-         return new JsonResult(await _stationDataService.GetMeteorologicalData(id, dateTime));
+         return new JsonResult(await _stationDataService.GetMeteorologicalData(stationid, dateTime));
+        }
+
+        [HttpGet("StationInfo")]
+        public async Task<IActionResult> StationInfo(int stationid, DateTime? dateTime)
+        {
+            return new JsonResult(await _stationService.GetStationInfo(stationid, dateTime));
         }
 
         [HttpGet("StationMap")]
