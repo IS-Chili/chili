@@ -21,17 +21,20 @@ namespace Usa.chili.Web.Controllers
         private readonly IStationService _stationService;
         private readonly IStationDataService _stationDataService;
         private readonly IPublicService _publicService;
+        private readonly IVariableService _variableService;
 
         public DataController(
             ILogger<DataController> logger,
             IStationService stationService,
             IStationDataService stationDataService,
-            IPublicService publicService)
+            IPublicService publicService,
+            IVariableService variableService)
         {
             _logger = logger;
             _stationService = stationService;
             _stationDataService = stationDataService;
             _publicService = publicService;
+            _variableService = variableService;
         }
 
         [HttpGet("Realtime")]
@@ -101,6 +104,12 @@ namespace Usa.chili.Web.Controllers
         public IActionResult VOC()
         {
             return View();
+        }
+
+        [HttpGet("VariableList")]
+        public async Task<IActionResult> VariableList()
+        {
+            return new JsonResult(await _variableService.ListAllVariables());
         }
 
         [HttpGet("ActiveStationList")]

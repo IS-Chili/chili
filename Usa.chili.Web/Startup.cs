@@ -76,6 +76,7 @@ namespace Usa.chili.Web
             services.AddScoped<IStationService, StationService>();
             services.AddScoped<IStationDataService, StationDataService>();
             services.AddScoped<IPublicService, PublicService>();
+            services.AddScoped<IVariableService, VariableService>();
             services.Configure<ChiliConfig>(Configuration.GetSection("ChiliConfig"));
         }
 
@@ -122,8 +123,7 @@ namespace Usa.chili.Web
 
             app.UseEndpoints(endpoints =>
             {
-                // endpoints.MapControllers();
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

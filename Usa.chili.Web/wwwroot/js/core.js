@@ -1,6 +1,10 @@
 ﻿// Core constants and functions
 const Core = {};
 
+Core.DATE_FORMAT = "MM/DD/YYYY";
+Core.DATETIME_FORMAT = "MM/DD/YYYY HH:mm:ss";
+Core.TIME_FORMAT = "HH:mm:ss";
+
 // Global Select2 Options
 Core.select2Options = {
   theme: 'bootstrap4',
@@ -9,13 +13,13 @@ Core.select2Options = {
 
 // Global Date Options
 Core.dateTimePickerDateOptions = {
-  format: 'MM/DD/YYYY',
+  format: Core.DATE_FORMAT,
   allowInputToggle: true
 };
 
 // Global Time Options
 Core.dateTimePickerTimeOptions = {
-  format: 'HH:mm:ss',
+  format: Core.TIME_FORMAT,
   allowInputToggle: true
 };
 
@@ -27,6 +31,17 @@ Core.populateStationDropdown = function (self, activeOnly) {
     })
     .catch(function (error) {
       console.log('populateStationDropdown failed', error);
+    });
+};
+
+// Get Variables
+Core.populateVariableDropdown = function (self) {
+  axios.get('/data/VariableList')
+    .then(function (response) {
+      self.variables = response.data;
+    })
+    .catch(function (error) {
+      console.log('populateVariableDropdown failed', error);
     });
 };
 
@@ -71,6 +86,46 @@ Vue.component('select2', {
   },
   destroyed: function () {
     $(this.$el).off().select2('destroy');
+  }
+});
+
+// datetimepicker Vue component
+Vue.component('datetimepicker', {
+  props: {
+    value: {
+      default: null,
+      required: true
+    },
+    id: {
+      type: String,
+      default: ''
+    },
+    time: {
+      type: Boolean,
+      default: false
+    },
+  },
+  template: '#datetimepicker-template',
+  data: function () {
+    return {
+      dp: null
+    }
+  },
+  mounted: function () {
+    const vm = this;
+
+    $(this.$el).datetimepicker(vm.time ? Core.dateTimePickerTimeOptions : Core.dateTimePickerDateOptions);
+
+    this.dp = $(this.$el).data('datetimepicker');
+
+    $(this.$el).on('change.datetimepicker', function(e) {
+      vm.$emit('input', e.date ? e.date.format(vm.dp.format()) : null);
+    });
+
+    this.dp.date(this.value);
+  },
+  destroyed: function () {
+    $(this.$el).off().datetimepicker('destroy');
   }
 });
 

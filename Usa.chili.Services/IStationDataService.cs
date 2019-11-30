@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Usa.chili.Domain;
 using Usa.chili.Dto;
 
 namespace Usa.chili.Services
