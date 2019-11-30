@@ -15,9 +15,11 @@ namespace Usa.chili.Domain
         public decimal MetricMin { get; set; }
         public decimal MetricMax { get; set; }
         public string MetricUnit { get; set; }
+        public string MetricSymbol { get; set; }
         public decimal EnglishMin { get; set; }
         public decimal EnglishMax { get; set; }
         public string EnglishUnit { get; set; }
+        public string EnglishSymbol { get; set; }
 
         public virtual ICollection<VariableDescription> VariableDescription { get; set; }
     }

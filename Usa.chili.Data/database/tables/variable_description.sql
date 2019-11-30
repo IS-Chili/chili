@@ -14,22 +14,22 @@ CREATE TABLE chili.variable_description (
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'Precip_TB3_Tot', 'Precipitation per minute (TB3)'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Minute Precipitation';
+WHERE variable_type.VariableType = 'Minute_Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'Precip_TX_Tot', 'Precipitation per minute (TX)'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Minute Precipitation';
+WHERE variable_type.VariableType = 'Minute_Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'Precip_TB3_Today', 'Precipitation since midnight (TB3)'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Total Precipitation';
+WHERE variable_type.VariableType = 'Total_Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'Precip_TX_Today', 'Precipitation since midnight (TX)'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Total Precipitation';
+WHERE variable_type.VariableType = 'Total_Precipitation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'SoilSfcT', 'Soil Surface Temperature'
@@ -99,7 +99,7 @@ WHERE variable_type.VariableType = 'Conductivity';
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'wfv', 'Soil Water content percentage'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Water Content';
+WHERE variable_type.VariableType = 'Water_Content';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'RH_2m', 'Relative Humidity at 2m (6.56ft)'
@@ -124,12 +124,12 @@ WHERE variable_type.VariableType = 'Pressure';
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'TotalRadn', 'Total Radiation'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Total Radiation';
+WHERE variable_type.VariableType = 'Total_Radiation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'QuantRadn', 'Quantum Radiation'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Quantum Radiation';
+WHERE variable_type.VariableType = 'Quantum_Radiation';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'WndDir_2m', 'Wind Direction at 2m (6.56ft)'
@@ -154,7 +154,7 @@ WHERE variable_type.VariableType = 'Speed';
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'WndSpd_Vert', 'Vertical Wind Speed'
 FROM chili.variable_type
-WHERE variable_type.VariableType = 'Vertical Speed';
+WHERE variable_type.VariableType = 'Vertical_Speed';
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'WndSpd_2m_Max', 'Maximum Wind Speed at 2m (6.56ft)'

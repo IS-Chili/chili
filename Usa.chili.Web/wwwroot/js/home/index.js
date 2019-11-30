@@ -1,45 +1,12 @@
-const USACampusWestStationId = 23;
+const USACampusWestStationId = 307;
 
 $(function () {
-  //populateStationDropdown_Jquery();
-  //getStationDataAndDraw(USACampusWestStationId);
-
-  /*
-  $('#stationSelection').on('change', function() {
-    getStationDataAndDraw($(this).val());
-  });
-  */
-
   $('#dataSetSelection').select2(Core.select2Options);
 
   $('#dataSetSelection').on('change', function() {
     changeRegional($(this).val());
   });
 });
-
-function populateStationDropdown_Jquery() {
-  axios.get(ajaxUrls.stationList)
-    .then(function (response) {
-      response.data.forEach(function(station) {
-        const option = $('<option>');
-        option.text(station.displayName);
-        option.val(station.id);
-        if(station.id === 1) {
-          option.prop('selected', true);
-        }
-        $('#stationSelection').append(option);
-      });
-
-      $('#stationSelection').select2(select2Options);
-
-      $('#stationSelection').on('change', function() {
-        getStationDataAndDraw($(this).val());
-      });
-    })
-    .catch(function (error) {
-      console.log('populateStationDropdown failed', error);
-    });
-}
 
 function getStationDataAndDraw(stationId) {
   axios.get('/data/StationObservation?id=' + stationId)
@@ -324,7 +291,7 @@ const App = new Vue({
     return {
       stations: [],
       model: {
-        stationId: 23
+        stationId: USACampusWestStationId
       }
     }
   },

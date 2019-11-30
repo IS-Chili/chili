@@ -5,6 +5,7 @@
 // Version: 1.0.0
 // ********************************************************************************************************************************************
 
+using System;
 using System.Collections.Generic;
 
 namespace Usa.chili.Dto
@@ -15,6 +16,7 @@ namespace Usa.chili.Dto
         public string SubTitle { get; set; }
         public string XAxisTitle { get; set; }
         public string YAxisTitle { get; set; }
+        public DateTime? LastDateTimeEntry { get; set; }
         public List<StationGraphSeriesDto> Series { get; set; }
     }
 }

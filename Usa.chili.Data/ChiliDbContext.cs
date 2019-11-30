@@ -37021,11 +37021,21 @@ namespace Usa.chili.Data
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.EnglishSymbol)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.MetricMax).HasColumnType("decimal(6,2)");
 
                 entity.Property(e => e.MetricMin).HasColumnType("decimal(6,2)");
 
                 entity.Property(e => e.MetricUnit)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MetricSymbol)
                     .IsRequired()
                     .HasMaxLength(30)
                     .IsUnicode(false);

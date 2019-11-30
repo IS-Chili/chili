@@ -34,41 +34,53 @@ namespace Usa.chili.Services
         }
 
         public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits) {
+            // Get the VariableDescription with the VariableType
             VariableDescription variableDescription = await _dbContext.VariableDescription
                 .Include(x => x.VariableType)
                 .Where(x => x.Id == variableId)
                 .SingleAsync();
 
-            StationGraphDto stationGraphDto =  new StationGraphDto {
+            // Build the StationGraphDto
+            StationGraphDto stationGraphDto = new StationGraphDto {
                 Title = "24 hour graph of " + variableDescription.VariableDescription1,
                 YAxisTitle = isMetricUnits ? variableDescription.VariableType.MetricUnit : variableDescription.VariableType.EnglishUnit,
                 Series = new List<StationGraphSeriesDto> {
                     new StationGraphSeriesDto {
-                        Name = variableDescription.VariableType.VariableType1,
-                        LineWidth = 0.5,
-                        Data = new List<List<double>>()
+                        Name = variableDescription.VariableType.VariableType1.Replace("_", " "),
+                        LineWidth = 0.5
                     }
                 }
             };
 
-            DateTime dateStart = new DateTime(2019, 11, 1, 0, 0, 0);
-            DateTime dateToReach = new DateTime(2019, 11, 2, 0, 0, 0);
+            // Get the last datetime data entry for the station
+            stationGraphDto.LastDateTimeEntry = await _dbContext.StationData
+                        .Where(x => x.Station.Id == stationId)
+                        .OrderByDescending(x => x.Ts)
+                        .AsNoTracking()
+                        .Select(x => x.Ts)
+                        .FirstOrDefaultAsync();
 
-            Random random = new Random();
+            // Use the last datetime data entry for the station if the date is null
+            if(date == null) {
+                date = stationGraphDto.LastDateTimeEntry;
+            }
 
-            double i = 0.1;
-
-            while(dateStart < dateToReach) {
-                stationGraphDto.Series[0].Data.Add(new List<double>() {
-                    (double) new DateTimeOffset(dateStart.ToUniversalTime()).ToUnixTimeMilliseconds(),
-                    75 + i
-                });
-                dateStart = dateStart.AddMinutes(1);
-
-                i += 0.1;
-
-                if(i > 25) {
-                    i = 15;
+            // Get the VariableEnum and VariableTypeEnum values based on the Variable
+            // Retrive the data entries for the station and variable in a timespan of 24 hours from the date
+            if(System.Enum.TryParse(variableDescription.VariableName, out VariableEnum variableEnum))
+            {
+                if(System.Enum.TryParse(variableDescription.VariableType.VariableType1, out VariableTypeEnum variableTypeEnum))
+                {
+                    stationGraphDto.Series[0].Data = await _dbContext.StationData
+                        .Where(x => x.Ts >= date.Value.Date && x.Ts < date.Value.Date.AddDays(1))
+                        .Where(x => x.Station.Id == stationId)
+                        .OrderBy(x => x.Ts)
+                        .AsNoTracking()
+                        .Select(x => new List<double>() {
+                            (double) new DateTimeOffset(x.Ts.ToUniversalTime()).ToUnixTimeMilliseconds(),
+                            x.ValueForVariable(isMetricUnits, variableTypeEnum, variableEnum) ?? 0
+                        })
+                        .ToListAsync();
                 }
             }
 

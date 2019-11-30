@@ -4,14 +4,14 @@
 }
 
 <div class="container bg-core-blue">
-        <hr>
-        <h1 class="text-center">24 Hour Meteorological Data Graph for Agricola Station</h1>
-        <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
-        <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
-        <hr>
+    <br>
+    <h1 class="text-center">24 Hour Meteorological Data Graph for Agricola Station</h1>
+    <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
+    <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
+    <br>
 </div>
 <div class="container bg-core-translucent">
-    <hr>
+    <br>
     <div class="d-flex justify-content-center my-4">
         <a class="btn btn-light mr-3" asp-controller="Data" asp-action="Station" asp-route-id="1">Display Current Data for Agricola Station</a>
         <a class="btn btn-light" asp-controller="Data" asp-action="Metadata" asp-route-id="1">Display Metadata for Agricola Station</a>
@@ -21,7 +21,7 @@
         <div class="form-group col-lg-2 mr-2">
             <label for="datePicker">Date</label>
             <div class="input-group date" id="datePicker" data-target-input="nearest">
-                <input type="text" :value="currentDate" class="form-control datetimepicker-input" data-target="#datePicker" />
+                <input type="text" v-model="model.date" class="form-control datetimepicker-input" data-target="#datePicker" />
                 <div class="input-group-append" data-target="#datePicker" data-toggle="datetimepicker">
                     <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
                 </div>
@@ -36,7 +36,7 @@
             <select2 id="variableSelection" :options="variables" v-model="model.variableId"></select2>
         </div>
         <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline mb-3">Go</button>
+            <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="search">Go</button>
         </div>
     </div>
 
@@ -51,18 +51,14 @@
 
         <div class="form-group col-lg-2">
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="metricUnits">
+                <input type="checkbox" class="custom-control-input" id="metricUnits" v-model="model.isMetricUnits">
                 <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
             </div>
         </div>
     </div>
 
     <div class="d-flex justify-content-center">
-        <img class="img-fluid w-740" src="/images/Air1.png" />
-    </div>
-
-    <div class="d-flex justify-content-center">
-        <div id="graph" class="w-740"></div>
+        <div id="graph" class="w-740 h-400 mb-5"></div>
     </div>
 </div>
 
