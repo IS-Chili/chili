@@ -9,7 +9,7 @@ const App = new Vue({
     return {
       variables: [],
       model: {
-        variableId: null
+        variableId: 1
       }
     }
   },

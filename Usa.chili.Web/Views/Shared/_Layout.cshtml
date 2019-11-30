@@ -122,6 +122,7 @@
     <script src="~/lib/js/bootstrap.min.js"></script>
     <script src="~/lib/js/moment.min.js"></script>
     <script src="~/lib/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="~/js/datetimepicker-fix.js"></script>
     <script src="~/lib/js/select2.min.js"></script>
     <script src="~/lib/js/axios.min.js"></script>
     <script src="~/lib/leaflet/leaflet.js"></script>
@@ -142,6 +143,15 @@
         <select>
             <slot></slot>
         </select>
+    </script>
+
+    <script type="text/x-template" id="datetimepicker-template">
+        <div class="input-group date" :id="id" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" :data-target="`#${id}`" />
+            <div class="input-group-append" :data-target="`#${id}`" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+            </div>
+        </div>
     </script>
 
     @RenderSection("scripts", required: false)

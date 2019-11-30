@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="3.1.430" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -34,6 +33,7 @@
     <ProjectReference Include="..\Usa.chili.Domain\Usa.chili.Domain.csproj" />
     <ProjectReference Include="..\Usa.chili.Dto\Usa.chili.Dto.csproj" />
     <ProjectReference Include="..\Usa.chili.Services\Usa.chili.Services.csproj" />
+    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="3.2.435" />
   </ItemGroup>
 
   <ItemGroup>

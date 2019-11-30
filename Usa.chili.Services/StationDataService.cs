@@ -18,7 +18,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Usa.chili.Services
 {
-    public class StationDataService: IStationDataService
+    public class StationDataService : IStationDataService
     {
         private readonly ILogger _logger;
         private readonly ChiliDbContext _dbContext;
@@ -33,7 +33,8 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
-        public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits) {
+        public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits)
+        {
             // Get the VariableDescription with the VariableType
             VariableDescription variableDescription = await _dbContext.VariableDescription
                 .Include(x => x.VariableType)
@@ -41,16 +42,25 @@ namespace Usa.chili.Services
                 .SingleAsync();
 
             // Build the StationGraphDto
-            StationGraphDto stationGraphDto = new StationGraphDto {
+            StationGraphDto stationGraphDto = new StationGraphDto
+            {
                 Title = "24 hour graph of " + variableDescription.VariableDescription1,
                 YAxisTitle = isMetricUnits ? variableDescription.VariableType.MetricUnit : variableDescription.VariableType.EnglishUnit,
                 Series = new List<StationGraphSeriesDto> {
                     new StationGraphSeriesDto {
                         Name = variableDescription.VariableType.VariableType1.Replace("_", " "),
-                        LineWidth = 0.5
+                        LineWidth = 1
                     }
                 }
             };
+
+            // Get the first datetime data entry for the station
+            stationGraphDto.FirstDateTimeEntry = await _dbContext.StationData
+                        .Where(x => x.Station.Id == stationId)
+                        .OrderBy(x => x.Ts)
+                        .AsNoTracking()
+                        .Select(x => x.Ts)
+                        .FirstOrDefaultAsync();
 
             // Get the last datetime data entry for the station
             stationGraphDto.LastDateTimeEntry = await _dbContext.StationData
@@ -60,40 +70,53 @@ namespace Usa.chili.Services
                         .Select(x => x.Ts)
                         .FirstOrDefaultAsync();
 
-            // Use the last datetime data entry for the station if the date is null
-            if(date == null) {
+            // Set first and last datetime entries null if defaulted
+            if(stationGraphDto.FirstDateTimeEntry == DateTime.MinValue){
+                stationGraphDto.FirstDateTimeEntry = null;
+            }
+            // Set first and last datetime entries null if defaulted
+            if(stationGraphDto.LastDateTimeEntry == DateTime.MinValue){
+                stationGraphDto.LastDateTimeEntry = null;
+            }
+
+            // Default date to LastDateTimeEntry
+            if(!date.HasValue) {
                 date = stationGraphDto.LastDateTimeEntry;
             }
 
             // Get the VariableEnum and VariableTypeEnum values based on the Variable
             // Retrive the data entries for the station and variable in a timespan of 24 hours from the date
-            if(System.Enum.TryParse(variableDescription.VariableName, out VariableEnum variableEnum))
-            {
-                if(System.Enum.TryParse(variableDescription.VariableType.VariableType1, out VariableTypeEnum variableTypeEnum))
+            if(date != null) {
+                if (System.Enum.TryParse(variableDescription.VariableName, out VariableEnum variableEnum))
                 {
-                    stationGraphDto.Series[0].Data = await _dbContext.StationData
-                        .Where(x => x.Ts >= date.Value.Date && x.Ts < date.Value.Date.AddDays(1))
-                        .Where(x => x.Station.Id == stationId)
-                        .OrderBy(x => x.Ts)
-                        .AsNoTracking()
-                        .Select(x => new List<double>() {
-                            (double) new DateTimeOffset(x.Ts.ToUniversalTime()).ToUnixTimeMilliseconds(),
-                            x.ValueForVariable(isMetricUnits, variableTypeEnum, variableEnum) ?? 0
-                        })
-                        .ToListAsync();
+                    if (System.Enum.TryParse(variableDescription.VariableType.VariableType1, out VariableTypeEnum variableTypeEnum))
+                    {
+                        stationGraphDto.Series[0].Data = await _dbContext.StationData
+                            .Where(x => x.Ts >= date.Value.Date && x.Ts < date.Value.Date.AddDays(1))
+                            .Where(x => x.Station.Id == stationId)
+                            .OrderBy(x => x.Ts)
+                            .AsNoTracking()
+                            .Select(x => new List<double>() {
+                                (double) new DateTimeOffset(x.Ts.ToUniversalTime()).ToUnixTimeMilliseconds(),
+                                x.ValueForVariable(isMetricUnits, variableTypeEnum, variableEnum) ?? 0
+                            })
+                            .ToListAsync();
+                    }
                 }
             }
 
             return stationGraphDto;
         }
 
-        public async Task<List<RealtimeDataDto>> ListRealtimeData() {
+        public async Task<List<RealtimeDataDto>> ListRealtimeData()
+        {
             DateTime now = DateTime.Now;
 
             return await _dbContext.Station
                 .AsNoTracking()
                 .OrderBy(x => x.DisplayName)
-                .Select(x => new RealtimeDataDto {
+                .Select(x => new RealtimeDataDto
+                {
                     StationId = x.Id,
                     StationName = x.DisplayName,
                     StationTimestamp = now,
@@ -105,7 +128,8 @@ namespace Usa.chili.Services
                     WindDirection = 1.3,
                     WindSpeed = 1.4,
                     Pressure = 1.5,
-                    YesterdayExtreme = new ExtremeDto {
+                    YesterdayExtreme = new ExtremeDto
+                    {
                         AirTemperatureHighTimestamp = now.AddDays(-1),
                         AirTemperatureLowTimestamp = now.AddDays(-1),
                         DewPointHighTimestamp = now.AddDays(-1),
@@ -122,7 +146,8 @@ namespace Usa.chili.Services
                         WindSpeedMax = 1.5,
                         Precipitation = 1.5,
                     },
-                    TodayExtreme = new ExtremeDto {
+                    TodayExtreme = new ExtremeDto
+                    {
                         AirTemperatureHighTimestamp = now,
                         AirTemperatureLowTimestamp = now,
                         DewPointHighTimestamp = now,
