@@ -37,7 +37,7 @@ INSERT INTO chili.station (Id, StationKey, DisplayName, Latitude, Longitude, Ele
 VALUES (401, 'bayminette', 'Bay Minette', 30.8948, -87.797, 81.5, '2008-08-12', NULL, 1);
 
 INSERT INTO chili.station (Id, StationKey, DisplayName, Latitude, Longitude, Elevation, BeginDate, EndDate, IsActive) 
-VALUES (1301, 'castlebery', 'Castleberry', 31.2958, -87.0313, 76.2, '2009-12-27', NULL, 1);
+VALUES (1301, 'castleberry', 'Castleberry', 31.2958, -87.0313, 76.2, '2009-12-27', NULL, 1);
 
 INSERT INTO chili.station (Id, StationKey, DisplayName, Latitude, Longitude, Elevation, BeginDate, EndDate, IsActive) 
 VALUES (303, 'disl', 'Dauphin Island', 30.2467, -88.07712, 1.52, '2008-07-01', '2012-07-24', 0);
