@@ -10,7 +10,7 @@ const App = new Vue({
     return {
       stations: [],
       model: {
-        stationId: 201,
+        stationId: Core.DEFAULT_STATION,
         date: null,
         time: null,
         datetime: null

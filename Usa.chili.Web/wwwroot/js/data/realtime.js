@@ -78,21 +78,7 @@ const App = new Vue({
         }
       })
       .then(function (response) {
-        // Set nulls to N/A
-        response.data.forEach(function(object){
-          for(key in object) {
-            if(typeof object[key] === 'object') {
-              for(objectKey in object[key]) {
-                if(object[key][objectKey] == null) {
-                  object[key][objectKey] = 'N/A';
-                }
-              }
-            }
-            if(object[key] == null) {
-              object[key] = 'N/A';
-            }
-          }
-        });
+        Core.setNullsInArrayToNA(response.data);
 
         self.realtimeData = response.data;
 

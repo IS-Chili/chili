@@ -47,18 +47,21 @@ ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated we
                         <tbody>
                             <tr class="text-center">
                                 <td>
-                                    <div>
+                                    <div v-if="!stationData.isDecommissioned">
                                         <a :href="'/Data/Station?id=' + stationData.stationId">
                                             <span
                                                 class="font-weight-bold font-georgia">{{ stationData.stationName }}</span>
                                         </a>
+                                        <div>
+                                            <small>{{ stationData.stationTimestamp }}</small>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <small>{{ stationData.stationTimestamp }}</small>
+                                    <div v-else>
+                                        <span class="station-offline"><em>Station Decommissioned</em></span>
                                     </div>
                                 </td>
                                 <td>{{ stationData.airTemperature }}</td>
-                                <td>{{ stationData.airTemperature }}</td>
+                                <td :class="stationData.isWindChill ? 'wc' : (stationData.felt != 'N/A' ? 'ht' : '')">{{ stationData.felt }}</td>
                                 <td>{{ stationData.dewPoint }}</td>
                                 <td>{{ stationData.realHumidity }}</td>
                                 <td>{{ stationData.windDirection }}</td>

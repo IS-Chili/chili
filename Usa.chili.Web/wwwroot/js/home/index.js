@@ -1,5 +1,3 @@
-const USACampusWestStationId = 307;
-
 $(function () {
   $('#dataSetSelection').select2(Core.select2Options);
 
@@ -15,7 +13,7 @@ const App = new Vue({
       stations: [],
       stationData: {},
       model: {
-        stationId: USACampusWestStationId
+        stationId: Core.DEFAULT_WIDGET_STATION
       }
     }
   },
@@ -30,16 +28,24 @@ const App = new Vue({
 });
 
 function getStationDataAndDraw(stationId) {
-  axios.get('/data/StationObservation?id=' + stationId)
+  if(stationId != null) {
+    axios.get('/data/StationObservation?id=' + stationId)
     .then(function (response) {
       if(response.data != null) {
+        Core.setNullsInObjectToNA(response.data);
         App.stationData = response.data;
         drawStation(response.data);
+        $("#stationObservationsCanvas").show();
       }
     })
     .catch(function (error) {
       console.log('getStationDataAndDraw failed', error);
     });
+  }
+  else {
+    App.stationData = { isDecommissioned: true };
+    $("#stationObservationsCanvas").hide();
+  }
 }
 
 function drawStation(stationData) {

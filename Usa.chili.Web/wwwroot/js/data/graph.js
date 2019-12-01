@@ -5,7 +5,7 @@ const App = new Vue({
       stations: [],
       variables: [],
       model: {
-        stationId: 201,
+        stationId: Core.DEFAULT_STATION,
         variableId: 1,
         date: null,
         isMetricUnits: false
