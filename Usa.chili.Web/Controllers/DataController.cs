@@ -62,11 +62,11 @@ namespace Usa.chili.Web.Controllers
         [HttpGet("Metadata")]
         public IActionResult Metadata(int? id) => View();
 
-        /*[HttpGet("Station")]
+        [HttpGet("Station")]
         public IActionResult Station()
         {
            return View();
-        }*/
+        }
 
         [HttpGet("StationData")]
         public async Task<IActionResult> StationData(int stationid, DateTime? dateTime) 
@@ -74,7 +74,7 @@ namespace Usa.chili.Web.Controllers
          return new JsonResult(await _stationDataService.GetMeteorologicalData(stationid, dateTime));
         }
 
-        [HttpGet("Station")]
+        [HttpGet("StationInfo")]
         public async Task<IActionResult> StationInfo(int stationid, DateTime? dateTime)
         {
             return new JsonResult(await _stationService.GetStationInfo(stationid, dateTime));

@@ -4,7 +4,7 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 
-const App = new Vue({
+/*const App = new Vue({
   el: '#app',
   data: function () {
     return {
@@ -60,7 +60,7 @@ const App = new Vue({
         console.log('getStationInfo failed', error);
       });
 
-      /*axios.get('/data/StationData', {
+      axios.get('/data/StationData', {
         params: {
           stationid: this.model.stationId,
           dateTime: this.model.dateTime
@@ -79,7 +79,7 @@ const App = new Vue({
       })
       .catch(function (error) {
         console.log('getMeteorologicalData failed', error);
-      });*/
+      });
     }
   },
   watch: {
@@ -91,9 +91,9 @@ const App = new Vue({
       self.getData();
     }
   }
-});
+});*/
 
-/*const App = new Vue({
+const App = new Vue({
   el: '#app',
   data: function () {
     return {
@@ -114,4 +114,4 @@ const App = new Vue({
       return moment().format('HH:mm:ss');
     }
   }
-});*/
+});
