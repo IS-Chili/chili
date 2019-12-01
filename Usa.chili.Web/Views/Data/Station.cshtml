@@ -4,19 +4,23 @@ ViewBag.Description = "Meteorological Station Data";
 }
 
 <div class="container bg-core-blue">
-        <br>
-        <h1 class="text-center">Meteorological Data for Agricola Station</h1>
-        <h6 class="text-center">Latitude: 30.8170°N, Longitude: 88.5205°W, Elevation: 68.58m, Commissioned: 2008-08-12</h6>
-        <h5 class="text-center">Measurements recorded at: 2019-09-08 18:58:00 CST</h5>
-        <br>
+    <br>
+    <h1 class="text-center">Meteorological Data for {{ stationInfo.displayName }} Station</h1>
+    <h6 class="text-center">Latitude: {{ stationInfo.latitude }}&deg;{{ stationInfo.latitudeDirection }}
+        , Longitude: {{ stationInfo.longitude }}&deg;{{ stationInfo.longitudeDirection }}
+        , Elevation: {{ stationInfo.elevation }}m
+        , Commissioned: {{ stationInfo.beginDate }}
+        <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
+    </h6>
+    <h5 class="text-center">Measurements recorded at: {{ model.datetime }} CST</h5>
+    <br>
 </div>
 
 <div class="container bg-core-translucent">
 
     <br>
     <div class="d-flex justify-content-center my-4">
-        <a class="btn btn-light" asp-controller="Data" asp-action="Metadata" asp-route-id="1">Display Metadata for Agricola
-            Station</a>
+        <a class="btn btn-light" :href="'/Data/Metadata?id=' + stationInfo.id">Display Metadata for {{ stationInfo.displayName }} Station</a>
     </div>
 
     <div class="form-row d-flex justify-content-center">
@@ -52,7 +56,7 @@ ViewBag.Description = "Meteorological Station Data";
             <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
         </div>
         <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline mb-3">Go</button>
+            <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go">Go</button>
         </div>
     </div>
 

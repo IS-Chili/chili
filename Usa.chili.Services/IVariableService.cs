@@ -14,5 +14,6 @@ namespace Usa.chili.Services
     public interface IVariableService
     {
         Task<List<DropdownDto>> ListAllVariables();
+        Task<List<VariableTypeDto>> ListAllVariableTypes();
     }
 }

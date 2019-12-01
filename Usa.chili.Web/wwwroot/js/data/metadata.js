@@ -9,10 +9,23 @@ const App = new Vue({
       stations: [],
       model: {
         stationId: 201
-      }
+      },
+      lastStationId: null,
+      stationInfo: {}
     }
   },
   created: function() {
+    this.lastStationId = this.model.stationId;
     Core.populateStationDropdown(this, false);
+    Core.getStationInfo(this, this.model.stationId);
+  },
+  methods: {
+    go: function () {
+      // Get station info if station changed
+      if(this.lastStationId != this.model.stationId) {
+        this.lastStationId = this.model.stationId;
+        Core.getStationInfo(this, this.model.stationId);
+      }
+    }
   }
 });

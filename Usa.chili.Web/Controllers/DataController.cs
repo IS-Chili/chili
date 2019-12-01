@@ -44,9 +44,9 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("RealtimeData")]
-        public async Task<IActionResult> RealtimeData()
+        public async Task<IActionResult> RealtimeData(bool isMetricUnits, bool? isWindChill)
         {
-            return new JsonResult(await _stationDataService.ListRealtimeData());
+            return new JsonResult(await _stationDataService.ListRealtimeData(isMetricUnits, isWindChill));
         }
 
         [HttpGet("CustomProducts")]
@@ -62,6 +62,12 @@ namespace Usa.chili.Web.Controllers
         public IActionResult Station(int? id)
         {
             return View();
+        }
+
+        [HttpGet("StationInfo")]
+        public async Task<IActionResult> StationInfo(int id)
+        {
+            return new JsonResult(await _stationService.GetStationInfo(id));
         }
 
         [HttpGet("StationMap")]
@@ -110,6 +116,12 @@ namespace Usa.chili.Web.Controllers
         public async Task<IActionResult> VariableList()
         {
             return new JsonResult(await _variableService.ListAllVariables());
+        }
+
+        [HttpGet("VariableTypeList")]
+        public async Task<IActionResult> VariableTypeList()
+        {
+            return new JsonResult(await _variableService.ListAllVariableTypes());
         }
 
         [HttpGet("ActiveStationList")]

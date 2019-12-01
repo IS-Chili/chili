@@ -10,12 +10,17 @@ const App = new Vue({
         date: null,
         isMetricUnits: false
       },
+      lastStationId: null,
+      stationInfo: {},
       error: null
     }
   },
   created: function () {
+    this.lastStationId = this.model.stationId;
+
     Core.populateStationDropdown(this, false);
     Core.populateVariableDropdown(this);
+    Core.getStationInfo(this, this.model.stationId);
 
     // Set model from URL params
     const params = new URLSearchParams(window.location.search.substring(1));
@@ -61,6 +66,12 @@ const App = new Vue({
     // the station and variable and draw it using Highcharts
     createGraph: function () {
       const self = this;
+
+      // Get station info if station changed
+      if(this.lastStationId != this.model.stationId) {
+        this.lastStationId = this.model.stationId;
+        Core.getStationInfo(this, this.model.stationId);
+      }
 
       axios.get('/data/StationGraph', {
         params: {

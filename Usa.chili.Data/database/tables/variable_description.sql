@@ -9,7 +9,9 @@ CREATE TABLE chili.variable_description (
   VariableDescription VARCHAR(50) NOT NULL,
   PRIMARY KEY (Id),
   FOREIGN KEY (VariableTypeId) REFERENCES variable_type (Id)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 INSERT INTO chili.variable_description (VariableTypeId, VariableName, VariableDescription) 
 SELECT variable_type.id, 'Precip_TB3_Tot', 'Precipitation per minute (TB3)'

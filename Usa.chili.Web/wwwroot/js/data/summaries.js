@@ -14,5 +14,10 @@ const App = new Vue({
 
       }
     }
+  },
+  methods: {
+    go: function () {
+      // TODO
+    }
   }
 });

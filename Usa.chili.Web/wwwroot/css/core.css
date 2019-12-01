@@ -265,3 +265,28 @@ footer {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.font-georgia {
+  font: bold 11px Georgia, serif;
+  word-wrap: break-word;
+}
+
+.station-offline {
+  font-weight: bold;
+  color: #C00;
+  font-size: .8em;
+}
+
+.row-dark {
+  background-color: #DDDDDD;
+}
+
+.ht {
+  color: #CC0000;
+  font-weight: 600;
+}
+
+.wc {
+  color: blue;
+  font-weight: 600;
+}

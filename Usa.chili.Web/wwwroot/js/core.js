@@ -45,6 +45,17 @@ Core.populateVariableDropdown = function (self) {
     });
 };
 
+// Get Station Info
+Core.getStationInfo = function (self, id) {
+  axios.get('/data/StationInfo?id=' + id)
+    .then(function (response) {
+      self.stationInfo = response.data;
+    })
+    .catch(function (error) {
+      console.log('getStationInfo failed', error);
+    });
+};
+
 // select2 Vue component
 Vue.component('select2', {
   props: ['options', 'value'],

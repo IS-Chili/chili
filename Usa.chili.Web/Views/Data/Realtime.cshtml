@@ -12,32 +12,32 @@ ViewBag.Description = "USA Mesonet Realtime Display";
 </environment>
 }
 
-<div class="container bg-core-blue">
+<div class="head-container bg-core-blue">
     <br>
     <h1 class="text-center">USA Mesonet Realtime Display</h1>
     <h2 class="text-center">{{ nowFormated }} CST</h2>
     <br>
 </div>
-<div class="container bg-core-translucent">
+<div class="head-container bg-core-translucent">
     <br>
     <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2">
+        <div class="form-group col-xs-2 mr-2">
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="windchill">
-                <label class="custom-control-label" for="windchill">Display Windchill</label>
+                <input type="checkbox" class="custom-control-input" id="windChill" v-model="model.isWindChill">
+                <label class="custom-control-label" for="windChill">Display Windchill</label>
             </div>
         </div>
 
-        <div class="form-group col-lg-2">
+        <div class="form-group col-xs-2">
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="metricUnits">
+                <input type="checkbox" class="custom-control-input" id="metricUnits" v-model="model.isMetricUnits">
                 <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
             </div>
         </div>
     </div>
 </div>
 
-<table id="real_time_table">
+<table>
     <thead>
         <tr>
             <th colspan="1"></th>
@@ -52,7 +52,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
         <tr>
             <th>Location/Obs time</th>
             <th class="text-center">Temp</th>
-            <th class="text-center">HtIdx</th>
+            <th class="text-center">{{ model.isWindChill ? 'Wdchl' : 'HtIdx' }}</th>
             <th class="text-center">DewPt</th>
             <th class="text-center">Hum</th>
             <th class="text-center">WdDir</th>
@@ -69,137 +69,161 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             <th class="text-center">DewPt</th>
             <th class="text-center">Hum</th>
         </tr>
-        <tr class="text-center">
+        <tr class="text-center" v-if="model.isMetricUnits">
             <th colspan="1"></th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&#37;</th>
-            <th>&deg;</th>
-            <th>mph</th>
-            <th>inHg</th>
-            <th>in</th>
-            <th>mph</th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&#37;</th>
-            <th>in</th>
-            <th>mph</th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&#37;</th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Humidity', 'Metric')"></th>
+            <th v-html="getUnit('Direction', 'Metric')"></th>
+            <th v-html="getUnit('Speed', 'Metric')"></th>
+            <th v-html="getUnit('Pressure', 'Metric')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'Metric')"></th>
+            <th v-html="getUnit('Speed', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Humidity', 'Metric')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'Metric')"></th>
+            <th v-html="getUnit('Speed', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Humidity', 'Metric')"></th>
+        </tr>
+        <tr class="text-center" v-else>
+            <th colspan="1"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Humidity', 'English')"></th>
+            <th v-html="getUnit('Direction', 'English')"></th>
+            <th v-html="getUnit('Speed', 'English')"></th>
+            <th v-html="getUnit('Pressure', 'English')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'English')"></th>
+            <th v-html="getUnit('Speed', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Humidity', 'English')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'English')"></th>
+            <th v-html="getUnit('Speed', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Humidity', 'English')"></th>
         </tr>
     </thead>
     <tbody>
-        <tr v-for='item in realtimeData'>
+        <tr v-for='item in realtimeData' :class="item.isStationOffline ? 'row-dark' : ''">
             <td>
                 <div>
-                    <a v-bind:href="'/Data/Station?id=' + item.stationId">
-                        <span class="font-weight-bold"
-                            style=" font: bold 11px Georgia, serif; word-wrap:break-word;">{{ item.stationName }}</span>
+                    <a :href="'/Data/Station?id=' + item.stationId">
+                        <span class="font-weight-bold font-georgia">{{ item.stationName }}</span>
                     </a>
                 </div>
-                <div>
+                <div v-if="item.isStationOffline">
+                    <span class="station-offline"><em>Station Offline</em></span>
+                </div>
+                <div v-else>
                     <small>{{ item.stationTimestamp }}</small>
                 </div>
             </td>
-            <td class="temp font-weight-bold">{{ item.airTemperature }}</td>
-            <td class="ht">{{ item.heatIndex }}</td>
-            <td class="hum">{{ item.dewPoint }}</td>
-            <td class="hum">{{ item.realHumidity }}</td>
-            <td class="wind">{{ item.windDirection }}</td>
-            <td class="wind">{{ item.windSpeed }}</td>
-            <td class="pres">{{ item.pressure }}</td>
-            <td class="rain">{{ item.todayExtreme.precipitation }}</td>
-            <td class="wind">
-                <span data-toggle="tooltip" v-bind:title="item.todayExtreme.windSpeedMaxTimestamp">
+            <td v-if="!item.isStationOffline" class="temp font-weight-bold">{{ item.airTemperature }}</td>
+            <td v-if="!item.isStationOffline" :class="item.isWindChill ? 'wc' : (item.felt != 'N/A' ? 'ht' : '')">{{ item.felt }}</td>
+            <td v-if="!item.isStationOffline" class="hum">{{ item.dewPoint }}</td>
+            <td v-if="!item.isStationOffline" class="hum">{{ item.realHumidity }}</td>
+            <td v-if="!item.isStationOffline" class="wind">{{ item.windDirection }}</td>
+            <td v-if="!item.isStationOffline" class="wind">{{ item.windSpeed }}</td>
+            <td v-if="!item.isStationOffline" class="pres">{{ item.pressure }}</td>
+            <td v-if="!item.isStationOffline" class="rain">{{ item.precipitation }}</td>
+            <td v-if="!item.isStationOffline" class="wind">
+                <span data-toggle="tooltip" :title="item.todayExtreme.windSpeedMaxTimestamp">
                     {{ item.todayExtreme.windSpeedMax }}
                 </span>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
-                    <span data-toggle="tooltip" v-bind:title="item.todayExtreme.airTemperatureHighTimestamp">
+                    <span :class="item.todayExtreme.airTemperatureHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip" 
+                        :title="item.todayExtreme.airTemperatureHighTimestamp">
                         {{ item.todayExtreme.airTemperatureHigh }}
                     </span>
                 </div>
                 <div>
-                    <span data-toggle="tooltip" v-bind:title="item.todayExtreme.airTemperatureLowTimestamp">
+                    <span :class="item.todayExtreme.airTemperatureLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip" 
+                        :title="item.todayExtreme.airTemperatureLowTimestamp">
                         {{ item.todayExtreme.airTemperatureLow }}
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.dewPointHighTimestamp">
+                    <span :class="item.todayExtreme.dewPointHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
+                        :title="item.todayExtreme.dewPointHighTimestamp">
                         {{ item.todayExtreme.dewPointHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.dewPointLowTimestamp">
+                    <span :class="item.todayExtreme.dewPointLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
+                        :title="item.todayExtreme.dewPointLowTimestamp">
                         {{ item.todayExtreme.dewPointLow }}
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.realHumidityHighTimestamp">
+                    <span :class="item.todayExtreme.realHumidityHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
+                        :title="item.todayExtreme.realHumidityHighTimestamp">
                         {{ item.todayExtreme.realHumidityHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.realHumidityLowTimestamp">
+                    <span :class="item.todayExtreme.realHumidityLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
+                        :title="item.todayExtreme.realHumidityLowTimestamp">
                         {{ item.todayExtreme.realHumidityLow }}
                     </span>
                 </div>
             </td>
-            <td class="rain">{{ item.yesterdayExtreme.precipitation }}</td>
-            <td class="wind">
-                <span data-toggle="tooltip" v-bind:title="item.yesterdayExtreme.windSpeedMaxTimestamp">
+            <td v-if="!item.isStationOffline" class="rain">{{ item.yesterdayExtreme.precipitation }}</td>
+            <td v-if="!item.isStationOffline" class="wind">
+                <span data-toggle="tooltip" :title="item.yesterdayExtreme.windSpeedMaxTimestamp">
                     {{ item.yesterdayExtreme.windSpeedMax }}
                 </span>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.airTemperatureHighTimestamp">
+                    <span :class="item.yesterdayExtreme.airTemperatureHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
+                        :title="item.yesterdayExtreme.airTemperatureHighTimestamp">
                         {{ item.yesterdayExtreme.airTemperatureHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.airTemperatureLowTimestamp">
+                    <span :class="item.yesterdayExtreme.airTemperatureLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
+                        :title="item.yesterdayExtreme.airTemperatureLowTimestamp">
                         {{ item.yesterdayExtreme.airTemperatureLow }}
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.dewPointHighTimestamp">
+                    <span :class="item.yesterdayExtreme.dewPointHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
+                        :title="item.yesterdayExtreme.dewPointHighTimestamp">
                         {{ item.yesterdayExtreme.dewPointHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.dewPointLowTimestamp">
+                    <span :class="item.yesterdayExtreme.dewPointLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
+                        :title="item.yesterdayExtreme.dewPointLowTimestamp">
                         {{ item.yesterdayExtreme.dewPointLow }}
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.realHumidityHighTimestamp">
+                    <span :class="item.yesterdayExtreme.realHumidityHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
+                        :title="item.yesterdayExtreme.realHumidityHighTimestamp">
                         {{ item.yesterdayExtreme.realHumidityHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.realHumidityLowTimestamp">
+                    <span :class="item.yesterdayExtreme.realHumidityLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
+                        :title="item.yesterdayExtreme.realHumidityLowTimestamp">
                         {{ item.yesterdayExtreme.realHumidityLow }}
                     </span>
                 </div>

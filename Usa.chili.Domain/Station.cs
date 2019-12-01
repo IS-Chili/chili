@@ -20,6 +20,9 @@ namespace Usa.chili.Domain
         public DateTime? EndDate { get; set; }
         public bool IsActive { get; set; }
 
+        public virtual ExtremesTday ExtremesTday { get; set; }
+        public virtual ExtremesYday ExtremesYday { get; set; }
+        public virtual Public Public { get; set; }
         public virtual ICollection<StationData> StationData { get; set; }
     }
 }

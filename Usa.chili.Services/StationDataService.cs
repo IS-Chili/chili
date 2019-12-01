@@ -56,19 +56,19 @@ namespace Usa.chili.Services
 
             // Get the first datetime data entry for the station
             stationGraphDto.FirstDateTimeEntry = await _dbContext.StationData
-                        .Where(x => x.Station.Id == stationId)
-                        .OrderBy(x => x.Ts)
-                        .AsNoTracking()
-                        .Select(x => x.Ts)
-                        .FirstOrDefaultAsync();
+                .Where(x => x.Station.Id == stationId)
+                .OrderBy(x => x.Ts)
+                .AsNoTracking()
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
 
             // Get the last datetime data entry for the station
             stationGraphDto.LastDateTimeEntry = await _dbContext.StationData
-                        .Where(x => x.Station.Id == stationId)
-                        .OrderByDescending(x => x.Ts)
-                        .AsNoTracking()
-                        .Select(x => x.Ts)
-                        .FirstOrDefaultAsync();
+                .Where(x => x.Station.Id == stationId)
+                .OrderByDescending(x => x.Ts)
+                .AsNoTracking()
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
 
             // Set first and last datetime entries null if defaulted
             if(stationGraphDto.FirstDateTimeEntry == DateTime.MinValue){
@@ -97,7 +97,7 @@ namespace Usa.chili.Services
                             .OrderBy(x => x.Ts)
                             .AsNoTracking()
                             .Select(x => new List<double>() {
-                                (double) new DateTimeOffset(x.Ts.ToUniversalTime()).ToUnixTimeMilliseconds(),
+                                (double) new DateTimeOffset(x.Ts).ToUnixTimeMilliseconds(),
                                 x.ValueForVariable(isMetricUnits, variableTypeEnum, variableEnum) ?? 0
                             })
                             .ToListAsync();
@@ -108,64 +108,99 @@ namespace Usa.chili.Services
             return stationGraphDto;
         }
 
-        public async Task<List<RealtimeDataDto>> ListRealtimeData()
+        public async Task<List<RealtimeDataDto>> ListRealtimeData(bool isMetricUnits, bool? isWindChill)
         {
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.Now.Date;
 
-            return await _dbContext.Station
-                .AsNoTracking()
+            // Get initial station data
+            List<RealtimeDataDto> realtimeDataDtos = await _dbContext.Station
+                .Include(x => x.Public)
+                .Where(x => x.IsActive)
                 .OrderBy(x => x.DisplayName)
                 .Select(x => new RealtimeDataDto
                 {
                     StationId = x.Id,
+                    IsStationOffline = !x.Public.Ts.HasValue, // || x.Public.Ts.Value.Date < now,
                     StationName = x.DisplayName,
-                    StationTimestamp = now,
-                    AirTemperature = 90.1,
-                    DewPoint = 1.1,
-                    HeatIndex = 1.1,
-                    WindChill = 1.2,
-                    RealHumidity = 1.2,
-                    WindDirection = 1.3,
-                    WindSpeed = 1.4,
-                    Pressure = 1.5,
-                    YesterdayExtreme = new ExtremeDto
-                    {
-                        AirTemperatureHighTimestamp = now.AddDays(-1),
-                        AirTemperatureLowTimestamp = now.AddDays(-1),
-                        DewPointHighTimestamp = now.AddDays(-1),
-                        DewPointLowTimestamp = now.AddDays(-1),
-                        RealHumidityHighTimestamp = now.AddDays(-1),
-                        RealHumidityLowTimestamp = now.AddDays(-1),
-                        WindSpeedMaxTimestamp = now.AddDays(-1),
-                        AirTemperatureHigh = 65.3,
-                        AirTemperatureLow = 80.6,
-                        DewPointHigh = 1.5,
-                        DewPointLow = 1.5,
-                        RealHumidityHigh = 1.5,
-                        RealHumidityLow = 1.5,
-                        WindSpeedMax = 1.5,
-                        Precipitation = 1.5,
-                    },
-                    TodayExtreme = new ExtremeDto
-                    {
-                        AirTemperatureHighTimestamp = now,
-                        AirTemperatureLowTimestamp = now,
-                        DewPointHighTimestamp = now,
-                        DewPointLowTimestamp = now,
-                        RealHumidityHighTimestamp = now,
-                        RealHumidityLowTimestamp = now,
-                        WindSpeedMaxTimestamp = now,
-                        AirTemperatureHigh = 65.3,
-                        AirTemperatureLow = 80.6,
-                        DewPointHigh = 1.5,
-                        DewPointLow = 1.5,
-                        RealHumidityHigh = 1.5,
-                        RealHumidityLow = 1.5,
-                        WindSpeedMax = 1.5,
-                        Precipitation = 1.5,
-                    }
+                    StationTimestamp = x.Public.Ts
                 })
                 .ToListAsync();
+
+            // Get realtime data for online stations
+            realtimeDataDtos.ForEach(dto => {
+                if(!dto.IsStationOffline) {
+                    Public publicData = _dbContext.Public
+                        .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        .Select(x => x.ConvertUnits(isMetricUnits, isWindChill))
+                        .Single();
+
+                    ExtremesTday extremesTdayData = _dbContext.ExtremesTday
+                        .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        .Select(x => x.ConvertUnits(isMetricUnits))
+                        .Single();
+
+                    ExtremesYday extremesYdayData = _dbContext.ExtremesYday
+                        .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        .Select(x => x.ConvertUnits(isMetricUnits))
+                        .Single();
+
+                    // Set public data
+                    dto.AirTemperature = publicData.AirT2m;
+                    dto.IsWindChill = publicData.IsWindChill;
+                    dto.Felt = publicData.Felt;
+                    dto.DewPoint = publicData.DewPoint;
+                    dto.RealHumidity = publicData.Rh;
+                    dto.WindDirection = publicData.WndDir10m;
+                    dto.WindSpeed = publicData.WndSpd10m;
+                    dto.Pressure = publicData.PressSealev1;
+                    dto.Precipitation = publicData.PrecipTb3Today;
+
+                    // Set Yesterday's extremes data
+                    dto.YesterdayExtreme = new ExtremeDto
+                    {
+                        AirTemperatureHighTimestamp = extremesYdayData.AirT2mTmx,
+                        AirTemperatureLowTimestamp = extremesYdayData.AirT2mTmn,
+                        DewPointHighTimestamp = extremesYdayData.DewPt2mTmx,
+                        DewPointLowTimestamp = extremesYdayData.DewPt2mTmn,
+                        RealHumidityHighTimestamp = extremesYdayData.Rh2mTmx,
+                        RealHumidityLowTimestamp = extremesYdayData.Rh2mTmn,
+                        WindSpeedMaxTimestamp = extremesYdayData.WndSpd10mTmx,
+                        AirTemperatureHigh = extremesYdayData.AirT2mMax,
+                        AirTemperatureLow = extremesYdayData.AirT2mMin,
+                        DewPointHigh = extremesYdayData.DewPt2mMax,
+                        DewPointLow = extremesYdayData.DewPt2mMin,
+                        RealHumidityHigh = extremesYdayData.Rh2mMax,
+                        RealHumidityLow = extremesYdayData.Rh2mMin,
+                        WindSpeedMax = extremesYdayData.WndSpd10mMax,
+                        Precipitation = extremesYdayData.PrecipTb3Today
+                    };
+
+                    // Set Today's extremes data
+                    dto.TodayExtreme = new ExtremeDto
+                    {
+                        AirTemperatureHighTimestamp = extremesTdayData.AirT2mTmx,
+                        AirTemperatureLowTimestamp = extremesTdayData.AirT2mTmn,
+                        DewPointHighTimestamp = extremesTdayData.DewPt2mTmx,
+                        DewPointLowTimestamp = extremesTdayData.DewPt2mTmn,
+                        RealHumidityHighTimestamp = extremesTdayData.Rh2mTmx,
+                        RealHumidityLowTimestamp = extremesTdayData.Rh2mTmn,
+                        WindSpeedMaxTimestamp = extremesTdayData.WndSpd10mTmx,
+                        AirTemperatureHigh = extremesTdayData.AirT2mMax,
+                        AirTemperatureLow = extremesTdayData.AirT2mMin,
+                        DewPointHigh = extremesTdayData.DewPt2mMax,
+                        DewPointLow = extremesTdayData.DewPt2mMin,
+                        RealHumidityHigh = extremesTdayData.Rh2mMax,
+                        RealHumidityLow = extremesTdayData.Rh2mMin,
+                        WindSpeedMax = extremesTdayData.WndSpd10mMax
+                    };
+                }
+                else {
+                    dto.YesterdayExtreme = new ExtremeDto();
+                    dto.TodayExtreme = new ExtremeDto();
+                }
+            });
+
+            return realtimeDataDtos;
         }
     }
 }

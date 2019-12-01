@@ -1,3 +1,10 @@
+// ********************************************************************************************************************************************
+// Copyright (c) 2019
+// Author: USA
+// Product: CHILI
+// Version: 1.0.0
+// ********************************************************************************************************************************************
+
 using Usa.chili.Common;
 using System;
 
@@ -114,29 +121,23 @@ namespace Usa.chili.Domain
             }
 
             if(!isMetricUnits && value.HasValue) {
-                double ninefifths = 9/5;
-                double mm2inches = 0.0393700787;
-                double mb2inHg =  0.029529983071;
-                double wpsqm2lymin = 0.00143197;
-                double mps2Mph = 2.2369363;
-
                 switch(variableTypeEnum) {
                     case VariableTypeEnum.Minute_Precipitation:
                     case VariableTypeEnum.Total_Precipitation:
-                        value = value.Value * mm2inches;
+                        value = value.Value * Constant.mm2Inches;
                         break;
                     case VariableTypeEnum.Temperature:
-                        value = value.Value * ninefifths + 32;
+                        value = value.Value * Constant.nineFifths + 32;
                         break;
                     case VariableTypeEnum.Pressure:
-                        value = value.Value * mb2inHg;
+                        value = value.Value * Constant.mb2InHg;
                         break;
                     case VariableTypeEnum.Total_Radiation:
-                        value = value.Value * wpsqm2lymin;
+                        value = value.Value * Constant.wpsqm2lymin;
                         break;
                     case VariableTypeEnum.Speed:
                     case VariableTypeEnum.Vertical_Speed:
-                        value = value.Value * mps2Mph;
+                        value = value.Value * Constant.mps2Mph;
                         break;
                     default:
                     break;
