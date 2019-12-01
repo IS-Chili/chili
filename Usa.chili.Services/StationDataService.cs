@@ -97,7 +97,7 @@ namespace Usa.chili.Services
                             .OrderBy(x => x.Ts)
                             .AsNoTracking()
                             .Select(x => new List<double>() {
-                                (double) new DateTimeOffset(x.Ts.ToUniversalTime()).ToUnixTimeMilliseconds(),
+                                (double) new DateTimeOffset(x.Ts).ToUnixTimeMilliseconds(),
                                 x.ValueForVariable(isMetricUnits, variableTypeEnum, variableEnum) ?? 0
                             })
                             .ToListAsync();
