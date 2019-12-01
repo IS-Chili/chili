@@ -13,11 +13,11 @@ namespace Usa.chili.Dto
     {
         public int StationId { get; set; }
         public bool IsStationOffline { get; set; }
+        public bool IsWindChill { get; set; }
         public string StationName { get; set; }
         public DateTime? StationTimestamp { get; set; }
         public double? AirTemperature { get; set; }
-        public double? HeatIndex { get; set; }
-        public double? WindChill { get; set; }
+        public double? Felt { get; set; }
         public double? DewPoint { get; set; }
         public double? RealHumidity { get; set; }
         public double? WindDirection { get; set; }

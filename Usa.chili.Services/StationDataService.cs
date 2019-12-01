@@ -56,19 +56,19 @@ namespace Usa.chili.Services
 
             // Get the first datetime data entry for the station
             stationGraphDto.FirstDateTimeEntry = await _dbContext.StationData
-                        .Where(x => x.Station.Id == stationId)
-                        .OrderBy(x => x.Ts)
-                        .AsNoTracking()
-                        .Select(x => x.Ts)
-                        .FirstOrDefaultAsync();
+                .Where(x => x.Station.Id == stationId)
+                .OrderBy(x => x.Ts)
+                .AsNoTracking()
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
 
             // Get the last datetime data entry for the station
             stationGraphDto.LastDateTimeEntry = await _dbContext.StationData
-                        .Where(x => x.Station.Id == stationId)
-                        .OrderByDescending(x => x.Ts)
-                        .AsNoTracking()
-                        .Select(x => x.Ts)
-                        .FirstOrDefaultAsync();
+                .Where(x => x.Station.Id == stationId)
+                .OrderByDescending(x => x.Ts)
+                .AsNoTracking()
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
 
             // Set first and last datetime entries null if defaulted
             if(stationGraphDto.FirstDateTimeEntry == DateTime.MinValue){
@@ -116,6 +116,7 @@ namespace Usa.chili.Services
             List<RealtimeDataDto> realtimeDataDtos = await _dbContext.Station
                 .Include(x => x.Public)
                 .Where(x => x.IsActive)
+                .OrderBy(x => x.DisplayName)
                 .Select(x => new RealtimeDataDto
                 {
                     StationId = x.Id,
@@ -145,8 +146,8 @@ namespace Usa.chili.Services
 
                     // Set public data
                     dto.AirTemperature = publicData.AirT2m;
-                    dto.HeatIndex = publicData.HtIdx;
-                    dto.WindChill = publicData.Felt;
+                    dto.IsWindChill = publicData.IsWindChill;
+                    dto.Felt = publicData.Felt;
                     dto.DewPoint = publicData.DewPoint;
                     dto.RealHumidity = publicData.Rh;
                     dto.WindDirection = publicData.WndDir10m;

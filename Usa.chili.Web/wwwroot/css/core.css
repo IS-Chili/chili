@@ -280,3 +280,13 @@ footer {
 .row-dark {
   background-color: #DDDDDD;
 }
+
+.ht {
+  color: #CC0000;
+  font-weight: 600;
+}
+
+.wc {
+  color: blue;
+  font-weight: 600;
+}

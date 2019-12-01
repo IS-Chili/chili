@@ -126,7 +126,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                 </div>
             </td>
             <td v-if="!item.isStationOffline" class="temp font-weight-bold">{{ item.airTemperature }}</td>
-            <td v-if="!item.isStationOffline" class="ht">{{ model.isWindChill ? item.windChill  : item.heatIndex  }}</td>
+            <td v-if="!item.isStationOffline" :class="item.isWindChill ? 'wc' : (item.felt != 'N/A' ? 'ht' : '')">{{ item.felt }}</td>
             <td v-if="!item.isStationOffline" class="hum">{{ item.dewPoint }}</td>
             <td v-if="!item.isStationOffline" class="hum">{{ item.realHumidity }}</td>
             <td v-if="!item.isStationOffline" class="wind">{{ item.windDirection }}</td>
@@ -140,25 +140,27 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             </td>
             <td v-if="!item.isStationOffline">
                 <div>
-                    <span data-toggle="tooltip" :title="item.todayExtreme.airTemperatureHighTimestamp">
+                    <span :class="item.todayExtreme.airTemperatureHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip" 
+                        :title="item.todayExtreme.airTemperatureHighTimestamp">
                         {{ item.todayExtreme.airTemperatureHigh }}
                     </span>
                 </div>
                 <div>
-                    <span data-toggle="tooltip" :title="item.todayExtreme.airTemperatureLowTimestamp">
+                    <span :class="item.todayExtreme.airTemperatureLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip" 
+                        :title="item.todayExtreme.airTemperatureLowTimestamp">
                         {{ item.todayExtreme.airTemperatureLow }}
                     </span>
                 </div>
             </td>
             <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
+                    <span :class="item.todayExtreme.dewPointHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
                         :title="item.todayExtreme.dewPointHighTimestamp">
                         {{ item.todayExtreme.dewPointHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
+                    <span :class="item.todayExtreme.dewPointLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
                         :title="item.todayExtreme.dewPointLowTimestamp">
                         {{ item.todayExtreme.dewPointLow }}
                     </span>
@@ -166,13 +168,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             </td>
             <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
+                    <span :class="item.todayExtreme.realHumidityHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
                         :title="item.todayExtreme.realHumidityHighTimestamp">
                         {{ item.todayExtreme.realHumidityHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
+                    <span :class="item.todayExtreme.realHumidityLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
                         :title="item.todayExtreme.realHumidityLowTimestamp">
                         {{ item.todayExtreme.realHumidityLow }}
                     </span>
@@ -186,13 +188,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             </td>
             <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
+                    <span :class="item.yesterdayExtreme.airTemperatureHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.airTemperatureHighTimestamp">
                         {{ item.yesterdayExtreme.airTemperatureHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
+                    <span :class="item.yesterdayExtreme.airTemperatureLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.airTemperatureLowTimestamp">
                         {{ item.yesterdayExtreme.airTemperatureLow }}
                     </span>
@@ -200,13 +202,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             </td>
             <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
+                    <span :class="item.yesterdayExtreme.dewPointHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.dewPointHighTimestamp">
                         {{ item.yesterdayExtreme.dewPointHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
+                    <span :class="item.yesterdayExtreme.dewPointLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.dewPointLowTimestamp">
                         {{ item.yesterdayExtreme.dewPointLow }}
                     </span>
@@ -214,13 +216,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             </td>
             <td v-if="!item.isStationOffline">
                 <div>
-                    <span class="text-color-high" data-toggle="tooltip"
+                    <span :class="item.yesterdayExtreme.realHumidityHigh != 'N/A' ? 'text-color-high' : ''" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.realHumidityHighTimestamp">
                         {{ item.yesterdayExtreme.realHumidityHigh }}
                     </span>
                 </div>
                 <div>
-                    <span class="text-color-low" data-toggle="tooltip"
+                    <span :class="item.yesterdayExtreme.realHumidityLow != 'N/A' ? 'text-color-low' : ''" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.realHumidityLowTimestamp">
                         {{ item.yesterdayExtreme.realHumidityLow }}
                     </span>

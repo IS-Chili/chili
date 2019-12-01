@@ -35,7 +35,7 @@ namespace Usa.chili.Domain
                 // Minimum Air Temperature at 2m
                 if (AirT2mMin != null)
                 {
-                    AirT2mMin = Math.Round(Constant.nineFifths * (AirT2mMin ?? 0 + 32), 2);
+                    AirT2mMin = Math.Round(Constant.nineFifths * (AirT2mMin ?? 0) + 32, 2);
                 }
                 // Maximum Dew Point at 2m
                 if (DewPt2mMax != null)
