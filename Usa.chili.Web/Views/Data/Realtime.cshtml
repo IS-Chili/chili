@@ -126,7 +126,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                 </div>
             </td>
             <td v-if="!item.isStationOffline" class="temp font-weight-bold">{{ item.airTemperature }}</td>
-            <td v-if="!item.isStationOffline" :class="item.isWindChill ? 'wc' : (item.felt != 'N/A' ? 'ht' : '')">{{ item.felt }}</td>
+            <td v-if="!item.isStationOffline" :class="item.felt != 'N/A' ? (item.isWindChill ? 'wc' : 'ht') : ''">{{ item.felt }}</td>
             <td v-if="!item.isStationOffline" class="hum">{{ item.dewPoint }}</td>
             <td v-if="!item.isStationOffline" class="hum">{{ item.realHumidity }}</td>
             <td v-if="!item.isStationOffline" class="wind">{{ item.windDirection }}</td>
