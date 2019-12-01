@@ -47,10 +47,11 @@ namespace Usa.chili.Services
                     StationName = station.DisplayName,
                     StationTimestamp = p.Ts,
                     AirTemperature = p.AirT2m,
+                    Felt = p.Felt,
                     DewPoint = p.DewPoint,
                     RealHumidity = p.Rh,
                     WindDirection = p.WndDir10m,
-                    WindSpeed = p.WndDir10m,
+                    WindSpeed = p.WndSpd10m,
                     Pressure = p.PressSealev1,
                     Precipitation = p.PrecipTb3Today
             }).FirstOrDefault();

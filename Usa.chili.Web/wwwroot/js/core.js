@@ -1,6 +1,9 @@
 ﻿// Core constants and functions
 const Core = {};
 
+Core.DEFAULT_WIDGET_STATION = 23; // 307
+Core.DEFAULT_STATION = 1; // 201
+
 Core.DATE_FORMAT = "MM/DD/YYYY";
 Core.DATETIME_FORMAT = "MM/DD/YYYY HH:mm:ss";
 Core.TIME_FORMAT = "HH:mm:ss";
@@ -54,6 +57,29 @@ Core.getStationInfo = function (self, id) {
     .catch(function (error) {
       console.log('getStationInfo failed', error);
     });
+};
+
+// Set all null values to N/A in the array
+Core.setNullsInArrayToNA = function (array) {
+  array.forEach(function(object) {
+    Core.setNullsInObjectToNA(object);
+  });
+};
+
+// Set all null values to N/A in the object
+Core.setNullsInObjectToNA = function (object) {
+  for(key in object) {
+    if(typeof object[key] === 'object') {
+      for(objectKey in object[key]) {
+        if(object[key][objectKey] == null) {
+          object[key][objectKey] = 'N/A';
+        }
+      }
+    }
+    if(object[key] == null) {
+      object[key] = 'N/A';
+    }
+  }
 };
 
 // select2 Vue component
