@@ -137,12 +137,17 @@ namespace Usa.chili.Domain
                 // at or below 50 degrees F and wind speeds above 3 mph
                 if (AirT2m <= 50 && WndSpd10m > 3)
                 {
-                    IsWindChill = true;
+                    this.IsWindChill = true;
+                    isWindChill = true;
                 }
                 else
                 {
-                    IsWindChill = false;
+                    this.IsWindChill = false;
+                    isWindChill = false;
                 }
+            }
+            else {
+                this.IsWindChill = isWindChill.Value;
             }
 
             // Calculate either the Heat Index OR the Windchill for each station

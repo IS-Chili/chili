@@ -15,6 +15,8 @@ namespace Usa.chili.Dto
         public string StationName { get; set; }
         public DateTime? StationTimestamp { get; set; }
         public double? AirTemperature { get; set; }
+        public double? Felt { get; set; }
+        public bool IsWindChill { get; set; }
         public double? DewPoint { get; set; }
         public double? RealHumidity { get; set; }
         public double? WindDirection { get; set; }

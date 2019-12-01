@@ -33,7 +33,7 @@ const StationMap = function() {
     stationList.forEach(function(station) {
       const stationLink = "<a class='font-weight-bold' href='/Data/Station?id=" + station.id + "'>" + station.displayName + "</a>";
       const stationData = "<br>High: " + (station.airTemperatureHigh || 'N/A') + "&deg;F<br>Low: " + (station.airTemperatureLow || 'N/A') + "&deg;F";
-      station.dataText = stationLink + stationData;
+      station.dataText = stationLink + (station.isActive ? stationData : '');
       addPoint(station);
     });
 
@@ -75,6 +75,9 @@ const StationMap = function() {
     // Add the station Id to the popup object
     popup.stationId = station.id;
 
+    // Add the station isActive to the popup object
+    popup.isActive = station.isActive;
+
     // Bind the popup object to the circle object
     circleMarker.bindPopup(popup);
   }
@@ -82,7 +85,12 @@ const StationMap = function() {
   // Set the App stationId from the popup object
   // This will change the station in the "Live Mesonet Observations" widget
   function onPopupOpen(e) {
-    App.model.stationId = e.popup.stationId;
+    if(e.popup.isActive) {
+      App.model.stationId = e.popup.stationId;
+    }
+    else {
+      App.model.stationId = null;
+    }
   }
 
   init();
