@@ -5,8 +5,10 @@
 // Version: 1.0.0
 // ********************************************************************************************************************************************
 
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,8 +34,13 @@ namespace Usa.chili.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ChiliDbContext>(options =>
-                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextPool<ChiliDbContext>(
+                options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
+                    mySqlOptions =>
+                    {
+                        mySqlOptions.ServerVersion(new Version(5, 5, 64), ServerType.MariaDb);
+                    }
+            ));
 
             // Configure Antiforgery
             services.AddAntiforgery(opts => opts.Cookie.Name = "X-CSRF-TOKEN-COOKIE");

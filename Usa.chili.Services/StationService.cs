@@ -33,13 +33,30 @@ namespace Usa.chili.Services
         public async Task<List<DropdownDto>> ListActiveStations() {
             return await _dbContext.Station
                 .AsNoTracking()
-                .Where(x => x.IsActive == true)
+                .Where(x => x.IsActive)
                 .OrderBy(x => x.DisplayName)
                 .Select(x => new DropdownDto {
                     Id = x.Id,
                     Text = x.DisplayName
                 })
                 .ToListAsync();
+        }
+
+        public async Task<StationDto> GetStationInfo(int id) {
+            return await _dbContext.Station
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(x => new StationDto {
+                    Id = x.Id,
+                    DisplayName = x.DisplayName,
+                    Latitude = x.Latitude,
+                    Longitude = x.Longitude,
+                    Elevation = x.Elevation,
+                    BeginDate = x.BeginDate,
+                    EndDate = x.EndDate,
+                    IsActive = x.IsActive
+                })
+                .SingleAsync();
         }
 
         public async Task<List<StationMapDto>> GetStationMapData() {

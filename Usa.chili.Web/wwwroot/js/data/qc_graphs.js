@@ -15,5 +15,10 @@ const App = new Vue({
   },
   created: function () {
     Core.populateVariableDropdown(this);
+  },
+  methods: {
+    go: function () {
+      // TODO
+    }
   }
 });

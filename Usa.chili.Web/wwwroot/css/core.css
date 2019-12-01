@@ -270,3 +270,13 @@ footer {
   font: bold 11px Georgia, serif;
   word-wrap: break-word;
 }
+
+.station-offline {
+  font-weight: bold;
+  color: #C00;
+  font-size: .8em;
+}
+
+.row-dark {
+  background-color: #DDDDDD;
+}

@@ -16,5 +16,10 @@ const App = new Vue({
   },
   created: function() {
     Core.populateStationDropdown(this, false);
+  },
+  methods: {
+    download: function () {
+      // TODO
+    }
   }
 });

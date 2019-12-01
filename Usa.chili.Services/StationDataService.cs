@@ -108,64 +108,98 @@ namespace Usa.chili.Services
             return stationGraphDto;
         }
 
-        public async Task<List<RealtimeDataDto>> ListRealtimeData()
+        public async Task<List<RealtimeDataDto>> ListRealtimeData(bool isMetricUnits, bool? isWindChill)
         {
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.Now.Date;
 
-            return await _dbContext.Station
-                .AsNoTracking()
-                .OrderBy(x => x.DisplayName)
+            // Get initial station data
+            List<RealtimeDataDto> realtimeDataDtos = await _dbContext.Station
+                .Include(x => x.Public)
+                .Where(x => x.IsActive)
                 .Select(x => new RealtimeDataDto
                 {
                     StationId = x.Id,
+                    IsStationOffline = !x.Public.Ts.HasValue, // || x.Public.Ts.Value.Date < now,
                     StationName = x.DisplayName,
-                    StationTimestamp = now,
-                    AirTemperature = 90.1,
-                    DewPoint = 1.1,
-                    HeatIndex = 1.1,
-                    WindChill = 1.2,
-                    RealHumidity = 1.2,
-                    WindDirection = 1.3,
-                    WindSpeed = 1.4,
-                    Pressure = 1.5,
-                    YesterdayExtreme = new ExtremeDto
-                    {
-                        AirTemperatureHighTimestamp = now.AddDays(-1),
-                        AirTemperatureLowTimestamp = now.AddDays(-1),
-                        DewPointHighTimestamp = now.AddDays(-1),
-                        DewPointLowTimestamp = now.AddDays(-1),
-                        RealHumidityHighTimestamp = now.AddDays(-1),
-                        RealHumidityLowTimestamp = now.AddDays(-1),
-                        WindSpeedMaxTimestamp = now.AddDays(-1),
-                        AirTemperatureHigh = 65.3,
-                        AirTemperatureLow = 80.6,
-                        DewPointHigh = 1.5,
-                        DewPointLow = 1.5,
-                        RealHumidityHigh = 1.5,
-                        RealHumidityLow = 1.5,
-                        WindSpeedMax = 1.5,
-                        Precipitation = 1.5,
-                    },
-                    TodayExtreme = new ExtremeDto
-                    {
-                        AirTemperatureHighTimestamp = now,
-                        AirTemperatureLowTimestamp = now,
-                        DewPointHighTimestamp = now,
-                        DewPointLowTimestamp = now,
-                        RealHumidityHighTimestamp = now,
-                        RealHumidityLowTimestamp = now,
-                        WindSpeedMaxTimestamp = now,
-                        AirTemperatureHigh = 65.3,
-                        AirTemperatureLow = 80.6,
-                        DewPointHigh = 1.5,
-                        DewPointLow = 1.5,
-                        RealHumidityHigh = 1.5,
-                        RealHumidityLow = 1.5,
-                        WindSpeedMax = 1.5,
-                        Precipitation = 1.5,
-                    }
+                    StationTimestamp = x.Public.Ts
                 })
                 .ToListAsync();
+
+            // Get realtime data for online stations
+            realtimeDataDtos.ForEach(dto => {
+                if(!dto.IsStationOffline) {
+                    Public publicData = _dbContext.Public
+                        .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        .Select(x => x.ConvertUnits(isMetricUnits, isWindChill))
+                        .Single();
+
+                    ExtremesTday extremesTdayData = _dbContext.ExtremesTday
+                        .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        .Select(x => x.ConvertUnits(isMetricUnits))
+                        .Single();
+
+                    ExtremesYday extremesYdayData = _dbContext.ExtremesYday
+                        .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        .Select(x => x.ConvertUnits(isMetricUnits))
+                        .Single();
+
+                    // Set public data
+                    dto.AirTemperature = publicData.AirT2m.HasValue ? Math.Round(publicData.AirT2m.Value, 2) : (double?)null;
+                    dto.HeatIndex = publicData.HtIdx.HasValue ? Math.Round(publicData.HtIdx.Value, 2) : (double?)null;
+                    dto.WindChill = publicData.Felt.HasValue ? Math.Round(publicData.Felt.Value, 2) : (double?)null;
+                    dto.DewPoint = publicData.DewPoint.HasValue ? Math.Round(publicData.DewPoint.Value, 2) : (double?)null;
+                    dto.RealHumidity = publicData.Rh.HasValue ? Math.Round(publicData.Rh.Value, 2) : (double?)null;
+                    dto.WindDirection = publicData.WndDir10m.HasValue ? Math.Round(publicData.WndDir10m.Value, 2) : (double?)null;
+                    dto.WindSpeed = publicData.WndSpd10m.HasValue ? Math.Round(publicData.WndSpd10m.Value, 2) : (double?)null;
+                    dto.Pressure = publicData.PressSealev1.HasValue ? Math.Round(publicData.PressSealev1.Value, 2) : (double?)null;
+                    dto.Precipitation = publicData.PrecipTb3Today.HasValue ? Math.Round(publicData.PrecipTb3Today.Value, 2) : (double?)null;
+
+                    // Set Yesterday's extremes data
+                    dto.YesterdayExtreme = new ExtremeDto
+                    {
+                        AirTemperatureHighTimestamp = extremesYdayData.AirT2mTmx,
+                        AirTemperatureLowTimestamp = extremesYdayData.AirT2mTmn,
+                        DewPointHighTimestamp = extremesYdayData.DewPt2mTmx,
+                        DewPointLowTimestamp = extremesYdayData.DewPt2mTmn,
+                        RealHumidityHighTimestamp = extremesYdayData.Rh2mTmx,
+                        RealHumidityLowTimestamp = extremesYdayData.Rh2mTmn,
+                        WindSpeedMaxTimestamp = extremesYdayData.WndSpd10mTmx,
+                        AirTemperatureHigh = extremesYdayData.AirT2mMax.HasValue ? Math.Round(extremesYdayData.AirT2mMax.Value, 2) : (double?)null,
+                        AirTemperatureLow = extremesYdayData.AirT2mMin.HasValue ? Math.Round(extremesYdayData.AirT2mMin.Value, 2) : (double?)null,
+                        DewPointHigh = extremesYdayData.DewPt2mMax.HasValue ? Math.Round(extremesYdayData.DewPt2mMax.Value, 2) : (double?)null,
+                        DewPointLow = extremesYdayData.DewPt2mMin.HasValue ? Math.Round(extremesYdayData.DewPt2mMin.Value, 2) : (double?)null,
+                        RealHumidityHigh = extremesYdayData.Rh2mMax.HasValue ? Math.Round(extremesYdayData.Rh2mMax.Value, 2) : (double?)null,
+                        RealHumidityLow = extremesYdayData.Rh2mMin.HasValue ? Math.Round(extremesYdayData.Rh2mMin.Value, 2) : (double?)null,
+                        WindSpeedMax = extremesYdayData.WndSpd10mMax.HasValue ? Math.Round(extremesYdayData.WndSpd10mMax.Value, 2) : (double?)null,
+                        Precipitation = extremesYdayData.PrecipTb3Today.HasValue ? Math.Round(extremesYdayData.PrecipTb3Today.Value, 2) : (double?)null
+                    };
+
+                    // Set Today's extremes data
+                    dto.TodayExtreme = new ExtremeDto
+                    {
+                        AirTemperatureHighTimestamp = extremesTdayData.AirT2mTmx,
+                        AirTemperatureLowTimestamp = extremesTdayData.AirT2mTmn,
+                        DewPointHighTimestamp = extremesTdayData.DewPt2mTmx,
+                        DewPointLowTimestamp = extremesTdayData.DewPt2mTmn,
+                        RealHumidityHighTimestamp = extremesTdayData.Rh2mTmx,
+                        RealHumidityLowTimestamp = extremesTdayData.Rh2mTmn,
+                        WindSpeedMaxTimestamp = extremesTdayData.WndSpd10mTmx,
+                        AirTemperatureHigh = extremesTdayData.AirT2mMax.HasValue ? Math.Round(extremesTdayData.AirT2mMax.Value, 2) : (double?)null,
+                        AirTemperatureLow = extremesTdayData.AirT2mMin.HasValue ? Math.Round(extremesTdayData.AirT2mMin.Value, 2) : (double?)null,
+                        DewPointHigh = extremesTdayData.DewPt2mMax.HasValue ? Math.Round(extremesTdayData.DewPt2mMax.Value, 2) : (double?)null,
+                        DewPointLow = extremesTdayData.DewPt2mMin.HasValue ? Math.Round(extremesTdayData.DewPt2mMin.Value, 2) : (double?)null,
+                        RealHumidityHigh = extremesTdayData.Rh2mMax.HasValue ? Math.Round(extremesTdayData.Rh2mMax.Value, 2) : (double?)null,
+                        RealHumidityLow = extremesTdayData.Rh2mMin.HasValue ? Math.Round(extremesTdayData.Rh2mMin.Value, 2) : (double?)null,
+                        WindSpeedMax = extremesTdayData.WndSpd10mMax.HasValue ? Math.Round(extremesTdayData.WndSpd10mMax.Value, 2) : (double?)null
+                    };
+                }
+                else {
+                    dto.YesterdayExtreme = new ExtremeDto();
+                    dto.TodayExtreme = new ExtremeDto();
+                }
+            });
+
+            return realtimeDataDtos;
         }
     }
 }

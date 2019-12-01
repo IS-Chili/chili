@@ -97,4 +97,6 @@ CREATE TABLE chili.station_data (
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (Id),
   FOREIGN KEY (StationID) REFERENCES station (Id)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;

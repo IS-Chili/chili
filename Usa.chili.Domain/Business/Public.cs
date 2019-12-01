@@ -1,5 +1,13 @@
-﻿using System;
+﻿// ********************************************************************************************************************************************
+// Copyright (c) 2019
+// Author: USA
+// Product: CHILI
+// Version: 1.0.0
+// ********************************************************************************************************************************************
+
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Usa.chili.Common;
 
 namespace Usa.chili.Domain
 {
@@ -13,6 +21,8 @@ namespace Usa.chili.Domain
         public double? HtIdx { get; set; }
         [NotMapped()]
         public double? Felt { get; set; }
+        [NotMapped()]
+        public bool IsWindChill { get; set; }
 
         public double? NormalizeRelativeHumidity()
         {
@@ -37,7 +47,7 @@ namespace Usa.chili.Domain
                 return (AirT2m ?? 0) - ((100 - normalizedRelativeHumidity) / 5);
         }
 
-        public Public ConvertUnits()
+        public Public ConvertUnits(bool isMetricUnits, bool? isWindChill)
         {
             // If Wind Direction is slightly negative adjust it
             if (WndDir10m != null && WndDir10m < 0)
@@ -55,31 +65,9 @@ namespace Usa.chili.Domain
             DewPoint = CalculateDewPoint();
             Rh = NormalizeRelativeHumidity();
 
-            // Define some useful conversion constants
-            double fiveninths = 5 / 9;
-            double ninefifths = 9 / 5;
-            double mm2inches = 0.0393700787;
-            double mb2inHg = 0.029529983071;
-            double wpsqm2lymin = 0.00143197;
-            double mps2Mph = 2.2369363;
             // Define constants for Dew Point calculation (Deg C)
             double a = 17.271;
             double b = 237.7;
-            // Define constants for Heat Index calculation (Deg F)
-            double hi1 = 42.379;
-            double hi2 = 2.04901523;
-            double hi3 = 10.14333127;
-            double hi4 = 0.22475541;
-            double hi5 = 0.00683783;
-            double hi6 = 0.05481717;
-            double hi7 = 0.00122874;
-            double hi8 = 0.00085282;
-            double hi9 = 0.00000199;
-            // Define constants for Wind Chill calculation (Deg F)
-            double wc1 = 35.74;
-            double wc2 = 0.6215;
-            double wc3 = 35.75;
-            double wc4 = 0.4275;
 
             // Calculate Dew point for "Current" data values
             // Dew Point at 2m
@@ -109,57 +97,54 @@ namespace Usa.chili.Domain
                 DewPoint = (b * gamma) / (a - gamma);
             }
 
-            string felt = "dy";
-            string unit = "en";
-
             // Prepare English unit versions of the "Current" data values
-            // Air Temperature at 2m
-            if (unit == "en")
+            if (!isMetricUnits)
             {
+                // Air Temperature at 2m
                 if (AirT2m != null)
                 {
-                    AirT2m = Math.Round(ninefifths * AirT2m ?? 0 + 32.2);
+                    AirT2m = Math.Round(Constant.nineFifths * AirT2m ?? 0 + Constant.thirtyTwoPointTwo);
                 }
                 // Dew Point at 2m
                 if (DewPoint != null)
                 {
-                    DewPoint = DewPoint * ninefifths + 32;
+                    DewPoint = DewPoint * Constant.nineFifths + 32;
                 }
                 // Wind Speed at 10m
                 if (WndSpd10m != null)
                 {
-                    WndSpd10m = WndSpd10m * mps2Mph;
+                    WndSpd10m = WndSpd10m * Constant.mps2Mph;
                 }
                 // Sea Level Pressure
                 if (PressSealev1 != null)
                 {
-                    PressSealev1 = PressSealev1 * mb2inHg;
+                    PressSealev1 = PressSealev1 * Constant.mb2InHg;
                 }
                 // Total Precipitation Today
                 if (PrecipTb3Today != null)
                 {
-                    PrecipTb3Today = PrecipTb3Today * mm2inches;
+                    PrecipTb3Today = PrecipTb3Today * Constant.mm2Inches;
                 }
             }
 
             // If neither Heat Index nor Wind Chill was specified
             // then choose one based on current conditions
-            if (felt == "dy" && AirT2m != null && WndSpd10m != null)
+            if (!isWindChill.HasValue && AirT2m != null && WndSpd10m != null)
             {
                 // Windchill Temperature is only defined for temperatures
                 // at or below 50 degrees F and wind speeds above 3 mph
                 if (AirT2m <= 50 && WndSpd10m > 3)
                 {
-                    felt = "wc";
+                    IsWindChill = true;
                 }
                 else
                 {
-                    felt = "ht";
+                    IsWindChill = false;
                 }
             }
 
             // Calculate either the Heat Index OR the Windchill for each station
-            if (felt == "ht")
+            if (isWindChill.HasValue && !isWindChill.Value)
             {
                 // Heat Index calculation per NWS
                 if (AirT2m == null ||
@@ -177,14 +162,14 @@ namespace Usa.chili.Domain
                     double t2 = t * t;
                     double r = Rh ?? 0;
                     double r2 = r * r;
-                    double HtIdx = hi2 * t +
-                                            hi3 * r -
-                                            hi4 * t * r -
-                                            hi5 * t2 -
-                                            hi6 * r2 +
-                                            hi7 * t2 * r +
-                                            hi8 * t * r2 -
-                                            hi9 * t2 * r2 - hi1;
+                    HtIdx = Constant.hi2 * t +
+                            Constant.hi3 * r -
+                            Constant.hi4 * t * r -
+                            Constant.hi5 * t2 -
+                            Constant.hi6 * r2 +
+                            Constant.hi7 * t2 * r +
+                            Constant.hi8 * t * r2 -
+                            Constant.hi9 * t2 * r2 - Constant.hi1;
                     if (HtIdx < AirT2m)
                     {
                         Felt = null;
@@ -202,22 +187,18 @@ namespace Usa.chili.Domain
                 {
                     Felt = null;
                 }
-                Felt = wc1 +
-                        wc2 * AirT2m -
-                        wc3 * Math.Pow(WndSpd10m ?? 0, 0.16) +
-                        wc4 * AirT2m * Math.Pow(WndSpd10m ?? 0, 0.16);
+                Felt =  Constant.wc1 +
+                        Constant.wc2 * AirT2m -
+                        Constant.wc3 * Math.Pow(WndSpd10m ?? 0, 0.16) +
+                        Constant.wc4 * AirT2m * Math.Pow(WndSpd10m ?? 0, 0.16);
             }
 
             if (Felt != null)
             {
-                if (unit != "en")
+                if (!isMetricUnits)
                 {
-                    Felt = Math.Round(((Felt ?? 0 - 32) * fiveninths), 2);
+                    Felt = Math.Round(((Felt ?? 0 - 32) * Constant.fiveNinths), 2);
                 }
-            }
-            else
-            {
-                Felt = null;
             }
 
             return this;

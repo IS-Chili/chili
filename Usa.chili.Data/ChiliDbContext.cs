@@ -7,9 +7,6 @@
 
 using Microsoft.EntityFrameworkCore;
 using Usa.chili.Domain;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System;
 
 namespace Usa.chili.Data
 {
@@ -12582,6 +12579,13 @@ namespace Usa.chili.Data
                 entity.Property(e => e.WndSpd10mMax).HasColumnName("WndSpd_10m_Max");
 
                 entity.Property(e => e.WndSpd10mTmx).HasColumnName("WndSpd_10m_TMx");
+
+                entity.HasOne(d => d.StationKeyNavigation)
+                    .WithOne(p => p.ExtremesTday)
+                    .HasPrincipalKey<Station>(p => p.StationKey)
+                    .HasForeignKey<ExtremesTday>(d => d.StationKey)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("extremes_tday_ibfk_2");
             });
 
             modelBuilder.Entity<ExtremesYday>(entity =>
@@ -12626,6 +12630,13 @@ namespace Usa.chili.Data
                 entity.Property(e => e.WndSpd10mMax).HasColumnName("WndSpd_10m_Max");
 
                 entity.Property(e => e.WndSpd10mTmx).HasColumnName("WndSpd_10m_TMx");
+
+                entity.HasOne(d => d.StationKeyNavigation)
+                    .WithOne(p => p.ExtremesYday)
+                    .HasPrincipalKey<Station>(p => p.StationKey)
+                    .HasForeignKey<ExtremesYday>(d => d.StationKey)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("extremes_yday_ibfk_2");
             });
 
             modelBuilder.Entity<Fairhope202>(entity =>
@@ -33908,6 +33919,13 @@ namespace Usa.chili.Data
                 entity.Property(e => e.WsmaxToday2).HasColumnName("WSMaxToday_2");
 
                 entity.Property(e => e.Year).HasColumnType("smallint(5) unsigned");
+
+                entity.HasOne(d => d.StationKeyNavigation)
+                    .WithOne(p => p.Public)
+                    .HasPrincipalKey<Station>(p => p.StationKey)
+                    .HasForeignKey<Public>(d => d.StationKey)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("public_ibfk_2");
             });
 
             modelBuilder.Entity<Rainfall>(entity =>
@@ -36774,6 +36792,10 @@ namespace Usa.chili.Data
             {
                 entity.ToTable("station", "chili");
 
+                entity.HasIndex(e => e.StationKey)
+                    .HasName("StationKey")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.DisplayName)
@@ -36793,9 +36815,6 @@ namespace Usa.chili.Data
                     .IsRequired()
                     .HasMaxLength(15)
                     .IsUnicode(false);
-
-                entity.Property(x => x.IsActive)
-                    .HasConversion(new BoolToZeroOneConverter<Int16>());
             });
 
             modelBuilder.Entity<StationData>(entity =>
@@ -36803,7 +36822,7 @@ namespace Usa.chili.Data
                 entity.ToTable("station_data", "chili");
 
                 entity.HasIndex(e => e.StationId)
-                    .HasName("StationId");
+                    .HasName("StationID");
 
                 entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
 
@@ -36879,7 +36898,9 @@ namespace Usa.chili.Data
 
                 entity.Property(e => e.SoilWaCondTc).HasColumnName("SoilWaCond_tc");
 
-                entity.Property(e => e.StationId).HasColumnType("int(10) unsigned");
+                entity.Property(e => e.StationId)
+                    .HasColumnName("StationID")
+                    .HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.TableCode).HasColumnType("smallint(5) unsigned");
 
@@ -36977,76 +36998,6 @@ namespace Usa.chili.Data
                     .HasConstraintName("station_data_ibfk_1");
             });
 
-             modelBuilder.Entity<VariableDescription>(entity =>
-            {
-                entity.ToTable("variable_description", "chili");
-
-                entity.HasIndex(e => e.VariableTypeId)
-                    .HasName("VariableTypeId");
-
-                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
-
-                entity.Property(e => e.VariableDescription1)
-                    .IsRequired()
-                    .HasColumnName("VariableDescription")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.VariableName)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.VariableTypeId).HasColumnType("int(10) unsigned");
-
-                entity.HasOne(d => d.VariableType)
-                    .WithMany(p => p.VariableDescription)
-                    .HasForeignKey(d => d.VariableTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("variable_description_ibfk_1");
-            });
-
-            modelBuilder.Entity<VariableType>(entity =>
-            {
-                entity.ToTable("variable_type", "chili");
-
-                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
-
-                entity.Property(e => e.EnglishMax).HasColumnType("decimal(6,2)");
-
-                entity.Property(e => e.EnglishMin).HasColumnType("decimal(6,2)");
-
-                entity.Property(e => e.EnglishUnit)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EnglishSymbol)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.MetricMax).HasColumnType("decimal(6,2)");
-
-                entity.Property(e => e.MetricMin).HasColumnType("decimal(6,2)");
-
-                entity.Property(e => e.MetricUnit)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.MetricSymbol)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.VariableType1)
-                    .IsRequired()
-                    .HasColumnName("VariableType")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Stormtrack>(entity =>
             {
                 entity.HasKey(e => new { e.Year, e.Stormnum, e.Ts });
@@ -37096,6 +37047,76 @@ namespace Usa.chili.Data
                 entity.Property(e => e.RecId).HasColumnType("bigint(20) unsigned");
 
                 entity.Property(e => e.Ts).HasColumnName("TS");
+            });
+
+            modelBuilder.Entity<VariableDescription>(entity =>
+            {
+                entity.ToTable("variable_description", "chili");
+
+                entity.HasIndex(e => e.VariableTypeId)
+                    .HasName("VariableTypeId");
+
+                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.VariableDescription1)
+                    .IsRequired()
+                    .HasColumnName("VariableDescription")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VariableName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VariableTypeId).HasColumnType("int(10) unsigned");
+
+                entity.HasOne(d => d.VariableType)
+                    .WithMany(p => p.VariableDescription)
+                    .HasForeignKey(d => d.VariableTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("variable_description_ibfk_1");
+            });
+
+            modelBuilder.Entity<VariableType>(entity =>
+            {
+                entity.ToTable("variable_type", "chili");
+
+                entity.Property(e => e.Id).HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.EnglishMax).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.EnglishMin).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.EnglishSymbol)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EnglishUnit)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MetricMax).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.MetricMin).HasColumnType("decimal(6,2)");
+
+                entity.Property(e => e.MetricSymbol)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MetricUnit)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VariableType1)
+                    .IsRequired()
+                    .HasColumnName("VariableType")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Walnuthill202>(entity =>

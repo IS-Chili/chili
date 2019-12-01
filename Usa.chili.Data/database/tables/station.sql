@@ -12,8 +12,11 @@ CREATE TABLE chili.station (
   BeginDate DATETIME NOT NULL,
   EndDate DATETIME NULL,
   IsActive TINYINT(1) NOT NULL,
-  PRIMARY KEY (Id)
-);
+  PRIMARY KEY (Id),
+  UNIQUE(StationKey)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 INSERT INTO chili.station (Id, StationKey, DisplayName, Latitude, Longitude, Elevation, BeginDate, EndDate, IsActive) 
 VALUES (201, 'agricola', 'Agricola', 30.817, -88.5205, 68.58, '2008-08-12', NULL, 1);
@@ -101,3 +104,23 @@ VALUES (306, 'saraland', 'Saraland', 30.8302, -88.0658, 6.1, '2010-01-27', NULL,
 
 INSERT INTO chili.station (Id, StationKey, DisplayName, Latitude, Longitude, Elevation, BeginDate, EndDate, IsActive) 
 VALUES (1501, 'walnuthill', 'Walnut Hill', 30.89696, -87.47604, 76.2, '2010-03-30', NULL, 0);
+
+-- Change table engines for public, extremes_tday, and extremes_yday tables to support foreign keys
+ALTER TABLE chili.public
+ENGINE = InnoDB;
+
+ALTER TABLE chili.extremes_tday
+ENGINE = InnoDB;
+
+ALTER TABLE chili.extremes_yday
+ENGINE = InnoDB;
+
+-- Add foreign key to the public, extremes_tday, and extremes_yday tables
+ALTER TABLE chili.public
+ADD FOREIGN KEY (StationKey) REFERENCES station(StationKey);
+
+ALTER TABLE chili.extremes_tday
+ADD FOREIGN KEY (StationKey) REFERENCES station(StationKey);
+
+ALTER TABLE chili.extremes_yday
+ADD FOREIGN KEY (StationKey) REFERENCES station(StationKey);

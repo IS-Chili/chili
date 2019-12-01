@@ -14,7 +14,9 @@ CREATE TABLE chili.variable_type (
   EnglishUnit VARCHAR(30) NOT NULL,
   EnglishSymbol VARCHAR(30) NOT NULL,
   PRIMARY KEY (Id)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 INSERT INTO chili.variable_type (VariableType, MetricMin, MetricMax, MetricUnit, MetricSymbol, EnglishMin, EnglishMax, EnglishUnit, EnglishSymbol) 
 VALUES ('Minute_Precipitation', 0, 10, 'Millimeters', 'mm', 0, 0.5, 'Inches', 'in');

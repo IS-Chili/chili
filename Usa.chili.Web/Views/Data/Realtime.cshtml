@@ -23,14 +23,14 @@ ViewBag.Description = "USA Mesonet Realtime Display";
     <div class="form-row d-flex justify-content-center">
         <div class="form-group col-xs-2 mr-2">
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="windchill">
-                <label class="custom-control-label" for="windchill">Display Windchill</label>
+                <input type="checkbox" class="custom-control-input" id="windChill" v-model="model.isWindChill">
+                <label class="custom-control-label" for="windChill">Display Windchill</label>
             </div>
         </div>
 
         <div class="form-group col-xs-2">
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="metricUnits">
+                <input type="checkbox" class="custom-control-input" id="metricUnits" v-model="model.isMetricUnits">
                 <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
             </div>
         </div>
@@ -52,7 +52,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
         <tr>
             <th>Location/Obs time</th>
             <th class="text-center">Temp</th>
-            <th class="text-center">HtIdx</th>
+            <th class="text-center">{{ model.isWindChill ? 'Wdchl' : 'HtIdx' }}</th>
             <th class="text-center">DewPt</th>
             <th class="text-center">Hum</th>
             <th class="text-center">WdDir</th>
@@ -91,31 +91,34 @@ ViewBag.Description = "USA Mesonet Realtime Display";
         </tr>
     </thead>
     <tbody>
-        <tr v-for='item in realtimeData'>
+        <tr v-for='item in realtimeData' :class="item.isStationOffline ? 'row-dark' : ''">
             <td>
                 <div>
                     <a :href="'/Data/Station?id=' + item.stationId">
                         <span class="font-weight-bold font-georgia">{{ item.stationName }}</span>
                     </a>
                 </div>
-                <div>
+                <div v-if="item.isStationOffline">
+                    <span class="station-offline"><em>Station Offline</em></span>
+                </div>
+                <div v-else>
                     <small>{{ item.stationTimestamp }}</small>
                 </div>
             </td>
-            <td class="temp font-weight-bold">{{ item.airTemperature }}</td>
-            <td class="ht">{{ item.heatIndex }}</td>
-            <td class="hum">{{ item.dewPoint }}</td>
-            <td class="hum">{{ item.realHumidity }}</td>
-            <td class="wind">{{ item.windDirection }}</td>
-            <td class="wind">{{ item.windSpeed }}</td>
-            <td class="pres">{{ item.pressure }}</td>
-            <td class="rain">{{ item.todayExtreme.precipitation }}</td>
-            <td class="wind">
+            <td v-if="!item.isStationOffline" class="temp font-weight-bold">{{ item.airTemperature }}</td>
+            <td v-if="!item.isStationOffline" class="ht">{{ model.isWindChill ? item.windChill  : item.heatIndex  }}</td>
+            <td v-if="!item.isStationOffline" class="hum">{{ item.dewPoint }}</td>
+            <td v-if="!item.isStationOffline" class="hum">{{ item.realHumidity }}</td>
+            <td v-if="!item.isStationOffline" class="wind">{{ item.windDirection }}</td>
+            <td v-if="!item.isStationOffline" class="wind">{{ item.windSpeed }}</td>
+            <td v-if="!item.isStationOffline" class="pres">{{ item.pressure }}</td>
+            <td v-if="!item.isStationOffline" class="rain">{{ item.precipitation }}</td>
+            <td v-if="!item.isStationOffline" class="wind">
                 <span data-toggle="tooltip" :title="item.todayExtreme.windSpeedMaxTimestamp">
                     {{ item.todayExtreme.windSpeedMax }}
                 </span>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
                     <span data-toggle="tooltip" :title="item.todayExtreme.airTemperatureHighTimestamp">
                         {{ item.todayExtreme.airTemperatureHigh }}
@@ -127,7 +130,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
                         :title="item.todayExtreme.dewPointHighTimestamp">
@@ -141,7 +144,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
                         :title="item.todayExtreme.realHumidityHighTimestamp">
@@ -155,13 +158,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                     </span>
                 </div>
             </td>
-            <td class="rain">{{ item.yesterdayExtreme.precipitation }}</td>
-            <td class="wind">
+            <td v-if="!item.isStationOffline" class="rain">{{ item.yesterdayExtreme.precipitation }}</td>
+            <td v-if="!item.isStationOffline" class="wind">
                 <span data-toggle="tooltip" :title="item.yesterdayExtreme.windSpeedMaxTimestamp">
                     {{ item.yesterdayExtreme.windSpeedMax }}
                 </span>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.airTemperatureHighTimestamp">
@@ -175,7 +178,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.dewPointHighTimestamp">
@@ -189,7 +192,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                     </span>
                 </div>
             </td>
-            <td>
+            <td v-if="!item.isStationOffline">
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
                         :title="item.yesterdayExtreme.realHumidityHighTimestamp">

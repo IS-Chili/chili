@@ -1,7 +1,7 @@
 -- ----------------------------------------------------------------------------
 -- MySQL Workbench Migration
--- Migrated Schemata: hili
--- Source Schemata: , chili
+-- Migrated Schemata: chili
+-- Source Schemata: chili
 -- Created: Thu Sep 12 20:06:31 2019
 -- Workbench Version: 8.0.17
 -- ----------------------------------------------------------------------------
@@ -11,8 +11,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------------------------------------------------------
 -- Schema chili
 -- ----------------------------------------------------------------------------
-DROP SCHEMA IF EXISTS `chili` ;
-CREATE SCHEMA IF NOT EXISTS `chili` DEFAULT CHARACTER SET latin1 ;
+DROP SCHEMA IF EXISTS `chili`;
+CREATE SCHEMA IF NOT EXISTS `chili` DEFAULT CHARACTER SET latin1;
 
 -- ----------------------------------------------------------------------------
 -- Table chili.agricola_202
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`agricola_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`agricola_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -419,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`agricola_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -629,7 +629,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`agricola_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -639,7 +639,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`agricola_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -738,7 +738,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`andalusia_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -837,7 +837,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`andalusia_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -1047,7 +1047,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`andalusia_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -1257,7 +1257,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`andalusia_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -1267,7 +1267,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`andalusia_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -1366,7 +1366,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`ashford_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -1465,7 +1465,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`ashford_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -1675,7 +1675,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`ashford_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -1885,7 +1885,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`ashford_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2100,7 +2100,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`ashford_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2199,7 +2199,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`atmore_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2298,7 +2298,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`atmore_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2508,7 +2508,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`atmore_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2718,7 +2718,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`atmore_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2728,7 +2728,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`atmore_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2827,7 +2827,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`bayminette_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -2926,7 +2926,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`bayminette_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3136,7 +3136,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`bayminette_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3346,7 +3346,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`bayminette_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3356,7 +3356,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`bayminette_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3455,7 +3455,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`castleberry_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3554,7 +3554,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`castleberry_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3764,7 +3764,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`castleberry_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3974,7 +3974,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`castleberry_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -3984,7 +3984,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`castleberry_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4000,7 +4000,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`climatedata` (
   `Precip_TX` DOUBLE NULL DEFAULT NULL COMMENT 'Total Precipitation via TX',
   `PctColl` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`Year`, `Month`, `StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4013,7 +4013,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`contactInfo` (
   `type` VARCHAR(31) NULL DEFAULT NULL,
   `personId` SMALLINT(5) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 AUTO_INCREMENT = 81
 DEFAULT CHARACTER SET = latin1;
 
@@ -4113,7 +4113,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`disl_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4212,7 +4212,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`disl_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4422,7 +4422,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`disl_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4632,7 +4632,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`disl_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4642,7 +4642,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`disl_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4666,7 +4666,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`disl_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4765,7 +4765,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`dixie_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -4864,7 +4864,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`dixie_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5074,7 +5074,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`dixie_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5284,7 +5284,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`dixie_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5294,7 +5294,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`dixie_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5393,7 +5393,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`elberta_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5492,7 +5492,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`elberta_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5702,7 +5702,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`elberta_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5912,7 +5912,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`elberta_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5922,7 +5922,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`elberta_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -5946,7 +5946,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`elberta_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6051,7 +6051,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`extremes` (
   `WndSpd_Vert_Min` DOUBLE NULL DEFAULT NULL,
   `WndSpd_Vert_TMn` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6075,7 +6075,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`extremes_tday` (
   `WndSpd_10m_TMx` DATETIME NULL DEFAULT NULL,
   `WndSpd_10m_Max` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6100,7 +6100,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`extremes_yday` (
   `WndSpd_10m_TMx` DATETIME NULL DEFAULT NULL,
   `WndSpd_10m_Max` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6199,7 +6199,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`fairhope_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6298,7 +6298,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`fairhope_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6508,7 +6508,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`fairhope_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6718,7 +6718,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`fairhope_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6728,7 +6728,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`fairhope_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6752,7 +6752,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`fairhope_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6763,7 +6763,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`filestat` (
   `FileSize` BIGINT(20) UNSIGNED NOT NULL,
   `StatTime` DATETIME NOT NULL,
   PRIMARY KEY (`FileName`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6862,7 +6862,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`florala_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -6961,7 +6961,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`florala_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -7171,7 +7171,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`florala_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -7381,7 +7381,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`florala_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -7391,7 +7391,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`florala_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -7490,7 +7490,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`foley_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -7589,7 +7589,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`foley_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -7799,7 +7799,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`foley_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8009,7 +8009,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`foley_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8019,7 +8019,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`foley_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8043,7 +8043,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`foley_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8142,7 +8142,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`gasque_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8241,7 +8241,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`gasque_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8451,7 +8451,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`gasque_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8661,7 +8661,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`gasque_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8671,7 +8671,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`gasque_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8695,7 +8695,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`gasque_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8794,7 +8794,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`geneva_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -8893,7 +8893,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`geneva_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9103,7 +9103,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`geneva_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9313,7 +9313,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`geneva_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9323,7 +9323,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`geneva_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9422,7 +9422,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`grandbay_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9521,7 +9521,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`grandbay_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9731,7 +9731,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`grandbay_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9941,7 +9941,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`grandbay_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9951,7 +9951,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`grandbay_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -9975,7 +9975,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`grandbay_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -10074,7 +10074,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`jay_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -10173,7 +10173,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`jay_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -10383,7 +10383,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`jay_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -10593,7 +10593,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`jay_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -10603,7 +10603,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`jay_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -10702,7 +10702,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`kinston_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -10801,7 +10801,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`kinston_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11011,7 +11011,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`kinston_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11221,7 +11221,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`kinston_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11231,7 +11231,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`kinston_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11330,7 +11330,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`leakesville_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11429,7 +11429,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`leakesville_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11639,7 +11639,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`leakesville_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11849,7 +11849,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`leakesville_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11859,7 +11859,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`leakesville_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -11958,7 +11958,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`loxley_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12057,7 +12057,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`loxley_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12267,7 +12267,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`loxley_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12477,7 +12477,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`loxley_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12487,7 +12487,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`loxley_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12497,7 +12497,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`madis_status` (
   `StationKey` VARCHAR(20) NOT NULL,
   `TS` DATETIME NOT NULL,
   PRIMARY KEY (`StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12596,7 +12596,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobiledr_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12695,7 +12695,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobiledr_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -12905,7 +12905,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobiledr_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13115,7 +13115,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobiledr_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13125,7 +13125,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobiledr_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13149,7 +13149,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobiledr_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13248,7 +13248,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusa_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13347,7 +13347,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusa_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13557,7 +13557,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusa_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13767,7 +13767,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusa_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13777,7 +13777,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusa_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13801,7 +13801,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusa_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13900,7 +13900,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusaw_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -13999,7 +13999,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusaw_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14209,7 +14209,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusaw_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14419,7 +14419,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusaw_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14429,7 +14429,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusaw_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14474,7 +14474,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mobileusaw_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14484,7 +14484,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`monthly_qcgraphs` (
   `Year` CHAR(4) NOT NULL,
   `Month` CHAR(2) NOT NULL,
   PRIMARY KEY (`Year`, `Month`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14514,7 +14514,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`monthly_summary` (
   `WdSpd_Max` DOUBLE NULL DEFAULT NULL COMMENT 'Maximum Wind Speed 10m',
   `WdSpd_Max_TS` DATETIME NULL DEFAULT NULL COMMENT 'Maximum Wind Speed 10m Time',
   PRIMARY KEY (`Year`, `Month`, `StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14613,7 +14613,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mtvernon_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14712,7 +14712,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mtvernon_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -14922,7 +14922,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mtvernon_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15132,7 +15132,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mtvernon_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15142,7 +15142,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`mtvernon_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15156,7 +15156,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`nonAmbientSourceData` (
   `azimuth` DOUBLE NOT NULL,
   `material` VARCHAR(63) NOT NULL,
   PRIMARY KEY (`stationKey`, `distance`, `azimuth`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15170,7 +15170,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`obstructionData` (
   `height` DOUBLE NULL DEFAULT NULL,
   `type` VARCHAR(63) NULL DEFAULT NULL,
   PRIMARY KEY (`stationKey`, `azimuth`, `distance`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15269,7 +15269,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`pascagoula_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15368,7 +15368,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`pascagoula_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15578,7 +15578,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`pascagoula_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15788,7 +15788,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`pascagoula_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15798,7 +15798,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`pascagoula_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15822,7 +15822,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`pascagoula_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -15845,7 +15845,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`people` (
   `onlineResource` VARCHAR(255) NULL DEFAULT NULL,
   `affiliation` CHAR(63) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = latin1;
 
@@ -15934,7 +15934,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`poarch_202` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16033,7 +16033,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`poarch_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16043,7 +16043,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`poarch_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16150,7 +16150,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`public` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16164,7 +16164,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`rainfall` (
   `Precip_TX` DOUBLE NULL DEFAULT NULL,
   `PctColl` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`Year`, `Month`, `StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16263,7 +16263,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`robertsdale_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16362,7 +16362,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`robertsdale_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16572,7 +16572,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`robertsdale_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16782,7 +16782,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`robertsdale_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16792,7 +16792,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`robertsdale_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16816,7 +16816,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`robertsdale_voc` (
   `Raeguard_Avg` DOUBLE NULL DEFAULT NULL,
   `Batt_Min` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16827,7 +16827,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`roughnessData` (
   `angleToNorth` DOUBLE NOT NULL,
   `roughnessClassification` TINYINT(4) NOT NULL,
   PRIMARY KEY (`stationKey`, `angleToNorth`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -16926,7 +16926,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`saraland_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17025,7 +17025,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`saraland_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17235,7 +17235,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`saraland_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17445,7 +17445,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`saraland_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17455,7 +17455,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`saraland_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17473,7 +17473,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`sensorData` (
   `commissioningDate` DATETIME NULL DEFAULT NULL,
   `misc` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`X`, `Y`, `Z`, `manufacturer`, `modelNo`, `stationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17494,7 +17494,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`siteData` (
   `soilType` VARCHAR(255) NULL DEFAULT NULL,
   `timezone` VARCHAR(5) NULL DEFAULT NULL,
   PRIMARY KEY (`stationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17508,7 +17508,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`site_visit` (
   `PurposeOfVisit` TEXT NULL DEFAULT NULL,
   `WorkPerformed` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`stationKey`, `Arrive`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 -- ----------------------------------------------------------------------------
@@ -17526,7 +17526,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`stormtrack` (
   `wind_kts` FLOAT NULL DEFAULT NULL,
   `pres_mb` FLOAT NULL DEFAULT NULL,
   PRIMARY KEY (`year`, `stormnum`, `ts`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17536,7 +17536,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`test` (
   `RecId` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `TS` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`RecId`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = latin1;
 
@@ -17636,7 +17636,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`walnuthill_202` (
   `SoilCond_tc` DOUBLE NULL DEFAULT NULL,
   `SoilWaCond_tc` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17735,7 +17735,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`walnuthill_202_flags` (
   `SoilCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   `SoilWaCond_tc_flag` TINYINT(3) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -17945,7 +17945,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`walnuthill_224` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -18155,7 +18155,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`walnuthill_260` (
   `WndSpd_2m_Std` DOUBLE NULL DEFAULT NULL,
   `WndSpd_10m_Std` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`TS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -18165,7 +18165,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`walnuthill_public_perf` (
   `CollectTS` DATETIME NOT NULL,
   `ArriveTS` DATETIME NOT NULL,
   PRIMARY KEY (`CollectTS`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -18177,7 +18177,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`windgust` (
   `GustTime` DATETIME NULL DEFAULT NULL,
   `GustSpeed` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
@@ -18189,7 +18189,7 @@ CREATE TABLE IF NOT EXISTS `chili`.`windtest` (
   `GustTime` DATETIME NULL DEFAULT NULL,
   `GustSpeed` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`StationKey`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------

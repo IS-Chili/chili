@@ -11,11 +11,21 @@ const App = new Vue({
   data: function () {
     return {
       realtimeData: [],
-      now: new Date()
+      now: new Date(),
+      model: {
+        isMetricUnits: false,
+        isWindChill: null
+      }
     }
   },
   created: function() {
     const self = this;
+
+    // Set model from localStorage
+    this.model.isMetricUnits = localStorage.getItem('isMetricUnits') === 'true';
+    if(localStorage.getItem('isWindChill')) {
+      this.model.isWindChill = localStorage.getItem('isWindChill') === 'true';
+    }
 
     // Get data on load
     self.getData();
@@ -30,11 +40,26 @@ const App = new Vue({
       return moment(this.now).format('MM/DD/YYYY HH:mm:ss');
     }
   },
+  watch: {
+    "model.isMetricUnits": function (value) {
+      localStorage.setItem('isMetricUnits', value.toString());
+      this.getData();
+    },
+    "model.isWindChill": function (value) {
+      localStorage.setItem('isWindChill', value.toString());
+      this.getData();
+    }
+  },
   methods: {
     getData: function() {
       const self = this;
 
-      axios.get('/data/RealtimeData')
+      axios.get('/data/RealtimeData', {
+        params: {
+          isMetricUnits: self.model.isMetricUnits,
+          isWindChill: self.model.isWindChill
+        }
+      })
       .then(function (response) {
         self.realtimeData = response.data;
         Vue.nextTick(function () {

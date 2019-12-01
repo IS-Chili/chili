@@ -5,14 +5,12 @@
 // Version: 1.0.0
 // ********************************************************************************************************************************************
 
-using Usa.chili.Common;
 using Usa.chili.Data;
 using Usa.chili.Domain;
 using Usa.chili.Dto;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,9 +40,8 @@ namespace Usa.chili.Services
             return _dbContext.Public
                 .AsNoTracking()
                 .Where(x => x.StationKey == station.StationKey)
-                //.Where(x => x.Ts.HasValue && x.Ts.Value >= DateTime.Now.AddHours(-1))
                 .AsEnumerable()
-                .Select(p => p.ConvertUnits())
+                .Select(p => p.ConvertUnits(false, null))
                 .Select(p => new StationObservationDto {
                     StationId = station.Id,
                     StationName = station.DisplayName,

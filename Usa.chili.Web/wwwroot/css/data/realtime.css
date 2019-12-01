@@ -7,6 +7,10 @@
   margin-right: auto;
 }
 
+table {
+  background-color: white;
+}
+
 thead {
   position: relative;
   display: block;
