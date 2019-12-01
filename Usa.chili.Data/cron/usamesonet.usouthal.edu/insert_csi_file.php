@@ -3,45 +3,25 @@
 // Revision history:
 // 2011-09-29 dnb Original version
 // 2018-05-08 wdt Added support for North Ashford station
+// 2019-11-29 Utilize PDO and the new station and station data tables
 //
 // Notes:
 // This script implements improvements on an eariler script (insert_loggernet_file.php)
 // 1) Inserts only database columns that have a LoggerNet table file counterpart
 
-$db_host = "chiliweb.usouthal.edu";
+$db_host = "localhost";
 $db_username =  "chilistudent";
 $db_password = "chilistudent";
 $db_database = "chili";
+$charset = 'latin1';
 
-$station_arr = array('agricola',
-                     'andalusia',
-                     'ashford',
-                     'atmore',
-                     'bayminette',
-                     'castleberry',
-                     'disl',
-                     'dixie',
-                     'elberta',
-                     'fairhope',
-                     'florala',
-                     'foley',
-                     'gasque',
-                     'geneva',
-                     'grandbay',
-                     'jay',
-                     'kinston',
-                     'leakesville',
-                     'loxley',
-                     'mobiledr',
-                     'mobileusa',
-                     'mobileusaw',
-                     'mtvernon',
-					 'ashford_n',
-                     'pascagoula',
-					 'poarch',
-                     'robertsdale',
-                     'saraland',
-                     'walnuthill');
+$dsn = "mysql:host=$db_host;dbname=$db_database;charset=$charset";
+
+$options = [
+  PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+  PDO::ATTR_EMULATE_PREPARES   => false
+];
 
 //
 // Verify that the correct number of arguments was specified
@@ -49,13 +29,29 @@ $station_arr = array('agricola',
 if ($argc != 4) {
   die("usage: insert_csi_file <stationkey> <table_id> <filename>\n");
 }
+
+//
+// Connect to database
+//
+try {
+  $pdo = new PDO($dsn, $db_username, $db_password, $options);
+} catch (\PDOException $e) {
+  throw new \PDOException($e->getMessage(), (int)$e->getCode());
+}
+
 //
 // Verify that the station key parameter is valid
 //
 $station_key = strtolower($argv[1]);
-if (!in_array($station_key, $station_arr)) {
+
+$stmt = $pdo->prepare('SELECT station.id FROM chili.station WHERE station.StationKey = :stationKey LIMIT 1');
+$stmt->execute(['stationKey' => $station_key]);
+$stationId = $stmt->fetchColumn();
+
+if ($stationId == null) {
   die("Invalid station key ($station_key) parameter passed, exiting...\n");
 }
+
 //
 // Verify that the table_id parameter is valid
 //
@@ -67,6 +63,7 @@ if ($table_id != "202" &&
     $table_id != "voc") {
   die("Invalid table_id ($table_id) parameter passed, exiting...\n");
 }
+
 //
 // Verify the requested file exists and open it
 //
@@ -86,17 +83,6 @@ $tbl = $station_key . "_" . $table_id;
 // Use new table for 202
 if($table_id == '202') {
   $tbl = 'station_data';
-}
-//
-// Connect to database and select for use
-//
-$connection = mysql_connect($db_host,$db_username,$db_password);
-if (!$connection) {
-  die("Could not connect to the database: " . mysql_error() . "\n");
-}
-$db_select = mysql_select_db($db_database);
-if (!$db_select) {
-  die("Could not select the database: " . mysql_error() . "\n");
 }
 
 // 
@@ -131,24 +117,24 @@ if ($j) {
 //
 // Retrieve the column names for this database table
 //
-$query = sprintf("select * from %s order by TS desc limit 1",$tbl);
-$result = mysql_query($query);
-if (!$result) {
-  die("Could not query the database: " . mysql_error() . "\n");
-}
-if (mysql_num_rows($result) == 0) {
+$stmt = $pdo->prepare("SELECT * FROM $tbl ORDER BY TS DESC LIMIT 1");
+$stmt->execute();
+$row = $stmt->fetch();
+
+if (!$row) {
   die("No data available in $tbl\n");
 }
-$row = mysql_fetch_assoc($result);
-$dbtcnt = count($row);
+
 $dbtcol = array();
-for ($c=0; $c < $dbtcnt; $c++) {
-  $dbtcol[$c] = mysql_field_name($result, $c);
+
+foreach($row as $key=>$value)
+{
+  array_push($dbtcol, $key);
 }
-mysql_free_result($result);
 
 while (($rec = fgetcsv($handle, 0, ",")) != FALSE) {
-  $query = "insert ignore $tbl set ";
+  $ts = $rec[0];
+  $query = "INSERT IGNORE $tbl SET ";
   // Set any empty or "NAN" fields to NULL so MySQL will store a NULL
   // and build query string
   for ($c=0; $c < $csicnt; $c++) {
@@ -163,12 +149,16 @@ while (($rec = fgetcsv($handle, 0, ",")) != FALSE) {
   }
   $query = substr($query,0,-1);
   //echo $query . "\n";
-  $result = mysql_query($query);
-  if (!$result) {
+
+  $stmt = $pdo->prepare($query);
+  $stmt->execute();
+  if ($stmt->rowCount() == 0) {
     die("Unable to insert $ts row from $fn into $tbl , \$query : $query\n");
   }
 }
 
-mysql_close($connection);
+$pdo = null;
 fclose($handle);
+
+echo "Data inserted into $tbl\n";
 ?>

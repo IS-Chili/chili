@@ -32,7 +32,7 @@ const StationMap = function() {
     // Add the station points to the map
     stationList.forEach(function(station) {
       const stationLink = "<a class='font-weight-bold' href='/Data/Station?id=" + station.id + "'>" + station.displayName + "</a>";
-      const stationData = "<br>High: 100 &deg;F<br>Low: 70 &deg;F";
+      const stationData = "<br>High: " + (station.airTemperatureHigh || 'N/A') + "&deg;F<br>Low: " + (station.airTemperatureLow || 'N/A') + "&deg;F";
       station.dataText = stationLink + stationData;
       addPoint(station);
     });

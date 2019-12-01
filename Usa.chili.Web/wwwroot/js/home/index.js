@@ -1,15 +1,6 @@
-const USACampusWestStationId = 23;
+const USACampusWestStationId = 307;
 
 $(function () {
-  //populateStationDropdown_Jquery();
-  //getStationDataAndDraw(USACampusWestStationId);
-
-  /*
-  $('#stationSelection').on('change', function() {
-    getStationDataAndDraw($(this).val());
-  });
-  */
-
   $('#dataSetSelection').select2(Core.select2Options);
 
   $('#dataSetSelection').on('change', function() {
@@ -17,34 +8,32 @@ $(function () {
   });
 });
 
-function populateStationDropdown_Jquery() {
-  axios.get(ajaxUrls.stationList)
-    .then(function (response) {
-      response.data.forEach(function(station) {
-        const option = $('<option>');
-        option.text(station.displayName);
-        option.val(station.id);
-        if(station.id === 1) {
-          option.prop('selected', true);
-        }
-        $('#stationSelection').append(option);
-      });
-
-      $('#stationSelection').select2(select2Options);
-
-      $('#stationSelection').on('change', function() {
-        getStationDataAndDraw($(this).val());
-      });
-    })
-    .catch(function (error) {
-      console.log('populateStationDropdown failed', error);
-    });
-}
+const App = new Vue({
+  el: '#app',
+  data: function () {
+    return {
+      stations: [],
+      stationData: {},
+      model: {
+        stationId: USACampusWestStationId
+      }
+    }
+  },
+  created: function() {
+    Core.populateStationDropdown(this, true);
+  },
+  watch: {
+    "model.stationId": function(val) {
+      getStationDataAndDraw(val);
+    }
+  }
+});
 
 function getStationDataAndDraw(stationId) {
   axios.get('/data/StationObservation?id=' + stationId)
     .then(function (response) {
       if(response.data != null) {
+        App.stationData = response.data;
         drawStation(response.data);
       }
     })
@@ -65,13 +54,13 @@ function drawStation(stationData) {
 
   const canvas = $("#stationObservationsCanvas");
   const context = canvas.get(0).getContext('2d');
-  canvas.attr("width", canvas.width());
-  canvas.attr("height", canvas.height());
+  canvas.prop("width", canvas.width());
+  canvas.prop("height", canvas.height());
 
   const canvasDIV = $("#stationObservationsCanvasDiv");
   divWidth = canvasDIV.width() - 10;
-  canvas.attr("width", divWidth);
-  canvas.attr("height", divWidth);
+  canvas.prop("width", divWidth);
+  canvas.prop("height", divWidth);
 
   context.clearRect(0, 0, canvas.width(), canvas.height());
   context.closePath();
@@ -309,36 +298,11 @@ function drawStation(stationData) {
 
 function changeRegional(index) {
 	const image = $("#regionalImage");
-	if (index == 1) {
-		image.attr("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png");
-	} else if (index == 2) {
-		image.attr("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Dewpoint.png");
-	} else if (index == 3) {
-		image.attr("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Pressure.png");
+	if (index === '1') {
+		image.prop("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png");
+	} else if (index === '2') {
+		image.prop("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Dewpoint.png");
+	} else if (index === '3') {
+		image.prop("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Pressure.png");
 	}
 }
-
-const App = new Vue({
-  el: '#app',
-  data: function () {
-    return {
-      stations: [],
-      model: {
-        stationId: 23
-      }
-    }
-  },
-  created: function() {
-    Core.populateStationDropdown(this, true);
-  },
-  computed: {
-    meteorologicalDataLink: function() {
-      return '/Data/Station?id=' + this.model.stationId;
-    }
-  },
-  watch: {
-    "model.stationId": function(val) {
-      getStationDataAndDraw(val);
-    }
-  }
-});

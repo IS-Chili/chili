@@ -10,11 +10,16 @@ const App = new Vue({
     return {
       stations: [],
       model: {
-        stationId: 1
+        stationId: 201
       }
     }
   },
   created: function() {
     Core.populateStationDropdown(this, false);
+  },
+  methods: {
+    download: function () {
+      // TODO
+    }
   }
 });

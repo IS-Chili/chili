@@ -8,14 +8,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Usa.chili.Domain;
 using Usa.chili.Dto;
 
 namespace Usa.chili.Services
 {
     public interface IStationDataService
     {
-        Task<List<RealtimeDataDto>> ListRealtimeData();
+        Task<List<RealtimeDataDto>> ListRealtimeData(bool isMetricUnits, bool? isWindChill);
         Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits);
     }
 }

@@ -21,5 +21,7 @@ namespace Usa.chili.Domain
         public double? Rh2mMin { get; set; }
         public DateTime? WndSpd10mTmx { get; set; }
         public double? WndSpd10mMax { get; set; }
+
+        public virtual Station StationKeyNavigation { get; set; }
     }
 }

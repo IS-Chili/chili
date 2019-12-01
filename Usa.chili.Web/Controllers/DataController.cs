@@ -21,17 +21,20 @@ namespace Usa.chili.Web.Controllers
         private readonly IStationService _stationService;
         private readonly IStationDataService _stationDataService;
         private readonly IPublicService _publicService;
+        private readonly IVariableService _variableService;
 
         public DataController(
             ILogger<DataController> logger,
             IStationService stationService,
             IStationDataService stationDataService,
-            IPublicService publicService)
+            IPublicService publicService,
+            IVariableService variableService)
         {
             _logger = logger;
             _stationService = stationService;
             _stationDataService = stationDataService;
             _publicService = publicService;
+            _variableService = variableService;
         }
 
         [HttpGet("Realtime")]
@@ -41,9 +44,9 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("RealtimeData")]
-        public async Task<IActionResult> RealtimeData()
+        public async Task<IActionResult> RealtimeData(bool isMetricUnits, bool? isWindChill)
         {
-            return new JsonResult(await _stationDataService.ListRealtimeData());
+            return new JsonResult(await _stationDataService.ListRealtimeData(isMetricUnits, isWindChill));
         }
 
         [HttpGet("CustomProducts")]
@@ -59,6 +62,12 @@ namespace Usa.chili.Web.Controllers
         public IActionResult Station(int? id)
         {
             return View();
+        }
+
+        [HttpGet("StationInfo")]
+        public async Task<IActionResult> StationInfo(int id)
+        {
+            return new JsonResult(await _stationService.GetStationInfo(id));
         }
 
         [HttpGet("StationMap")]
@@ -101,6 +110,18 @@ namespace Usa.chili.Web.Controllers
         public IActionResult VOC()
         {
             return View();
+        }
+
+        [HttpGet("VariableList")]
+        public async Task<IActionResult> VariableList()
+        {
+            return new JsonResult(await _variableService.ListAllVariables());
+        }
+
+        [HttpGet("VariableTypeList")]
+        public async Task<IActionResult> VariableTypeList()
+        {
+            return new JsonResult(await _variableService.ListAllVariableTypes());
         }
 
         [HttpGet("ActiveStationList")]

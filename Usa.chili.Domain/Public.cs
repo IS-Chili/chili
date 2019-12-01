@@ -104,5 +104,7 @@ namespace Usa.chili.Domain
         public double? SoilCond { get; set; }
         public double? SoilCondTc { get; set; }
         public double? SoilWaCondTc { get; set; }
+
+        public virtual Station StationKeyNavigation { get; set; }
     }
 }
