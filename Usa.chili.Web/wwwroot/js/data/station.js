@@ -9,7 +9,7 @@ const App = new Vue({
   data: function () {
     return {
       statInfo: {},
-      metData: {},
+     // metData: {},
       now: new Date(),
       model: {
         stationId: 23,
@@ -57,10 +57,10 @@ const App = new Vue({
         self.statInfo = response.data;
       })
       .catch(function (error) {
-        console.log('getMeteorologicalData failed', error);
+        console.log('getStationInfo failed', error);
       });
 
-      axios.get('/data/StationData', {
+      /*axios.get('/data/StationData', {
         params: {
           stationid: this.model.stationId,
           dateTime: this.model.dateTime
@@ -79,7 +79,7 @@ const App = new Vue({
       })
       .catch(function (error) {
         console.log('getMeteorologicalData failed', error);
-      });
+      });*/
     }
   },
   watch: {
