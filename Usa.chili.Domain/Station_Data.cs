@@ -16,7 +16,7 @@ namespace Usa.chili.Domain
         public int? DayOfYear {get; set;}
         public int? Hour {get; set;}
         public int? Minute {get; set;}
-        public int? StationId {get; set;}
+        public int StationId {get; set;}
         public virtual Station Station {get; set;} 
         public double? Lat {get; set;}
         public double? Lon {get; set;}

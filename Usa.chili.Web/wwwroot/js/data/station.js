@@ -9,26 +9,31 @@ const App = new Vue({
   data: function () {
     return {
       statInfo: {},
-      metData: {},
-      now: new Date()
+      //metData: {},
+      now: new Date(),
+      model: {
+        stationId: 23,
+        dateTime: now
+      }
     }
   },
   created: function() {
     const self = this;
 
+    Core.populateStationDropdown(this, false);
+
     // Get parameters from URL for stationID and dateTime 
-    var queryParams = new Array();
-    Core.getURLParameters(this);
+    //var queryParams = new Array();
+    //Core.getURLParameters(this);
 
     // Get data on load
-    self.getData(queryParams);
+    self.getData();
 
     // Get data again every 5 minutes
     setInterval(function() {
       self.getData();
     }, 300000);
 
-    Core.populateStationDropdown(this, false);
   },
   computed: {
     currentDate: function() {
@@ -39,14 +44,14 @@ const App = new Vue({
     }
   },
   methods: {
-    getData: function(stationParams) {
+    getData: function() {
       const self = this;
 
       axios.get('/data/StationInfo', {
-          params: {
-            stationid: stationParams.id,
-            dateTime: stationParams.dateTime
-          }
+        params: {
+          stationid: this.model.stationId,
+          dateTime: this.model.dateTime
+        }
       })
       .then(function (response) {
         self.statInfo = response.data;
@@ -55,11 +60,11 @@ const App = new Vue({
         console.log('getMeteorologicalData failed', error);
       });
 
-      axios.get('/data/StationData', {
-          params: {
-            stationid: stationParams.id,
-            dateTime: stationParams.dateTime
-          }
+      /*axios.get('/data/StationData', {
+        params: {
+          stationid: this.model.stationId,
+          dateTime: this.model.dateTime
+        }
       }) 
       .then(function (response) {
         self.metData = response.data;
@@ -74,7 +79,16 @@ const App = new Vue({
       })
       .catch(function (error) {
         console.log('getMeteorologicalData failed', error);
-      });
+      });*/
+    }
+  },
+  watch: {
+    "model.stationId": function() {
+      self.getData();
+    },
+
+    "model.dateTime": function() {
+      self.getData();
     }
   }
 });

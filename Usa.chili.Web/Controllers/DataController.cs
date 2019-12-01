@@ -62,13 +62,13 @@ namespace Usa.chili.Web.Controllers
         [HttpGet("Metadata")]
         public IActionResult Metadata(int? id) => View();
 
-       /* [HttpGet("Station")]
+        [HttpGet("Station")]
         public IActionResult Station()
         {
            return View();
-        }*/
+        }
 
-        [HttpGet("Station")]
+        [HttpGet("StationData")]
         public async Task<IActionResult> StationData(int stationid, DateTime? dateTime) 
         {   
          return new JsonResult(await _stationDataService.GetMeteorologicalData(stationid, dateTime));
