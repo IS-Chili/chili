@@ -14,5 +14,7 @@ namespace Usa.chili.Dto
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public bool IsActive { get; set; }
+        public double? AirTemperatureHigh { get; set; }
+        public double? AirTemperatureLow { get; set; }
     }
 }

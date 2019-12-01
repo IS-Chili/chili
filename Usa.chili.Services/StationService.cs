@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Usa.chili.Domain;
 
 namespace Usa.chili.Services
 {
@@ -60,7 +61,7 @@ namespace Usa.chili.Services
         }
 
         public async Task<List<StationMapDto>> GetStationMapData() {
-            return await _dbContext.Station
+            List<StationMapDto> stationMapDtos = await _dbContext.Station
                 .AsNoTracking()
                 .Select(x => new StationMapDto {
                     Id = x.Id,
@@ -70,6 +71,21 @@ namespace Usa.chili.Services
                     IsActive = x.IsActive
                 })
                 .ToListAsync();
+
+            // Get high and low temperatures for each station
+            stationMapDtos.ForEach(dto => {
+                ExtremesTday extremesTdayData = _dbContext.ExtremesTday
+                    .Where(x => x.StationKeyNavigation.Id == dto.Id)
+                    .Select(x => x.ConvertUnits(false))
+                    .SingleOrDefault();
+
+                if(extremesTdayData != null) {
+                    dto.AirTemperatureHigh = extremesTdayData.AirT2mMax;
+                    dto.AirTemperatureLow = extremesTdayData.AirT2mMin;
+                }
+            });
+
+            return stationMapDtos;
         }
 
          public async Task<List<DropdownDto>> ListAllStations() {
