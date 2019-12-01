@@ -79,7 +79,7 @@ namespace Usa.chili.Web.Controllers
         {
             return new JsonResult(await _stationService.GetStationInfo(stationid, dateTime));
         }
-
+        
         [HttpGet("StationMap")]
         public async Task<IActionResult> StationMap()
         {
