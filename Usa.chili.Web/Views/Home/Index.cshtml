@@ -24,7 +24,7 @@ ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated we
                             <tr>
                                 <th>Location/Obs time</th>
                                 <th class="text-center">Temp</th>
-                                <th class="text-center">HtIdx</th>
+                                <th class="text-center">{{ stationData.isWindChill ? 'Wdchl' : 'HtIdx' }}</th>
                                 <th class="text-center">DewPt</th>
                                 <th class="text-center">Hum</th>
                                 <th class="text-center">WdDir</th>
