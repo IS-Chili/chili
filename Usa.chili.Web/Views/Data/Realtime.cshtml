@@ -12,23 +12,23 @@ ViewBag.Description = "USA Mesonet Realtime Display";
 </environment>
 }
 
-<div class="container bg-core-blue">
+<div class="head-container bg-core-blue">
     <br>
     <h1 class="text-center">USA Mesonet Realtime Display</h1>
     <h2 class="text-center">{{ nowFormated }} CST</h2>
     <br>
 </div>
-<div class="container bg-core-translucent">
+<div class="head-container bg-core-translucent">
     <br>
     <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2">
+        <div class="form-group col-xs-2 mr-2">
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="windchill">
                 <label class="custom-control-label" for="windchill">Display Windchill</label>
             </div>
         </div>
 
-        <div class="form-group col-lg-2">
+        <div class="form-group col-xs-2">
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="metricUnits">
                 <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
@@ -37,7 +37,7 @@ ViewBag.Description = "USA Mesonet Realtime Display";
     </div>
 </div>
 
-<table id="real_time_table">
+<table>
     <thead>
         <tr>
             <th colspan="1"></th>
@@ -94,9 +94,8 @@ ViewBag.Description = "USA Mesonet Realtime Display";
         <tr v-for='item in realtimeData'>
             <td>
                 <div>
-                    <a v-bind:href="'/Data/Station?id=' + item.stationId">
-                        <span class="font-weight-bold"
-                            style=" font: bold 11px Georgia, serif; word-wrap:break-word;">{{ item.stationName }}</span>
+                    <a :href="'/Data/Station?id=' + item.stationId">
+                        <span class="font-weight-bold font-georgia">{{ item.stationName }}</span>
                     </a>
                 </div>
                 <div>
@@ -112,18 +111,18 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             <td class="pres">{{ item.pressure }}</td>
             <td class="rain">{{ item.todayExtreme.precipitation }}</td>
             <td class="wind">
-                <span data-toggle="tooltip" v-bind:title="item.todayExtreme.windSpeedMaxTimestamp">
+                <span data-toggle="tooltip" :title="item.todayExtreme.windSpeedMaxTimestamp">
                     {{ item.todayExtreme.windSpeedMax }}
                 </span>
             </td>
             <td>
                 <div>
-                    <span data-toggle="tooltip" v-bind:title="item.todayExtreme.airTemperatureHighTimestamp">
+                    <span data-toggle="tooltip" :title="item.todayExtreme.airTemperatureHighTimestamp">
                         {{ item.todayExtreme.airTemperatureHigh }}
                     </span>
                 </div>
                 <div>
-                    <span data-toggle="tooltip" v-bind:title="item.todayExtreme.airTemperatureLowTimestamp">
+                    <span data-toggle="tooltip" :title="item.todayExtreme.airTemperatureLowTimestamp">
                         {{ item.todayExtreme.airTemperatureLow }}
                     </span>
                 </div>
@@ -131,13 +130,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             <td>
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.dewPointHighTimestamp">
+                        :title="item.todayExtreme.dewPointHighTimestamp">
                         {{ item.todayExtreme.dewPointHigh }}
                     </span>
                 </div>
                 <div>
                     <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.dewPointLowTimestamp">
+                        :title="item.todayExtreme.dewPointLowTimestamp">
                         {{ item.todayExtreme.dewPointLow }}
                     </span>
                 </div>
@@ -145,33 +144,33 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             <td>
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.realHumidityHighTimestamp">
+                        :title="item.todayExtreme.realHumidityHighTimestamp">
                         {{ item.todayExtreme.realHumidityHigh }}
                     </span>
                 </div>
                 <div>
                     <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.todayExtreme.realHumidityLowTimestamp">
+                        :title="item.todayExtreme.realHumidityLowTimestamp">
                         {{ item.todayExtreme.realHumidityLow }}
                     </span>
                 </div>
             </td>
             <td class="rain">{{ item.yesterdayExtreme.precipitation }}</td>
             <td class="wind">
-                <span data-toggle="tooltip" v-bind:title="item.yesterdayExtreme.windSpeedMaxTimestamp">
+                <span data-toggle="tooltip" :title="item.yesterdayExtreme.windSpeedMaxTimestamp">
                     {{ item.yesterdayExtreme.windSpeedMax }}
                 </span>
             </td>
             <td>
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.airTemperatureHighTimestamp">
+                        :title="item.yesterdayExtreme.airTemperatureHighTimestamp">
                         {{ item.yesterdayExtreme.airTemperatureHigh }}
                     </span>
                 </div>
                 <div>
                     <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.airTemperatureLowTimestamp">
+                        :title="item.yesterdayExtreme.airTemperatureLowTimestamp">
                         {{ item.yesterdayExtreme.airTemperatureLow }}
                     </span>
                 </div>
@@ -179,13 +178,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             <td>
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.dewPointHighTimestamp">
+                        :title="item.yesterdayExtreme.dewPointHighTimestamp">
                         {{ item.yesterdayExtreme.dewPointHigh }}
                     </span>
                 </div>
                 <div>
                     <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.dewPointLowTimestamp">
+                        :title="item.yesterdayExtreme.dewPointLowTimestamp">
                         {{ item.yesterdayExtreme.dewPointLow }}
                     </span>
                 </div>
@@ -193,13 +192,13 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             <td>
                 <div>
                     <span class="text-color-high" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.realHumidityHighTimestamp">
+                        :title="item.yesterdayExtreme.realHumidityHighTimestamp">
                         {{ item.yesterdayExtreme.realHumidityHigh }}
                     </span>
                 </div>
                 <div>
                     <span class="text-color-low" data-toggle="tooltip"
-                        v-bind:title="item.yesterdayExtreme.realHumidityLowTimestamp">
+                        :title="item.yesterdayExtreme.realHumidityLowTimestamp">
                         {{ item.yesterdayExtreme.realHumidityLow }}
                     </span>
                 </div>

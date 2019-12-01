@@ -1,7 +1,6 @@
-table {
+.head-container, table {
   max-width: 1250px;
   width: 95vw;
-  background-color: white;
   overflow: hidden;
   border-collapse: collapse;
   margin-left: auto;

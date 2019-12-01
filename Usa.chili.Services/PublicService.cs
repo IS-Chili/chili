@@ -46,6 +46,7 @@ namespace Usa.chili.Services
                 .AsEnumerable()
                 .Select(p => p.ConvertUnits())
                 .Select(p => new StationObservationDto {
+                    StationId = station.Id,
                     StationName = station.DisplayName,
                     StationTimestamp = p.Ts ?? DateTime.Now,
                     AirTemperature = Math.Round(p.AirT2m ?? 0, 2),

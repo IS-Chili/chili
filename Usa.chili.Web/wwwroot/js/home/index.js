@@ -2,54 +2,44 @@ const USACampusWestStationId = 307;
 
 $(function () {
   $('#dataSetSelection').select2(Core.select2Options);
- 
 
   $('#dataSetSelection').on('change', function() {
     changeRegional($(this).val());
   });
 });
 
+const App = new Vue({
+  el: '#app',
+  data: function () {
+    return {
+      stations: [],
+      stationData: {},
+      model: {
+        stationId: USACampusWestStationId
+      }
+    }
+  },
+  created: function() {
+    Core.populateStationDropdown(this, true);
+  },
+  watch: {
+    "model.stationId": function(val) {
+      getStationDataAndDraw(val);
+    }
+  }
+});
+
 function getStationDataAndDraw(stationId) {
   axios.get('/data/StationObservation?id=' + stationId)
     .then(function (response) {
       if(response.data != null) {
+        App.stationData = response.data;
         drawStation(response.data);
-        drawMapTable(response.data);
       }
     })
     .catch(function (error) {
       console.log('getStationDataAndDraw failed', error);
     });
-}
-
-/*function drawMapTable(stationData){
-  const stationTemp = Math.round(Number(stationData.airTemperature));
-  const stationDew = Math.round(Number(stationData.dewPoint));
-  const stationRH = Math.round(Number(stationData.realHumidity));
-  const stationWinD = Math.round(Number(stationData.windDirection));
-  const stationWinS = Math.round(Number(stationData.windSpeed));
-  const stationPrec = Number(stationData.precipitation);
-  const stationPres = Number(stationData.pressure);
-  const stationTS = stationData.stationTimestamp;
-  
-
-}
-*/
-
-function drawMapTable(stationData){
-  const stationName = document.getElementById("Location").innerText = stationData.stationName;
-  const stationTemp = document.getElementById("stationTemp").innerText = Math.round(Number(stationData.airTemperature));
-  const stationDew = document.getElementById("stationDew").innerText = Math.round(Number(stationData.dewPoint));
-  const stationRH = document.getElementById("stationRH").innerText = Math.round(Number(stationData.realHumidity));
-  const stationWinD = document.getElementById("stationWinD").innerText = Math.round(Number(stationData.windDirection));
-  const stationWinS = document.getElementById("stationWinS").innerText = Math.round(Number(stationData.windSpeed));
-  const stationPrec = document.getElementById("stationPrec").innerText = Number(stationData.precipitation);
-  const stationPres = document.getElementById("stationPres").innerText = Number(stationData.pressure);
-  const stationTS = document.getElementById("stationTS").innerText = stationData.stationTimestamp;
-
- 
-
-
 }
 
 function drawStation(stationData) {
@@ -64,13 +54,13 @@ function drawStation(stationData) {
 
   const canvas = $("#stationObservationsCanvas");
   const context = canvas.get(0).getContext('2d');
-  canvas.attr("width", canvas.width());
-  canvas.attr("height", canvas.height());
+  canvas.prop("width", canvas.width());
+  canvas.prop("height", canvas.height());
 
   const canvasDIV = $("#stationObservationsCanvasDiv");
   divWidth = canvasDIV.width() - 10;
-  canvas.attr("width", divWidth);
-  canvas.attr("height", divWidth);
+  canvas.prop("width", divWidth);
+  canvas.prop("height", divWidth);
 
   context.clearRect(0, 0, canvas.width(), canvas.height());
   context.closePath();
@@ -308,36 +298,11 @@ function drawStation(stationData) {
 
 function changeRegional(index) {
 	const image = $("#regionalImage");
-	if (index == 1) {
-		image.attr("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png");
-	} else if (index == 2) {
-		image.attr("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Dewpoint.png");
-	} else if (index == 3) {
-		image.attr("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Pressure.png");
+	if (index === '1') {
+		image.prop("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Temp.png");
+	} else if (index === '2') {
+		image.prop("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Dewpoint.png");
+	} else if (index === '3') {
+		image.prop("src", "http://weather.southalabama.edu/images/surface/GulfCoast_CHILI_Pressure.png");
 	}
 }
-
-const App = new Vue({
-  el: '#app',
-  data: function () {
-    return {
-      stations: [],
-      model: {
-        stationId: USACampusWestStationId
-      }
-    }
-  },
-  created: function() {
-    Core.populateStationDropdown(this, true);
-  },
-  computed: {
-    meteorologicalDataLink: function() {
-      return '/Data/Station?id=' + this.model.stationId;
-    }
-  },
-  watch: {
-    "model.stationId": function(val) {
-      getStationDataAndDraw(val);
-    }
-  }
-});

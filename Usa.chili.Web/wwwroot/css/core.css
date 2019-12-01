@@ -265,3 +265,8 @@ footer {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.font-georgia {
+  font: bold 11px Georgia, serif;
+  word-wrap: break-word;
+}

@@ -11,6 +11,7 @@ namespace Usa.chili.Dto
 {
     public class StationObservationDto
     {
+        public int StationId { get; set; }
         public string StationName { get; set; }
         public DateTime StationTimestamp { get; set; }
         public double AirTemperature { get; set; }
