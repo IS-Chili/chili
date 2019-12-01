@@ -144,15 +144,15 @@ namespace Usa.chili.Services
                         .Single();
 
                     // Set public data
-                    dto.AirTemperature = publicData.AirT2m.HasValue ? Math.Round(publicData.AirT2m.Value, 2) : (double?)null;
-                    dto.HeatIndex = publicData.HtIdx.HasValue ? Math.Round(publicData.HtIdx.Value, 2) : (double?)null;
-                    dto.WindChill = publicData.Felt.HasValue ? Math.Round(publicData.Felt.Value, 2) : (double?)null;
-                    dto.DewPoint = publicData.DewPoint.HasValue ? Math.Round(publicData.DewPoint.Value, 2) : (double?)null;
-                    dto.RealHumidity = publicData.Rh.HasValue ? Math.Round(publicData.Rh.Value, 2) : (double?)null;
-                    dto.WindDirection = publicData.WndDir10m.HasValue ? Math.Round(publicData.WndDir10m.Value, 2) : (double?)null;
-                    dto.WindSpeed = publicData.WndSpd10m.HasValue ? Math.Round(publicData.WndSpd10m.Value, 2) : (double?)null;
-                    dto.Pressure = publicData.PressSealev1.HasValue ? Math.Round(publicData.PressSealev1.Value, 2) : (double?)null;
-                    dto.Precipitation = publicData.PrecipTb3Today.HasValue ? Math.Round(publicData.PrecipTb3Today.Value, 2) : (double?)null;
+                    dto.AirTemperature = publicData.AirT2m;
+                    dto.HeatIndex = publicData.HtIdx;
+                    dto.WindChill = publicData.Felt;
+                    dto.DewPoint = publicData.DewPoint;
+                    dto.RealHumidity = publicData.Rh;
+                    dto.WindDirection = publicData.WndDir10m;
+                    dto.WindSpeed = publicData.WndSpd10m;
+                    dto.Pressure = publicData.PressSealev1;
+                    dto.Precipitation = publicData.PrecipTb3Today;
 
                     // Set Yesterday's extremes data
                     dto.YesterdayExtreme = new ExtremeDto
@@ -164,14 +164,14 @@ namespace Usa.chili.Services
                         RealHumidityHighTimestamp = extremesYdayData.Rh2mTmx,
                         RealHumidityLowTimestamp = extremesYdayData.Rh2mTmn,
                         WindSpeedMaxTimestamp = extremesYdayData.WndSpd10mTmx,
-                        AirTemperatureHigh = extremesYdayData.AirT2mMax.HasValue ? Math.Round(extremesYdayData.AirT2mMax.Value, 2) : (double?)null,
-                        AirTemperatureLow = extremesYdayData.AirT2mMin.HasValue ? Math.Round(extremesYdayData.AirT2mMin.Value, 2) : (double?)null,
-                        DewPointHigh = extremesYdayData.DewPt2mMax.HasValue ? Math.Round(extremesYdayData.DewPt2mMax.Value, 2) : (double?)null,
-                        DewPointLow = extremesYdayData.DewPt2mMin.HasValue ? Math.Round(extremesYdayData.DewPt2mMin.Value, 2) : (double?)null,
-                        RealHumidityHigh = extremesYdayData.Rh2mMax.HasValue ? Math.Round(extremesYdayData.Rh2mMax.Value, 2) : (double?)null,
-                        RealHumidityLow = extremesYdayData.Rh2mMin.HasValue ? Math.Round(extremesYdayData.Rh2mMin.Value, 2) : (double?)null,
-                        WindSpeedMax = extremesYdayData.WndSpd10mMax.HasValue ? Math.Round(extremesYdayData.WndSpd10mMax.Value, 2) : (double?)null,
-                        Precipitation = extremesYdayData.PrecipTb3Today.HasValue ? Math.Round(extremesYdayData.PrecipTb3Today.Value, 2) : (double?)null
+                        AirTemperatureHigh = extremesYdayData.AirT2mMax,
+                        AirTemperatureLow = extremesYdayData.AirT2mMin,
+                        DewPointHigh = extremesYdayData.DewPt2mMax,
+                        DewPointLow = extremesYdayData.DewPt2mMin,
+                        RealHumidityHigh = extremesYdayData.Rh2mMax,
+                        RealHumidityLow = extremesYdayData.Rh2mMin,
+                        WindSpeedMax = extremesYdayData.WndSpd10mMax,
+                        Precipitation = extremesYdayData.PrecipTb3Today
                     };
 
                     // Set Today's extremes data
@@ -184,13 +184,13 @@ namespace Usa.chili.Services
                         RealHumidityHighTimestamp = extremesTdayData.Rh2mTmx,
                         RealHumidityLowTimestamp = extremesTdayData.Rh2mTmn,
                         WindSpeedMaxTimestamp = extremesTdayData.WndSpd10mTmx,
-                        AirTemperatureHigh = extremesTdayData.AirT2mMax.HasValue ? Math.Round(extremesTdayData.AirT2mMax.Value, 2) : (double?)null,
-                        AirTemperatureLow = extremesTdayData.AirT2mMin.HasValue ? Math.Round(extremesTdayData.AirT2mMin.Value, 2) : (double?)null,
-                        DewPointHigh = extremesTdayData.DewPt2mMax.HasValue ? Math.Round(extremesTdayData.DewPt2mMax.Value, 2) : (double?)null,
-                        DewPointLow = extremesTdayData.DewPt2mMin.HasValue ? Math.Round(extremesTdayData.DewPt2mMin.Value, 2) : (double?)null,
-                        RealHumidityHigh = extremesTdayData.Rh2mMax.HasValue ? Math.Round(extremesTdayData.Rh2mMax.Value, 2) : (double?)null,
-                        RealHumidityLow = extremesTdayData.Rh2mMin.HasValue ? Math.Round(extremesTdayData.Rh2mMin.Value, 2) : (double?)null,
-                        WindSpeedMax = extremesTdayData.WndSpd10mMax.HasValue ? Math.Round(extremesTdayData.WndSpd10mMax.Value, 2) : (double?)null
+                        AirTemperatureHigh = extremesTdayData.AirT2mMax,
+                        AirTemperatureLow = extremesTdayData.AirT2mMin,
+                        DewPointHigh = extremesTdayData.DewPt2mMax,
+                        DewPointLow = extremesTdayData.DewPt2mMin,
+                        RealHumidityHigh = extremesTdayData.Rh2mMax,
+                        RealHumidityLow = extremesTdayData.Rh2mMin,
+                        WindSpeedMax = extremesTdayData.WndSpd10mMax
                     };
                 }
                 else {

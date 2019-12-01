@@ -33,13 +33,31 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
-         public async Task<List<DropdownDto>> ListAllVariables() {
+        public async Task<List<DropdownDto>> ListAllVariables() {
             return await _dbContext.VariableDescription
                 .AsNoTracking()
                 .OrderBy(x => x.Id)
                 .Select(x => new DropdownDto {
                     Id = x.Id,
                     Text = x.VariableDescription1
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<VariableTypeDto>> ListAllVariableTypes() {
+            return await _dbContext.VariableType
+                .AsNoTracking()
+                .OrderBy(x => x.Id)
+                .Select(x => new VariableTypeDto {
+                    VariableType = x.VariableType1,
+                    MetricMin = x.MetricMin,
+                    MetricMax = x.MetricMax,
+                    MetricUnit = x.MetricUnit,
+                    MetricSymbol = x.MetricSymbol,
+                    EnglishMin = x.EnglishMin,
+                    EnglishMax = x.EnglishMax,
+                    EnglishUnit = x.EnglishUnit,
+                    EnglishSymbol = x.EnglishSymbol
                 })
                 .ToListAsync();
         }

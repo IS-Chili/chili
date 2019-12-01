@@ -12,7 +12,7 @@ ViewBag.Description = "Meteorological Station Data";
         , Commissioned: {{ stationInfo.beginDate }}
         <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
     </h6>
-    <h5 class="text-center">Measurements recorded at: {{ model.date }} CST</h5>
+    <h5 class="text-center">Measurements recorded at: {{ model.datetime }} CST</h5>
     <br>
 </div>
 

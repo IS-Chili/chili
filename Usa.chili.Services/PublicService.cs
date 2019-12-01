@@ -45,14 +45,14 @@ namespace Usa.chili.Services
                 .Select(p => new StationObservationDto {
                     StationId = station.Id,
                     StationName = station.DisplayName,
-                    StationTimestamp = p.Ts ?? DateTime.Now,
-                    AirTemperature = Math.Round(p.AirT2m ?? 0, 2),
-                    DewPoint = Math.Round(p.DewPoint ?? 0, 2),
-                    RealHumidity = Math.Round(p.Rh ?? 0, 2),
-                    WindDirection = Math.Round(p.WndDir10m ?? 0, 2),
-                    WindSpeed = Math.Round(p.WndDir10m ?? 0, 2),
-                    Pressure = Math.Round(p.PressSealev1 ?? 0, 2),
-                    Precipitation = Math.Round(p.PrecipTb3Today ?? 0, 2)
+                    StationTimestamp = p.Ts,
+                    AirTemperature = p.AirT2m,
+                    DewPoint = p.DewPoint,
+                    RealHumidity = p.Rh,
+                    WindDirection = p.WndDir10m,
+                    WindSpeed = p.WndDir10m,
+                    Pressure = p.PressSealev1,
+                    Precipitation = p.PrecipTb3Today
             }).FirstOrDefault();
         }
     }

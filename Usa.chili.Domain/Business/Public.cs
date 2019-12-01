@@ -103,7 +103,7 @@ namespace Usa.chili.Domain
                 // Air Temperature at 2m
                 if (AirT2m != null)
                 {
-                    AirT2m = Math.Round(Constant.nineFifths * AirT2m ?? 0 + Constant.thirtyTwoPointTwo);
+                    AirT2m = Math.Round(Constant.nineFifths * (AirT2m ?? 0) + 32, 2);
                 }
                 // Dew Point at 2m
                 if (DewPoint != null)
@@ -183,19 +183,21 @@ namespace Usa.chili.Domain
                 {
                     Felt = null;
                 }
-                if (AirT2m > 50.0 || WndSpd10m <= 3.0)
+                else if (AirT2m > 50.0 || WndSpd10m <= 3.0)
                 {
                     Felt = null;
                 }
-                Felt =  Constant.wc1 +
-                        Constant.wc2 * AirT2m -
-                        Constant.wc3 * Math.Pow(WndSpd10m ?? 0, 0.16) +
-                        Constant.wc4 * AirT2m * Math.Pow(WndSpd10m ?? 0, 0.16);
+                else {
+                    Felt =  Constant.wc1 +
+                            Constant.wc2 * AirT2m -
+                            Constant.wc3 * Math.Pow(WndSpd10m ?? 0, 0.16) +
+                            Constant.wc4 * AirT2m * Math.Pow(WndSpd10m ?? 0, 0.16);
+                }
             }
 
             if (Felt != null)
             {
-                if (!isMetricUnits)
+                if (isMetricUnits)
                 {
                     Felt = Math.Round(((Felt ?? 0 - 32) * Constant.fiveNinths), 2);
                 }

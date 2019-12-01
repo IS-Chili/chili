@@ -20,7 +20,6 @@ namespace Usa.chili.Common
         // Define some useful conversion constants
         public const double fiveNinths = 5 / 9;
         public const double nineFifths = 9 / 5;
-        public const double thirtyTwoPointTwo = 32.2;
         public const double mm2Inches = 0.0393700787;
         public const double mb2InHg = 0.029529983071;
         public const double wpsqm2lymin = 0.00143197;

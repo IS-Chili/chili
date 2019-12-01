@@ -74,6 +74,7 @@ namespace Usa.chili.Web
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                    options.JsonSerializerOptions.Converters.Add(new DoubleConverter());
                 });
                 
             services.AddRazorPages();

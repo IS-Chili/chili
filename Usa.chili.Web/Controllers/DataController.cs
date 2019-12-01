@@ -118,6 +118,12 @@ namespace Usa.chili.Web.Controllers
             return new JsonResult(await _variableService.ListAllVariables());
         }
 
+        [HttpGet("VariableTypeList")]
+        public async Task<IActionResult> VariableTypeList()
+        {
+            return new JsonResult(await _variableService.ListAllVariableTypes());
+        }
+
         [HttpGet("ActiveStationList")]
         public async Task<IActionResult> ActiveStationList()
         {

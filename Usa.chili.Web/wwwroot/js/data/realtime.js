@@ -15,7 +15,8 @@ const App = new Vue({
       model: {
         isMetricUnits: false,
         isWindChill: null
-      }
+      },
+      variableTypes: []
     }
   },
   created: function() {
@@ -26,6 +27,15 @@ const App = new Vue({
     if(localStorage.getItem('isWindChill')) {
       this.model.isWindChill = localStorage.getItem('isWindChill') === 'true';
     }
+
+    // Get Variable Types
+    axios.get('/data/VariableTypeList')
+      .then(function (response) {
+        self.variableTypes = response.data;
+      })
+      .catch(function (error) {
+        console.log('Get VariableTypeList failed', error);
+      });
 
     // Get data on load
     self.getData();
@@ -51,6 +61,13 @@ const App = new Vue({
     }
   },
   methods: {
+    getUnit: function(variableType, measurementSystem) {
+      if(this.variableTypes && this.variableTypes.length > 0) {
+        return measurementSystem === 'Metric'
+          ? this.variableTypes.find(x => x.variableType === variableType).metricSymbol
+          : this.variableTypes.find(x => x.variableType === variableType).englishSymbol;
+      }
+    },
     getData: function() {
       const self = this;
 
@@ -61,7 +78,24 @@ const App = new Vue({
         }
       })
       .then(function (response) {
+        // Set nulls to N/A
+        response.data.forEach(function(object){
+          for(key in object) {
+            if(typeof object[key] === 'object') {
+              for(objectKey in object[key]) {
+                if(object[key][objectKey] == null) {
+                  object[key][objectKey] = 'N/A';
+                }
+              }
+            }
+            if(object[key] == null) {
+              object[key] = 'N/A';
+            }
+          }
+        });
+
         self.realtimeData = response.data;
+
         Vue.nextTick(function () {
           self.now = new Date();
 

@@ -69,25 +69,45 @@ ViewBag.Description = "USA Mesonet Realtime Display";
             <th class="text-center">DewPt</th>
             <th class="text-center">Hum</th>
         </tr>
-        <tr class="text-center">
+        <tr class="text-center" v-if="model.isMetricUnits">
             <th colspan="1"></th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&#37;</th>
-            <th>&deg;</th>
-            <th>mph</th>
-            <th>inHg</th>
-            <th>in</th>
-            <th>mph</th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&#37;</th>
-            <th>in</th>
-            <th>mph</th>
-            <th>&deg;F</th>
-            <th>&deg;F</th>
-            <th>&#37;</th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Humidity', 'Metric')"></th>
+            <th v-html="getUnit('Direction', 'Metric')"></th>
+            <th v-html="getUnit('Speed', 'Metric')"></th>
+            <th v-html="getUnit('Pressure', 'Metric')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'Metric')"></th>
+            <th v-html="getUnit('Speed', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Humidity', 'Metric')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'Metric')"></th>
+            <th v-html="getUnit('Speed', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Temperature', 'Metric')"></th>
+            <th v-html="getUnit('Humidity', 'Metric')"></th>
+        </tr>
+        <tr class="text-center" v-else>
+            <th colspan="1"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Humidity', 'English')"></th>
+            <th v-html="getUnit('Direction', 'English')"></th>
+            <th v-html="getUnit('Speed', 'English')"></th>
+            <th v-html="getUnit('Pressure', 'English')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'English')"></th>
+            <th v-html="getUnit('Speed', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Humidity', 'English')"></th>
+            <th v-html="getUnit('Total_Precipitation', 'English')"></th>
+            <th v-html="getUnit('Speed', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Temperature', 'English')"></th>
+            <th v-html="getUnit('Humidity', 'English')"></th>
         </tr>
     </thead>
     <tbody>

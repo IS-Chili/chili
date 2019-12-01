@@ -12,7 +12,8 @@ const App = new Vue({
       model: {
         stationId: 201,
         date: null,
-        time: null
+        time: null,
+        datetime: null
       },
       lastStationId: null,
       stationInfo: {}
