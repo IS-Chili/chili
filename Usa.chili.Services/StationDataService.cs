@@ -125,7 +125,7 @@ namespace Usa.chili.Services
                 })
                 .ToListAsync();
         }
-        public async Task<MeteorologicalDataDto> GetMeteorologicalData(int? id, DateTime? dateTime) {
+        public async Task<MeteorologicalDataDto> GetMeteorologicalData(int id, DateTime? dateTime) {
             // Some handy metric to english conversion variables
             var ninefifths = 9/5;
             var mm2inches = 0.0393700787;
@@ -135,13 +135,40 @@ namespace Usa.chili.Services
 
             var mdDto = new MeteorologicalDataDto();
 
-            // Query database for all data on indicated station at the most recent Time Stamp
-            // for that station
-            var md = await _dbContext.Station_Data
+            // Query database for all data on requested station and place in list
+            var mdList = await _dbContext.Station_Data
                 .Include(sd => sd.Station)
                 .Where(sd => sd.StationId == id)
                 .OrderByDescending(sd => sd.TS)
-                .FirstOrDefaultAsync();
+                .ToListAsync();
+
+            // A variable to hold the requested time or current time if no 
+            // particular time has been requested
+            var dateToFind = new DateTime();
+
+            if (dateTime == null) {
+               dateToFind = DateTime.Now;
+            }
+            else {
+               dateToFind = dateTime.GetValueOrDefault();
+            }
+
+            // Make a list of all the Time Stamps from the requested station
+            List<DateTime> mdTimeStamps = new List<DateTime>(); 
+            foreach (var item in mdList) {
+               mdTimeStamps.Add(item.TS);
+            }
+
+            // Find the TimeStamp in the above mdTimeStamps list that is closest to
+            // the requested dateToFind
+            var mdTimeStamp = mdTimeStamps.OrderBy(t => Math.Abs((t - dateToFind).Ticks))
+                                          .FirstOrDefault();
+
+            // Narrow down the mdList to the the list member with the 
+            // TimeStamp equal to mdTimeStamp (closest TimeStamp to dateToFind)
+            Station_Data md = new Station_Data();
+            md = mdList.Where(s => (s.TS == mdTimeStamp))
+                       .FirstOrDefault();
 
             // Start building MeteorologicalDataDto from Station_Data object 
             // retrieved in above database query
