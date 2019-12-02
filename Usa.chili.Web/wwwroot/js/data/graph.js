@@ -16,18 +16,18 @@ const App = new Vue({
     }
   },
   created: function () {
-    this.lastStationId = this.model.stationId;
-
     Core.populateStationDropdown(this, false);
     Core.populateVariableDropdown(this);
     Core.getStationInfo(this, this.model.stationId);
 
     // Set model from URL params
     const params = new URLSearchParams(window.location.search.substring(1));
-    this.model.id = Number(params.get("id"));
-    this.model.variableId = Number(params.get("varId"));
+    this.model.stationId = (params.get("id") && !isNaN(params.get("id"))) ? Number(params.get("id")) : Core.DEFAULT_STATION;
+    this.model.variableId = (params.get("varId") && !isNaN(params.get("varId"))) ? Number(params.get("varId")) : 1;
     this.model.date = params.get("date") ? moment(params.get("date")).format(Core.DATE_FORMAT) : null;
     this.model.isMetricUnits = localStorage.getItem('isMetricUnits') === 'true';
+
+    this.lastStationId = this.model.stationId;
 
     // Create initial graph
     this.createGraph();
@@ -35,6 +35,7 @@ const App = new Vue({
   watch: {
     "model.isMetricUnits": function (value) {
       localStorage.setItem('isMetricUnits', value.toString());
+      this.createGraph();
     }
   },
   methods: {

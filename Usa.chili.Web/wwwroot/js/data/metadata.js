@@ -15,6 +15,10 @@ const App = new Vue({
     }
   },
   created: function() {
+    // Set model from URL params
+    const params = new URLSearchParams(window.location.search.substring(1));
+    this.model.stationId = (params.get("id") && !isNaN(params.get("id"))) ? Number(params.get("id")) : Core.DEFAULT_STATION;
+
     this.lastStationId = this.model.stationId;
     Core.populateStationDropdown(this, false);
     Core.getStationInfo(this, this.model.stationId);
