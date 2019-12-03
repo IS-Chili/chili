@@ -202,5 +202,50 @@ namespace Usa.chili.Services
 
             return realtimeDataDtos;
         }
+
+        public async Task<MeteorologicalDataDto> GetMeteorologicalData(int stationId, DateTime? dateTime) {
+            var meteorologicalDataDto = new MeteorologicalDataDto();
+
+            // Get the first datetime data entry for the station
+            meteorologicalDataDto.FirstDateTimeEntry = await _dbContext.StationData
+                .Where(x => x.Station.Id == stationId)
+                .OrderBy(x => x.Ts)
+                .AsNoTracking()
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
+
+            // Get the last datetime data entry for the station
+            meteorologicalDataDto.LastDateTimeEntry = await _dbContext.StationData
+                .Where(x => x.Station.Id == stationId)
+                .OrderByDescending(x => x.Ts)
+                .AsNoTracking()
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
+
+            // Set first and last datetime entries null if defaulted
+            if(meteorologicalDataDto.FirstDateTimeEntry == DateTime.MinValue){
+                meteorologicalDataDto.FirstDateTimeEntry = null;
+            }
+            // Set first and last datetime entries null if defaulted
+            if(meteorologicalDataDto.LastDateTimeEntry == DateTime.MinValue){
+                meteorologicalDataDto.LastDateTimeEntry = null;
+            }
+
+            // Return DTO if dateTime is null
+            if(!dateTime.HasValue) {
+                return meteorologicalDataDto;
+            }
+
+            // Get Station Data in English and Metric Units
+            return await _dbContext.StationData
+                .Where(x => x.Station.Id == stationId)
+                .Where(x => x.Ts == dateTime)
+                .OrderByDescending(x => x.Ts)
+                .Select(x => new MeteorologicalDataDto {
+                    Door = x.Door,
+                    FirstDateTimeEntry = meteorologicalDataDto.FirstDateTimeEntry,
+                    LastDateTimeEntry = meteorologicalDataDto.LastDateTimeEntry
+            }).FirstOrDefaultAsync();
+        }
     }
 }
