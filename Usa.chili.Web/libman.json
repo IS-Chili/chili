@@ -43,6 +43,13 @@
       "destination": "wwwroot/lib/js"
     },
     {
+      "library": "moment-timezone@0.5.26",
+      "files": [
+        "moment-timezone.min.js"
+      ],
+      "destination": "wwwroot/lib/js"
+    },
+    {
       "library": "tempusdominus-bootstrap-4@5.1.2",
       "files": [
         "css/tempusdominus-bootstrap-4.min.css",

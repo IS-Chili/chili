@@ -13,5 +13,11 @@ cd Usa.chili.Web
 dotnet bundle
 ```
 
+## Library Manager Restore
+```
+cd Usa.chili.Web
+libman restore
+```
+
 # Service location
 `/etc/systemd/system/kestrel-chili.service`

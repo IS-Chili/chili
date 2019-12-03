@@ -121,6 +121,9 @@ const App = new Vue({
               zoomType: 'x',
               type: 'line'
             },
+            time: {
+              useUTC: false
+            },
             title: {
               text: graphData.title
             },
