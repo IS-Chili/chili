@@ -11,7 +11,9 @@ KillSignal=SIGINT
 SyslogIdentifier=chili
 User=apache
 Environment=ASPNETCORE_ENVIRONMENT=Production
-Environment=ConnectionStrings__DefaultConnection=server=localhost;port=3306;user=;password=;database=chili
+# MySQL Connection String
+# NOTE: "Convert Zero Datetime=True" is necessary for dealing with bad datetimes in the database
+Environment="ConnectionStrings__DefaultConnection=server=localhost;port=3306;user=chilistudent;password=chilistudent;database=chili;Convert Zero Datetime=True;"
 
 [Install]
 WantedBy=multi-user.target
