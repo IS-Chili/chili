@@ -1,31 +1,32 @@
 {
   "version": "1.0",
-  "defaultProvider": "cdnjs",
+  "defaultProvider": "jsDelivr",
   "defaultDestination": "wwwroot/lib",
   "libraries": [
     {
       "library": "jquery@3.4.1",
       "files": [
-        "jquery.min.js"
+        "dist/jquery.min.js"
       ],
-      "destination": "wwwroot/lib/js"
+      "destination": "wwwroot/lib/jquery"
     },
     {
-      "library": "popper.js@1.15.0",
+      "library": "popper.js@1.16.0",
       "files": [
-        "umd/popper.min.js"
+        "dist/umd/popper.min.js"
       ],
-      "destination": "wwwroot/lib/js"
+      "destination": "wwwroot/lib/popper"
     },
     {
-      "library": "twitter-bootstrap@4.3.1",
+      "library": "bootstrap@4.4.1",
       "files": [
-        "css/bootstrap.min.css",
-        "js/bootstrap.min.js"
-      ]
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.min.js"
+      ],
+      "destination": "wwwroot/lib/bootstrap"
     },
     {
-      "library": "font-awesome@5.10.2",
+      "library": "@fortawesome/fontawesome-free@5.11.2",
       "files": [
         "css/all.min.css",
         "webfonts/fa-solid-900.eot",
@@ -33,61 +34,57 @@
         "webfonts/fa-solid-900.ttf",
         "webfonts/fa-solid-900.woff",
         "webfonts/fa-solid-900.woff2"
-      ]
+      ],
+      "destination": "wwwroot/lib/fontawesome"
     },
     {
-      "library": "moment.js@2.24.0",
+      "library": "moment@2.24.0",
       "files": [
-        "moment.min.js"
+        "min/moment.min.js"
       ],
-      "destination": "wwwroot/lib/js"
-    },
-    {
-      "library": "moment-timezone@0.5.26",
-      "files": [
-        "moment-timezone.min.js"
-      ],
-      "destination": "wwwroot/lib/js"
+      "destination": "wwwroot/lib/moment"
     },
     {
       "library": "tempusdominus-bootstrap-4@5.1.2",
       "files": [
-        "css/tempusdominus-bootstrap-4.min.css",
-        "js/tempusdominus-bootstrap-4.min.js"
-      ]
+        "build/js/tempusdominus-bootstrap-4.min.js",
+        "build/css/tempusdominus-bootstrap-4.min.css"
+      ],
+      "destination": "wwwroot/lib/tempusdominus"
     },
     {
-      "library": "select2@4.0.10",
+      "library": "select2@4.0.12",
       "files": [
-        "css/select2.min.css",
-        "js/select2.min.js"
-      ]
+        "dist/js/select2.min.js",
+        "dist/css/select2.min.css"
+      ],
+      "destination": "wwwroot/lib/select2"
     },
     {
       "library": "axios@0.19.0",
       "files": [
-        "axios.min.js"
+        "dist/axios.min.js"
       ],
-      "destination": "wwwroot/lib/js"
+      "destination": "wwwroot/lib/axios"
     },
     {
       "library": "vue@2.6.10",
       "files": [
-        "vue.min.js", 
-        "vue.js"
+        "dist/vue.min.js", 
+        "dist/vue.js"
       ],
-      "destination": "wwwroot/lib/js"
+      "destination": "wwwroot/lib/vue"
     },
     {
       "library": "leaflet@1.5.1",
       "files": [
-        "leaflet.css", 
-        "leaflet.js"
+        "dist/leaflet.css", 
+        "dist/leaflet.js"
       ],
       "destination": "wwwroot/lib/leaflet"
     },
     {
-      "library": "highcharts@7.2.0",
+      "library": "highcharts@7.2.1",
       "files": [
         "highcharts.js",
         "modules/exporting.js",

@@ -141,6 +141,10 @@ Vue.component('datetimepicker', {
       type: Boolean,
       default: false
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   template: '#datetimepicker-template',
   data: function () {

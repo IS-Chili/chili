@@ -11,7 +11,7 @@ const App = new Vue({
   data: function () {
     return {
       realtimeData: [],
-      now: new Date(),
+      now: moment(),
       model: {
         isMetricUnits: false,
         isWindChill: null
@@ -47,7 +47,7 @@ const App = new Vue({
   },
   computed: {
     nowFormated: function() {
-      return moment(this.now).format('MM/DD/YYYY HH:mm:ss');
+      return this.now.format(Core.DATETIME_FORMAT);
     }
   },
   watch: {
@@ -83,7 +83,7 @@ const App = new Vue({
         self.realtimeData = response.data;
 
         Vue.nextTick(function () {
-          self.now = new Date();
+          self.now = moment();
 
           $('[data-toggle="tooltip"]').tooltip({
             boundary: 'span',

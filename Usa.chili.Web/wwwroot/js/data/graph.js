@@ -12,7 +12,8 @@ const App = new Vue({
       },
       lastStationId: null,
       stationInfo: {},
-      error: null
+      error: null,
+      isLoading: false
     }
   },
   created: function () {
@@ -68,6 +69,17 @@ const App = new Vue({
     createGraph: function () {
       const self = this;
 
+      // Prevent multiple requests
+      if(self.isLoading) {
+        return;
+      }
+
+      // Remove error
+      self.error = null;
+
+      // Show loading spinner
+      self.isLoading = true;
+
       // Get station info if station changed
       if(this.lastStationId != this.model.stationId) {
         this.lastStationId = this.model.stationId;
@@ -83,7 +95,8 @@ const App = new Vue({
         }
       })
       .then(function (response) {
-        self.error = null;
+        // Hide loading spinner
+        self.isLoading = false;
 
         const graphData = response.data;
 
@@ -158,6 +171,9 @@ const App = new Vue({
 
       })
       .catch(function (error) {
+        // Hide loading spinner
+        self.isLoading = false;
+
         console.log('StationGraphInit failed', error);
       });
     },
