@@ -1,14 +1,15 @@
 @{
-    ViewBag.Title = "Meteorological Data";
-    ViewBag.Description = "Meteorological Data";
+ViewBag.Title = "Meteorological Data";
+ViewBag.Description = "Meteorological Data";
 }
 
 <div class="container">
     <div class="alert alert-info" role="alert">
-        <div class="text-center">Please consider supporting the USA Mesonet project by clicking on the <a asp-controller="Home" asp-action="Donate">Donations Welcome</a> link</div>
+        <div class="text-center">Please consider supporting the USA Mesonet project by clicking on the <a
+                asp-controller="Home" asp-action="Donate">Donations Welcome</a> link</div>
     </div>
 
-    <div class="bg-core-blue">
+    <div class="container bg-core-blue">
         <br>
         <h2 class="text-center">Select Meteorological Data to Download</h2>
         <br>
@@ -47,17 +48,49 @@
                 </select>
             </div>
             <div class="col-lg-1">
-                <button type="button" class="btn btn-secondary btn-inline" @@click="download">Download</button>
+                <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="download">Download</button>
             </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered bg-white">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="selectAll"
+                                    v-model="selectAllVariables" @@change="selectAll">
+                                <label class="custom-control-label" for="selectAll">Select/Deselect All</label>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody v-for="(item, index) in variables">
+                    <tr v-if="index == 0 || variables[index - 1].type != item.type" class="bg-core-blue">
+                        <td>
+                            <h5 class="m-0">{{ item.type }}</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" :id="'var' + index"
+                                    :value="item.name" v-model="model.selectedVariables" @@change="selectOne">
+                                <label class="custom-control-label" :for="'var' + index">{{ item.description }}</label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 @section scripts {
-    <environment include="Development">
-        <script src="~/js/data/meteorological.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/data/meteorological.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/data/meteorological.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/data/meteorological.min.js" asp-append-version="true"></script>
+</environment>
 }

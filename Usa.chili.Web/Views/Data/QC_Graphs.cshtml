@@ -1,59 +1,61 @@
 @{
-    ViewBag.Title = "Monthly QC Graphs";
-    ViewBag.Description = "USA Mesonet Monthly Quality Control Graphs";
+ViewBag.Title = "Monthly QC Graphs";
+ViewBag.Description = "USA Mesonet Monthly Quality Control Graphs";
 }
 
-<div class="container bg-core-blue">
-    <br>
-    <h2 class="text-center">USA Mesonet Monthly Quality Control Graphs</h2>
-    <h2 class="text-center">September, 2017</h2>
-    <br>
-</div>
-
-<div class="container bg-core-translucent">
-    <br>
-    <h3 class="text-center">
-        <a href="#" class="mr-3"><i class="fas fa-arrow-left"></i> Previous Month</a>
-        <a href="#" class="mr-3">Most Recent</a>
-        <a href="#">Next Month <i class="fas fa-arrow-right"></i></a>
-    </h3>
-
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2 mr-2">
-            <label for="dayMonthSelection">Year and month</label>
-            <select id="dayMonthSelection">
-                <option value="2010-09">2010-09</option>
-                <option value="2010-10">2010-10</option>
-            </select>
-        </div>
-        <div class="form-group col-lg-4 mr-2">
-            <label for="variableSelection">Variable</label>
-            <select2 id="variableSelection" :options="variables" v-model="model.variableId"></select2>
-        </div>
-        <div class="form-group col-lg-2 mr-2">
-            <label for="groupSelection">Group</label>
-            <select id="groupSelection">
-                <option value="1">Group 1</option>
-                <option value="2">Group 2</option>
-                <option value="3">Group 3</option>
-            </select>
-        </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline" @@click="go">Go</button>
-        </div>
+<div class="container">
+    <div class="container bg-core-blue">
+        <br>
+        <h2 class="text-center">USA Mesonet Monthly Quality Control Graphs</h2>
+        <h2 class="text-center">September, 2017</h2>
+        <br>
     </div>
 
-    <div class="d-flex justify-content-center">
-        <img class="img-fluid w-1000" src="/images/QC1.png" />
+    <div class="container bg-core-translucent">
+        <br>
+        <h3 class="text-center">
+            <a href="#" class="mr-3"><i class="fas fa-arrow-left"></i> Previous Month</a>
+            <a href="#" class="mr-3">Most Recent</a>
+            <a href="#">Next Month <i class="fas fa-arrow-right"></i></a>
+        </h3>
+
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-2 mr-2">
+                <label for="dayMonthSelection">Year and month</label>
+                <select id="dayMonthSelection">
+                    <option value="2010-09">2010-09</option>
+                    <option value="2010-10">2010-10</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-4 mr-2">
+                <label for="variableSelection">Variable</label>
+                <select2 id="variableSelection" :options="variables" v-model="model.variableId"></select2>
+            </div>
+            <div class="form-group col-lg-2 mr-2">
+                <label for="groupSelection">Group</label>
+                <select id="groupSelection">
+                    <option value="1">Group 1</option>
+                    <option value="2">Group 2</option>
+                    <option value="3">Group 3</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go">Go</button>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <img class="img-fluid w-1000" src="/images/QC1.png" />
+        </div>
+        <br>
     </div>
-    <br>
 </div>
 
 @section scripts {
-    <environment include="Development">
-        <script src="~/js/data/qc_graphs.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/data/qc_graphs.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/data/qc_graphs.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/data/qc_graphs.min.js" asp-append-version="true"></script>
+</environment>
 }

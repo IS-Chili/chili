@@ -2,68 +2,72 @@
 ViewBag.Title = "Metadata";
 ViewBag.Description = "Instrument Metadata";
 }
-<div class="container bg-core-blue">
-    <br>
-    <h1 class="text-center bg-core-blue">Displaying Instrument Metadata for {{ stationInfo.displayName }} Station</h1>
-    <h6 class="text-center">Latitude: {{ stationInfo.latitude }}&deg;{{ stationInfo.latitudeDirection }}
-        , Longitude: {{ stationInfo.longitude }}&deg;{{ stationInfo.longitudeDirection }}
-        , Elevation: {{ stationInfo.elevation }}m
-        , Commissioned: {{ stationInfo.beginDate }}
-        <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
-    </h6>
-    <br>
-</div>
-<div class="container bg-core-translucent">
-    <br>
 
-    <div class="d-flex justify-content-center my-4">
-        <a class="btn btn-light" :href="'/Data/Station?id=' + stationInfo.id">Display Current Data for
-            {{ stationInfo.displayName }} Station</a>
+<div class="container">
+    <div class="container bg-core-blue">
+        <br>
+        <h1 class="text-center bg-core-blue">Displaying Instrument Metadata for {{ stationInfo.displayName }} Station
+        </h1>
+        <h6 class="text-center">Latitude: {{ stationInfo.latitude }}&deg;{{ stationInfo.latitudeDirection }}
+            , Longitude: {{ stationInfo.longitude }}&deg;{{ stationInfo.longitudeDirection }}
+            , Elevation: {{ stationInfo.elevation }}m
+            , Commissioned: {{ stationInfo.beginDate }}
+            <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
+        </h6>
+        <br>
     </div>
+    <div class="container bg-core-translucent">
+        <br>
 
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-3 mr-2">
-            <label for="stationSelection">Station</label>
-            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+        <div class="d-flex justify-content-center my-4">
+            <a class="btn btn-light" :href="'/Data/Station?id=' + stationInfo.id">Display Current Data for
+                {{ stationInfo.displayName }} Station</a>
         </div>
-        <div class="form-group col-lg-4 mr-2">
-            <label for="metadataSelection">Metadata</label>
-            <select id="metadataSelection">
-                <option value="instrument">Instrument Metadata</option>
-                <option value="eventlog">Station Event Log</option>
-                <option value="images">Ground-level Station Images</option>
-                <option value="satellite">Satellite Station Images</option>
-                <option value="dataproc">Data Processing</option>
-            </select>
-        </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline" @@click="go">Go</button>
-        </div>
-    </div>
 
-    <div class="table-responsive" >   
-        <table class="table table-bordered table-striped bg-white">
-            <thead>
-                <tr>
-                    <th class="text-center">Parameter</th>
-                    <th class="text-center">Manufacturer / Model (SerialNo)</th>
-                    <th class="text-center">Installation Date</th>
-                    <th class="text-center">Mounting Height</th>
-                    <th class="text-center">Measuring Range</th>
-                    <th class="text-center">Accuracy</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Precipitation</td>
-                    <td>Hydrological Services<br />TB3 (N/A)</td>
-                    <td>2005-08-27</td>
-                    <td>1m</td>
-                    <td>0 to 700 mm/h</td>
-                    <td>&plusmn; 2% @@ 225 to 500 mm/h<br />Resolution: 0.254 mm</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-3 mr-2">
+                <label for="stationSelection">Station</label>
+                <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+            </div>
+            <div class="form-group col-lg-4 mr-2">
+                <label for="metadataSelection">Metadata</label>
+                <select id="metadataSelection">
+                    <option value="instrument">Instrument Metadata</option>
+                    <option value="eventlog">Station Event Log</option>
+                    <option value="images">Ground-level Station Images</option>
+                    <option value="satellite">Satellite Station Images</option>
+                    <option value="dataproc">Data Processing</option>
+                </select>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go">Go</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th class="text-center">Parameter</th>
+                        <th class="text-center">Manufacturer / Model (SerialNo)</th>
+                        <th class="text-center">Installation Date</th>
+                        <th class="text-center">Mounting Height</th>
+                        <th class="text-center">Measuring Range</th>
+                        <th class="text-center">Accuracy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Precipitation</td>
+                        <td>Hydrological Services<br />TB3 (N/A)</td>
+                        <td>2005-08-27</td>
+                        <td>1m</td>
+                        <td>0 to 700 mm/h</td>
+                        <td>&plusmn; 2% @@ 225 to 500 mm/h<br />Resolution: 0.254 mm</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

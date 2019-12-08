@@ -1,91 +1,103 @@
 @{
-    ViewBag.Title = "Data Graph";
-    ViewBag.Description = "24 Hour Meteorological Data Graph";
+ViewBag.Title = "Data Graph";
+ViewBag.Description = "24 Hour Meteorological Data Graph";
 }
 
-<div class="container bg-core-blue">
-    <br>
-    <h1 class="text-center">24 Hour Meteorological Data Graph for {{ stationInfo.displayName }} Station</h1>
-    <h6 class="text-center">Latitude: {{ stationInfo.latitude }}&deg;{{ stationInfo.latitudeDirection }}
-        , Longitude: {{ stationInfo.longitude }}&deg;{{ stationInfo.longitudeDirection }}
-        , Elevation: {{ stationInfo.elevation }}m
-        , Commissioned: {{ stationInfo.beginDate }}
-        <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
-    </h6>
-    <h5 class="text-center">Measurements recorded at: {{ model.date }} CST</h5>
-    <br>
-</div>
-<div class="container bg-core-translucent">
-    <br>
-    <div class="d-flex justify-content-center my-4">
-        <a class="btn btn-light mr-3" :href="'/Data/Station?id=' + stationInfo.id">Display Current Data for {{ stationInfo.displayName }} Station</a>
-        <a class="btn btn-light" :href="'/Data/Metadata?id=' + stationInfo.id">Display Metadata for {{ stationInfo.displayName }} Station</a>
+<div class="container">
+    <div class="bg-core-blue">
+        <br>
+        <h1 class="text-center">24 Hour Meteorological Data Graph for {{ stationInfo.displayName }} Station</h1>
+        <h6 class="text-center">Latitude: {{ stationInfo.latitude }}&deg;{{ stationInfo.latitudeDirection }}
+            , Longitude: {{ stationInfo.longitude }}&deg;{{ stationInfo.longitudeDirection }}
+            , Elevation: {{ stationInfo.elevation }}m
+            , Commissioned: {{ stationInfo.beginDate }}
+            <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
+        </h6>
+        <h5 class="text-center">Measurements recorded at: {{ model.date }} CST</h5>
+        <br>
     </div>
+    <div class="container bg-core-translucent">
+        <br>
+        <div class="d-flex justify-content-center my-4">
+            <a class="btn btn-light mr-3" :href="'/Data/Station?id=' + stationInfo.id">Display Current Data for
+                {{ stationInfo.displayName }} Station</a>
+            <a class="btn btn-light" :href="'/Data/Metadata?id=' + stationInfo.id">Display Metadata for
+                {{ stationInfo.displayName }} Station</a>
+        </div>
 
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2 mr-2">
-            <label for="datePicker">Date</label>
-            <datetimepicker id="datePicker" v-model="model.date" :time="false" :disabled="isLoading"></datetimepicker>
-        </div>
-        <div class="form-group col-lg-3 mr-2">
-            <label for="stationSelection">Station</label>
-            <select2 id="stationSelection" :options="stations" v-model="model.stationId" :disabled="isLoading"></select2>
-        </div>
-        <div class="form-group col-lg-4 mr-2">
-            <label for="variableSelection">Variable</label>
-            <select2 id="variableSelection" :options="variables" v-model="model.variableId" :disabled="isLoading"></select2>
-        </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go" :disabled="isLoading">
-                <span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span v-if="isLoading" class="sr-only">Loading...</span>
-                <span v-else>Go</span>
-            </button>
-        </div>
-    </div>
-
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-8">
-            <div class="btn-group" role="group" aria-label="Date change">
-                <button type="button" class="btn btn-light" @@click="previous" :disabled="isLoading"><i class="fas fa-chevron-left"></i></button>
-                <button type="button" class="btn btn-light" @@click="lastDateTime" :disabled="isLoading"><i class="fas fa-clock"></i></button>
-                <button type="button" class="btn btn-light" @@click="next" :disabled="isLoading"><i class="fas fa-chevron-right"></i></button>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-2 mr-2">
+                <label for="datePicker">Date</label>
+                <datetimepicker id="datePicker" v-model="model.date" :time="false" :disabled="isLoading">
+                </datetimepicker>
+            </div>
+            <div class="form-group col-lg-3 mr-2">
+                <label for="stationSelection">Station</label>
+                <select2 id="stationSelection" :options="stations" v-model="model.stationId" :disabled="isLoading">
+                </select2>
+            </div>
+            <div class="form-group col-lg-4 mr-2">
+                <label for="variableSelection">Variable</label>
+                <select2 id="variableSelection" :options="variables" v-model="model.variableId" :disabled="isLoading">
+                </select2>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go" :disabled="isLoading">
+                    <span v-if="isLoading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    <span v-if="isLoading" class="sr-only">Loading...</span>
+                    <span v-else>Go</span>
+                </button>
             </div>
         </div>
 
-        <div class="form-group col-lg-2">
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="metricUnits" v-model="model.isMetricUnits" :disabled="isLoading">
-                <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-8">
+                <div class="btn-group" role="group" aria-label="Date change">
+                    <button type="button" class="btn btn-light" @@click="previous" :disabled="isLoading"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-light" @@click="lastDateTime" :disabled="isLoading"><i
+                            class="fas fa-clock"></i></button>
+                    <button type="button" class="btn btn-light" @@click="next" :disabled="isLoading"><i
+                            class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="metricUnits" v-model="model.isMetricUnits"
+                        :disabled="isLoading">
+                    <label class="custom-control-label" for="metricUnits">Use Metric Units</label>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="h-400" v-if="error">
-        <div class="alert alert-danger mb-5" role="alert">
-            <div class="text-center">{{ error }}</div>
-        </div>
-    </div>
-
-    <div class="h-400" v-if="isLoading">
-        <div class="alert alert-info mb-5" role="alert">
-            <div class="text-center">
-                <div class="spinner-border text-primary" role="status"></div>
-                <div><strong>Loading...</strong></div>
+        <div class="h-400" v-if="error">
+            <div class="alert alert-danger mb-5" role="alert">
+                <div class="text-center">{{ error }}</div>
             </div>
         </div>
-    </div>
-    
-    <div class="d-flex justify-content-center">
-        <div id="graph" class="w-740 h-400 mb-5"></div>
+
+        <div class="h-400" v-if="isLoading">
+            <div class="alert alert-info mb-5" role="alert">
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <div><strong>Loading...</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div id="graph" class="w-740 h-400 mb-5"></div>
+        </div>
     </div>
 </div>
 
 @section scripts {
-    <environment include="Development">
-        <script src="~/js/data/graph.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/data/graph.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/data/graph.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/data/graph.min.js" asp-append-version="true"></script>
+</environment>
 }
