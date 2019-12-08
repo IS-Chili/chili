@@ -12,6 +12,9 @@ using Usa.chili.Dto;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Interface for StationDataService.
+    /// </summary>
     public interface IStationDataService
     {
         Task<List<RealtimeDataDto>> ListRealtimeData(bool isMetricUnits, bool? isWindChill);

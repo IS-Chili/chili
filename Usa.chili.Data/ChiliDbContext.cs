@@ -10,6 +10,10 @@ using Usa.chili.Domain;
 
 namespace Usa.chili.Data
 {
+    /// <summary>
+    /// DbContext for the Chili Database.
+    /// </summary>
+    // TODO: Remove tables/Dbsets not used in the application.
     public partial class ChiliDbContext : DbContext
     {
         public ChiliDbContext(DbContextOptions<ChiliDbContext> options)

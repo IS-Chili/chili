@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for station graphs.
+    /// </summary>
     public class StationGraphDto
     {
         public string Title { get; set; }

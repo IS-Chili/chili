@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for dropdowns.
+    /// </summary>
     public class DropdownDto
     {
         public int Id { get; set; }

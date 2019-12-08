@@ -16,6 +16,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Service for the Public table.
+    /// </summary>
     public class PublicService: IPublicService
     {
         private readonly ILogger _logger;
@@ -31,16 +34,23 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
-        public async Task<StationObservationDto> GetStationObservationById(int id) {
+        /// <summary>
+        /// Gets data for the Station Observation widget and realtime data row in English units.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <returns>A StationObservationDto for a station</returns>
+        public async Task<StationObservationDto> GetStationObservation(int stationId) {
+            // Get station by Id
             Station station = await _dbContext.Station
                 .AsNoTracking()
-                .Where(x => x.Id == id)
+                .Where(x => x.Id == stationId)
                 .FirstAsync();
 
             return _dbContext.Public
                 .AsNoTracking()
                 .Where(x => x.StationKey == station.StationKey)
                 .AsEnumerable()
+                // Perform any necessary calculations and conversions
                 .Select(p => p.ConvertUnits(false, null))
                 .Select(p => new StationObservationDto {
                     StationId = station.Id,

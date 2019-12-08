@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Common
 {
+    /// <summary>
+    /// Enum for valid variable types.
+    /// </summary>
     public enum VariableTypeEnum
     {
         Minute_Precipitation,

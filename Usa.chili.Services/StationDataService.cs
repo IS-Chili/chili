@@ -18,6 +18,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Service for the Station Data table.
+    /// </summary>
     public class StationDataService : IStationDataService
     {
         private readonly ILogger _logger;
@@ -33,6 +36,14 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Gets data for station info displays.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <param name="variableId">Variable Id filter</param>
+        /// <param name="date">Timestamp filter</param> 
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <returns>A StationGraphDto for a station</returns>
         public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits)
         {
             // Get the VariableDescription with the VariableType
@@ -112,6 +123,12 @@ namespace Usa.chili.Services
             return stationGraphDto;
         }
 
+        /// <summary>
+        /// Gets data for the realtime data table.
+        /// </summary>
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <param name="isWindChill">Returns windchill data if true, heatindex data if false</param>
+        /// <returns>List of RealtimeDataDtos</returns>
         public async Task<List<RealtimeDataDto>> ListRealtimeData(bool isMetricUnits, bool? isWindChill)
         {
             var now = DateTime.Now.Date;
@@ -125,6 +142,7 @@ namespace Usa.chili.Services
                 .Select(x => new RealtimeDataDto
                 {
                     StationId = x.Id,
+                    // TODO: Remove comment to allow IsStationOffline to work
                     IsStationOffline = !x.Public.Ts.HasValue, // || x.Public.Ts.Value.Date < now,
                     StationName = x.DisplayName,
                     StationTimestamp = x.Public.Ts
@@ -139,18 +157,21 @@ namespace Usa.chili.Services
                     Public publicData = _dbContext.Public
                         .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        // Perform any necessary calculations and conversions
                         .Select(x => x.ConvertUnits(isMetricUnits, isWindChill))
                         .Single();
 
                     ExtremesTday extremesTdayData = _dbContext.ExtremesTday
                         .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        // Perform any necessary calculations and conversions
                         .Select(x => x.ConvertUnits(isMetricUnits))
                         .Single();
 
                     ExtremesYday extremesYdayData = _dbContext.ExtremesYday
                         .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        // Perform any necessary calculations and conversions
                         .Select(x => x.ConvertUnits(isMetricUnits))
                         .Single();
 
@@ -214,6 +235,12 @@ namespace Usa.chili.Services
             return realtimeDataDtos;
         }
 
+        /// <summary>
+        /// Gets data for the station data table.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <param name="dateTime">Timestamp filter</param>
+        /// <returns>A StationDataDto for a station</returns>
         public async Task<StationDataDto> GetStationData(int stationId, DateTime? dateTime)
         {
             var stationDataDto = new StationDataDto();

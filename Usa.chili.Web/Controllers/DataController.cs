@@ -15,6 +15,10 @@ using Usa.chili.Services;
 
 namespace Usa.chili.Web.Controllers
 {
+    /// <summary>
+    /// This controller handles and displays the data views.
+    /// This controller also returns data as JSON responses.
+    /// </summary>
     [Route("[controller]")]
     public class DataController : Controller
     {
@@ -38,115 +42,220 @@ namespace Usa.chili.Web.Controllers
             _variableService = variableService;
         }
 
+        /// <summary>
+        /// This view displays the realtime display page.
+        /// </summary>
+        /// <returns>Data/Realtime view</returns>
         [HttpGet("Realtime")]
         public IActionResult Realtime()
         {
             return View();
         }
 
+        /// <summary>
+        /// Gets data for the realtime data table.
+        /// </summary>
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <param name="isWindChill">Returns windchill data if true, heatindex data if false</param>
+        /// <returns>List of RealtimeDataDtos as JSON</returns>
         [HttpGet("RealtimeData")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<List<RealtimeDataDto>> RealtimeData(bool isMetricUnits, bool? isWindChill)
         {
             return await _stationDataService.ListRealtimeData(isMetricUnits, isWindChill);
         }
 
+        /// <summary>
+        /// This view displays the custom products page.
+        /// </summary>
+        /// <returns>Data/CustomProducts view</returns>
         [HttpGet("CustomProducts")]
         public IActionResult CustomProducts()
         {
             return View();
         }
 
+        /// <summary>
+        /// This view displays the metadata page.
+        /// </summary>
+        /// <returns>Data/Metadata view</returns>
         [HttpGet("Metadata")]
-        public IActionResult Metadata(int? id) => View();
+        public IActionResult Metadata(int? id)
+        {
+            return View();
+        }
 
+        /// <summary>
+        /// Processes the download request and returns the file to the client.
+        /// </summary>
+        /// <returns>Data/Metadata view</returns>
+        [HttpPost("MetadataDownload")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult MetadataDownload(int id, DateTime beginDate, DateTime endDate, int downloadFormat)
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// This view displays the station page.
+        /// </summary>
+        /// <returns>Data/Station view</returns>
         [HttpGet("Station")]
         public IActionResult Station(int? id)
         {
             return View();
         }
 
+        /// <summary>
+        /// Gets data for the station data table.
+        /// </summary>
+        /// <param name="id">Station Id filter</param>
+        /// <param name="dateTime">Timestamp filter</param>
+        /// <returns>StationDataDto as JSON</returns>
         [HttpGet("StationData")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<StationDataDto> StationData(int id, DateTime? dateTime)
         {
             return await _stationDataService.GetStationData(id, dateTime);
         }
 
+        /// <summary>
+        /// Gets data for station info displays.
+        /// </summary>
+        /// <param name="id">Station Id filter</param>
+        /// <returns>StationDto as JSON</returns>
         [HttpGet("StationInfo")]
         public async Task<StationDto> StationInfo(int id)
         {
             return await _stationService.GetStationInfo(id);
         }
 
+        /// <summary>
+        /// Gets data for the station map.
+        /// </summary>
+        /// <returns>List of StationMapDtos as JSON</returns>
         [HttpGet("StationMap")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<List<StationMapDto>> StationMap()
         {
             return await _stationService.GetStationMapData();
         }
 
+        /// <summary>
+        /// This view displays the graph page.
+        /// </summary>
+        /// <returns>Data/Graph view</returns>
         [HttpGet("Graph")]
         public IActionResult Graph()
         {
             return View();
         }
 
+        /// <summary>
+        /// Gets data for station info displays.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <param name="variableId">Variable Id filter</param>
+        /// <param name="date">Timestamp filter</param> 
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <returns>StationGraphDto as JSON</returns>
         [HttpGet("StationGraph")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<StationGraphDto> StationGraph(int stationId, int variableId, DateTime? date, bool isMetricUnits)
         {
             return await _stationDataService.StationGraphData(stationId, variableId, date, isMetricUnits);
         }
 
+        /// <summary>
+        /// This view displays the meteorological page.
+        /// </summary>
+        /// <returns>Data/Meteorological view</returns>
         [HttpGet("Meteorological")]
         public IActionResult Meteorological()
         {
             return View();
         }
 
+        /// <summary>
+        /// This view displays the QC graphs page.
+        /// </summary>
+        /// <returns>Data/QC_Graphs view</returns>
         [HttpGet("QC_Graphs")]
         public IActionResult QC_Graphs()
         {
             return View();
         }
 
+        /// <summary>
+        /// This view displays the summaries page.
+        /// </summary>
+        /// <returns>Data/Summaries view</returns>
         [HttpGet("Summaries")]
         public IActionResult Summaries()
         {
             return View();
         }
 
+        /// <summary>
+        /// This view displays the VOC page.
+        /// </summary>
+        /// <returns>Data/VOC view</returns>
         [HttpGet("VOC")]
         public IActionResult VOC()
         {
             return View();
         }
 
+        /// <summary>
+        /// Gets data for variable dropdowns.
+        /// </summary>
+        /// <returns>List of DropdownDtos as JSON</returns>
         [HttpGet("VariableList")]
         public async Task<List<DropdownDto>> VariableList()
         {
             return await _variableService.ListAllVariables();
         }
 
+        /// <summary>
+        /// Gets data for the realtime data table's unit symbols.
+        /// </summary>
+        /// <returns>List of VariableTypeDtos as JSON</returns>
         [HttpGet("VariableTypeList")]
         public async Task<List<VariableTypeDto>> VariableTypeList()
         {
             return await _variableService.ListAllVariableTypes();
         }
 
+        /// <summary>
+        /// Gets active stations for station dropdowns.
+        /// </summary>
+        /// <returns>List of DropdownDtos as JSON</returns>
         [HttpGet("ActiveStationList")]
         public async Task<List<DropdownDto>> ActiveStationList()
         {
             return await _stationService.ListActiveStations();
         }
 
+        /// <summary>
+        /// Gets all stations for station dropdowns.
+        /// </summary>
+        /// <returns>List of DropdownDtos as JSON</returns>
         [HttpGet("StationList")]
         public async Task<List<DropdownDto>> StationList()
         {
             return await _stationService.ListAllStations();
         }
 
+        /// <summary>
+        /// Gets data for the Station Observation widget and realtime data row in English units.
+        /// </summary>
+        /// <param name="id">Station Id filter</param>
+        /// <returns>StationObservationDto as JSON</returns>
         [HttpGet("StationObservation")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<StationObservationDto> StationObservationData(int id)
         {
-            return await _publicService.GetStationObservationById(id);
+            return await _publicService.GetStationObservation(id);
         }
     }
 }

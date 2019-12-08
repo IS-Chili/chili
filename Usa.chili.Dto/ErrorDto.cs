@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for errors.
+    /// </summary>
     public class ErrorDto
     {
         public int StatusCode { get; set; }

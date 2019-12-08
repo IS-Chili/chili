@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for variable type.
+    /// </summary>
     public class VariableTypeDto
     {
         public string VariableType { get; set; }

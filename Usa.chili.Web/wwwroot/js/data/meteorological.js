@@ -1,9 +1,3 @@
-$(function () {
-  $('#downloadFormat').select2(Core.select2Options);
-  $('#beginDate').datetimepicker(Core.dateTimePickerDateOptions);
-  $('#endDate').datetimepicker(Core.dateTimePickerDateOptions);
-});
-
 const App = new Vue({
   el: '#app',
   data: function () {
@@ -11,10 +5,25 @@ const App = new Vue({
       stations: [],
       model: {
         stationId: Core.DEFAULT_STATION,
-        selectedVariables: [],
+        beginDate: moment().format(Core.DATE_FORMAT),
+        endDate: moment().format(Core.DATE_FORMAT),
+        downloadFormat: 1,
+        selectedVariables: []
       },
       variables: [],
-      selectAllVariables: false
+      formatOptions: [
+        {
+          id: 1,
+          text: "CSV"
+        },
+        {
+          id: 2,
+          text: "Fixed"
+        }
+      ],
+      selectAllVariables: false,
+      error: null,
+      isLoading: false
     }
   },
   created: function () {
@@ -22,7 +31,6 @@ const App = new Vue({
 
     // Get Variable list from JSON file
     this.getVariables();
-
   },
   methods: {
     getVariables: function () {

@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Common
 {
+    /// <summary>
+    /// Enum for valid Door values.
+    /// </summary>
     public enum DoorEnum
     {
         Open = 1,
