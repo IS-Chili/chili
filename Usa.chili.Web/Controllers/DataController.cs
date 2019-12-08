@@ -16,6 +16,7 @@ using Usa.chili.Common;
 using Usa.chili.Domain;
 using Usa.chili.Dto;
 using Usa.chili.Services;
+using Usa.chili.Web.Converters;
 
 namespace Usa.chili.Web.Controllers
 {
@@ -223,10 +224,12 @@ namespace Usa.chili.Web.Controllers
             using (var streamWriter = new StreamWriter(memoryStream))
             using (var csvWriter = new CsvWriter(streamWriter))
             {
-                // Use tabs for fixed format
+                // Remove delimeter for fixed format
                 // Remove header row for fixed format
                 if(downloadFormat == DownloadFormatEnum.Fixed) {
-                    csvWriter.Configuration.Delimiter = "\t";
+                    csvWriter.Configuration.Delimiter = "";
+                    csvWriter.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.None;
+                    csvWriter.Configuration.ShouldQuote = (field, context) => false;
                     csvWriter.Configuration.HasHeaderRecord = false;
                 }
 
@@ -235,7 +238,14 @@ namespace Usa.chili.Web.Controllers
                 foreach (var column in columns)
                 {
                     var property = typeof(StationData).GetProperty(column.Replace("_", ""));
-                    map.Map(typeof(StationData), property);
+
+                    // Use the FixedWidthConverter for the fixed format
+                    if(downloadFormat == DownloadFormatEnum.Fixed) {
+                        map.Map(typeof(StationData), property).TypeConverter<FixedWidthConverter>();
+                    }
+                    else {
+                        map.Map(typeof(StationData), property);
+                    }
                 }
                 csvWriter.Configuration.RegisterClassMap(map);
 
