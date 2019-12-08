@@ -18,6 +18,21 @@ namespace Usa.chili.Common
         public const string DATETIME_FORMAT = "MM/dd/yyyy HH:mm:ss";
 
         /// <summary>
+        /// Standard date format for the application
+        /// </summary>
+        public const string DATE_FORMAT = "MM/dd/yyyy";
+
+         /// <summary>
+        /// Standard date format for the application
+        /// </summary>
+        public const string DATE_FILE_FORMAT = "yyyy-MM-dd";
+
+        /// <summary>
+        /// Standard time format for the application
+        /// </summary>
+        public const string TIME_FORMAT = "HH:mm:ss";
+
+        /// <summary>
         /// Define some useful conversion constants
         /// </summary>
         public const double fiveNinths = 5.0 / 9.0;

@@ -73,7 +73,27 @@ const App = new Vue({
       }
     },
     download: function () {
-      // TODO
+      this.error = null;
+
+      if(this.model.stationId
+          && this.model.beginDate
+          && this.model.endDate
+          && this.model.downloadFormat
+          && this.model.selectedVariables.length > 0) {
+        const params = {
+          id: this.model.stationId,
+          beginDate: this.model.beginDate,
+          endDate: this.model.endDate,
+          downloadFormat: this.model.downloadFormat,
+          variables: this.model.selectedVariables
+        };
+
+        window.location = '/Data/MeteorologicalDownload?' + new URLSearchParams(params).toString();
+      }
+      else {
+        this.error = "Please select a station, begin date, end date, download format, and variable";
+      }
+
     }
   }
 });

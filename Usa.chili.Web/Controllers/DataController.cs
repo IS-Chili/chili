@@ -7,9 +7,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Usa.chili.Common;
+using Usa.chili.Domain;
 using Usa.chili.Dto;
 using Usa.chili.Services;
 
@@ -81,17 +85,6 @@ namespace Usa.chili.Web.Controllers
         /// <returns>Data/Metadata view</returns>
         [HttpGet("Metadata")]
         public IActionResult Metadata(int? id)
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// Processes the download request and returns the file to the client.
-        /// </summary>
-        /// <returns>Data/Metadata view</returns>
-        [HttpPost("MetadataDownload")]
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult MetadataDownload(int id, DateTime beginDate, DateTime endDate, int downloadFormat)
         {
             return View();
         }
@@ -174,6 +167,76 @@ namespace Usa.chili.Web.Controllers
         public IActionResult Meteorological()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Processes the download request and returns the file to the client.
+        /// </summary>
+        /// <returns>CSV or Fixed file</returns>
+        [HttpGet("MeteorologicalDownload")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> MeteorologicalDownload(int id, DateTime beginDate, DateTime endDate, DownloadFormatEnum downloadFormat, string variables)
+        {
+            // Must have variables selected
+            if(variables == null) {
+                return View("Error", new ErrorDto { StatusCode = 400 });
+            }
+
+            // Get station Info
+            var stationInfo = await _stationService.GetStationInfo(id);
+
+            // Get data for the file
+            var data = await _stationDataService.MeteorologicalDownloadData(id, beginDate, endDate);
+
+            // File extension
+            var extension = "csv";
+            if(downloadFormat == DownloadFormatEnum.Fixed) {
+                extension = "dat";
+            }
+
+            // Create file name
+            var fileName = stationInfo.DisplayName.Replace(" ", "_") 
+                + "_" + beginDate.ToString(Constant.DATE_FILE_FORMAT) 
+                + "_" + endDate.ToString(Constant.DATE_FILE_FORMAT) 
+                + "." + extension;
+            
+            // Create the memory stream for the file
+            var memoryStream = new MemoryStream(WriteCsvToMemory(data, variables.Split(","), downloadFormat));
+
+            // Return the file stream
+            return new FileStreamResult(memoryStream, "text/csv") { FileDownloadName = fileName };
+        }
+
+        /// <summary>
+        /// Processes and writes the CSV or Fixed format.
+        /// </summary>
+        /// <returns>CSV or Fixed file</returns>
+        private byte[] WriteCsvToMemory(IEnumerable<StationData> records, string[] columns, DownloadFormatEnum downloadFormat)
+        {
+            // Use the streams and writers to generate the file
+            using (var memoryStream = new MemoryStream())
+            using (var streamWriter = new StreamWriter(memoryStream))
+            using (var csvWriter = new CsvWriter(streamWriter))
+            {
+                // Use tabs for fixed format
+                if(downloadFormat == DownloadFormatEnum.Fixed) {
+                    csvWriter.Configuration.Delimiter = "\t";
+                }
+
+                // Configure the columns to write to the file
+                var map = new CsvHelper.Configuration.DefaultClassMap<StationData>();
+                foreach (var column in columns)
+                {
+                    var property = typeof(StationData).GetProperty(column.Replace("_", ""));
+                    map.Map(typeof(StationData), property);
+                }
+                csvWriter.Configuration.RegisterClassMap(map);
+
+                // Write the records and flush
+                csvWriter.WriteRecords(records);
+                streamWriter.Flush();
+                return memoryStream.ToArray();
+            }
         }
 
         /// <summary>

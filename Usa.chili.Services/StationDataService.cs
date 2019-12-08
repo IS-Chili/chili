@@ -48,6 +48,7 @@ namespace Usa.chili.Services
         {
             // Get the VariableDescription with the VariableType
             var variableDescription = await _dbContext.VariableDescription
+                .AsNoTracking()
                 .Include(x => x.VariableType)
                 .Where(x => x.Id == variableId)
                 .SingleAsync();
@@ -67,17 +68,17 @@ namespace Usa.chili.Services
 
             // Get the first datetime data entry for the station
             stationGraphDto.FirstDateTimeEntry = await _dbContext.StationData
+                .AsNoTracking()
                 .Where(x => x.Station.Id == stationId)
                 .OrderBy(x => x.Ts)
-                .AsNoTracking()
                 .Select(x => x.Ts)
                 .FirstOrDefaultAsync();
 
             // Get the last datetime data entry for the station
             stationGraphDto.LastDateTimeEntry = await _dbContext.StationData
+                .AsNoTracking()
                 .Where(x => x.Station.Id == stationId)
                 .OrderByDescending(x => x.Ts)
-                .AsNoTracking()
                 .Select(x => x.Ts)
                 .FirstOrDefaultAsync();
 
@@ -107,10 +108,10 @@ namespace Usa.chili.Services
                     if (System.Enum.TryParse(variableDescription.VariableType.VariableType1, out VariableTypeEnum variableTypeEnum))
                     {
                         stationGraphDto.Series[0].Data = await _dbContext.StationData
+                            .AsNoTracking()
                             .Where(x => x.Ts >= date.Value.Date && x.Ts < date.Value.Date.AddDays(1))
                             .Where(x => x.Station.Id == stationId)
                             .OrderBy(x => x.Ts)
-                            .AsNoTracking()
                             .Select(x => new List<double>() {
                                 (double) new DateTimeOffset(x.Ts).ToUnixTimeMilliseconds(),
                                 x.ValueForVariable(isMetricUnits, false, variableTypeEnum, variableEnum) ?? 0
@@ -121,6 +122,24 @@ namespace Usa.chili.Services
             }
 
             return stationGraphDto;
+        }
+
+        /// <summary>
+        /// Gets data for a Meteorological Download request.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <param name="beginDate">Begin Timestamp filter</param> 
+        /// <param name="endDate">End Timestamp filter</param> 
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <returns>List of StationData rows</returns>
+        public async Task<List<StationData>> MeteorologicalDownloadData(int stationId, DateTime beginDate, DateTime endDate)
+        {
+            return await _dbContext.StationData
+                        .AsNoTracking()
+                        .Where(x => x.Ts >= beginDate.Date && x.Ts < endDate.Date.AddDays(1))
+                        .Where(x => x.Station.Id == stationId)
+                        .OrderBy(x => x.Ts)
+                        .ToListAsync();
         }
 
         /// <summary>
@@ -336,7 +355,7 @@ namespace Usa.chili.Services
                             {
                                 VariableId = variableDescription.Id,
                                 VariableDescription = variableDescription.VariableDescription1,
-                                MetricValue = stationData.Door == (byte) DoorEnum.Open ? "Open" : "Closed",
+                                MetricValue = stationData.Door == (byte)DoorEnum.Open ? "Open" : "Closed",
                                 MetricSymbol = variableDescription.VariableType.EnglishSymbol
                             });
                         }
@@ -346,14 +365,15 @@ namespace Usa.chili.Services
 
             // Determine Soil Type
             var SoilType = "N/A";
-            switch(stationData.SoilType) {
-                case (int) SoilTypeEnum.Sand:
+            switch (stationData.SoilType)
+            {
+                case (int)SoilTypeEnum.Sand:
                     SoilType = "Sand";
                     break;
-                case (int) SoilTypeEnum.Silt:
+                case (int)SoilTypeEnum.Silt:
                     SoilType = "Silt";
                     break;
-                case (int) SoilTypeEnum.Clay:
+                case (int)SoilTypeEnum.Clay:
                     SoilType = "Clay";
                     break;
             }

@@ -13,6 +13,6 @@ namespace Usa.chili.Common
     public enum DownloadFormatEnum
     {
         CSV = 1,
-        Fixed = 0
+        Fixed = 2
     }
 }
