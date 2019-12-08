@@ -61,11 +61,10 @@ const App = new Vue({
     }
   },
   methods: {
-    getUnit: function(variableType, measurementSystem) {
+    getUnit: function(variableTypeName, measurementSystem) {
       if(this.variableTypes && this.variableTypes.length > 0) {
-        return measurementSystem === 'Metric'
-          ? this.variableTypes.find(x => x.variableType === variableType).metricSymbol
-          : this.variableTypes.find(x => x.variableType === variableType).englishSymbol;
+        const variableType = this.variableTypes.find(function(x) { return x.variableType === variableTypeName });
+        return measurementSystem === 'Metric' ? variableType.metricSymbol : variableType.englishSymbol;
       }
     },
     getData: function() {

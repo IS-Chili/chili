@@ -115,7 +115,7 @@
         </div>
     </footer>
 
-    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Promise%2CURL"></script>
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=Array.prototype.find%2CPromise%2CURL"></script>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/popper/dist/umd/popper.min.js" asp-append-version="true"></script>
@@ -147,8 +147,8 @@
 
     <script type="text/x-template" id="datetimepicker-template">
         <div class="input-group date" :id="id" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" :data-target="`#${id}`" :disabled="disabled"/>
-            <div class="input-group-append" :data-target="`#${id}`" data-toggle="datetimepicker">
+            <input type="text" class="form-control datetimepicker-input" :data-target="'#' + id" :disabled="disabled"/>
+            <div class="input-group-append" :data-target="'#' + id" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
             </div>
         </div>
