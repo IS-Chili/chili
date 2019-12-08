@@ -3,91 +3,102 @@ ViewBag.Title = "Meteorological Station Data";
 ViewBag.Description = "Meteorological Station Data";
 }
 
-<div class="container bg-core-blue">
-    <br>
-    <h1 class="text-center">Meteorological Data for {{ stationInfo.displayName }} Station</h1>
-    <h6 class="text-center">Latitude: {{ stationInfo.latitude }}&deg;{{ stationInfo.latitudeDirection }}
-        , Longitude: {{ stationInfo.longitude }}&deg;{{ stationInfo.longitudeDirection }}
-        , Elevation: {{ stationInfo.elevation }}m
-        , Commissioned: {{ stationInfo.beginDate }}
-        <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
-    </h6>
-    <h5 class="text-center">Measurements recorded at: {{ dateTimeRecorded }} CST</h5>
-    <br>
-</div>
-
-<div class="container bg-core-translucent">
-
-    <br>
-    <div class="d-flex justify-content-center my-4">
-        <a class="btn btn-light" :href="'/Data/Metadata?id=' + stationInfo.id">Display Metadata for {{ stationInfo.displayName }} Station</a>
+<div class="container">
+    <div class="container bg-core-blue">
+        <br>
+        <h1 class="text-center">Meteorological Data for {{ stationInfo.displayName }} Station</h1>
+        <h6 class="text-center">Latitude: {{ stationInfo.latitude }}&deg;{{ stationInfo.latitudeDirection }}
+            , Longitude: {{ stationInfo.longitude }}&deg;{{ stationInfo.longitudeDirection }}
+            , Elevation: {{ stationInfo.elevation }}m
+            , Commissioned: {{ stationInfo.beginDate }}
+            <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
+        </h6>
+        <h5 class="text-center">Measurements recorded at: {{ dateTimeRecorded }} CST</h5>
+        <br>
     </div>
 
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group col-lg-2 mr-2">
-            <label for="datePicker">Date</label>
-            <datetimepicker id="datePicker" v-model="model.date" :time="false" :disabled="isLoading"></datetimepicker>
-        </div>
-        <div class="form-group col-lg-2 mr-2">
-            <label for="timePicker">Time</label>
-            <datetimepicker id="timePicker" v-model="model.time" :time="true" :disabled="isLoading"></datetimepicker>
-        </div>
-        <div class="form-group col-lg-3 mr-2">
-            <label for="stationSelection">Station</label>
-            <select2 id="stationSelection" :options="stations" v-model="model.stationId" :disabled="isLoading"></select2>
-        </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go" :disabled="isLoading">
-                <span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span v-if="isLoading" class="sr-only">Loading...</span>
-                <span v-else>Go</span>
-            </button>
-        </div>
-    </div>
+    <div class="container bg-core-translucent">
 
-    <div class="form-row d-flex justify-content-center">
-        <div class="form-group">
-            <div class="btn-group" role="group" aria-label="Date change">
-                <button type="button" class="btn btn-light" @@click="previous" :disabled="isLoading"><i class="fas fa-chevron-left"></i></button>
-                <button type="button" class="btn btn-light" @@click="lastDateTime" :disabled="isLoading"><i class="fas fa-clock"></i></button>
-                <button type="button" class="btn btn-light" @@click="next" :disabled="isLoading"><i class="fas fa-chevron-right"></i></button>
+        <br>
+        <div class="d-flex justify-content-center my-4">
+            <a class="btn btn-light" :href="'/Data/Metadata?id=' + stationInfo.id">Display Metadata for
+                {{ stationInfo.displayName }} Station</a>
+        </div>
+
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group col-lg-2 mr-2">
+                <label for="datePicker">Date</label>
+                <datetimepicker id="datePicker" v-model="model.date" :time="false" :disabled="isLoading">
+                </datetimepicker>
+            </div>
+            <div class="form-group col-lg-2 mr-2">
+                <label for="timePicker">Time</label>
+                <datetimepicker id="timePicker" v-model="model.time" :time="true" :disabled="isLoading">
+                </datetimepicker>
+            </div>
+            <div class="form-group col-lg-3 mr-2">
+                <label for="stationSelection">Station</label>
+                <select2 id="stationSelection" :options="stations" v-model="model.stationId" :disabled="isLoading">
+                </select2>
+            </div>
+            <div class="col-lg-1">
+                <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go" :disabled="isLoading">
+                    <span v-if="isLoading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    <span v-if="isLoading" class="sr-only">Loading...</span>
+                    <span v-else>Go</span>
+                </button>
             </div>
         </div>
-    </div>
 
-    <div class="h-400" v-if="error">
-        <div class="alert alert-danger mb-5" role="alert">
-            <div class="text-center">{{ error }}</div>
-        </div>
-    </div>
-
-    <div class="h-400" v-if="isLoading">
-        <div class="alert alert-info mb-5" role="alert">
-            <div class="text-center">
-                <div class="spinner-border text-primary" role="status"></div>
-                <div><strong>Loading...</strong></div>
+        <div class="form-row d-flex justify-content-center">
+            <div class="form-group">
+                <div class="btn-group" role="group" aria-label="Date change">
+                    <button type="button" class="btn btn-light" @@click="previous" :disabled="isLoading"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-light" @@click="lastDateTime" :disabled="isLoading"><i
+                            class="fas fa-clock"></i></button>
+                    <button type="button" class="btn btn-light" @@click="next" :disabled="isLoading"><i
+                            class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="stationDataTable" class="table-responsive" style="display: none">
-        <table class="table table-hover table-bordered table-striped bg-white">
-            <tbody>
-                <tr v-for='item in stationData'>
-                    <td>
-                        <a v-if="item.variableId" :href="'/Data/Graph?id=' + lastStationId + '&varId=' + item.variableId + '&date=' + dateParam" data-toggle="tooltip"
-                            data-placement="bottom" title="View Graph">
-                            <i class="fas fa-chart-area fa-lg"></i>
-                        </a>
-                    </td>
-                    <td>{{ item.variableDescription }}</td>
-                    <td>{{ item.metricValue }}</td>
-                    <td v-html="item.metricSymbol"></td>
-                    <td>{{ item.englishValue }}</td>
-                    <td v-html="item.englishSymbol"></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="h-400" v-if="error">
+            <div class="alert alert-danger mb-5" role="alert">
+                <div class="text-center">{{ error }}</div>
+            </div>
+        </div>
+
+        <div class="h-400" v-if="isLoading">
+            <div class="alert alert-info mb-5" role="alert">
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <div><strong>Loading...</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="stationDataTable" class="table-responsive" style="display: none">
+            <table class="table table-hover table-bordered table-striped bg-white">
+                <tbody>
+                    <tr v-for='item in stationData'>
+                        <td>
+                            <a v-if="item.variableId"
+                                :href="'/Data/Graph?id=' + lastStationId + '&varId=' + item.variableId + '&date=' + dateParam"
+                                data-toggle="tooltip" data-placement="bottom" title="View Graph">
+                                <i class="fas fa-chart-area fa-lg"></i>
+                            </a>
+                        </td>
+                        <td>{{ item.variableDescription }}</td>
+                        <td>{{ item.metricValue }}</td>
+                        <td v-html="item.metricSymbol"></td>
+                        <td>{{ item.englishValue }}</td>
+                        <td v-html="item.englishSymbol"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

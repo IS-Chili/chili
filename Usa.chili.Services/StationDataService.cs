@@ -18,6 +18,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Service for the Station Data table.
+    /// </summary>
     public class StationDataService : IStationDataService
     {
         private readonly ILogger _logger;
@@ -33,10 +36,19 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Gets data for station info displays.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <param name="variableId">Variable Id filter</param>
+        /// <param name="date">Timestamp filter</param> 
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <returns>A StationGraphDto for a station</returns>
         public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits)
         {
             // Get the VariableDescription with the VariableType
             var variableDescription = await _dbContext.VariableDescription
+                .AsNoTracking()
                 .Include(x => x.VariableType)
                 .Where(x => x.Id == variableId)
                 .SingleAsync();
@@ -56,17 +68,17 @@ namespace Usa.chili.Services
 
             // Get the first datetime data entry for the station
             stationGraphDto.FirstDateTimeEntry = await _dbContext.StationData
+                .AsNoTracking()
                 .Where(x => x.Station.Id == stationId)
                 .OrderBy(x => x.Ts)
-                .AsNoTracking()
                 .Select(x => x.Ts)
                 .FirstOrDefaultAsync();
 
             // Get the last datetime data entry for the station
             stationGraphDto.LastDateTimeEntry = await _dbContext.StationData
+                .AsNoTracking()
                 .Where(x => x.Station.Id == stationId)
                 .OrderByDescending(x => x.Ts)
-                .AsNoTracking()
                 .Select(x => x.Ts)
                 .FirstOrDefaultAsync();
 
@@ -96,10 +108,10 @@ namespace Usa.chili.Services
                     if (System.Enum.TryParse(variableDescription.VariableType.VariableType1, out VariableTypeEnum variableTypeEnum))
                     {
                         stationGraphDto.Series[0].Data = await _dbContext.StationData
+                            .AsNoTracking()
                             .Where(x => x.Ts >= date.Value.Date && x.Ts < date.Value.Date.AddDays(1))
                             .Where(x => x.Station.Id == stationId)
                             .OrderBy(x => x.Ts)
-                            .AsNoTracking()
                             .Select(x => new List<double>() {
                                 (double) new DateTimeOffset(x.Ts).ToUnixTimeMilliseconds(),
                                 x.ValueForVariable(isMetricUnits, false, variableTypeEnum, variableEnum) ?? 0
@@ -112,6 +124,30 @@ namespace Usa.chili.Services
             return stationGraphDto;
         }
 
+        /// <summary>
+        /// Gets data for a Meteorological Download request.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <param name="beginDate">Begin Timestamp filter</param> 
+        /// <param name="endDate">End Timestamp filter</param> 
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <returns>List of StationData rows</returns>
+        public async Task<List<StationData>> MeteorologicalDownloadData(int stationId, DateTime beginDate, DateTime endDate)
+        {
+            return await _dbContext.StationData
+                        .AsNoTracking()
+                        .Where(x => x.Ts >= beginDate.Date && x.Ts < endDate.Date.AddDays(1))
+                        .Where(x => x.Station.Id == stationId)
+                        .OrderBy(x => x.Ts)
+                        .ToListAsync();
+        }
+
+        /// <summary>
+        /// Gets data for the realtime data table.
+        /// </summary>
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <param name="isWindChill">Returns windchill data if true, heatindex data if false</param>
+        /// <returns>List of RealtimeDataDtos</returns>
         public async Task<List<RealtimeDataDto>> ListRealtimeData(bool isMetricUnits, bool? isWindChill)
         {
             var now = DateTime.Now.Date;
@@ -125,6 +161,7 @@ namespace Usa.chili.Services
                 .Select(x => new RealtimeDataDto
                 {
                     StationId = x.Id,
+                    // TODO: Remove comment to allow IsStationOffline to work
                     IsStationOffline = !x.Public.Ts.HasValue, // || x.Public.Ts.Value.Date < now,
                     StationName = x.DisplayName,
                     StationTimestamp = x.Public.Ts
@@ -139,18 +176,21 @@ namespace Usa.chili.Services
                     Public publicData = _dbContext.Public
                         .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        // Perform any necessary calculations and conversions
                         .Select(x => x.ConvertUnits(isMetricUnits, isWindChill))
                         .Single();
 
                     ExtremesTday extremesTdayData = _dbContext.ExtremesTday
                         .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        // Perform any necessary calculations and conversions
                         .Select(x => x.ConvertUnits(isMetricUnits))
                         .Single();
 
                     ExtremesYday extremesYdayData = _dbContext.ExtremesYday
                         .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
+                        // Perform any necessary calculations and conversions
                         .Select(x => x.ConvertUnits(isMetricUnits))
                         .Single();
 
@@ -214,6 +254,12 @@ namespace Usa.chili.Services
             return realtimeDataDtos;
         }
 
+        /// <summary>
+        /// Gets data for the station data table.
+        /// </summary>
+        /// <param name="stationId">Station Id filter</param>
+        /// <param name="dateTime">Timestamp filter</param>
+        /// <returns>A StationDataDto for a station</returns>
         public async Task<StationDataDto> GetStationData(int stationId, DateTime? dateTime)
         {
             var stationDataDto = new StationDataDto();
@@ -309,7 +355,7 @@ namespace Usa.chili.Services
                             {
                                 VariableId = variableDescription.Id,
                                 VariableDescription = variableDescription.VariableDescription1,
-                                MetricValue = stationData.Door == (byte) DoorEnum.Open ? "Open" : "Closed",
+                                MetricValue = stationData.Door == (byte)DoorEnum.Open ? "Open" : "Closed",
                                 MetricSymbol = variableDescription.VariableType.EnglishSymbol
                             });
                         }
@@ -319,14 +365,15 @@ namespace Usa.chili.Services
 
             // Determine Soil Type
             var SoilType = "N/A";
-            switch(stationData.SoilType) {
-                case (int) SoilTypeEnum.Sand:
+            switch (stationData.SoilType)
+            {
+                case (int)SoilTypeEnum.Sand:
                     SoilType = "Sand";
                     break;
-                case (int) SoilTypeEnum.Silt:
+                case (int)SoilTypeEnum.Silt:
                     SoilType = "Silt";
                     break;
-                case (int) SoilTypeEnum.Clay:
+                case (int)SoilTypeEnum.Clay:
                     SoilType = "Clay";
                     break;
             }

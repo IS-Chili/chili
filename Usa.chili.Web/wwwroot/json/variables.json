@@ -1,0 +1,372 @@
+[
+    {
+        "name": "RecId",
+        "description": "ID",
+        "type": "Record"
+    },
+    {
+        "name": "TableCode",
+        "description": "Table Code",
+        "type": "Record"
+    },
+    {
+        "name": "Year",
+        "description": "Year",
+        "type": "DateTime"
+    },
+    {
+        "name": "Month",
+        "description": "Month",
+        "type": "DateTime"
+    },
+    {
+        "name": "DayOfMon",
+        "description": "Day of Month",
+        "type": "DateTime"
+    },
+    {
+        "name": "DayOfYear",
+        "description": "Day of Year",
+        "type": "DateTime"
+    },
+    {
+        "name": "Hour",
+        "description": "Hour",
+        "type": "DateTime"
+    },
+    {
+        "name": "Minute",
+        "description": "Minute",
+        "type": "DateTime"
+    },
+    {
+        "name": "StationId",
+        "description": "Station Id",
+        "type": "Station"
+    },
+    {
+        "name": "Lat",
+        "description": "Latitude",
+        "type": "Station"
+    },
+    {
+        "name": "Lon",
+        "description": "Longitude",
+        "type": "Station"
+    },
+    {
+        "name": "Elev",
+        "description": "Elevation",
+        "type": "Station"
+    },
+    {
+        "name": "Sign",
+        "description": "Sign",
+        "type": "Other"
+    },
+    {
+        "name": "Door",
+        "description": "Door open indicator",
+        "type": "Other"
+    },
+    {
+        "name": "Batt",
+        "description": "Battery Voltage",
+        "type": "Other"
+    },
+    {
+        "name": "ObsInSummTot",
+        "description": "Observations in the last minute",
+        "type": "Other"
+    },
+    {
+        "name": "Ptemp",
+        "description": "Panel Temperature",
+        "type": "Other"
+    },
+    {
+        "name": "IrtsTrgt",
+        "description": "IRTS Target",
+        "type": "Other"
+    },
+    {
+        "name": "IrtsBody",
+        "description": "IRTS Body",
+        "type": "Other"
+    },
+    {
+        "name": "PrecipTb3Tot",
+        "description": "Precipitation over the last minute (TB3)",
+        "type": "Precipitation"
+    },
+    {
+        "name": "PrecipTxTot",
+        "description": "Precipitation over the last minute (TX)",
+        "type": "Precipitation"
+    },
+    {
+        "name": "PrecipTb3Today",
+        "description": "Precipitation since midnight (TB3)",
+        "type": "Precipitation"
+    },
+    {
+        "name": "PrecipTxToday",
+        "description": "Precipitation since midnight (TX)",
+        "type": "Precipitation"
+    },
+    {
+        "name": "AirT1pt5m",
+        "description": "Air Temperature (1.5m)",
+        "type": "Air Temperature"
+    },
+    {
+        "name": "AirT2m",
+        "description": "Air Temperature (2m)",
+        "type": "Air Temperature"
+    },
+    {
+        "name": "AirT9pt5m",
+        "description": "Air Temperature (9.5m)",
+        "type": "Air Temperature"
+    },
+    {
+        "name": "AirT10m",
+        "description": "Air Temperature (10m)",
+        "type": "Air Temperature"
+    },
+    {
+        "name": "Rh2m",
+        "description": "Relative Humidity (2m)",
+        "type": "Humidity"
+    },
+    {
+        "name": "Rh10m",
+        "description": "Relative Humidity (10m)",
+        "type": "Humidity"
+    },
+    {
+        "name": "Pressure1",
+        "description": "Air Pressure (1)",
+        "type": "Pressure"
+    },
+    {
+        "name": "Pressure2",
+        "description": "Air Pressure (2)",
+        "type": "Pressure"
+    },
+    {
+        "name": "TotalRadn",
+        "description": "Total Radiation",
+        "type": "Radiation"
+    },
+    {
+        "name": "QuantRadn",
+        "description": "Quantum Radiation",
+        "type": "Radiation"
+    },
+    {
+        "name": "SoilSfcT",
+        "description": "Soil Surface Temperature",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "SoilT5cm",
+        "description": "Soil Temperature 5cm",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "SoilT10cm",
+        "description": "Soil Temperature 10cm",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "SoilT20cm",
+        "description": "Soil Temperature 20cm",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "SoilT50cm",
+        "description": "Soil Temperature 50cm",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "SoilT100cm",
+        "description": "Soil Temperature 100cm",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "Vitel100cmA",
+        "description": "Soil Temperature 100cm (Vitel a component)",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "Vitel100cmB",
+        "description": "Soil Temperature 100cm (Vitel b component)",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "Vitel100cmC",
+        "description": "Soil Temperature 100cm (Vitel c component)",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "Vitel100cmD",
+        "description": "Soil Temperature 100cm (Vitel d component)",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "TempC",
+        "description": "Soil Temperature(C)",
+        "type": "Soil Temperature"
+    },
+    {
+        "name": "SoilType",
+        "description": "Soil type",
+        "type": "Soil"
+    },
+    {
+        "name": "ER",
+        "description": "Soil eR",
+        "type": "Soil"
+    },
+    {
+        "name": "EI",
+        "description": "Soil eI",
+        "type": "Soil"
+    },
+    {
+        "name": "ERTc",
+        "description": "Soil eRtc",
+        "type": "Soil"
+    },
+    {
+        "name": "EITc",
+        "description": "Soil eItc",
+        "type": "Soil"
+    },
+    {
+        "name": "Wfv",
+        "description": "Soil wfv",
+        "type": "Soil"
+    },
+    {
+        "name": "NaCi",
+        "description": "Soil NaCI",
+        "type": "Soil"
+    },
+    {
+        "name": "SoilCond",
+        "description": "Soil Condition",
+        "type": "Soil"
+    },
+    {
+        "name": "SoilCondTc",
+        "description": "Soil Condition(tc)",
+        "type": "Soil"
+    },
+    {
+        "name": "SoilWaCondTc",
+        "description": "Soil Wa Condition(tc)",
+        "type": "Soil"
+    },
+    {
+        "name": "WndDir2m",
+        "description": "Wind Direction (2m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndDir10m",
+        "description": "Wind Direction (10m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd2m",
+        "description": "Wind Speed (2m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd10m",
+        "description": "Wind Speed (10m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpdVert",
+        "description": "Vertical Wind Speed",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd2mMax",
+        "description": "Wind Speed Maximum (2m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd10mMax",
+        "description": "Wind Speed Maximum (10m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpdVertMax",
+        "description": "Vertical Wind Speed Maximum",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpdVertMin",
+        "description": "Vertical Wind Speed Minimum",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd2mStd",
+        "description": "Wind Speed Standard Deviation (2m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd10mStd",
+        "description": "Wind Speed Standard Deviation (10m)",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd2mWvc1",
+        "description": "Scalar average windspeed at 2 m",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd2mWvc2",
+        "description": "Vector average windspeed at 2 m as result of scalar quantity",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd2mWvc3",
+        "description": "Direction of resultant windspeed vector at 2 m",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd2mWvc4",
+        "description": "Approximate standard deviation of 2 m wind direction",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd10mWvc1",
+        "description": "Scalar average windspeed at 10 m",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd10mWvc2",
+        "description": "Vector average windspeed at 10 m as result of scalar quantity",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd10mWvc3",
+        "description": "Direction of resultant windspeed vector at 10 m",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpd10mWvc4",
+        "description": "Approximate standard deviation of 10 m wind direction",
+        "type": "Wind"
+    },
+    {
+        "name": "WndSpdVertTot",
+        "description": "Minute total of vertical wind speed",
+        "type": "Wind"
+    }
+]

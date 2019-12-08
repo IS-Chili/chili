@@ -9,6 +9,9 @@ using System;
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for Extreme data.
+    /// </summary>
     public class ExtremeDto
     {
         public DateTime? AirTemperatureHighTimestamp { get; set; }

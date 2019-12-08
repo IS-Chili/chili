@@ -10,8 +10,16 @@ using Usa.chili.Common;
 
 namespace Usa.chili.Domain
 {
+    /// <summary>
+    /// Handle business logic for ExtremesYday.
+    /// </summary>
     public partial class ExtremesYday
     {
+        /// <summary>
+        /// Performs any necessary calculations and conversions
+        /// </summary>
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <returns>ExtremesTday with calculations and conversions performed</returns>
         public ExtremesYday ConvertUnits(bool isMetricUnits)
         {
             // Prepare English unit versions of the "Yesterday's Extremes" data values

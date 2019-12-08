@@ -16,6 +16,9 @@ using Usa.chili.Domain;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Service for the Station table.
+    /// </summary>
     public class StationService: IStationService
     {
         private readonly ILogger _logger;
@@ -31,6 +34,10 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Gets active stations as DTOs.
+        /// </summary>
+        /// <returns>List of DropdownDtos</returns>
         public async Task<List<DropdownDto>> ListActiveStations() {
             return await _dbContext.Station
                 .AsNoTracking()
@@ -43,6 +50,26 @@ namespace Usa.chili.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Gets all stations as DTOs.
+        /// </summary>
+        /// <returns>List of DropdownDtos</returns>
+        public async Task<List<DropdownDto>> ListAllStations() {
+            return await _dbContext.Station
+                .AsNoTracking()
+                .OrderBy(x => x.DisplayName)
+                .Select(x => new DropdownDto {
+                    Id = x.Id,
+                    Text = x.DisplayName
+                })
+                .ToListAsync();
+        }
+
+        /// <summary>
+        /// Gets data for station info displays.
+        /// </summary>
+        /// <param name="id">Station Id filter</param>
+        /// <returns>A StationDto for a station</returns>
         public async Task<StationDto> GetStationInfo(int id) {
             return await _dbContext.Station
                 .AsNoTracking()
@@ -60,6 +87,10 @@ namespace Usa.chili.Services
                 .SingleAsync();
         }
 
+        /// <summary>
+        /// Gets data for the station map.
+        /// </summary>
+        /// <returns>List of StationMapDtos</returns>
         public async Task<List<StationMapDto>> GetStationMapData() {
             List<StationMapDto> stationMapDtos = await _dbContext.Station
                 .AsNoTracking()
@@ -77,6 +108,7 @@ namespace Usa.chili.Services
                 ExtremesTday extremesTdayData = _dbContext.ExtremesTday
                     .AsNoTracking()
                     .Where(x => x.StationKeyNavigation.Id == dto.Id)
+                    // Perform any necessary calculations and conversions
                     .Select(x => x.ConvertUnits(false))
                     .SingleOrDefault();
 
@@ -87,17 +119,6 @@ namespace Usa.chili.Services
             });
 
             return stationMapDtos;
-        }
-
-         public async Task<List<DropdownDto>> ListAllStations() {
-            return await _dbContext.Station
-                .AsNoTracking()
-                .OrderBy(x => x.DisplayName)
-                .Select(x => new DropdownDto {
-                    Id = x.Id,
-                    Text = x.DisplayName
-                })
-                .ToListAsync();
         }
     }
 }

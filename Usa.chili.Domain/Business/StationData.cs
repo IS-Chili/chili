@@ -10,8 +10,19 @@ using System;
 
 namespace Usa.chili.Domain
 {
+    /// <summary>
+    /// Handle business logic for StationData.
+    /// </summary>
     public partial class StationData
     {
+        /// <summary>
+        /// Gets data for the specified variable with conversion or rounding applied.
+        /// </summary>
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <param name="useRound">Returns data with default rounding applied for the variable if true, no rounding if false</param>
+        /// <param name="variableTypeEnum">Determines how to convert the value</param>
+        /// <param name="variableEnum">Determines the variable value to return</param>
+        /// <returns>Value of the variable</returns>
         public double? ValueForVariable(bool isMetricUnits, bool useRound, VariableTypeEnum variableTypeEnum, VariableEnum variableEnum)
         {
             double? value = null;

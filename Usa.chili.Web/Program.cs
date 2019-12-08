@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Usa.chili.Web
 {
+    /// <summary>
+    /// This is the program class called by dotnet.
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)

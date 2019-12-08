@@ -5,18 +5,14 @@
 // Version: 1.0.0
 // ********************************************************************************************************************************************
 
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Usa.chili.Dto;
-
-namespace Usa.chili.Services
+namespace Usa.chili.Common
 {
     /// <summary>
-    /// Interface for VariableService.
+    /// Enum for valid Download Format values.
     /// </summary>
-    public interface IVariableService
+    public enum DownloadFormatEnum
     {
-        Task<List<DropdownDto>> ListAllVariables();
-        Task<List<VariableTypeDto>> ListAllVariableTypes();
+        CSV = 1,
+        Fixed = 2
     }
 }

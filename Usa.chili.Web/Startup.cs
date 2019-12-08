@@ -23,6 +23,9 @@ using Usa.chili.Web.Converters;
 
 namespace Usa.chili.Web
 {
+    /// <summary>
+    /// This is the startup website configuration.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)

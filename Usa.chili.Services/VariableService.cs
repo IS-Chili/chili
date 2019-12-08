@@ -18,6 +18,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Service for the Variable Description and Variable Type tables.
+    /// </summary>
     public class VariableService: IVariableService
     {
         private readonly ILogger _logger;
@@ -33,6 +36,10 @@ namespace Usa.chili.Services
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Gets all variable descriptions as DTOs.
+        /// </summary>
+        /// <returns>List of DropdownDtos</returns>
         public async Task<List<DropdownDto>> ListAllVariables() {
             return await _dbContext.VariableDescription
                 .AsNoTracking()
@@ -44,6 +51,10 @@ namespace Usa.chili.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Gets all variable types as DTOs.
+        /// </summary>
+        /// <returns>List of VariableTypeDtos</returns>
         public async Task<List<VariableTypeDto>> ListAllVariableTypes() {
             return await _dbContext.VariableType
                 .AsNoTracking()

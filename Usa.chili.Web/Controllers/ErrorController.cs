@@ -18,7 +18,8 @@ namespace Usa.chili.Web.Controllers
         /// <summary>
         /// This view displays the error page.
         /// </summary>
-        /// <returns>Shared/Error view</returns>
+        /// <param name="statusCode">The HTTP status code number</param>
+        /// <returns>Shared/Error view with a ErrorDto</returns>
         [Route("Error/{statusCode}")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int statusCode)

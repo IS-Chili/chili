@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Common
 {
+    /// <summary>
+    /// Enum for valid Soil Type values.
+    /// </summary>
     public enum SoilTypeEnum
     {
         Sand = 1,
