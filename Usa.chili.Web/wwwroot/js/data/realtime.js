@@ -80,6 +80,9 @@ const App = new Vue({
       .then(function (response) {
         Core.setNullsInArrayToNA(response.data);
 
+        // Show the table
+        $("#realTimeDataTable").show();
+
         self.realtimeData = response.data;
 
         Vue.nextTick(function () {

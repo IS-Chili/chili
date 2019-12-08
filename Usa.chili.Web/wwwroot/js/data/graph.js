@@ -21,7 +21,6 @@ const App = new Vue({
 
     Core.populateStationDropdown(this, false);
     Core.populateVariableDropdown(this);
-    Core.getStationInfo(this, this.model.stationId);
 
     // Set model from URL params
     const params = new URLSearchParams(window.location.search.substring(1));
@@ -31,6 +30,8 @@ const App = new Vue({
     this.model.isMetricUnits = localStorage.getItem('isMetricUnits') === 'true';
 
     this.lastStationId = this.model.stationId;
+
+    Core.getStationInfo(this, this.model.stationId);
 
     // Create initial graph
     this.createGraph();
@@ -83,10 +84,13 @@ const App = new Vue({
       };
 
       // Replace parameters to the URL
-      history.replaceState(params, null, '/Data/Graph?' + new URLSearchParams(params).toString());
+      history.replaceState(null, null, '/Data/Graph?' + new URLSearchParams(params).toString());
 
       // Remove error
       self.error = null;
+
+      // Hide graph
+      $("#graph").hide();
 
       // Show loading spinner
       self.isLoading = true;
@@ -176,16 +180,13 @@ const App = new Vue({
               }
             });
           }
-          else {
-            $("#graph").hide();
-          }
 
         })
         .catch(function (error) {
           // Hide loading spinner
           self.isLoading = false;
 
-          console.log('StationGraphInit failed', error);
+          console.log('createGraph failed', error);
         });
     },
   }

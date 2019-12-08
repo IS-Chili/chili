@@ -65,6 +65,12 @@ namespace Usa.chili.Web.Controllers
             return View();
         }
 
+        [HttpGet("StationData")]
+        public async Task<StationDataDto> StationData(int id, DateTime? dateTime)
+        {
+            return await _stationDataService.GetStationData(id, dateTime);
+        }
+
         [HttpGet("StationInfo")]
         public async Task<StationDto> StationInfo(int id)
         {

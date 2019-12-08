@@ -53,7 +53,10 @@ Core.populateVariableDropdown = function (self) {
 Core.getStationInfo = function (self, id) {
   axios.get('/data/StationInfo?id=' + id)
     .then(function (response) {
-      self.stationInfo = response.data;
+      const stationInfo = response.data;
+      stationInfo.beginDate = moment(stationInfo.beginDate, Core.DATETIME_FORMAT).format(Core.DATE_FORMAT);
+      stationInfo.endDate = stationInfo.endDate ? moment(stationInfo.endDate, Core.DATETIME_FORMAT).format(Core.DATE_FORMAT) : null;
+      self.stationInfo = stationInfo;
     })
     .catch(function (error) {
       console.log('getStationInfo failed', error);
