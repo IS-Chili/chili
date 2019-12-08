@@ -10,8 +10,11 @@ using Usa.chili.Dto;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Interface for PublicService.
+    /// </summary>
     public interface IPublicService
     {
-        Task<StationObservationDto> GetStationObservationById(int id);
+        Task<StationObservationDto> GetStationObservation(int stationId);
     }
 }

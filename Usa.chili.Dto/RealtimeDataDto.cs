@@ -9,6 +9,9 @@ using System;
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for realtime data.
+    /// </summary>
     public class RealtimeDataDto
     {
         public int StationId { get; set; }

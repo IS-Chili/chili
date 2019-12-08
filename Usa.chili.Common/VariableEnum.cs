@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Common
 {
+    /// <summary>
+    /// Enum for valid variables.
+    /// </summary>
     public enum VariableEnum
     {
         Precip_TB3_Tot,

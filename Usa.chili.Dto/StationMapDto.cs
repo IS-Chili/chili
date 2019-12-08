@@ -7,6 +7,9 @@
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for station map.
+    /// </summary>
     public class StationMapDto
     {
         public int Id { get; set; }

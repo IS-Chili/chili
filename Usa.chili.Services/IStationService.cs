@@ -12,6 +12,9 @@ using Usa.chili.Dto;
 
 namespace Usa.chili.Services
 {
+    /// <summary>
+    /// Interface for StationService.
+    /// </summary>
     public interface IStationService
     {
         Task<StationDto> GetStationInfo(int id);

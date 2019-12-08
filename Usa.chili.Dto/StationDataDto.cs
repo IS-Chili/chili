@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for station data.
+    /// </summary>
     public class StationDataDto
     {
         public DateTime? FirstDateTimeEntry { get; set; }

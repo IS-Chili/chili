@@ -1,8 +1,3 @@
-$(function () {
-  $('#datePicker').datetimepicker(Core.dateTimePickerDateOptions);
-  $('#timePicker').datetimepicker(Core.dateTimePickerTimeOptions);
-});
-
 const App = new Vue({
   el: '#app',
   data: function () {

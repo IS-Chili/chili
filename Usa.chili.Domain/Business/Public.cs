@@ -11,17 +11,31 @@ using Usa.chili.Common;
 
 namespace Usa.chili.Domain
 {
+    /// <summary>
+    /// Handle business logic for Public.
+    /// </summary>
     public partial class Public
     {
+        // Calculated Relative Humidity
         [NotMapped()]
         public double? Rh { get; set; }
+
+        // Calculated Dew Point
         [NotMapped()]
         public double? DewPoint { get; set; }
+
+        // Calculated Felt
         [NotMapped()]
         public double? Felt { get; set; }
+
+        // Determines if Felt is Windchill or Heatindex
         [NotMapped()]
         public bool IsWindChill { get; set; }
 
+        /// <summary>
+        /// Normalizes relative humidity 
+        /// </summary>
+        /// <returns>Normalized relative humidity</returns>
         public double? NormalizeRelativeHumidity()
         {
             if (Rh2m > 110)
@@ -36,6 +50,10 @@ namespace Usa.chili.Domain
                 return Rh2m;
         }
 
+        /// <summary>
+        /// Calculates dew point
+        /// </summary>
+        /// <returns>Dew point</returns>
         public double? CalculateDewPoint()
         {
             double? normalizedRelativeHumidity = NormalizeRelativeHumidity();
@@ -45,6 +63,12 @@ namespace Usa.chili.Domain
                 return (AirT2m ?? 0) - ((100.0 - normalizedRelativeHumidity) / 5.0);
         }
 
+        /// <summary>
+        /// Performs any necessary calculations and conversions
+        /// </summary>
+        /// <param name="isMetricUnits">Returns data in metric units if true, english units if false</param>
+        /// <param name="isWindChill">Returns windchill data if true, heatindex data if false</param>
+        /// <returns>Public with calculations and conversions performed</returns>
         public Public ConvertUnits(bool isMetricUnits, bool? isWindChill)
         {
             // If Wind Direction is slightly negative adjust it
@@ -135,7 +159,7 @@ namespace Usa.chili.Domain
             {
                 // Windchill Temperature is only defined for temperatures
                 // at or below 50 degrees F and wind speeds above 3 mph
-                if (AirT2m <= 50 && WndSpd10m > 3)
+                if (AirT2m_en <= 50 && WndSpd10m_en > 3)
                 {
                     this.IsWindChill = true;
                     isWindChill = true;

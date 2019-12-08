@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  // Handle scrolling the table while keeping the header and first column frozen
   $('tbody').scroll(function(e) {
     $('thead').css("left", -$("tbody").scrollLeft());
     $('thead th:nth-child(1)').css("left", $("tbody").scrollLeft());

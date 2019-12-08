@@ -1,14 +1,15 @@
 @{
-    ViewBag.Title = "Meteorological Data";
-    ViewBag.Description = "Meteorological Data";
+ViewBag.Title = "Meteorological Data";
+ViewBag.Description = "Meteorological Data";
 }
 
 <div class="container">
     <div class="alert alert-info" role="alert">
-        <div class="text-center">Please consider supporting the USA Mesonet project by clicking on the <a asp-controller="Home" asp-action="Donate">Donations Welcome</a> link</div>
+        <div class="text-center">Please consider supporting the USA Mesonet project by clicking on the <a
+                asp-controller="Home" asp-action="Donate">Donations Welcome</a> link</div>
     </div>
 
-    <div class="bg-core-blue">
+    <div class="container bg-core-blue">
         <br>
         <h2 class="text-center">Select Meteorological Data to Download</h2>
         <br>
@@ -19,45 +20,74 @@
         <div class="form-row d-flex justify-content-center">
             <div class="form-group col-lg-2 mr-2">
                 <label for="beginDate">Begin Date</label>
-                <div class="input-group date" id="beginDate" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#beginDate" />
-                    <div class="input-group-append" data-target="#beginDate" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                    </div>
-                </div>
+                <datetimepicker id="beginDate" v-model="model.beginDate" :time="false" :disabled="isLoading">
+                </datetimepicker>
             </div>
             <div class="form-group col-lg-2 mr-2">
                 <label for="endDate">End Date</label>
-                <div class="input-group date" id="endDate" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#endDate" />
-                    <div class="input-group-append" data-target="#endDate" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                    </div>
-                </div>
+                <datetimepicker id="endDate" v-model="model.endDate" :time="false" :disabled="isLoading">
+                </datetimepicker>
             </div>
             <div class="form-group col-lg-3 mr-2">
                 <label for="stationSelection">Station</label>
-                <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+                <select2 id="stationSelection" :options="stations" v-model="model.stationId" :disabled="isLoading">
+                </select2>
             </div>
             <div class="form-group col-lg-2 mr-2">
                 <label for="downloadFormat">Format</label>
-                <select id="downloadFormat">
-                    <option value="csv">CSV</option>
-                    <option value="fixed">Fixed</option>
-                </select>
+                <select2 id="downloadFormat" :options="formatOptions" v-model="model.downloadFormat"
+                    :disabled="isLoading"></select2>
             </div>
             <div class="col-lg-1">
-                <button type="button" class="btn btn-secondary btn-inline" @@click="download">Download</button>
+                <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="download">Download</button>
             </div>
+        </div>
+
+        <div v-if="error">
+            <div class="alert alert-danger mb-3" role="alert">
+                <div class="text-center">{{ error }}</div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered bg-white">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="selectAll"
+                                    v-model="selectAllVariables" @@change="selectAll">
+                                <label class="custom-control-label" for="selectAll">Select/Deselect All</label>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody v-for="(item, index) in variables">
+                    <tr v-if="index == 0 || variables[index - 1].type != item.type" class="bg-core-blue">
+                        <td>
+                            <h5 class="m-0">{{ item.type }}</h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" :id="'var' + index"
+                                    :value="item.name" v-model="model.selectedVariables" @@change="selectOne">
+                                <label class="custom-control-label" :for="'var' + index">{{ item.description }}</label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 @section scripts {
-    <environment include="Development">
-        <script src="~/js/data/meteorological.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/data/meteorological.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/data/meteorological.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/data/meteorological.min.js" asp-append-version="true"></script>
+</environment>
 }

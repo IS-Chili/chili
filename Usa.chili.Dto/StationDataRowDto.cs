@@ -9,6 +9,9 @@ using System;
 
 namespace Usa.chili.Dto
 {
+    /// <summary>
+    /// DTO for station data rows.
+    /// </summary>
     public class StationDataRowDto
     {
         public int? VariableId { get; set; }
