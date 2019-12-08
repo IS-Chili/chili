@@ -194,6 +194,11 @@ namespace Usa.chili.Web.Controllers
                 extension = "dat";
             }
 
+            // Add Timestamp column for CSV
+            if(downloadFormat == DownloadFormatEnum.CSV) {
+                variables = "Ts," + variables;
+            }
+
             // Create file name
             var fileName = stationInfo.DisplayName.Replace(" ", "_") 
                 + "_" + beginDate.ToString(Constant.DATE_FILE_FORMAT) 
