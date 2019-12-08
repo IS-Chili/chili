@@ -11,7 +11,7 @@ const App = new Vue({
   data: function () {
     return {
       realtimeData: [],
-      now: new Date(),
+      now: moment(),
       model: {
         isMetricUnits: false,
         isWindChill: null
@@ -47,7 +47,7 @@ const App = new Vue({
   },
   computed: {
     nowFormated: function() {
-      return moment(this.now).format('MM/DD/YYYY HH:mm:ss');
+      return this.now.format(Core.DATETIME_FORMAT);
     }
   },
   watch: {
@@ -61,11 +61,10 @@ const App = new Vue({
     }
   },
   methods: {
-    getUnit: function(variableType, measurementSystem) {
+    getUnit: function(variableTypeName, measurementSystem) {
       if(this.variableTypes && this.variableTypes.length > 0) {
-        return measurementSystem === 'Metric'
-          ? this.variableTypes.find(x => x.variableType === variableType).metricSymbol
-          : this.variableTypes.find(x => x.variableType === variableType).englishSymbol;
+        const variableType = this.variableTypes.find(function(x) { return x.variableType === variableTypeName });
+        return measurementSystem === 'Metric' ? variableType.metricSymbol : variableType.englishSymbol;
       }
     },
     getData: function() {
@@ -80,10 +79,13 @@ const App = new Vue({
       .then(function (response) {
         Core.setNullsInArrayToNA(response.data);
 
+        // Show the table
+        $("#realTimeDataTable").show();
+
         self.realtimeData = response.data;
 
         Vue.nextTick(function () {
-          self.now = new Date();
+          self.now = moment();
 
           $('[data-toggle="tooltip"]').tooltip({
             boundary: 'span',

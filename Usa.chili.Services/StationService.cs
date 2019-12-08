@@ -75,6 +75,7 @@ namespace Usa.chili.Services
             // Get high and low temperatures for each station
             stationMapDtos.ForEach(dto => {
                 ExtremesTday extremesTdayData = _dbContext.ExtremesTday
+                    .AsNoTracking()
                     .Where(x => x.StationKeyNavigation.Id == dto.Id)
                     .Select(x => x.ConvertUnits(false))
                     .SingleOrDefault();

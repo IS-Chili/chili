@@ -1,8 +1,21 @@
+@model ErrorDto
+
 @{
-    ViewBag.Title = "Error";
-    ViewBag.Description = "Error";
+ViewBag.Title = Model.StatusCode;
+ViewBag.Description = "Error";
 }
 
-<div class="container">
-    <h1>Page Not Found</h1>
+<div class="container bg-core-blue text-center">
+    <br>
+    <h3>
+        @Model.StatusCode
+    </h3>
+    <br>
+</div>
+<div class="container bg-core-translucent">
+    <br>
+    <h5>
+        @Model.Message
+    </h5>
+    <br>
 </div>
