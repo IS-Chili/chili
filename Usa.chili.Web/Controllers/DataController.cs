@@ -219,8 +219,10 @@ namespace Usa.chili.Web.Controllers
             using (var csvWriter = new CsvWriter(streamWriter))
             {
                 // Use tabs for fixed format
+                // Remove header row for fixed format
                 if(downloadFormat == DownloadFormatEnum.Fixed) {
                     csvWriter.Configuration.Delimiter = "\t";
+                    csvWriter.Configuration.HasHeaderRecord = false;
                 }
 
                 // Configure the columns to write to the file
