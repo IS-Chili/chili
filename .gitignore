@@ -32,3 +32,6 @@ msbuild.wrn
 
 # Log file
 log-file.txt
+
+# Keep tempusdominus build folder
+!Usa.chili.Web/wwwroot/lib/tempusdominus/build

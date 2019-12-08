@@ -6,6 +6,7 @@
 // ********************************************************************************************************************************************
 
 using Microsoft.AspNetCore.Mvc;
+using Usa.chili.Dto;
 
 namespace Usa.chili.Web.Controllers
 {
@@ -18,11 +19,11 @@ namespace Usa.chili.Web.Controllers
         /// This view displays the error page.
         /// </summary>
         /// <returns>Shared/Error view</returns>
-        [Route("Error/{errCode}")]
+        [Route("Error/{statusCode}")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Index(int errCode)
+        public IActionResult Error(int statusCode)
         {
-            return View("~/Views/Shared/Error.cshtml");
+            return View(new ErrorDto { StatusCode = statusCode });
         }
     }
 }

@@ -36,13 +36,13 @@ namespace Usa.chili.Services
         public async Task<StationGraphDto> StationGraphData(int stationId, int variableId, DateTime? date, bool isMetricUnits)
         {
             // Get the VariableDescription with the VariableType
-            VariableDescription variableDescription = await _dbContext.VariableDescription
+            var variableDescription = await _dbContext.VariableDescription
                 .Include(x => x.VariableType)
                 .Where(x => x.Id == variableId)
                 .SingleAsync();
 
             // Build the StationGraphDto
-            StationGraphDto stationGraphDto = new StationGraphDto
+            var stationGraphDto = new StationGraphDto
             {
                 Title = "24 hour graph of " + variableDescription.VariableDescription1,
                 YAxisTitle = isMetricUnits ? variableDescription.VariableType.MetricUnit : variableDescription.VariableType.EnglishUnit,
@@ -71,22 +71,26 @@ namespace Usa.chili.Services
                 .FirstOrDefaultAsync();
 
             // Set first and last datetime entries null if defaulted
-            if(stationGraphDto.FirstDateTimeEntry == DateTime.MinValue){
+            if (stationGraphDto.FirstDateTimeEntry == DateTime.MinValue)
+            {
                 stationGraphDto.FirstDateTimeEntry = null;
             }
             // Set first and last datetime entries null if defaulted
-            if(stationGraphDto.LastDateTimeEntry == DateTime.MinValue){
+            if (stationGraphDto.LastDateTimeEntry == DateTime.MinValue)
+            {
                 stationGraphDto.LastDateTimeEntry = null;
             }
 
             // Default date to LastDateTimeEntry
-            if(!date.HasValue) {
+            if (!date.HasValue)
+            {
                 date = stationGraphDto.LastDateTimeEntry;
             }
 
             // Get the VariableEnum and VariableTypeEnum values based on the Variable
             // Retrive the data entries for the station and variable in a timespan of 24 hours from the date
-            if(date != null) {
+            if (date != null)
+            {
                 if (System.Enum.TryParse(variableDescription.VariableName, out VariableEnum variableEnum))
                 {
                     if (System.Enum.TryParse(variableDescription.VariableType.VariableType1, out VariableTypeEnum variableTypeEnum))
@@ -98,7 +102,7 @@ namespace Usa.chili.Services
                             .AsNoTracking()
                             .Select(x => new List<double>() {
                                 (double) new DateTimeOffset(x.Ts).ToUnixTimeMilliseconds(),
-                                x.ValueForVariable(isMetricUnits, variableTypeEnum, variableEnum) ?? 0
+                                x.ValueForVariable(isMetricUnits, false, variableTypeEnum, variableEnum) ?? 0
                             })
                             .ToListAsync();
                     }
@@ -110,10 +114,11 @@ namespace Usa.chili.Services
 
         public async Task<List<RealtimeDataDto>> ListRealtimeData(bool isMetricUnits, bool? isWindChill)
         {
-            DateTime now = DateTime.Now.Date;
+            var now = DateTime.Now.Date;
 
             // Get initial station data
-            List<RealtimeDataDto> realtimeDataDtos = await _dbContext.Station
+            var realtimeDataDtos = await _dbContext.Station
+                .AsNoTracking()
                 .Include(x => x.Public)
                 .Where(x => x.IsActive)
                 .OrderBy(x => x.DisplayName)
@@ -127,19 +132,24 @@ namespace Usa.chili.Services
                 .ToListAsync();
 
             // Get realtime data for online stations
-            realtimeDataDtos.ForEach(dto => {
-                if(!dto.IsStationOffline) {
+            realtimeDataDtos.ForEach(dto =>
+            {
+                if (!dto.IsStationOffline)
+                {
                     Public publicData = _dbContext.Public
+                        .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
                         .Select(x => x.ConvertUnits(isMetricUnits, isWindChill))
                         .Single();
 
                     ExtremesTday extremesTdayData = _dbContext.ExtremesTday
+                        .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
                         .Select(x => x.ConvertUnits(isMetricUnits))
                         .Single();
 
                     ExtremesYday extremesYdayData = _dbContext.ExtremesYday
+                        .AsNoTracking()
                         .Where(x => x.StationKeyNavigation.Id == dto.StationId)
                         .Select(x => x.ConvertUnits(isMetricUnits))
                         .Single();
@@ -194,13 +204,142 @@ namespace Usa.chili.Services
                         WindSpeedMax = extremesTdayData.WndSpd10mMax
                     };
                 }
-                else {
+                else
+                {
                     dto.YesterdayExtreme = new ExtremeDto();
                     dto.TodayExtreme = new ExtremeDto();
                 }
             });
 
             return realtimeDataDtos;
+        }
+
+        public async Task<StationDataDto> GetStationData(int stationId, DateTime? dateTime)
+        {
+            var stationDataDto = new StationDataDto();
+
+            // Get the first datetime data entry for the station
+            stationDataDto.FirstDateTimeEntry = await _dbContext.StationData
+                .AsNoTracking()
+                .Where(x => x.Station.Id == stationId)
+                .OrderBy(x => x.Ts)
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
+
+            // Get the last datetime data entry for the station
+            stationDataDto.LastDateTimeEntry = await _dbContext.StationData
+                .AsNoTracking()
+                .Where(x => x.Station.Id == stationId)
+                .OrderByDescending(x => x.Ts)
+                .Select(x => x.Ts)
+                .FirstOrDefaultAsync();
+
+            // Set first and last datetime entries null if defaulted
+            if (stationDataDto.FirstDateTimeEntry == DateTime.MinValue)
+            {
+                stationDataDto.FirstDateTimeEntry = null;
+            }
+            // Set first and last datetime entries null if defaulted
+            if (stationDataDto.LastDateTimeEntry == DateTime.MinValue)
+            {
+                stationDataDto.LastDateTimeEntry = null;
+            }
+
+            // Return DTO if LastDateTimeEntry is null
+            if (!stationDataDto.LastDateTimeEntry.HasValue)
+            {
+                return stationDataDto;
+            }
+
+            // Default dateTime to LastDateTimeEntry
+            if (!dateTime.HasValue)
+            {
+                dateTime = stationDataDto.LastDateTimeEntry;
+            }
+
+            // Get Station Data
+            var stationData = await _dbContext.StationData
+                .AsNoTracking()
+                .Where(x => x.Station.Id == stationId)
+                .Where(x => x.Ts == dateTime)
+                .FirstOrDefaultAsync();
+
+            // Return DTO if stationData is null
+            if (stationData == null)
+            {
+                return stationDataDto;
+            }
+
+            // Set StationDataRowRows to a new list
+            stationDataDto.StationDataRows = new List<StationDataRowDto>();
+
+            // Get all VariableDescriptions with the VariableTypes
+            var variableDescriptions = await _dbContext.VariableDescription
+                .AsNoTracking()
+                .Include(x => x.VariableType)
+                .OrderBy(x => x.Id)
+                .ToListAsync();
+
+            variableDescriptions.ForEach(variableDescription =>
+            {
+                if (System.Enum.TryParse(variableDescription.VariableName, out VariableEnum variableEnum))
+                {
+                    if (System.Enum.TryParse(variableDescription.VariableType.VariableType1, out VariableTypeEnum variableTypeEnum))
+                    {
+                        if (variableEnum != VariableEnum.Door)
+                        {
+                            bool hasEnglishValue = variableDescription.VariableType.MetricSymbol != variableDescription.VariableType.EnglishSymbol;
+
+                            var metricValue = stationData.ValueForVariable(true, true, variableTypeEnum, variableEnum);
+                            var englishValue = stationData.ValueForVariable(false, true, variableTypeEnum, variableEnum);
+
+                            stationDataDto.StationDataRows.Add(new StationDataRowDto
+                            {
+                                VariableId = variableDescription.Id,
+                                VariableDescription = variableDescription.VariableDescription1,
+                                MetricValue = metricValue != null ? metricValue.ToString() : "N/A",
+                                MetricSymbol = variableDescription.VariableType.MetricSymbol,
+                                EnglishValue = hasEnglishValue ? (englishValue != null ? englishValue.ToString() : "N/A") : null,
+                                EnglishSymbol = hasEnglishValue ? variableDescription.VariableType.EnglishSymbol : null
+                            });
+                        }
+                        else
+                        {
+                            stationDataDto.StationDataRows.Add(new StationDataRowDto
+                            {
+                                VariableId = variableDescription.Id,
+                                VariableDescription = variableDescription.VariableDescription1,
+                                MetricValue = stationData.Door == (byte) DoorEnum.Open ? "Open" : "Closed",
+                                MetricSymbol = variableDescription.VariableType.EnglishSymbol
+                            });
+                        }
+                    }
+                }
+            });
+
+            // Determine Soil Type
+            var SoilType = "N/A";
+            switch(stationData.SoilType) {
+                case (int) SoilTypeEnum.Sand:
+                    SoilType = "Sand";
+                    break;
+                case (int) SoilTypeEnum.Silt:
+                    SoilType = "Silt";
+                    break;
+                case (int) SoilTypeEnum.Clay:
+                    SoilType = "Clay";
+                    break;
+            }
+
+            // Add Soil Type at index 11
+            stationDataDto.StationDataRows.Insert(11, new StationDataRowDto
+            {
+                VariableDescription = "Soil Type",
+                MetricValue = SoilType
+            });
+
+            return stationDataDto;
+
         }
     }
 }

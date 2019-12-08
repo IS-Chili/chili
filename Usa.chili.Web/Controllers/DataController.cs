@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Usa.chili.Dto;
 using Usa.chili.Services;
 
 namespace Usa.chili.Web.Controllers
@@ -44,9 +45,9 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("RealtimeData")]
-        public async Task<IActionResult> RealtimeData(bool isMetricUnits, bool? isWindChill)
+        public async Task<List<RealtimeDataDto>> RealtimeData(bool isMetricUnits, bool? isWindChill)
         {
-            return new JsonResult(await _stationDataService.ListRealtimeData(isMetricUnits, isWindChill));
+            return await _stationDataService.ListRealtimeData(isMetricUnits, isWindChill);
         }
 
         [HttpGet("CustomProducts")]
@@ -64,16 +65,22 @@ namespace Usa.chili.Web.Controllers
             return View();
         }
 
-        [HttpGet("StationInfo")]
-        public async Task<IActionResult> StationInfo(int id)
+        [HttpGet("StationData")]
+        public async Task<StationDataDto> StationData(int id, DateTime? dateTime)
         {
-            return new JsonResult(await _stationService.GetStationInfo(id));
+            return await _stationDataService.GetStationData(id, dateTime);
+        }
+
+        [HttpGet("StationInfo")]
+        public async Task<StationDto> StationInfo(int id)
+        {
+            return await _stationService.GetStationInfo(id);
         }
 
         [HttpGet("StationMap")]
-        public async Task<IActionResult> StationMap()
+        public async Task<List<StationMapDto>> StationMap()
         {
-            return new JsonResult(await _stationService.GetStationMapData());
+            return await _stationService.GetStationMapData();
         }
 
         [HttpGet("Graph")]
@@ -83,9 +90,9 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("StationGraph")]
-        public async Task<IActionResult> StationGraph(int stationId, int variableId, DateTime? date, bool isMetricUnits)
+        public async Task<StationGraphDto> StationGraph(int stationId, int variableId, DateTime? date, bool isMetricUnits)
         {
-            return new JsonResult(await _stationDataService.StationGraphData(stationId, variableId, date, isMetricUnits));
+            return await _stationDataService.StationGraphData(stationId, variableId, date, isMetricUnits);
         }
 
         [HttpGet("Meteorological")]
@@ -113,33 +120,33 @@ namespace Usa.chili.Web.Controllers
         }
 
         [HttpGet("VariableList")]
-        public async Task<IActionResult> VariableList()
+        public async Task<List<DropdownDto>> VariableList()
         {
-            return new JsonResult(await _variableService.ListAllVariables());
+            return await _variableService.ListAllVariables();
         }
 
         [HttpGet("VariableTypeList")]
-        public async Task<IActionResult> VariableTypeList()
+        public async Task<List<VariableTypeDto>> VariableTypeList()
         {
-            return new JsonResult(await _variableService.ListAllVariableTypes());
+            return await _variableService.ListAllVariableTypes();
         }
 
         [HttpGet("ActiveStationList")]
-        public async Task<IActionResult> ActiveStationList()
+        public async Task<List<DropdownDto>> ActiveStationList()
         {
-            return new JsonResult(await _stationService.ListActiveStations());
+            return await _stationService.ListActiveStations();
         }
 
         [HttpGet("StationList")]
-        public async Task<IActionResult> StationList()
+        public async Task<List<DropdownDto>> StationList()
         {
-            return new JsonResult(await _stationService.ListAllStations());
+            return await _stationService.ListAllStations();
         }
 
         [HttpGet("StationObservation")]
-        public async Task<IActionResult> StationObservationData(int id)
+        public async Task<StationObservationDto> StationObservationData(int id)
         {
-            return new JsonResult(await _publicService.GetStationObservationById(id));
+            return await _publicService.GetStationObservationById(id);
         }
     }
 }

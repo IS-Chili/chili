@@ -12,7 +12,7 @@ ViewBag.Description = "Meteorological Station Data";
         , Commissioned: {{ stationInfo.beginDate }}
         <span v-if="stationInfo.endDate">, Decommissioned: {{ stationInfo.endDate }}</span>
     </h6>
-    <h5 class="text-center">Measurements recorded at: {{ model.datetime }} CST</h5>
+    <h5 class="text-center">Measurements recorded at: {{ dateTimeRecorded }} CST</h5>
     <br>
 </div>
 
@@ -26,68 +26,65 @@ ViewBag.Description = "Meteorological Station Data";
     <div class="form-row d-flex justify-content-center">
         <div class="form-group col-lg-2 mr-2">
             <label for="datePicker">Date</label>
-            <div class="input-group date" id="datePicker" data-target-input="nearest">
-                <input type="text" :value="currentDate" class="form-control datetimepicker-input"
-                    data-target="#datePicker" />
-                <div class="input-group-append" data-target="#datePicker" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-                </div>
-            </div>
+            <datetimepicker id="datePicker" v-model="model.date" :time="false" :disabled="isLoading"></datetimepicker>
         </div>
         <div class="form-group col-lg-2 mr-2">
             <label for="timePicker">Time</label>
-            <div class="input-group date" id="timePicker" data-target-input="nearest">
-                <input type="text" :value="currentTime" class="form-control datetimepicker-input"
-                    data-target="#timePicker" />
-                <div class="input-group-append" data-target="#timePicker" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fas fa-clock"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group col-lg-1 ml-3 mr-5">
-            <div class="btn-group btn-inline" role="group" aria-label="Date change">
-                <button type="button" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
-                <button type="button" class="btn btn-light"><i class="fas fa-clock"></i></button>
-                <button type="button" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
-            </div>
+            <datetimepicker id="timePicker" v-model="model.time" :time="true" :disabled="isLoading"></datetimepicker>
         </div>
         <div class="form-group col-lg-3 mr-2">
             <label for="stationSelection">Station</label>
-            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
+            <select2 id="stationSelection" :options="stations" v-model="model.stationId" :disabled="isLoading"></select2>
         </div>
         <div class="col-lg-1">
-            <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go">Go</button>
+            <button type="button" class="btn btn-secondary btn-inline mb-3" @@click="go" :disabled="isLoading">
+                <span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span v-if="isLoading" class="sr-only">Loading...</span>
+                <span v-else>Go</span>
+            </button>
         </div>
     </div>
 
-    <div class="table-responsive" >
+    <div class="form-row d-flex justify-content-center">
+        <div class="form-group">
+            <div class="btn-group" role="group" aria-label="Date change">
+                <button type="button" class="btn btn-light" @@click="previous" :disabled="isLoading"><i class="fas fa-chevron-left"></i></button>
+                <button type="button" class="btn btn-light" @@click="lastDateTime" :disabled="isLoading"><i class="fas fa-clock"></i></button>
+                <button type="button" class="btn btn-light" @@click="next" :disabled="isLoading"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="h-400" v-if="error">
+        <div class="alert alert-danger mb-5" role="alert">
+            <div class="text-center">{{ error }}</div>
+        </div>
+    </div>
+
+    <div class="h-400" v-if="isLoading">
+        <div class="alert alert-info mb-5" role="alert">
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status"></div>
+                <div><strong>Loading...</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stationDataTable" class="table-responsive" style="display: none">
         <table class="table table-hover table-bordered table-striped bg-white">
             <tbody>
-                <tr>
+                <tr v-for='item in stationData'>
                     <td>
-                        <a href="/Data/Graph?id=1&varId=1&date=2019-09-19" data-toggle="tooltip"
+                        <a v-if="item.variableId" :href="'/Data/Graph?id=' + lastStationId + '&varId=' + item.variableId + '&date=' + dateParam" data-toggle="tooltip"
                             data-placement="bottom" title="View Graph">
                             <i class="fas fa-chart-area fa-lg"></i>
                         </a>
                     </td>
-                    <td>Precipitation over the last minute (TB3):</td>
-                    <td>0</td>
-                    <td>mm</td>
-                    <td>0</td>
-                    <td>in</td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="/Data/Graph?id=1&varId=2&date=2019-09-19" data-toggle="tooltip"
-                            data-placement="bottom" title="View Graph">
-                            <i class="fas fa-chart-area fa-lg"></i>
-                        </a>
-                    </td>
-                    <td>Precipitation over the last minute (TX):</td>
-                    <td>0</td>
-                    <td>mm</td>
-                    <td>0</td>
-                    <td>in</td>
+                    <td>{{ item.variableDescription }}</td>
+                    <td>{{ item.metricValue }}</td>
+                    <td v-html="item.metricSymbol"></td>
+                    <td>{{ item.englishValue }}</td>
+                    <td v-html="item.englishSymbol"></td>
                 </tr>
             </tbody>
         </table>

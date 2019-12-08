@@ -5,6 +5,7 @@ Core.DEFAULT_WIDGET_STATION = 23; // 307
 Core.DEFAULT_STATION = 1; // 201
 
 Core.DATE_FORMAT = "MM/DD/YYYY";
+Core.DATE_PARAM_FORMAT = "MM-DD-YYYY";
 Core.DATETIME_FORMAT = "MM/DD/YYYY HH:mm:ss";
 Core.TIME_FORMAT = "HH:mm:ss";
 
@@ -52,7 +53,10 @@ Core.populateVariableDropdown = function (self) {
 Core.getStationInfo = function (self, id) {
   axios.get('/data/StationInfo?id=' + id)
     .then(function (response) {
-      self.stationInfo = response.data;
+      const stationInfo = response.data;
+      stationInfo.beginDate = moment(stationInfo.beginDate, Core.DATETIME_FORMAT).format(Core.DATE_FORMAT);
+      stationInfo.endDate = stationInfo.endDate ? moment(stationInfo.endDate, Core.DATETIME_FORMAT).format(Core.DATE_FORMAT) : null;
+      self.stationInfo = stationInfo;
     })
     .catch(function (error) {
       console.log('getStationInfo failed', error);
@@ -141,6 +145,10 @@ Vue.component('datetimepicker', {
       type: Boolean,
       default: false
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   template: '#datetimepicker-template',
   data: function () {
