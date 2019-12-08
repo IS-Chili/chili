@@ -18,11 +18,17 @@ using Usa.chili.Dto;
 
 namespace Usa.chili.Web
 {
+    /// <summary>
+    /// Extension to provide custom exception handling in Startup.
+    /// </summary>
     public static class GlobalExceptionHandlerExtension
     {
-        // This method will globally handle logging unhandled exceptions.
-        // It will respond with a JSON response for AJAX calls that send the JSON accept header
-        // otherwise it will redirect to the error page.
+
+        /// <summary>
+        /// This method will globally handle logging unhandled exceptions.
+        /// It will respond with a JSON response for AJAX calls that send the JSON accept header
+        /// otherwise it will redirect to the error page.
+        /// </summary>
         public static void UseGlobalExceptionHandler(this IApplicationBuilder app, ILogger logger)
         {
             app.UseExceptionHandler(appBuilder =>
@@ -30,7 +36,7 @@ namespace Usa.chili.Web
                 appBuilder.Run(async context =>
                 {
                     // Get InternalServerError status code
-                    int statusCode = (int) HttpStatusCode.InternalServerError;
+                    int statusCode = (int)HttpStatusCode.InternalServerError;
 
                     // Get response status code
                     context.Response.StatusCode = statusCode;
