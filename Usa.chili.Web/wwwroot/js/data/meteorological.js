@@ -87,7 +87,7 @@ const App = new Vue({
           this.error = "The begin date is later than the end date";
         }
         else if (moment.duration(endDateMoment.diff(beginDateMoment)).asDays() > 31) {
-          this.error = "You have selected more that 31 days";
+          this.error = "You have selected more than 31 days";
         }
         else {
           const params = {
