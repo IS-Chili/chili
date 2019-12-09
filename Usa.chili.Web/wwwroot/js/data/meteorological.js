@@ -57,8 +57,8 @@ const App = new Vue({
     },
     selectOne: function () {
       if (this.model.selectedVariables
-          && this.model.selectedVariables.length > 0
-          && this.model.selectedVariables.length != this.variables.length) {
+        && this.model.selectedVariables.length > 0
+        && this.model.selectedVariables.length != this.variables.length) {
         $('#selectAll').prop('indeterminate', true);
       }
       else if (this.model.selectedVariables
@@ -75,20 +75,31 @@ const App = new Vue({
     download: function () {
       this.error = null;
 
-      if(this.model.stationId
-          && this.model.beginDate
-          && this.model.endDate
-          && this.model.downloadFormat
-          && this.model.selectedVariables.length > 0) {
-        const params = {
-          id: this.model.stationId,
-          beginDate: this.model.beginDate,
-          endDate: this.model.endDate,
-          downloadFormat: this.model.downloadFormat,
-          variables: this.model.selectedVariables
-        };
+      if (this.model.stationId
+        && this.model.beginDate
+        && this.model.endDate
+        && this.model.downloadFormat
+        && this.model.selectedVariables.length > 0) {
+        const beginDateMoment = moment(this.model.beginDate, Core.DATETIME_FORMAT);
+        const endDateMoment = moment(this.model.endDate, Core.DATETIME_FORMAT);
 
-        window.location = '/Data/MeteorologicalDownload?' + new URLSearchParams(params).toString();
+        if (endDateMoment.isBefore(beginDateMoment, 'day')) {
+          this.error = "The begin date is later than the end date";
+        }
+        else if (moment.duration(endDateMoment.diff(beginDateMoment)).asDays() > 31) {
+          this.error = "You have selected more than 31 days";
+        }
+        else {
+          const params = {
+            id: this.model.stationId,
+            beginDate: this.model.beginDate,
+            endDate: this.model.endDate,
+            downloadFormat: this.model.downloadFormat,
+            variables: this.model.selectedVariables
+          };
+
+          window.location = '/Data/MeteorologicalDownload?' + new URLSearchParams(params).toString();
+        }
       }
       else {
         this.error = "Please select a station, begin date, end date, download format, and variable";
