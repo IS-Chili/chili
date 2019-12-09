@@ -178,8 +178,11 @@ namespace Usa.chili.Web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> MeteorologicalDownload(int id, DateTime beginDate, DateTime endDate, DownloadFormatEnum downloadFormat, string variables)
         {
-            // Must have variables selected
-            if(variables == null) {
+            // Validation:
+            // 1. Must have 1 variable selected
+            // 2. endDate must come after beginDate
+            // 3. Timespan between beginDate and endDate must be 31 or less days
+            if(variables == null || beginDate > endDate || (endDate - beginDate).Days > 31) {
                 return View("Error", new ErrorDto { StatusCode = 400 });
             }
 
