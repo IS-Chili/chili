@@ -12,7 +12,7 @@ namespace Usa.chili.Dto
     /// </summary>
     public class DropdownDto
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
         public string Text { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Usa.chili.Domain
 {
-    public partial class Gasque202
+    public partial class AshfordN202
     {
         public DateTime Ts { get; set; }
         public uint? RecId { get; set; }

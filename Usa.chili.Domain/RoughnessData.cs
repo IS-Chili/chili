@@ -7,6 +7,6 @@ namespace Usa.chili.Domain
     {
         public string StationKey { get; set; }
         public double AngleToNorth { get; set; }
-        public byte RoughnessClassification { get; set; }
+        public sbyte RoughnessClassification { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace Usa.chili.Domain
 {
     public partial class People
     {
-        public short Id { get; set; }
+        public ushort Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Organization { get; set; }

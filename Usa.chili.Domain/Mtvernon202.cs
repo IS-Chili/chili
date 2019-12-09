@@ -6,22 +6,22 @@ namespace Usa.chili.Domain
     public partial class Mtvernon202
     {
         public DateTime Ts { get; set; }
-        public int? RecId { get; set; }
-        public short? TableCode { get; set; }
-        public short? Year { get; set; }
+        public uint? RecId { get; set; }
+        public ushort? TableCode { get; set; }
+        public ushort? Year { get; set; }
         public byte? Month { get; set; }
         public byte? DayOfMon { get; set; }
-        public short? DayOfYear { get; set; }
+        public ushort? DayOfYear { get; set; }
         public byte? Hour { get; set; }
         public byte? Minute { get; set; }
-        public short? StationId { get; set; }
+        public ushort? StationId { get; set; }
         public double? Lat { get; set; }
         public double? Lon { get; set; }
         public double? Elev { get; set; }
         public double? Sign { get; set; }
         public byte? Door { get; set; }
         public double? Batt { get; set; }
-        public int? ObsInSummTot { get; set; }
+        public uint? ObsInSummTot { get; set; }
         public double? PrecipTb3Tot { get; set; }
         public double? PrecipTxTot { get; set; }
         public double? PrecipTb3Today { get; set; }
