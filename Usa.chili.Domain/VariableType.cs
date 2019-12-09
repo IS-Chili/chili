@@ -10,7 +10,7 @@ namespace Usa.chili.Domain
             VariableDescription = new HashSet<VariableDescription>();
         }
 
-        public int Id { get; set; }
+        public uint Id { get; set; }
         public string VariableType1 { get; set; }
         public decimal MetricMin { get; set; }
         public decimal MetricMax { get; set; }

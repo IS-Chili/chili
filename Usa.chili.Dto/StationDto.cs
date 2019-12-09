@@ -14,7 +14,7 @@ namespace Usa.chili.Dto
     /// </summary>
     public class StationDto
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
         public string DisplayName { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
