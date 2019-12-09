@@ -14,7 +14,7 @@ namespace Usa.chili.Dto
     /// </summary>
     public class StationDataRowDto
     {
-        public int? VariableId { get; set; }
+        public uint? VariableId { get; set; }
         public string VariableDescription { get; set; }
         public string MetricValue { get; set; }
         public string MetricSymbol { get; set; }

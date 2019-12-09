@@ -14,7 +14,7 @@ namespace Usa.chili.Dto
     /// </summary>
     public class RealtimeDataDto
     {
-        public int StationId { get; set; }
+        public uint StationId { get; set; }
         public bool IsStationOffline { get; set; }
         public bool IsWindChill { get; set; }
         public string StationName { get; set; }

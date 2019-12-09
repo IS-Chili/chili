@@ -10,7 +10,7 @@ namespace Usa.chili.Domain
             StationData = new HashSet<StationData>();
         }
 
-        public int Id { get; set; }
+        public uint Id { get; set; }
         public string StationKey { get; set; }
         public string DisplayName { get; set; }
         public decimal Latitude { get; set; }

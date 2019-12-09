@@ -5,7 +5,7 @@ namespace Usa.chili.Domain
 {
     public partial class Stormtrack
     {
-        public short Year { get; set; }
+        public ushort Year { get; set; }
         public byte Stormnum { get; set; }
         public DateTime Ts { get; set; }
         public string Advisory { get; set; }
