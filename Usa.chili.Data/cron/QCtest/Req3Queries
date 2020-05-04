@@ -1,0 +1,95 @@
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_1pt5m
+FROM chili.test1
+WHERE AirT_1pt5m NOT BETWEEN -10.0 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_2m
+FROM chili.test1
+WHERE AirT_2m NOT BETWEEN -10.0 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_9pt5m
+FROM chili.test1
+WHERE AirT_9pt5m NOT BETWEEN -10.0 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_10m
+FROM chili.test1
+WHERE AirT_10m NOT BETWEEN -10.0 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TB3_Tot
+FROM chili.test1
+WHERE Precip_TB3_Tot NOT BETWEEN 0 AND 2.5;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TX_Tot
+FROM chili.test1
+WHERE Precip_TX_Tot NOT BETWEEN 0 AND 2.5;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TB3_Tot
+FROM chili.test1
+WHERE Precip_TB3_Tot NOT BETWEEN 0 AND 100;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TX_Today
+FROM chili.test1
+WHERE Precip_TX_Today NOT BETWEEN 0 AND 100;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, RH_2m
+FROM chili.test1
+WHERE RH_2m  NOT BETWEEN 0 AND 110;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, RH_10m
+FROM chili.test1
+WHERE RH_10m  NOT BETWEEN 0 AND 110;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndSpd_2m
+FROM chili.test1
+WHERE WndSpd_2m  NOT BETWEEN 0 AND 15;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndSpd_10m
+FROM chili.test1
+WHERE WndSpd_10m  NOT BETWEEN 0 AND 15;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndDir_2m
+FROM chili.test1
+WHERE WndDir_2m  NOT BETWEEN 0 AND 360;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndDir_10m
+FROM chili.test1
+WHERE WndDir_10m  NOT BETWEEN 0 AND 360;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Pressure_1
+FROM chili.test1
+WHERE Pressure_1  NOT BETWEEN 1000 AND 1040;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Pressure_2
+FROM chili.test1
+WHERE Pressure_2  NOT BETWEEN 1000 AND 1040;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, TotalRadn
+FROM chili.test1
+WHERE TotalRadn  NOT BETWEEN 0 AND 2000;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilSfcT
+FROM chili.test1
+WHERE SoilSfcT  NOT BETWEEN -10 AND 55;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Temp_C
+FROM chili.test1
+WHERE Temp_C NOT BETWEEN -5 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_5cm
+FROM chili.test1
+WHERE SoilT_5cm NOT BETWEEN -5 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_10cm
+FROM chili.test1
+WHERE SoilT_10cm NOT BETWEEN -5 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_20cm
+FROM chili.test1
+WHERE SoilT_20cm NOT BETWEEN -5 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_50cm
+FROM chili.test1
+WHERE SoilT_50cm NOT BETWEEN -5 AND 40;
+
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_100cm
+FROM chili.test1
+WHERE SoilT_100cm NOT BETWEEN -5 AND 40;

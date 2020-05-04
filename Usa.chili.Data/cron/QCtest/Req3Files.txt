@@ -1,0 +1,183 @@
+Req3.sh
+#!/bin/bash
+
+#This is the Bash Script for the QC Range test. It contains the MySQL Queries
+#These queries will run and if one is triggered then it will output the results in the Log file. This script will run manually.
+
+#db name chili
+
+#MYSQL username and password, needs to be changed to whatever account yall have created for this( if you create a new account), also the file location "/home/c
+le1521/.." needs to be changed to where the queries will be stored on the Production Server.
+file='Log.txt'
+
+mysql -u root -p < "/home/cle1521/AirT_1pt5m.sql" >> $file
+echo "1pt5m done"
+mysql -u root -p < "/home/cle1521/AirT_2m.sql" >> $file
+echo "2m done"
+mysql -u root -p < "/home/cle1521/AirT_9pt5m.sql" >> $file
+echo "9pt5m done"
+mysql -u root -p < "/home/cle1521/AirT_10m.sql" >> $file
+echo "10m done"
+mysql -u root -p < "/home/cle1521/Precip_TB3_Tot.sql" >> $file
+echo "tb3 tot done"
+mysql -u root -p < "/home/cle1521/Precip_TX_Tot.sql" >> $file
+echo "tx tot done"
+mysql -u root -p < "/home/cle1521/Precip_TB3_Today.sql" >> $file
+echo "tb3 today done"
+mysql -u root -p < "/home/cle1521/Precip_TX_Today.sql" >> $file
+echo "tx today done"
+mysql -u root -p < "/home/cle1521/RH_2m.sql" >> $file
+echo "rh 2m done"
+mysql -u root -p < "/home/cle1521/RH_10m.sql" >> $file
+echo "rh 10m done"
+mysql -u root -p < "/home/cle1521/WndSpd_2m.sql" >> $file
+echo "wndspd 2m done"
+mysql -u root -p < "/home/cle1521/WndSpd_10m.sql" >> $file
+echo "wndspd 10m done"
+mysql -u root -p < "/home/cle1521/WndDir_2m.sql" >> $file
+echo " wnddir 2m done"
+mysql -u root -p < "/home/cle1521/WndDir_10m.sql" >> $file
+echo "wnddir 10m done"
+mysql -u root -p < "/home/cle1521/Pressure_1.sql" >> $file
+echo "pressure 1 done"
+mysql -u root -p < "/home/cle1521/Pressure_2.sql" >> $file
+echo "pressure 2 done"
+mysql -u root -p < "/home/cle1521/TotalRadn.sql" >> $file
+echo "totradn done"
+mysql -u root -p < "/home/cle1521/SoilSfcT.sql" >> $file
+echo "soilsfct done"
+mysql -u root -p < "/home/cle1521/Temp_C.sql" >> $file
+echo "tempc done"
+mysql -u root -p < "/home/cle1521/SoilT_5cm.sql" >> $file
+echo "soilt5cm done"
+mysql -u root -p < "/home/cle1521/SoilT_10cm.sql" >> $file
+echo "soilt10cm  done"
+mysql -u root -p < "/home/cle1521/SoilT_20cm.sql" >> $file
+echo "soilt20cm done"
+mysql -u root -p < "/home/cle1521/SoilT_50cm.sql" >> $file
+echo "soilt50cm done"
+mysql -u root -p < "/home/cle1521/SoilT_100cm.sql" >> $file
+echo "soilt100cm done"
+
+echo "all done"
+
+AirT_1pt5m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_1pt5m
+FROM chili.station_data
+WHERE AirT_1pt5m NOT BETWEEN -10.0 AND 40;
+
+AirT_2m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_2m
+FROM chili.station_data
+WHERE AirT_2m NOT BETWEEN -10.0 AND 40;
+
+AirT_9pt5m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_9pt5m
+FROM chili.station_data
+WHERE AirT_9pt5m NOT BETWEEN -10.0 AND 40;
+
+AirT_10m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, AirT_10m
+FROM chili.station_data
+WHERE AirT_10m NOT BETWEEN -10.0 AND 40;
+
+Precip_TB3_Tot.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TB3_Tot
+FROM chili.station_data
+WHERE Precip_TB3_Tot NOT BETWEEN 0 AND 2.5;
+
+Precip_TX_Tot.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TX_Tot
+FROM chili.station_data
+WHERE Precip_TX_Tot NOT BETWEEN 0 AND 2.5;
+
+Precip_TB3_Today.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TB3_Tot
+FROM chili.station_data
+WHERE Precip_TB3_Tot NOT BETWEEN 0 AND 100;
+
+Precip_TX_Today.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Precip_TX_Today
+FROM chili.station_data
+WHERE Precip_TX_Today NOT BETWEEN 0 AND 100;
+
+RH_2m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, RH_2m
+FROM chili.station_data
+WHERE RH_2m  NOT BETWEEN 0 AND 110;
+
+RH_10m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, RH_10m
+FROM chili.station_data
+WHERE RH_10m  NOT BETWEEN 0 AND 110;
+
+WndSpd_2m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndSpd_2m
+FROM chili.station_data
+WHERE WndSpd_2m  NOT BETWEEN 0 AND 15;
+
+WndSpd_10m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndSpd_10m
+FROM chili.station_data
+WHERE WndSpd_10m  NOT BETWEEN 0 AND 15;
+
+WndDir_2m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndDir_2m
+FROM chili.station_data
+WHERE WndDir_2m  NOT BETWEEN 0 AND 360;
+
+WndDir_10m.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, WndDir_10m
+FROM chili.station_data
+WHERE WndDir_10m  NOT BETWEEN 0 AND 360;
+
+Pressure_1.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Pressure_1
+FROM chili.station_data
+WHERE Pressure_1  NOT BETWEEN 1000 AND 1040;
+
+Pressure_2.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Pressure_2
+FROM chili.station_data
+WHERE Pressure_2  NOT BETWEEN 1000 AND 1040;
+
+TotalRadn.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, TotalRadn
+FROM chili.station_data
+WHERE TotalRadn  NOT BETWEEN 0 AND 2000;
+
+SoilSfcT.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilSfcT
+FROM chili.station_data
+WHERE SoilSfcT  NOT BETWEEN -10 AND 55;
+
+
+Temp_C.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, Temp_C
+FROM chili.station_data
+WHERE Temp_C NOT BETWEEN -5 AND 40;
+
+SoilT_5cm.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_5cm
+FROM chili.station_data
+WHERE SoilT_5cm NOT BETWEEN -5 AND 40;
+
+SoilT_10cm.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_10cm
+FROM chili.station_data
+WHERE SoilT_10cm NOT BETWEEN -5 AND 40;
+
+SoilT_20cm.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_20cm
+FROM chili.station_data
+WHERE SoilT_20cm NOT BETWEEN -5 AND 40;
+
+SoilT_50cm.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_50cm
+FROM chili.station_data
+WHERE SoilT_50cm NOT BETWEEN -5 AND 40;
+
+SoilT_100cm.sql
+SELECT id, ts, RecId, TableCode, StationId, Lat, Lon, Elev, SoilT_100cm
+FROM chili.station_data
+WHERE SoilT_100cm NOT BETWEEN -5 AND 40;
