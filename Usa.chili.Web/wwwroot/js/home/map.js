@@ -84,12 +84,20 @@ const StationMap = function() {
 
   // Set the App stationId from the popup object
   // This will change the station in the "Live Mesonet Observations" widget
-  function onPopupOpen(e) {
+  function onPopupOpen(e){
+    App.model.stationId = e.popup.stationId;
     if(e.popup.isActive) {
-      App.model.stationId = e.popup.stationId;
+      
+      //this will draw the canvas on the bootstarp popup when the staion is selected on the map
+      $('#stationPopup').on('shown.bs.modal', function () {
+        getStationDataAndDraw(App.model.stationId);
+      }).modal('show');
+      
+
     }
     else {
       App.model.stationId = null;
+      $('#stationPopup').modal('dispose');
     }
   }
 

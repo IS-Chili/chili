@@ -9,7 +9,7 @@ ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated we
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-lg-8 mb-3">
+        <div class="col-sm-12 col-lg-12 mb-3">
             <div class="card">
                 <div class="card-heading bg-core-blue py-1">
                     <h5 class="card-title text-center mb-0">Station Map</h5>
@@ -17,88 +17,104 @@ ViewBag.Description = "The South Alabama Mesonet is a network of 26 automated we
                 <div class="card-body">
                     <div id="station-map"></div>
                 </div>
+            </div>
+        </div>
 
-                <div class="table-responsive">
+
+
+<!-- Large modal Change for new site make station obvervation and data pop up for each station -->
+<!--     -->
+<!-- This is the for the Bootstrap Modal that will popup on the screen    -->
+    <div class="modal fade cd-example-modal-lg" tabindex="1"  aria-labelledby="myLargeModalLabel" aria-hidden="true" id="stationPopup">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="row">
+                <div class=" col-lg-8 ">
+                    <!-- This is the card for the Live Mesonet Observations widget that will show on the bootstrap popup     -->
+            <div class="card"> 
+                    <div class="card-heading bg-core-blue py-1">
+                        <h5 class="card-title text-center mb-0">Live Mesonet Observations</h5>
+                        <div class="text-center"><small>Choose a Station Below</small></div>
+                    </div>
+                    <div id="stationObservationsCanvasDiv" class="card-body">
+                        <canvas id="stationObservationsCanvas" width="150" height="150" ></canvas>
+                        <div>
+                            <label for="stationSelection">Station</label>
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-8 pr-0">
+                            <select2 id="stationSelection" :options="stations" v-model="model.stationId" ></select2>
+                            </div>
+                            <div class="col-4 pr-0">
+                                <a class="btn btn-outline-primary" :href="'/Data/Station?id=' + stationData.stationId">Full Data</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+    <!--This is the table for the Live Staion Data that also shows in the bootsrap popup this will be the data from the selected station on the map -->
+    <div class="align-self-center" class="col-mg-4">   
+        <div class="table-responsive">
                     <table class="table table-hover table-bordered">
+                        <col width="80">
+                        <col width="80">
                         <thead>
                             <tr>
-                                <th>Location/Obs time</th>
+                                <th colspan="5" class="text-center">Live Station Data</th>
+                                
+                            </tr>
+                            <tr>
                                 <th class="text-center">Temp</th>
-                                <th class="text-center">{{ stationData.isWindChill ? 'Wdchl' : 'HtIdx' }}</th>
+                                <th>{{ stationData.airTemperature }}</th>
+                                <th>&deg;F</th>
+                            </tr>
+                            <tr>
+                               <th class="text-center">{{ stationData.isWindChill ? 'Wdchl' : 'HtIdx' }}</th>
+                               <th :class="stationData.isWindChill ? 'wc' : (stationData.felt != 'N/A' ? 'ht' : '')">{{ stationData.felt }}</th>
+                                <th>&deg;F</th>
+                            </tr>
+                            <tr>
                                 <th class="text-center">DewPt</th>
-                                <th class="text-center">Hum</th>
+                                <th>{{ stationData.dewPoint }}</th>
+                                <th>&deg;F</th>
+                            </tr>
+                            <tr>
+                                 <th class="text-center">Hum</th>
+                                 <th>{{ stationData.realHumidity }}</th>
+                                <th>&#37;</th>
+                            </tr>
+                            <tr>
                                 <th class="text-center">WdDir</th>
+                                <th>{{ stationData.windDirection }}</th>
+                                <th>&deg;</th>
+                            </tr>
+                            <tr>
                                 <th class="text-center">WdSpd</th>
+                                 <th>{{ stationData.windSpeed }}</th>
+                                <th>mph</th>
+                            </tr>
+                            <tr>
                                 <th class="text-center">Press</th>
+                                <th>{{ stationData.pressure }}</th>
+                                <th>inHg</th>
+                            </tr>
+                            <tr>
                                 <th class="text-center">Rain</th>
-                            </tr>
-                            <tr class="text-center">
-                                <td><a href="/Data/Realtime">All Station Data</a></td>
-                                <td>&deg;F</td>
-                                <td>&deg;F</td>
-                                <td>&deg;F</td>
-                                <td>&#37;</td>
-                                <td>&deg;</td>
-                                <td>mph</td>
-                                <td>inHg</td>
-                                <td>in</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td>
-                                    <div v-if="!stationData.isDecommissioned">
-                                        <a :href="'/Data/Station?id=' + stationData.stationId">
-                                            <span
-                                                class="font-weight-bold font-georgia">{{ stationData.stationName }}</span>
-                                        </a>
-                                        <div>
-                                            <small>{{ stationData.stationTimestamp }}</small>
-                                        </div>
-                                    </div>
-                                    <div v-else>
-                                        <span class="station-offline"><em>Station Decommissioned</em></span>
-                                    </div>
-                                </td>
-                                <td>{{ stationData.airTemperature }}</td>
-                                <td :class="stationData.isWindChill ? 'wc' : (stationData.felt != 'N/A' ? 'ht' : '')">{{ stationData.felt }}</td>
-                                <td>{{ stationData.dewPoint }}</td>
-                                <td>{{ stationData.realHumidity }}</td>
-                                <td>{{ stationData.windDirection }}</td>
-                                <td>{{ stationData.windSpeed }}</td>
-                                <td>{{ stationData.pressure }}</td>
-                                <td>{{ stationData.precipitation }}</td>
+                                <th>{{ stationData.precipitation }}</th>
+                                <th>in</th>
                             </tr>
                         </tbody>
                     </table>
-                </div>
+    
+                    </div>
             </div>
-        </div>
-
-        <div class="col-sm-12 col-lg-4 mb-3">
-            <div class="card">
-                <div class="card-heading bg-core-blue py-1">
-                    <h5 class="card-title text-center mb-0">Live Mesonet Observations</h5>
-                    <div class="text-center"><small>Choose a Station Below</small></div>
-                </div>
-                <div id="stationObservationsCanvasDiv" class="card-body">
-                    <canvas id="stationObservationsCanvas" width="600" height="400"></canvas>
-                    <div>
-                        <label for="stationSelection">Station</label>
-                    </div>
-                    <div class="row">
-                        <div class="col-8 pr-0">
-                            <select2 id="stationSelection" :options="stations" v-model="model.stationId"></select2>
-                        </div>
-                        <div class="col-4 pr-0">
-                            <a class="btn btn-outline-primary" :href="'/Data/Station?id=' + stationData.stationId">Full Data</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-
+</div>        
+        
+  <!-- This is the Regional Observations map at the bottom of the screen     -->  
     <div class="row">
         <div class="col-sm-12 col-lg-8 mb-3">
             <div class="card">
