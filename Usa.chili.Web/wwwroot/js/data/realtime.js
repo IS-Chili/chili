@@ -6,7 +6,7 @@ $(document).ready(function() {
     $('tbody td:nth-child(1)').css("left", $("tbody").scrollLeft());
   });
 });
-
+​
 const App = new Vue({
   el: '#app',
   data: function () {
@@ -22,13 +22,13 @@ const App = new Vue({
   },
   created: function() {
     const self = this;
-
+​
     // Set model from localStorage
     this.model.isMetricUnits = localStorage.getItem('isMetricUnits') === 'true';
     if(localStorage.getItem('isWindChill')) {
       this.model.isWindChill = localStorage.getItem('isWindChill') === 'true';
     }
-
+​
     // Get Variable Types
     axios.get('/data/VariableTypeList')
       .then(function (response) {
@@ -37,10 +37,10 @@ const App = new Vue({
       .catch(function (error) {
         console.log('Get VariableTypeList failed', error);
       });
-
+​
     // Get data on load
     self.getData();
-
+​
     // Get data again every 5 minutes
     setInterval(function() {
       self.getData();
@@ -70,7 +70,7 @@ const App = new Vue({
     },
     getData: function() {
       const self = this;
-
+​
       axios.get('/data/RealtimeData', {
         params: {
           isMetricUnits: self.model.isMetricUnits,
@@ -79,15 +79,15 @@ const App = new Vue({
       })
       .then(function (response) {
         Core.setNullsInArrayToNA(response.data);
-
+​
         // Show the table
         $("#realTimeDataTable").show();
-
+​
         self.realtimeData = response.data;
-
+​
         Vue.nextTick(function () {
           self.now = moment();
-
+​
           $('[data-toggle="tooltip"]').tooltip({
             boundary: 'span',
             placement: 'left'

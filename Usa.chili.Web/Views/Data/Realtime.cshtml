@@ -2,7 +2,6 @@
 ViewBag.Title = "Realtime Data";
 ViewBag.Description = "USA Mesonet Realtime Display";
 }
-
 @section styles {
 <environment include="Development">
     <link rel="stylesheet" href="~/css/data/realtime.css" />
@@ -11,7 +10,6 @@ ViewBag.Description = "USA Mesonet Realtime Display";
     <link rel="stylesheet" href="~/css/data/realtime.min.css" asp-append-version="true" />
 </environment>
 }
-
 <div class="head-container bg-core-blue">
     <br>
     <h1 class="text-center">USA Mesonet Realtime Display</h1>
@@ -27,7 +25,6 @@ ViewBag.Description = "USA Mesonet Realtime Display";
                 <label class="custom-control-label" for="windChill">Display Windchill</label>
             </div>
         </div>
-
         <div class="form-group col-xs-2">
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="metricUnits" v-model="model.isMetricUnits">
@@ -36,7 +33,6 @@ ViewBag.Description = "USA Mesonet Realtime Display";
         </div>
     </div>
 </div>
-
 <table id="realTimeDataTable" class="mb-3" style="display: none">
     <thead>
         <tr>
@@ -232,7 +228,6 @@ ViewBag.Description = "USA Mesonet Realtime Display";
         </tr>
     </tbody>
 </table>
-
 @section scripts {
 <environment include="Development">
     <script src="~/js/data/realtime.js"></script>
